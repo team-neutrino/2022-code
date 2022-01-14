@@ -20,14 +20,6 @@ public final class Constants {
         public static final int RIGHT_JOYSTICK_INPUT = 1;
 
     }
-
-
-
-
-
-
-
-
     public final class MotorCON{
     
         public static final int MOTOR_CONTROLLER_ONE = 1;

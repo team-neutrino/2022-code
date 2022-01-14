@@ -25,8 +25,6 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private Joystick m_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
   private Joystick m_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
-  private double rightY;
-  private double leftY;
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
