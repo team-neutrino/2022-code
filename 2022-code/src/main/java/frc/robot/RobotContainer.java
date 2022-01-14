@@ -9,6 +9,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.Constants.JoystickCON;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -19,11 +22,16 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
+  private Joystick m_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
+  private Joystick m_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
+  private double rightY;
+  private double leftY;
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -44,5 +52,10 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+  }
+  public void teleopInit() {
+
+    m_driveTrain.drivePeriodic(m_rightJoystick.getY(), m_leftJoystick.getY());
+
   }
 }
