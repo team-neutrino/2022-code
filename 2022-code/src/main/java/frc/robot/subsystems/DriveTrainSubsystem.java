@@ -14,7 +14,14 @@ private CANSparkMax m_leftmotor2 = new CANSparkMax(MotorCON.MOTOR_CONTROLLER_FOU
 private RelativeEncoder m_leftencoder1;
 private RelativeEncoder m_rightencoder;
 
+public  void DriveTrainSubsystem() {
+ m_leftmotor1.setInverted(true);
+ m_leftmotor2.setInverted(true);
+ 
+}
 public void drivePeriodic(double raxis, double laxis) {
+
+
     m_rightmotor1.set(raxis);
     m_rightmotor2.set(raxis);
     m_leftmotor1.set(laxis);
