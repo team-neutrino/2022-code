@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import edu.wpi.first.shuffleboard.app.components.DashboardTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<VBox fx:id="root" maxHeight="Infinity" maxWidth="Infinity"
+      xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="edu.wpi.first.shuffleboard.app.MainWindowController">
+
+    <MenuBar useSystemMenuBar="true">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem onAction="#newLayout" text="New" accelerator="SHORTCUT+N"/>
+            <MenuItem onAction="#save" text="Save" accelerator="SHORTCUT+S"/>
+            <MenuItem onAction="#saveAs" text="Save as..." accelerator="SHORTCUT+SHIFT+S"/>
+            <MenuItem onAction="#load" text="Load layout" accelerator="SHORTCUT+O"/>
+            <MenuItem onAction="#showPrefs" text="Preferences" accelerator="SHORTCUT+,"/>
+            <SeparatorMenuItem/>
+            <MenuItem onAction="#showPlugins" text="Plugins" accelerator="SHORTCUT+L"/>
+            <SeparatorMenuItem/>
+            <MenuItem onAction="#close" text="Close"/>
+        </Menu>
+        <Menu text="Recording">
+            <MenuItem text="Start recording" fx:id="recordingMenu" onAction="#toggleRecording"
+                      accelerator="SHORTCUT+SHIFT+R"/>
+            <MenuItem text="Load playback..." onAction="#loadPlayback" accelerator="SHORTCUT+SHIFT+P"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Convert recordings" onAction="#exportRecordings"/>
+        </Menu>
+        <Menu text="Tab">
+            <MenuItem text="New tab" onAction="#newTab" accelerator="SHORTCUT+T"/>
+            <MenuItem text="Close current tab" onAction="#closeCurrentTab" accelerator="SHORTCUT+W"/>
+            <MenuItem text="Tab preferences" onAction="#showTabPrefs" accelerator="SHORTCUT+SHIFT+,"/>
+        </Menu>
+        <Menu text="Help">
+            <MenuItem text="About" onAction="#showAboutDialog" accelerator="F1"/>
+            <MenuItem text="Documentation" onAction="#openDocsInBrowser" accelerator="F2"/>
+        </Menu>
+    </MenuBar>
+    <StackPane fx:id="contentRoot">
+        <DashboardTabPane fx:id="dashboard"/>
+        <fx:include source="LeftDrawer.fxml" fx:id="leftDrawer" maxWidth="-Infinity" StackPane.alignment="CENTER_LEFT">
+            <StackPane.margin>
+                <Insets top="31"/>
+            </StackPane.margin>
+        </fx:include>
+    </StackPane>
+    <BorderPane styleClass="footer">
+        <padding>
+            <Insets topRightBottomLeft="4"/>
+        </padding>
+        <center>
+            <fx:include source="PlaybackControls.fxml"/>
+        </center>
+        <right>
+            <fx:include source="ConnectionIndicators.fxml"/>
+        </right>
+    </BorderPane>
+</VBox>

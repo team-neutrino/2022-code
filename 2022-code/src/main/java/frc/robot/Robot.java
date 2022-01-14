@@ -4,9 +4,14 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DrivestationBoard;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -15,9 +20,19 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * project.
  */
 public class Robot extends TimedRobot {
+
   private Command m_autonomousCommand;
 
+  private Joystick m_testJoystick = new Joystick(1);
+
+  private TalonSRX m_testMotor = new TalonSRX(11);
+
   private RobotContainer m_robotContainer;
+
+  private DrivestationBoard m_testDriverstation = new DrivestationBoard();
+
+  
+  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -28,6 +43,17 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    String command = "movefiles.py";
+    try {
+      Process process = Runtime.getRuntime().exec("testfile.txt");
+      System.out.println("process");
+    } catch(Exception e) {
+      System.out.println("Exception Raised" + e.toString());
+    }
+  }
+
+  public double getJoystickVal() {
+    return m_testJoystick.getY();
   }
 
   /**
@@ -79,17 +105,18 @@ public class Robot extends TimedRobot {
     }
   }
 
-  /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {}
 
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
+    
+    m_testMotor.set(ControlMode.PercentOutput, 0);
     CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+    System.out.println(m_testJoystick.getY());
+  }
 }

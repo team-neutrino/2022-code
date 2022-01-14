@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import edu.wpi.first.shuffleboard.api.components.EditableLabel?>
+<?import edu.wpi.first.shuffleboard.app.components.Tile?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+
+<?import org.controlsfx.glyphfont.Glyph?>
+<fx:root xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         type="Tile"
+         fx:id="tile">
+    <top>
+        <HBox styleClass="tile-title-bar" alignment="CENTER">
+            <Glyph fx:id="titleGlyph" fontFamily="FontAwesome" fontSize="18" styleClass="tile-title-label">
+                <padding>
+                    <Insets topRightBottomLeft="5"/>
+                </padding>
+            </Glyph>
+            <EditableLabel fx:id="titleLabel" styleClass="tile-title-label"/>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="contentPane">
+            <padding>
+                <Insets topRightBottomLeft="2"/>
+            </padding>
+        </StackPane>
+    </center>
+</fx:root>
