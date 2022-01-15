@@ -11,8 +11,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.DrivestationBoard;
-import frc.robot.util.FileCopyPaster;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -23,14 +21,15 @@ import frc.robot.util.FileCopyPaster;
 public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
-
+/*
   private Joystick m_testJoystick = new Joystick(1);
 
-  private TalonSRX m_testMotor = new TalonSRX(11);
+  private TalonSRX m_testMotor = new TalonSRX(11);*/
 
   private RobotContainer m_robotContainer;
 
-  private DrivestationBoard m_testDriverstation = new DrivestationBoard();
+  
+
 
   
   
@@ -44,13 +43,14 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    /*new FileCopyPaster(src, dst)*/
     System.out.println("robotInit()");
   }
-
+/*
   public double getJoystickVal() {
     return m_testJoystick.getY();
   }
-
+*/
   /**
    * This function is called every robot packet, no matter the mode. Use this for items like
    * diagnostics that you want ran during disabled, autonomous, teleoperated and test.
@@ -108,13 +108,13 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     
-    m_testMotor.set(ControlMode.PercentOutput, 0);
+    //m_testMotor.set(ControlMode.PercentOutput, 0);
     CommandScheduler.getInstance().cancelAll();
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    System.out.println(m_testJoystick.getY());
+    //System.out.println(m_testJoystick.getY());
   }
 }

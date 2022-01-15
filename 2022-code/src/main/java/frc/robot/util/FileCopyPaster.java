@@ -33,6 +33,12 @@ public class FileCopyPaster {
     copyPaste();
   }
 
+  public static String URLCreator(String username, boolean ifPlugin) {
+    String baseURL = "C:/Users/" + username + "/Shuffleboard";
+    return (ifPlugin) ? (baseURL + "/plugins") : 
+                        (baseURL + "/themes");
+  }
+
   public void copyPaste() {
     
     try {
@@ -80,6 +86,7 @@ public class FileCopyPaster {
   public static void main(String[] args) {
     //String testDir = "src/main/java/frc/robot/util/";
     FileCopyPaster fileCopyPaster = new FileCopyPaster("src/main/java/frc/robot/util/srcFolder/", "src/main/java/frc/robot/util/themes/");
-    new FileCopyPaster("src/main/java/frc/robot/util/srcFolder/", "C:/Users/david/Shuffleboard/themes/");
+    new FileCopyPaster("src/main/java/frc/robot/util/srcFolder/", 
+                       "C:/Users/david/Shuffleboard/plugins/");
   }
 }

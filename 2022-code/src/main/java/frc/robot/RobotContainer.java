@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.DrivestationBoard;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.util.FileCopyPaster;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /**
@@ -22,10 +24,14 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
+  private DrivestationBoard m_drivestationBoard = new DrivestationBoard();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    new FileCopyPaster(Constants.ShuffleboardConstants.THEME_SRCURL,
+                       m_drivestationBoard.getUsername());
   }
 
   /**
