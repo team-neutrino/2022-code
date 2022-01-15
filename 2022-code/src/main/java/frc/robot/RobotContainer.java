@@ -23,9 +23,9 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private Joystick m_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
-  private Joystick m_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
+  private Joystick p_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
+  private Joystick p_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
