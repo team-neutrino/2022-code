@@ -12,4 +12,19 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+public final class Constants {
+
+    // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
+
+    public static final class TurretConstants {
+        public static final int TURRET_MOTOR_ID = 0;
+        public static final double TURRET_KP = 0.1;
+        public static final double TURRET_UPDATE_ANGLE = 2;
+        public static final double TURRET_LIMIT_ANGLE = 135;
+    }
+
+    public static final class PortConstants {
+        public static final int XBOX_CONTROLLER_ID = 0;
+    }
+
+}
