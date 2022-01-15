@@ -22,12 +22,10 @@ public final class Constants {
     }
     public final class MotorCON{
     
-        public static final int MOTOR_CONTROLLER_ONE = 1;
-        public static final int MOTOR_CONTROLLER_TWO = 2;
-        public static final int MOTOR_CONTROLLER_THREE = 3;
-        public static final int MOTOR_CONTROLLER_FOUR = 4;
-        public static final int MOTOR_CONTROLLER_FIVE = 5;
-        public static final int MOTOR_CONTROLLER_SIX = 6;
+        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_1 = 1;
+        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_2 = 2;
+        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_1 = 3;
+        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_2 = 4;
 
 
 
