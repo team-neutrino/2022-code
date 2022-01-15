@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.Controllers;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -27,10 +28,13 @@ public class RobotContainer {
   private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
 
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
+  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
   }
 
   /**
