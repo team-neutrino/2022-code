@@ -34,15 +34,15 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public double turretLimit(double positiveAngleLimit, double currentAngle) {
-    double setpointAngle = currentAngle;
-    if (currentAngle > positiveAngleLimit) {
-      setpointAngle = positiveAngleLimit;
+  public double turretLimit(double positiveAngleLimit, double angle) {
+    double augmentedAngle = angle;
+    if (angle > positiveAngleLimit) {
+      augmentedAngle = positiveAngleLimit;
     }
-    else if (currentAngle < -positiveAngleLimit) {
-      setpointAngle = -positiveAngleLimit;
+    else if (angle < -positiveAngleLimit) {
+      augmentedAngle = -positiveAngleLimit;
     }
-    return setpointAngle;
+    return augmentedAngle;
   }
 
   public double getCurrentAngle() {
