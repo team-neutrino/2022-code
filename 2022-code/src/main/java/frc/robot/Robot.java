@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.DrivestationBoard;
+import frc.robot.util.FileCopyPaster;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -43,13 +44,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    String command = "movefiles.py";
-    try {
-      Process process = Runtime.getRuntime().exec("testfile.txt");
-      System.out.println("process");
-    } catch(Exception e) {
-      System.out.println("Exception Raised" + e.toString());
-    }
+    System.out.println("robotInit()");
   }
 
   public double getJoystickVal() {
@@ -100,9 +95,12 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    //new FileMaker("src/main/java/frc/robot/util/", "testFile3.txt");
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    System.out.println("teleopInit()");
+    
   }
 
 
