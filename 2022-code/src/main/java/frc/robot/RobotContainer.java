@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Constants.JoystickCON;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -26,9 +26,6 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
-
- 
   /**
    * Instantiate subsystems below
    */
@@ -50,17 +47,15 @@ public class RobotContainer {
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 180);
 
 
-  private Joystick p_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
-  private Joystick p_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
-
+  private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
+  private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
+  private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
   }
 
   /**
@@ -71,15 +66,11 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-    
-  /**
-   * turret 
-   */
+  /* turret */
     m_leftPovButton.whileHeld(new TurretContinuousTurnCommand(true)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
     m_rightPovButton.whileHeld(new TurretContinuousTurnCommand(false)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
-
   }
 
 

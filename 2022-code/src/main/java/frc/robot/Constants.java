@@ -26,20 +26,16 @@ public final class Constants {
         public static final int XBOX_CONTROLLER_ID = 0;
     }
 
-    public  final class JoystickCON {
-        public static final int LEFT_JOYSTICK_IMPUT = 0;
-        public static final int RIGHT_JOYSTICK_INPUT = 1;
-
+    public  final class JoystickConstants {
+        public static final int LEFT_JOYSTICK_ID = 0;
+        public static final int RIGHT_JOYSTICK_ID = 1;
     }
-    public final class MotorCON{
 
+    public final class CANIDConstants {
         public static final int TURRET_MOTOR_ID = 0;
-        public static final int DRIVETRAIN_MOTOR_ID_RIGHT_1 = 1;
-        public static final int DRIVETRAIN_MOTOR_ID_RIGHT_2 = 2;
-        public static final int DRIVETRAIN_MOTOR_ID_LEFT_1 = 3;
-        public static final int DRIVETRAIN_MOTOR_ID_LEFT_2 = 4;
-
-
-
+        public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 1;
+        public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
+        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 3;
+        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 4;
     }
 }

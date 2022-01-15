@@ -13,8 +13,7 @@ import frc.robot.Constants;
 
 public class TurretSubsystem extends SubsystemBase {
 
-  private TalonSRX m_turretMotor = new TalonSRX(Constants.TurretConstants.TURRET_MOTOR_ID);
-
+  private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
 
   /** Creates a new TurretSubsystem. */
