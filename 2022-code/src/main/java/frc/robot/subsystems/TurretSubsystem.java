@@ -35,14 +35,14 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public double turretLimit(double positiveAngleLimit, double angle) {
-    double augmentedAngle = angle;
+    double limitedAngle = angle;
     if (angle > positiveAngleLimit) {
-      augmentedAngle = positiveAngleLimit;
+      limitedAngle = positiveAngleLimit;
     }
     else if (angle < -positiveAngleLimit) {
-      augmentedAngle = -positiveAngleLimit;
+      limitedAngle = -positiveAngleLimit;
     }
-    return augmentedAngle;
+    return limitedAngle;
   }
 
   public double getCurrentAngle() {
