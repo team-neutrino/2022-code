@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
+import frc.robot.Constants.Controllers;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -23,7 +24,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-  private XboxController m_OperatorController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
+  private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
 
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */

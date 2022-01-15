@@ -22,7 +22,22 @@ public final class Constants {
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT3 = 6;
+        public static final int MOTOR_CONTROLLER_SHOOTER1 = 7;
+        public static final int MOTOR_CONTROLLER_SHOOTER2 = 8;
+        public static final int MOTOR_CONTROLLER_SHOOTER3 = 9;
+    }
+    public static final class Controllers
+    {
+        public static final int XBOX_CONTROLLER_PORT = 2;
     }
 
-    public static final int XBOX_CONTROLLER_PORT = 2;
+    public static final class Shooter
+    {
+        public static final double WHEEL_P = 0.04;
+        public static final double WHEEL_I = 0;
+        public static final double WHEEL_D = 2;
+        public static final double WHEEL_F = 0.008;
+        public static final double SHOOTER_CONVERSION = 0;
+    }
+    
 }
