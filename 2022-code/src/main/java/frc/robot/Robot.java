@@ -21,18 +21,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
 
   private Command m_autonomousCommand;
-/*
-  private Joystick m_testJoystick = new Joystick(1);
-
-  private TalonSRX m_testMotor = new TalonSRX(11);*/
 
   private RobotContainer m_robotContainer;
-
-  
-
-
-  
-  
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -110,7 +100,7 @@ public class Robot extends TimedRobot {
     
     //m_testMotor.set(ControlMode.PercentOutput, 0);
     CommandScheduler.getInstance().cancelAll();
-  }
+  } 
 
   /** This function is called periodically during test mode. */
   @Override

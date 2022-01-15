@@ -12,8 +12,6 @@ import frc.robot.Robot;
 
 public class DrivestationBoard extends SubsystemBase {
 
-  private Robot m_Robot;
-
   private ShuffleboardTab m_drivestationTab;
 
   private NetworkTableEntry m_test_joystickPosition;  

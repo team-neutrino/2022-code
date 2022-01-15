@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -31,7 +32,7 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     new FileCopyPaster(Constants.ShuffleboardConstants.THEME_SRCURL,
-                       m_drivestationBoard.getUsername());
+                       m_drivestationBoard.getUsername(), true);
   }
 
   /**
@@ -40,6 +41,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+
   private void configureButtonBindings() {}
 
   /**
