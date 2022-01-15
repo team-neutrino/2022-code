@@ -8,11 +8,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TurretContinuousTurnCommand;
+import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.Constants.JoystickCON;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -46,11 +50,17 @@ public class RobotContainer {
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 180);
 
 
+  private Joystick p_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
+  private Joystick p_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
+
+  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    
   }
 
   /**

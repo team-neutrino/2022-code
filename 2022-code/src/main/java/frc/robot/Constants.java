@@ -27,4 +27,19 @@ public final class Constants {
         public static final int XBOX_CONTROLLER_ID = 0;
     }
 
+    public  final class JoystickCON {
+        public static final int LEFT_JOYSTICK_IMPUT = 0;
+        public static final int RIGHT_JOYSTICK_INPUT = 1;
+
+    }
+    public final class MotorCON{
+    
+        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_1 = 1;
+        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_2 = 2;
+        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_1 = 3;
+        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_2 = 4;
+
+
+
+    }
 }
