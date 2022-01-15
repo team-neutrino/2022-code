@@ -22,9 +22,9 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private Joystick m_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
   private Joystick m_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -52,8 +52,6 @@ public class RobotContainer {
     return m_autoCommand;
   }
   public void teleopInit() {
-
-    m_driveTrain.drivePeriodic(m_rightJoystick.getY(), m_leftJoystick.getY());
 
   }
 }
