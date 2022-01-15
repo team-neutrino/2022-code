@@ -17,7 +17,6 @@ public final class Constants {
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
     public static final class TurretConstants {
-        public static final int TURRET_MOTOR_ID = 0;
         public static final double TURRET_KP = 0.1;
         public static final double TURRET_UPDATE_ANGLE = 2;
         public static final double TURRET_LIMIT_ANGLE = 135;
@@ -33,11 +32,12 @@ public final class Constants {
 
     }
     public final class MotorCON{
-    
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_1 = 1;
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_2 = 2;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_1 = 3;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_2 = 4;
+
+        public static final int TURRET_MOTOR_ID = 0;
+        public static final int DRIVETRAIN_MOTOR_ID_RIGHT_1 = 1;
+        public static final int DRIVETRAIN_MOTOR_ID_RIGHT_2 = 2;
+        public static final int DRIVETRAIN_MOTOR_ID_LEFT_1 = 3;
+        public static final int DRIVETRAIN_MOTOR_ID_LEFT_2 = 4;
 
 
 
