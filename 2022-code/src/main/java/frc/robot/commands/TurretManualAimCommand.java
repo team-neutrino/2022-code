@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.TurretSubsystem;
 
-public class TurretContinuousTurnCommand extends CommandBase {
+public class TurretManualAimCommand extends CommandBase {
   private TurretSubsystem m_turret = new TurretSubsystem();
   private boolean m_isClockwise;
   private int m_negativeConstant;
   /** Creates a new ContinuousTurnCommand. */
-  public TurretContinuousTurnCommand(boolean isClockwise) {
+  public TurretManualAimCommand(boolean isClockwise) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_turret);
 
@@ -35,7 +35,9 @@ public class TurretContinuousTurnCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_turret.stop();
+  }
 
   // Returns true when the command should end.
   @Override

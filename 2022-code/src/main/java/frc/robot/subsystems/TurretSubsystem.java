@@ -34,13 +34,14 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public double turretLimit(double positiveAngleLimit, double angle) {
+  public double turretLimit(double angle) {
+    double limitAngle = Constants.TurretConstants.TURRET_LIMIT_ANGLE;
     double limitedAngle = angle;
-    if (angle > positiveAngleLimit) {
-      limitedAngle = positiveAngleLimit;
+    if (angle > limitAngle) {
+      limitedAngle = limitAngle;
     }
-    else if (angle < -positiveAngleLimit) {
-      limitedAngle = -positiveAngleLimit;
+    else if (angle < -limitAngle) {
+      limitedAngle = -limitAngle;
     }
     return limitedAngle;
   }
@@ -50,21 +51,9 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void setAngle(double setpointAngle) {
-    double limitedAngle = turretLimit(Constants.TurretConstants.TURRET_LIMIT_ANGLE, setpointAngle);
+    double limitedAngle = turretLimit(setpointAngle);
     double differenceAngle = getCurrentAngle() - limitedAngle;
     m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_KP * differenceAngle);
-  }
-
-  public void autoSetAngle()
-  {
-    if (getValidTarget() == 0)
-    {
-        setPower(0);
-    }
-    else
-    {
-        setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
-    }
   }
 
   @Override

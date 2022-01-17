@@ -25,7 +25,14 @@ public class TurretAutoAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    if (m_limelight.getTv())
+    {
+      m_turret.setAngle(m_turret.getCurrentAngle() + m_limelight.getTx());
+    }
+    else
+    {
+      m_turret.stop();
+    }
   }
 
   // Called once the command ends or is interrupted.
