@@ -17,7 +17,7 @@ public final class Constants
 
     public static final class ShuffleboardConstants 
     {
-        public static final String THEME_SRCURL = "src/main/java/frc/robot/util/srcFolder/";
+        public static final String THEME_SRCURL = "src/main/java/frc/robot/util/themes/";
     }
 
 }
