@@ -9,8 +9,9 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 public class TurretAutoAimCommand extends CommandBase {
-  private TurretSubsystem m_turret = new TurretSubsystem();
-  private LimelightSubsystem m_limelight = new LimelightSubsystem();
+
+  private TurretSubsystem m_turret;
+  private LimelightSubsystem m_limelight;
 
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand() {
@@ -20,7 +21,9 @@ public class TurretAutoAimCommand extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_limelight.setLimelightOn();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
