@@ -15,10 +15,11 @@ public class TurretSubsystem extends SubsystemBase {
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
+  private double m_initialAngle;
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-
+    m_initialAngle = m_currentAngle;
   }
 
   public void turnClockwise(){
@@ -48,16 +49,16 @@ public class TurretSubsystem extends SubsystemBase {
     return m_currentAngle;
   }
 
-  public void setAngle(double setpoint) {
-    double limitedAngle = turretLimit(Constants.TurretConstants.TURRET_LIMIT_ANGLE, setpoint);
+  public void setAngle(double setpointAngle) {
+    double limitedAngle = turretLimit(Constants.TurretConstants.TURRET_LIMIT_ANGLE, setpointAngle);
     double differenceAngle = getCurrentAngle() - limitedAngle;
     m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_KP * differenceAngle);
   }
+
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition();
-    
   }
 }

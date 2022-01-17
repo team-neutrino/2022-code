@@ -26,31 +26,24 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  /**
-   * Instantiate subsystems below
-   */
-  
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private TurretSubsystem m_turret = new TurretSubsystem();
 
-  /**
-    * Instantiate commands below
-    */
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  /**
-   * Instantiate controller ports below
-   */
-
+  /** Instantiate buttons, joysticks, etc. below */
   private XboxController m_OperatorController = new XboxController(Constants.PortConstants.XBOX_CONTROLLER_ID);
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 0);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 180);
-
-
   private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
-  private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
+
+  /** Instantiate subsystems below */
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private TurretSubsystem m_turret = new TurretSubsystem();
+  private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick, m_leftJoystick);
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+
+  /** Instantiate commands below */
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -66,9 +59,11 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-  /* turret */
+  
+    /** Turret mappings */
     m_leftPovButton.whileHeld(new TurretContinuousTurnCommand(true)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
+
     m_rightPovButton.whileHeld(new TurretContinuousTurnCommand(false)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
   }
