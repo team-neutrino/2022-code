@@ -30,6 +30,12 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
+  public void setLimelightOn()
+  {
+    NetworkTableEntry ledMode = limelight.getEntry("ledMode");
+    ledMode.setNumber(3);
+  }
+
   public double getTx()
   {
     NetworkTableEntry tx = limelight.getEntry("tx");

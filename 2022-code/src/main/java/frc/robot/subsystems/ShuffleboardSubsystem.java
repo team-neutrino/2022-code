@@ -4,7 +4,9 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -16,14 +18,19 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
   private ShuffleboardTab m_troubleshootTab; 
-  private NetworkTableEntry m_limelightFeed;
-  private HttpCamera feed;
+  private HttpCamera limelightFeed;
 
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem() {
-    feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
+    /** m_driverstation widgets */
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
+
+    /**m_troubleshoot widgets */
+    m_troubleshootTab = Shuffleboard.getTab("Troubleshoot Tab");
+    limelightFeed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
+    m_troubleshootTab.add("limelight feed", limelightFeed).withPosition(0, 0).withSize(8, 8);
+    
   }
 
   @Override
