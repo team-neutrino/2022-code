@@ -24,7 +24,7 @@ public class DrivestationBoard extends SubsystemBase {
       .withPosition(0, 0)
       .withSize(2, 2)
       .getEntry();   
-    m_user = m_drivestationTab.add("Username", "david")
+    m_user = m_drivestationTab.add("Username", "neutrino")
       .withPosition(2, 0)
       .withSize(2, 2)
       .getEntry();
@@ -32,7 +32,7 @@ public class DrivestationBoard extends SubsystemBase {
   }
 
   public String getUsername() {
-    return m_user.getString("david");
+    return m_user.getString("neutrino");
   }
 
 

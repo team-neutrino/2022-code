@@ -31,7 +31,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    new FileCopyPaster(Constants.ShuffleboardConstants.THEME_SRCURL, "david", true);
+    new FileCopyPaster(Constants.ShuffleboardConstants.THEME_SRCURL, m_drivestationBoard.getUsername(), false);
   }
 
   /**
