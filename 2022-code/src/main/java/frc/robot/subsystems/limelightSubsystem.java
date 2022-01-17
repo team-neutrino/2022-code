@@ -12,8 +12,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
+  NetworkTableEntry ledMode;
   public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
+    ledMode = limelight.getEntry("ledMode");
   }
 
   @Override
@@ -28,6 +30,12 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public void turnOnLimelight()
+  {
+    ledMode.setNumber(3);
+    
   }
 
   public double getTx()
