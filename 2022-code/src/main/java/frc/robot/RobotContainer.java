@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TurretContinuousTurnCommand;
+import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -61,10 +61,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
   
     /** Turret mappings */
-    m_leftPovButton.whileHeld(new TurretContinuousTurnCommand(true)).whenReleased(
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(true)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
 
-    m_rightPovButton.whileHeld(new TurretContinuousTurnCommand(false)).whenReleased(
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(false)).whenReleased(
       new InstantCommand(m_turret::stop, m_turret));
   }
 
