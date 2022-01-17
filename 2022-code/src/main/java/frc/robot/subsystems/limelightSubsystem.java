@@ -43,4 +43,15 @@ public class limelightSubsystem extends SubsystemBase {
     NetworkTableEntry ta = limelight.getEntry("tx");
     return ta.getDouble(0.0);
   }
+
+  public boolean getTv()
+  {
+    NetworkTableEntry tv = limelight.getEntry("tv");
+    double validTarget = tv.getDouble(0.0);
+    if(validTarget == 1)
+    {
+      return true;
+    }
+    return false;
+  }
 }
