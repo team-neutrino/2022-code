@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-  private NetworkTableEntry m_testOutput; 
+  private ShuffleboardTab m_troubleshootTab; 
   private NetworkTableEntry m_limelightFeed;
   private HttpCamera feed;
 
@@ -29,6 +29,5 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_testOutput.setDouble(2);
   }
 }

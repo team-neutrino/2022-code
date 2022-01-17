@@ -10,15 +10,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 
-public class limelightSubsystem extends SubsystemBase {
+public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
-  public limelightSubsystem() {
+  public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    System.out.println("tx = " + getTx());
+    System.out.println("ty = " + getTy());
+    System.out.println("ta = " + getTa());
+    System.out.println("tv = " + getTv());
   }
 
   @Override
@@ -42,5 +46,16 @@ public class limelightSubsystem extends SubsystemBase {
   {
     NetworkTableEntry ta = limelight.getEntry("tx");
     return ta.getDouble(0.0);
+  }
+
+  public boolean getTv()
+  {
+    NetworkTableEntry tv = limelight.getEntry("tv");
+    double validTarget = tv.getDouble(0.0);
+    if(validTarget == 1)
+    {
+      return true;
+    }
+    return false;
   }
 }
