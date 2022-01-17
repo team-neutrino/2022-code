@@ -55,6 +55,17 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_KP * differenceAngle);
   }
 
+  public void autoSetAngle()
+  {
+    if (getValidTarget() == 0)
+    {
+        setPower(0);
+    }
+    else
+    {
+        setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
+    }
+  }
 
   @Override
   public void periodic() {

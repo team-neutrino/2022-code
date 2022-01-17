@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 
-public class limelightSubsystem extends SubsystemBase {
+public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
-  public limelightSubsystem() {
+
+  public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
   }
 
