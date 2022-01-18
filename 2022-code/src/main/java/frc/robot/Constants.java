@@ -29,8 +29,9 @@ public final class Constants {
     public static final class Controllers
     {
         public static final int XBOX_CONTROLLER_PORT = 2;
+        public static final int LEFT_JOYSTICK_PORT = 0;
+        public static final int RIGHT_JOYSTICK_PORT = 1;
     }
-
     public static final class Shooter
     {
         public static final double WHEEL_P = 0.04;
@@ -38,22 +39,5 @@ public final class Constants {
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
-    }
-    
-
-    public  final class JoystickCON {
-        public static final int LEFT_JOYSTICK_IMPUT = 0;
-        public static final int RIGHT_JOYSTICK_INPUT = 1;
-
-    }
-    public final class MotorCON{
-    
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_1 = 1;
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_2 = 2;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_1 = 3;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_2 = 4;
-
-
-
     }
 }
