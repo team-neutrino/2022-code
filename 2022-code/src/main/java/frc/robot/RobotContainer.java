@@ -27,17 +27,17 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
-  private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-  private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private Joystick p_rightJoystick = new Joystick(Controllers.RIGHT_JOYSTICK_PORT);
   private Joystick p_leftJoystick = new Joystick(Controllers.LEFT_JOYSTICK_PORT);
+  private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
+  private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
+  
+  private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
