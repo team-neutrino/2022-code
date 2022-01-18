@@ -11,7 +11,7 @@ import frc.robot.subsystems.TurretSubsystem;
 public class TurretManualAimCommand extends CommandBase {
   private TurretSubsystem m_turret;
   private boolean m_isClockwise;
-  private int m_negativeConstant;
+
   /** Creates a new ContinuousTurnCommand. */
   public TurretManualAimCommand(TurretSubsystem p_turret, boolean isClockwise) {
     m_turret = p_turret;

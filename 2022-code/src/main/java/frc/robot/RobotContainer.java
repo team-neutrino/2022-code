@@ -41,7 +41,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private TurretSubsystem m_turret = new TurretSubsystem();
   private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick, m_leftJoystick);
-  private ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem();
+  private ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_turret);
 
   /** Instantiate commands below */
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
