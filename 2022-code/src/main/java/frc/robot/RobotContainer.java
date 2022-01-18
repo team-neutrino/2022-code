@@ -10,9 +10,6 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Constants.JoystickCON;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -23,11 +20,8 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private Joystick p_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
-  private Joystick p_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
