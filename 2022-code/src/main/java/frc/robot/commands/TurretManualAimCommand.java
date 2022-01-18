@@ -29,7 +29,7 @@ public class TurretManualAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double augmentedAngle = m_negativeConstant * (m_turret.getCurrentAngle() + Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+    double augmentedAngle = m_turret.getCurrentAngle() + (m_negativeConstant * Constants.TurretConstants.TURRET_UPDATE_ANGLE);
     m_turret.setSetpoint(augmentedAngle);
   }
 
