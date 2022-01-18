@@ -5,13 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.limelightSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 public class TurretAutoAimCommand extends CommandBase {
 
   private TurretSubsystem m_turret;
-  private limelightSubsystem m_limelight;
+  private LimelightSubsystem m_limelight;
 
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand() {

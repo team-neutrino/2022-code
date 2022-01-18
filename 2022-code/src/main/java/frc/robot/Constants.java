@@ -19,6 +19,7 @@ public final class Constants {
     public static final class TurretConstants {
         public static final double TURRET_KP = 0.1;
         public static final double TURRET_UPDATE_ANGLE = 2;
+        public static final double TURRET_DEAD_ANGLE = 1;
         public static final double TURRET_LIMIT_ANGLE = 135;
     }
 

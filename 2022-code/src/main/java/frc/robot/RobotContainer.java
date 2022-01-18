@@ -10,7 +10,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
-import frc.robot.subsystems.limelightSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -65,11 +65,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
   
     /** Turret mappings */
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true)).whenReleased(
-      new InstantCommand(m_turret::stop, m_turret));
-
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false)).whenReleased(
-      new InstantCommand(m_turret::stop, m_turret));
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
 
   }
 

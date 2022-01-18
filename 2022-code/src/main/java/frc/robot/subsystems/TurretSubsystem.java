@@ -15,19 +15,11 @@ public class TurretSubsystem extends SubsystemBase {
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
-  private double m_initialAngle;
+  //private double m_initialAngle;
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    m_initialAngle = m_currentAngle;
-  }
-
-  private void turnClockwise(){
-    m_turretMotor.set(ControlMode.PercentOutput, 1);
-  }
-
-  private void turnCounterClockwise(){
-    m_turretMotor.set(ControlMode.PercentOutput, -1);
+    //m_initialAngle = getCurrentAngle();
   }
 
   public void stop(){

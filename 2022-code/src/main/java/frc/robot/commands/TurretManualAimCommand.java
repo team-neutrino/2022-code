@@ -23,14 +23,18 @@ public class TurretManualAimCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_negativeConstant = (m_isClockwise)? 1 : -1;
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double augmentedAngle = m_turret.getCurrentAngle() + (m_negativeConstant * Constants.TurretConstants.TURRET_UPDATE_ANGLE);
-    m_turret.setSetpoint(augmentedAngle);
+    if(m_isClockwise) {
+      m_turret.setSetpoint(m_turret.getCurrentAngle() + Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+    }
+    else {
+      m_turret.setSetpoint(m_turret.getCurrentAngle() - Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+    }
   }
 
   // Called once the command ends or is interrupted.
