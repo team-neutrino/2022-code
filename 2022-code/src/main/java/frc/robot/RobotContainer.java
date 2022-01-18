@@ -55,7 +55,6 @@ public class RobotContainer {
   private void configureButtonBindings() 
   {
     m_B.whenHeld(new ShooterSetSpeed(m_Shooter, 50000));
-
   }
 
   /**

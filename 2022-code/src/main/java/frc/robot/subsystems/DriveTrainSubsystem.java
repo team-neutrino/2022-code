@@ -23,7 +23,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
         m_leftMotors.setInverted(true);
         m_rightJoystick = p_rightJoystick;
         m_leftJoystick= p_leftJoystick;
-        
     }
     @Override
     public void periodic()
