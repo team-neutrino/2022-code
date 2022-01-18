@@ -12,16 +12,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-
   private NetworkTableEntry m_testOutput;  
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem() {
-    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
-    m_testOutput = m_drivestationTab.add("Joystick position", 2)
-      .withPosition(0, 0)
-      .withSize(2, 2)
-      .getEntry();   
+    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");  
   }
 
   @Override

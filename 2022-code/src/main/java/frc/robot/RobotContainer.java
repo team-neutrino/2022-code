@@ -34,8 +34,8 @@ public class RobotContainer {
   
   private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
   
 
