@@ -15,13 +15,10 @@ package frc.robot;
 public final class Constants {
     public static final class  CanId
     {
-        //values not final
         public static final int MOTOR_CONTROLLER_DRIVER_LEFT1 = 1;
         public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 2;
-        public static final int MOTOR_CONTROLLER_DRIVER_LEFT3 = 3;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
-        public static final int MOTOR_CONTROLLER_DRIVER_RIGHT3 = 6;
         public static final int MOTOR_CONTROLLER_SHOOTER1 = 14;
         public static final int MOTOR_CONTROLLER_SHOOTER2 =12;
         public static final int MOTOR_CONTROLLER_SHOOTER3 = 11;
