@@ -22,11 +22,11 @@ public class TurretSubsystem extends SubsystemBase {
     m_initialAngle = m_currentAngle;
   }
 
-  public void turnClockwise(){
+  private void turnClockwise(){
     m_turretMotor.set(ControlMode.PercentOutput, 1);
   }
 
-  public void turnCounterClockwise(){
+  private void turnCounterClockwise(){
     m_turretMotor.set(ControlMode.PercentOutput, -1);
   }
 
@@ -34,7 +34,7 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public double turretLimit(double angle) {
+  private double turretLimit(double angle) {
     double limitAngle = Constants.TurretConstants.TURRET_LIMIT_ANGLE;
     double limitedAngle = angle;
     if (angle > limitAngle) {
@@ -50,14 +50,14 @@ public class TurretSubsystem extends SubsystemBase {
     return m_currentAngle;
   }
 
-  public void setAngle(double setpointAngle) {
+  public void setSetpoint(double setpointAngle) {
     double limitedAngle = turretLimit(setpointAngle);
     double differenceAngle = getCurrentAngle() - limitedAngle;
     m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_KP * differenceAngle);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() {                 
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition();
   }

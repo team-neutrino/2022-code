@@ -5,39 +5,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.TurretSubsystem;
 
-public class TurretManualAimCommand extends CommandBase {
+public class TurretSetAngleCommand extends CommandBase {
+  /** Creates a new TurretSetAngleCommand. */
   private TurretSubsystem m_turret;
-  private boolean m_isClockwise;
-  private int m_negativeConstant;
-  /** Creates a new ContinuousTurnCommand. */
-  public TurretManualAimCommand(TurretSubsystem p_turret, boolean isClockwise) {
+  private double m_targetAngle;
+  
+  public TurretSetAngleCommand(TurretSubsystem p_turret, double p_targetAngle) {
     m_turret = p_turret;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_turret);
-    m_isClockwise = isClockwise;
+    m_targetAngle = p_targetAngle;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_negativeConstant = (m_isClockwise)? 1 : -1;
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double augmentedAngle = m_negativeConstant * (m_turret.getCurrentAngle() + Constants.TurretConstants.TURRET_UPDATE_ANGLE);
-    m_turret.setSetpoint(augmentedAngle);
+    m_turret.setSetpoint(m_targetAngle);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
