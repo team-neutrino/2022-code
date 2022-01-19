@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanId;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
@@ -24,11 +25,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
         m_rightJoystick = p_rightJoystick;
         m_leftJoystick= p_leftJoystick;
     }
+
     @Override
     public void periodic()
     {
-        m_rightMotors.set(m_rightJoystick.getY());
-        m_leftMotors.set(m_leftJoystick.getY());
     }
 }
 

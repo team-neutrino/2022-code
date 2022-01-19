@@ -11,6 +11,7 @@ import frc.robot.Constants.Controllers;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.subsystems.ShuffleboardSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -36,6 +37,9 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+ 
+  private LimelightSubsystem m_limelight = new LimelightSubsystem();
+  
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
   
 
