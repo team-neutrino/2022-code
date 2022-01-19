@@ -33,7 +33,12 @@ public class ShooterSubsystem extends SubsystemBase
 
     public ShooterSubsystem()
     {
-        conifgSRX();
+        
+        wheelMasterConfig.slot0.kP = Shooter.WHEEL_P;
+        wheelMasterConfig.slot0.kI = Shooter.WHEEL_I;
+        wheelMasterConfig.slot0.kD = Shooter.WHEEL_D;
+        wheelMasterConfig.slot0.kF = Shooter.WHEEL_F;
+
         m_wheelMotor = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER1);
         m_wheelMotor2 = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER2);
         m_wheelMotor3 = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER3);
@@ -90,13 +95,4 @@ public class ShooterSubsystem extends SubsystemBase
         return false;
     }
 
-    private void conifgSRX()
-    {
-        wheelMasterConfig.slot0.kP = Shooter.WHEEL_P;
-        wheelMasterConfig.slot0.kI = Shooter.WHEEL_I;
-        wheelMasterConfig.slot0.kD = Shooter.WHEEL_D;
-        wheelMasterConfig.slot0.kF = Shooter.WHEEL_F;
-        wheelMasterConfig.openloopRamp = 1;
-        wheelFollowerConfig.openloopRamp = wheelMasterConfig.openloopRamp;
-    }
 }
