@@ -10,8 +10,8 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -42,6 +42,7 @@ public class RobotContainer {
   private TurretSubsystem m_turret = new TurretSubsystem();
   private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick, m_leftJoystick);
   private ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_turret);
+  private LimelightSubsystem m_limelight = new LimelightSubsystem();
 
   /** Instantiate commands below */
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -52,7 +53,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    CommandScheduler.getInstance().setDefaultCommand(m_turret, new TurretAutoAimCommand());
+    CommandScheduler.getInstance().setDefaultCommand(m_turret, new TurretAutoAimCommand(m_turret, m_limelight));
   }
 
   /**

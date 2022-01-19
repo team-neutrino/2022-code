@@ -10,6 +10,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
@@ -30,7 +31,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
 
-    feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
+    //feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
     
     m_turretCurrentAngle = m_drivestationTab.add("Turret Current Angle", 0).withPosition(6, 0).withSize(2, 2).getEntry();
   }

@@ -30,10 +30,10 @@ public class TurretManualAimCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_isClockwise) {
-      m_turret.setSetpoint(m_turret.getCurrentAngle() + Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+      m_turret.setSetpoint(Constants.TurretConstants.TURRET_UPDATE_ANGLE);
     }
     else {
-      m_turret.setSetpoint(m_turret.getCurrentAngle() - Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+      m_turret.setSetpoint(Constants.TurretConstants.TURRET_UPDATE_ANGLE);
     }
   }
 
