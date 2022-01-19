@@ -13,21 +13,29 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
-    public  final class JoystickCON {
-        public static final int LEFT_JOYSTICK_IMPUT = 0;
-        public static final int RIGHT_JOYSTICK_INPUT = 1;
-
+    public static final class  CanId
+    {
+        public static final int MOTOR_CONTROLLER_DRIVER_LEFT1 = 1;
+        public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 2;
+        public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
+        public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
+        public static final int MOTOR_CONTROLLER_SHOOTER1 = 14;
+        public static final int MOTOR_CONTROLLER_SHOOTER2 =12;
+        public static final int MOTOR_CONTROLLER_SHOOTER3 = 11;
     }
-    public final class MotorCON{
-    
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_1 = 1;
-        public static final int MOTOR_CONTROLLER_DRIVE_RIGHT_2 = 2;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_1 = 3;
-        public static final int MOTOR_CONTROLLER_DRIVE_LEFT_2 = 4;
-
-
-
+    public static final class Controllers
+    {
+        public static final int XBOX_CONTROLLER_PORT = 2;
+        public static final int LEFT_JOYSTICK_PORT = 0;
+        public static final int RIGHT_JOYSTICK_PORT = 1;
+    }
+    public static final class Shooter
+    {
+        public static final double WHEEL_P = 0.04;
+        public static final double WHEEL_I = 0;
+        public static final double WHEEL_D = 2;
+        public static final double WHEEL_F = 0.008;
+        public static final double SHOOTER_CONVERSION = 0;
     }
     public final class Conversions 
     {

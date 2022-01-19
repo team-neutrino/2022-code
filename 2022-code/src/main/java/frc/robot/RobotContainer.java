@@ -9,11 +9,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Constants.JoystickCON;
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.Constants.Controllers;
 
+import edu.wpi.first.wpilibj2.command.Command;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -23,11 +21,11 @@ import edu.wpi.first.wpilibj.Joystick;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private Joystick m_rightJoystick = new Joystick(JoystickCON.RIGHT_JOYSTICK_INPUT);
+  private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
   private Joystick m_leftJoystick = new Joystick(JoystickCON.LEFT_JOYSTICK_IMPUT);
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
