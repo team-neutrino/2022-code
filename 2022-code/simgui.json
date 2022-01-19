@@ -1,33 +1,19 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "SPARK MAX [1]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
-      "/LiveWindow/DrivestationBoard": "Subsystem",
+      "/LiveWindow/DriveTrainSubsystem": "Subsystem",
       "/LiveWindow/ExampleSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
-    }
-  },
-  "NetworkTables": {
-    "LiveWindow": {
-      "Ungrouped": {
-        "open": true
-      }
-    },
-    "Shuffleboard": {
-      "open": true
-    },
-    "SmartDashboard": {
-      "DB": {
-        "open": true
-      }
-    },
-    "Usage": {
-      "Client": {
-        "Dashboard": {
-          "open": true
-        },
-        "open": true
-      }
     }
   }
 }
