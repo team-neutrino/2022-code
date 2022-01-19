@@ -9,7 +9,7 @@ name: Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ automate_run ]
   pull_request:
     branches: [ main ]
 
