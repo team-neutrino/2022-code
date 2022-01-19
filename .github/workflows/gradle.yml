@@ -10,8 +10,12 @@ name: Java CI with Gradle
 on:
   push:
     branches: [ main ]
+    paths:
+    - '2022-code/**'
   pull_request:
     branches: [ main ]
+    paths:
+    - '2022-code/**'
 
 jobs:
   build:
