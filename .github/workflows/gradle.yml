@@ -23,7 +23,7 @@ jobs:
           java-version: "11"
       - name: Gradle Build
         run: |
-          cd 2021-code
+          cd 2022-code
           chmod +x ./gradlew
           ./gradlew build
-          du -h build/libs/2021-code.jar
+          du -h build/libs/2022-code.jar
