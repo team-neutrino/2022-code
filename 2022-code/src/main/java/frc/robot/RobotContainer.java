@@ -22,6 +22,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private LimelightSubsystem m_limelight = new LimelightSubsystem();
   
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
