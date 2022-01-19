@@ -28,7 +28,7 @@ public class RobotContainer {
   private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
   private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem, m_rightJoystick,m_leftJoystick);
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   private limelightSubsystem m_limelight = new limelightSubsystem();
   
