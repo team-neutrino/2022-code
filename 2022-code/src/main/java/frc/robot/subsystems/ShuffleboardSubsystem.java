@@ -30,7 +30,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
 
-    feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
+    //feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
     
     m_turretCurrentAngle = m_drivestationTab.add("Turret Current Angle", 0).withPosition(6, 0).withSize(2, 2).getEntry();
   }

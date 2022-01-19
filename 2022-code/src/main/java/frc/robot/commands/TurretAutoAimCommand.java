@@ -14,7 +14,9 @@ public class TurretAutoAimCommand extends CommandBase {
   private LimelightSubsystem m_limelight;
 
   /** Creates a new TurretAutoAimCommand. */
-  public TurretAutoAimCommand() {
+  public TurretAutoAimCommand(TurretSubsystem p_turret, LimelightSubsystem p_limelight) {
+    m_turret = p_turret;
+    m_limelight = p_limelight;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_turret, m_limelight);
   }
