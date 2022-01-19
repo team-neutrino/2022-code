@@ -20,11 +20,11 @@ public final class Constants {
         public static final double TURRET_KP = 0.1;
         public static final double TURRET_UPDATE_ANGLE = 2;
         public static final double TURRET_DEAD_ANGLE = 1;
-        public static final double TURRET_LIMIT_ANGLE = 135;
+        public static final double TURRET_LIMIT_ANGLE = 20;
     }
 
     public static final class PortConstants {
-        public static final int XBOX_CONTROLLER_ID = 0;
+        public static final int XBOX_CONTROLLER_ID = 2;
     }
 
     public  final class JoystickConstants {
@@ -33,7 +33,7 @@ public final class Constants {
     }
 
     public final class CANIDConstants {
-        public static final int TURRET_MOTOR_ID = 0;
+        public static final int TURRET_MOTOR_ID = 15;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 1;
         public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 3;

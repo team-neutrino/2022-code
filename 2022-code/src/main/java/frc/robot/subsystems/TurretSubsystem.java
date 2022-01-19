@@ -15,11 +15,11 @@ public class TurretSubsystem extends SubsystemBase {
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
-  //private double m_initialAngle;
+  private double m_initialAngle;
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    //m_initialAngle = getCurrentAngle();
+    m_initialAngle = getCurrentAngle();
   }
 
   public void stop(){
@@ -52,5 +52,6 @@ public class TurretSubsystem extends SubsystemBase {
   public void periodic() {                 
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition();
+    System.out.println(m_turretMotor.getSelectedSensorPosition());
   }
 }

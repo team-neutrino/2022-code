@@ -22,10 +22,6 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    System.out.println("tx = " + getTx());
-    System.out.println("ty = " + getTy());
-    System.out.println("ta = " + getTa());
-    System.out.println("tv = " + getTv());
   }
 
   @Override
