@@ -11,22 +11,15 @@ public class FileCopyPaster {
 
   private String m_src; 
   private String m_dst;
-  private File m_srcFile;  
-  private File m_dstFile;                     
+  private File m_srcFile;                     
   private List<File> m_srcFileArray;
 
-  private String m_username;
-  private boolean m_isPlugin;
 
   public FileCopyPaster(String src, String username, boolean isPlugin) {
     m_src = src;                           
     m_dst = URLCreator(username, isPlugin);
-    m_srcFile = new File(m_src);                           
-    m_dstFile = new File(m_dst);
-    m_srcFileArray = new ArrayList<File>(); 
-
-    m_username = username;      
-    m_isPlugin = isPlugin;                    
+    m_srcFile = new File(m_src);    
+    m_srcFileArray = new ArrayList<File>();                   
 
     String[] srcNames = m_srcFile.list();
     for (String srcName : srcNames) {
@@ -46,7 +39,7 @@ public class FileCopyPaster {
     try {
       for (File file : m_srcFileArray) {
         String filename = file.getName(); 
-        String fullpath = URLCreator(m_username, m_isPlugin) + filename.substring(0, filename.length()-4);
+        String fullpath = m_dst + filename.substring(0, filename.length()-4);
         (new File(fullpath)).mkdir();
         Files.copy(
           (new File(m_src + "/" + file.getName())).toPath(), 
@@ -60,8 +53,4 @@ public class FileCopyPaster {
 
   }
 
-  public static void main(String[] args) {
-    // use this for testing, keep
-    // new FileCopyPaster("src/main/java/frc/robot/util/themes/", "david", false);
-  }
 }
