@@ -29,4 +29,8 @@ public final class Constants {
 
 
     }
+    public final class Conversions 
+    {
+
+    }
 }
