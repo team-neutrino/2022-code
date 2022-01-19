@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 import frc.robot.subsystems.DriveTrainSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,10 +27,10 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
   private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick,m_leftJoystick);
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain);
-  private LimelightSubsystem m_limelight = new LimelightSubsystem();
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem, m_rightJoystick,m_leftJoystick);
+  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private limelightSubsystem m_limelight = new limelightSubsystem();
   
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 

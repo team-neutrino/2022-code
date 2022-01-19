@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.Joystick;
 
 /** An example command that uses an example subsystem. */
 public class ExampleCommand extends CommandBase {
@@ -17,7 +18,7 @@ public class ExampleCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ExampleCommand(ExampleSubsystem subsystem) {
+  public ExampleCommand(ExampleSubsystem subsystem, Joystick p_rightJoystick, Joystick p_leftJoystick) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

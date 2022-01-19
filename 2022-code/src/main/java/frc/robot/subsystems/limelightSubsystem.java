@@ -9,11 +9,11 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-public class LimelightSubsystem extends SubsystemBase {
+public class limelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
 
-  public LimelightSubsystem() {
+  public limelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
   }

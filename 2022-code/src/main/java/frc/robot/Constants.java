@@ -37,8 +37,4 @@ public final class Constants {
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
     }
-    public final class Conversions 
-    {
-
-    }
 }
