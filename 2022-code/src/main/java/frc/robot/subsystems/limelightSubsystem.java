@@ -29,7 +29,7 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   public void setLimelightOn(boolean setOn) {
-      if(setOn == true) {
+      if(setOn) {
         ledMode.setNumber(3);
       }
       else {
