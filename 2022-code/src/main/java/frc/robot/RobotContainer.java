@@ -6,14 +6,15 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.DrivestationBoard;
 import frc.robot.subsystems.ShuffleboardSubsystem;
-import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.util.FileCopyPaster;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 
+import frc.robot.subsystems.DriveTrainSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -22,20 +23,21 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
+  private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private limelightSubsystem m_limelight = new limelightSubsystem();
+  
+  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
-
-  private DrivestationBoard m_drivestationBoard = new DrivestationBoard();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    new FileCopyPaster(Constants.ShuffleboardConstants.THEME_SRCURL, m_drivestationBoard.getUsername(), false);
+    
   }
 
   /**
@@ -44,8 +46,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
