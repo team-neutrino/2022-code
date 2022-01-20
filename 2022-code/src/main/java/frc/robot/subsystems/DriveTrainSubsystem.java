@@ -17,6 +17,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     public DriveTrainSubsystem()
     {
+        System.out.println("david");
         m_leftMotors.setInverted(true);
     }
 
