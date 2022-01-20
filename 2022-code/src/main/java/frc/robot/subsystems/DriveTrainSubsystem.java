@@ -30,5 +30,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     public void periodic()
     {
     }
+    public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) 
+    {
+        m_leftMotors.set(m_setLeftSpeed);
+        m_rightMotors.set(m_setRightSpeed);
+    }
 }
 
