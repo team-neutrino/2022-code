@@ -51,7 +51,7 @@ public class TurretSubsystem extends SubsystemBase {
   @Override
   public void periodic() {                 
     // This method will be called once per scheduler run
-    m_currentAngle = m_turretMotor.getSelectedSensorPosition();
-    System.out.println(m_turretMotor.getSelectedSensorPosition());
+    m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
+    //System.out.println(m_turretMotor.getSelectedSensorPosition());
   }
 }

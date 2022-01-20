@@ -33,7 +33,7 @@ public final class Constants {
     }
 
     public final class CANIDConstants {
-        public static final int TURRET_MOTOR_ID = 15;
+        public static final int TURRET_MOTOR_ID = 7;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 1;
         public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 3;
