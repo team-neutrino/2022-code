@@ -7,21 +7,28 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-
+  private NetworkTableEntry m_shooterSpeed;
+  private ShooterSubsystem m_shooter;
+  
 
   /** Creates a new shuffleboard. */
-  public ShuffleboardSubsystem() {
-    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");  
+  public ShuffleboardSubsystem(ShooterSubsystem p_shooter) {
+    m_shooter = p_shooter; 
+
+    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
+    m_shooterSpeed = m_drivestationTab.add("Shooter Speed", 0).getEntry();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  
+    m_shooterSpeed.getDouble(m_shooter.getVelocity());
+    
   }
 }
