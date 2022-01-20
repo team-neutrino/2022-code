@@ -34,7 +34,6 @@ public final class Constants {
         public static final double WHEEL_P = 0.04;
         public static final double WHEEL_I = 0;
         public static final double WHEEL_D = 2;
-        public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
         public static final double SHOOTER_SPEED = 50000;
     }

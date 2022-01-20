@@ -43,22 +43,20 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor2 = new CANSparkMax(Constants.CanId.MOTOR_CONTROLLER_SHOOTER2, MotorType.kBrushless);
         m_wheelMotor2.follow(m_wheelMotor);
 
+        m_wheelMotor.restoreFactoryDefaults();
+        m_wheelMotor2.restoreFactoryDefaults();
+        m_wheelMotor.setInverted(true);
+        m_wheelMotor2.setInverted(true);
+        m_wheelMotor.setIdleMode(IdleMode.kBrake);
+        m_wheelMotor2.setIdleMode(IdleMode.kBrake);
+
         m_encoder = m_wheelMotor.getEncoder();
+        m_pidController = m_wheelMotor.getPIDController();
         m_pidController.setFeedbackDevice(m_encoder);
         m_pidController.setP(Shooter.WHEEL_P);
         m_pidController.setI(Shooter.WHEEL_I);
         m_pidController.setD(Shooter.WHEEL_D);
-        
-        m_wheelMotor.restoreFactoryDefaults();
-        m_wheelMotor2.restoreFactoryDefaults();
-
-        m_wheelMotor.setInverted(true);
-        m_wheelMotor2.setInverted(true);
-  
-        m_wheelMotor.setIdleMode(IdleMode.kBrake);
-        m_wheelMotor2.setIdleMode(IdleMode.kBrake);
-       
-
+        m_pidController.setOutputRange(-1, 1);
     }
 
     @Override
