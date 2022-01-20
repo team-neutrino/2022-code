@@ -31,7 +31,7 @@ public class RobotContainer {
   
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   
-  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
