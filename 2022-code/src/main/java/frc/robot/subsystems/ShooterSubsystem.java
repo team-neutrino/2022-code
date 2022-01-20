@@ -90,9 +90,4 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor.set(ControlMode.Velocity, velocity);
     }
 
-    public boolean getMotorSpeedStatus()
-    {
-        return false;
-    }
-
 }
