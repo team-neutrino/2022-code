@@ -5,16 +5,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 public class TurretAutoAimCommand extends CommandBase {
 
   private TurretSubsystem m_turret;
-  private LimelightSubsystem m_limelight;
+  private limelightSubsystem m_limelight;
 
   /** Creates a new TurretAutoAimCommand. */
-  public TurretAutoAimCommand(TurretSubsystem p_turret, LimelightSubsystem p_limelight) {
+  public TurretAutoAimCommand(TurretSubsystem p_turret, limelightSubsystem p_limelight) {
     m_turret = p_turret;
     m_limelight = p_limelight;
     // Use addRequirements() here to declare subsystem dependencies.
