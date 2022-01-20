@@ -38,20 +38,17 @@ public class RobotContainer {
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   
   private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
- 
   private LimelightSubsystem m_limelight = new LimelightSubsystem();
+  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_Shooter);
   
-  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
-  
+  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    
   }
 
   /**
@@ -63,8 +60,6 @@ public class RobotContainer {
   private void configureButtonBindings() 
   {
     m_B.whenHeld(new ShooterSetSpeed(m_Shooter, Shooter.SHOOTER_SPEED));
-
-    
   }
 
   /**

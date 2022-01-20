@@ -64,6 +64,11 @@ public class ShooterSubsystem extends SubsystemBase
     {
     }
 
+    public double getVelocity()
+    {
+        return m_encoder.getPosition();
+    }
+
     public double getTargetVelocity()
     {
         return m_targetVelocity;
@@ -85,5 +90,4 @@ public class ShooterSubsystem extends SubsystemBase
         m_targetVelocity = velocity;
         m_wheelMotor.set(velocity);
     }
-
 }

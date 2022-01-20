@@ -19,8 +19,8 @@ public final class Constants {
         public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 2;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
-        public static final int MOTOR_CONTROLLER_SHOOTER1 = 14;
-        public static final int MOTOR_CONTROLLER_SHOOTER2 =12;
+        public static final int MOTOR_CONTROLLER_SHOOTER1 = 1;
+        public static final int MOTOR_CONTROLLER_SHOOTER2 =2;
         public static final int MOTOR_CONTROLLER_SHOOTER3 = 11;
     }
     public static final class Controllers
