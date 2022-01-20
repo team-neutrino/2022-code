@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
-import frc.robot.subsystems.limelightSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
@@ -30,7 +30,7 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
-  private limelightSubsystem m_limelight = new limelightSubsystem();
+  private LimelightSubsystem m_limelight = new LimelightSubsystem();
   
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
