@@ -10,6 +10,10 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,9 +26,9 @@ public class ShooterSubsystem extends SubsystemBase
 {
     private TalonSRXConfiguration wheelMasterConfig = new TalonSRXConfiguration();
     private TalonSRXConfiguration wheelFollowerConfig = new TalonSRXConfiguration();
-    private TalonSRX m_wheelMotor;
-    private TalonSRX m_wheelMotor2;
-    private TalonSRX m_wheelMotor3;
+    private CANSparkMax m_wheelMotor;
+    private CANSparkMax m_wheelMotor2;
+  
     private double m_targetVelocity;
 
     /**
@@ -39,33 +43,25 @@ public class ShooterSubsystem extends SubsystemBase
         wheelMasterConfig.slot0.kD = Shooter.WHEEL_D;
         wheelMasterConfig.slot0.kF = Shooter.WHEEL_F;
 
-        m_wheelMotor = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER1);
-        m_wheelMotor2 = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER2);
-        m_wheelMotor3 = new TalonSRX(Constants.CanId.MOTOR_CONTROLLER_SHOOTER3);
+        m_wheelMotor = new CANSparkMax(Constants.CanId.MOTOR_CONTROLLER_SHOOTER1, MotorType.kBrushless);
+        m_wheelMotor2 = new CANSparkMax(Constants.CanId.MOTOR_CONTROLLER_SHOOTER2, MotorType.kBrushless);
+        m_wheelMotor.restoreFactoryDefaults();
+        m_wheelMotor2.restoreFactoryDefaults();
        
-        m_wheelMotor.configAllSettings(wheelMasterConfig);
-        m_wheelMotor2.configAllSettings(wheelFollowerConfig);
-        m_wheelMotor3.configAllSettings(wheelFollowerConfig);
         m_wheelMotor2.follow(m_wheelMotor);
-        m_wheelMotor3.follow(m_wheelMotor);
+       
 
         m_wheelMotor.setInverted(true);
         m_wheelMotor2.setInverted(true);
-        m_wheelMotor3.setInverted(true);
-
-        m_wheelMotor.setNeutralMode(NeutralMode.Coast);
-        m_wheelMotor2.setNeutralMode(NeutralMode.Coast);
-        m_wheelMotor3.setNeutralMode(NeutralMode.Coast);
+  
+        m_wheelMotor.setIdleMode(IdleMode.kBrake);
+        m_wheelMotor2.setIdleMode(IdleMode.kBrake);
+       
     }
 
     @Override
     public void periodic()
     {
-    }
-
-    public double getVelocity()
-    {
-        return m_wheelMotor.getSelectedSensorVelocity();
     }
 
     public double getTargetVelocity()
@@ -81,13 +77,13 @@ public class ShooterSubsystem extends SubsystemBase
 
     public void setPower(double power)
     {
-        m_wheelMotor.set(ControlMode.PercentOutput, power);
+        m_wheelMotor.set(power);
     }
 
     public void setVelocity(double velocity)
     {
         m_targetVelocity = velocity;
-        m_wheelMotor.set(ControlMode.Velocity, velocity);
+        m_wheelMotor.set(velocity);
     }
 
 }
