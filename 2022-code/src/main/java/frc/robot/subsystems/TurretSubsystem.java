@@ -19,7 +19,7 @@ public class TurretSubsystem extends SubsystemBase {
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    m_initialAngle = getCurrentAngle();
+    m_initialAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
   }
 
   public void stop(){
@@ -39,7 +39,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public double getCurrentAngle() {
-    return m_currentAngle;
+    return m_currentAngle - m_initialAngle;
   }
 
   public void setSetpoint(double setpointAngle) {
@@ -51,7 +51,8 @@ public class TurretSubsystem extends SubsystemBase {
   @Override
   public void periodic() {                 
     // This method will be called once per scheduler run
-    m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
-    //System.out.println(m_turretMotor.getSelectedSensorPosition());
+    m_currentAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
+    System.out.println(getCurrentAngle());
+    System.out.println("initial angle: " + m_initialAngle);
   }
 }
