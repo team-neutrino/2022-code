@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.Controllers;
+import frc.robot.Constants.Shooter;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.subsystems.ShuffleboardSubsystem;
@@ -58,7 +59,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() 
   {
-    m_B.whenHeld(new ShooterSetSpeed(m_Shooter, 50000));
+    m_B.whenHeld(new ShooterSetSpeed(m_Shooter, Shooter.SHOOTER_SPEED));
   }
 
   /**
