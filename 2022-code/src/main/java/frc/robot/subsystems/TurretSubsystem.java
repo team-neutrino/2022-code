@@ -16,10 +16,13 @@ public class TurretSubsystem extends SubsystemBase {
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
   private double m_initialAngle;
+  private double m_initialDerivative;
+  private double prevAngleError;
 
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
     m_initialAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
+    m_initialDerivative = 0;
   }
 
   public void stop(){
@@ -39,14 +42,23 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public double getCurrentAngle() {
-    return m_currentAngle;
+    return m_currentAngle - m_initialAngle;
+  }
+
+  private double PIDify(double error, double derivative) {
+    double kP = Constants.TurretConstants.TURRET_KP;
+    double kD = Constants.TurretConstants.TURRET_KD;
+    double kI = Constants.TurretConstants.TURRET_KI;
+    return kP * error - kD * derivative;
   }
 
   public void setSetpoint(double setpointAngle) {
     double limitedAngle = turretLimit(setpointAngle);
-    double differenceAngle = getCurrentAngle() - limitedAngle;
-    System.out.println("differenceAngle: " + differenceAngle);
-    m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_KP * differenceAngle);
+    double currentAngleError = limitedAngle - getCurrentAngle(); 
+    double derivative = currentAngleError - prevAngleError;
+    System.out.println("differenceAngle: " + currentAngleError);
+    m_turretMotor.set(ControlMode.PercentOutput, PIDify(currentAngleError, derivative));
+    prevAngleError = currentAngleError;   
   }
 
   @Override

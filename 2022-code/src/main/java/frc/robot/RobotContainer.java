@@ -51,7 +51,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    //m_turret.setDefaultCommand(new TurretAutoAimCommand(m_turret, m_limelight));
+    m_turret.setDefaultCommand(new TurretAutoAimCommand(m_turret, m_limelight));
   }
 
   /**

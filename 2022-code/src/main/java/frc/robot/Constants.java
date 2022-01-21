@@ -17,10 +17,12 @@ public final class Constants {
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
     public static final class TurretConstants {
-        public static final double TURRET_KP = 0.1;
-        public static final double TURRET_UPDATE_ANGLE = 2;
+        public static final double TURRET_KP = 0.03;
+        public static final double TURRET_KD = 0.02;
+        public static final double TURRET_KI = 0.01;
+        public static final double TURRET_UPDATE_ANGLE = 10;
         public static final double TURRET_DEAD_ANGLE = 1;
-        public static final double TURRET_LIMIT_ANGLE = 100;
+        public static final double TURRET_LIMIT_ANGLE = 160;
     }
 
     public static final class PortConstants {
