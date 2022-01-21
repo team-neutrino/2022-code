@@ -43,6 +43,5 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Shuffleboard.update();
-    System.out.println("hace frio");
   }
 }
