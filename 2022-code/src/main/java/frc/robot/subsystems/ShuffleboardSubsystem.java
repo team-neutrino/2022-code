@@ -27,7 +27,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     System.out.println("Wineinger");
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     try {
-    LLFeed = new HttpCamera("limelight", "http://10.39.28.12:5800/stream.mjpg",
+    LLFeed = new HttpCamera("limelight", "http://10.39.28.12",
       HttpCameraKind.kMJPGStreamer);
     // m_drivestationTab.add(LLFeed);
     CameraServer.startAutomaticCapture(LLFeed);
@@ -35,11 +35,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     System.out.println("cale"); }
     catch(VideoException e) {
       System.out.println("swag");
+
     }
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    Shuffleboard.update();
+    System.out.println("hace frio");
   }
 }
