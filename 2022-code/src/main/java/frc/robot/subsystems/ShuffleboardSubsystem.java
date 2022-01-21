@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-  private NetworkTableEntry m_testOutput;  
+
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem() {
@@ -22,6 +22,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_testOutput.setDouble(2);
+  
   }
 }
