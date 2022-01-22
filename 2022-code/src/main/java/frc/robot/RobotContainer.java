@@ -28,10 +28,9 @@ public class RobotContainer {
   private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
-  
-  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
