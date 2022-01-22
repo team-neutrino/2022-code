@@ -15,13 +15,12 @@ package frc.robot;
 public final class Constants {
     public static final class  CanId
     {
-        public static final int MOTOR_CONTROLLER_DRIVER_LEFT1 = 1;
-        public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 2;
+        public static final int MOTOR_CONTROLLER_DRIVER_LEFT1 = 10;
+        public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 20;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
         public static final int MOTOR_CONTROLLER_SHOOTER1 = 1;
         public static final int MOTOR_CONTROLLER_SHOOTER2 =2;
-        public static final int MOTOR_CONTROLLER_SHOOTER3 = 11;
     }
     public static final class Controllers
     {
@@ -31,9 +30,9 @@ public final class Constants {
     }
     public static final class Shooter
     {
-        public static final double WHEEL_P = 0.04;
+        public static final double WHEEL_P = 0.02;
         public static final double WHEEL_I = 0;
-        public static final double WHEEL_D = 2;
+        public static final double WHEEL_D = 0;
         public static final double SHOOTER_CONVERSION = 0;
         public static final double SHOOTER_SPEED = 50000;
     }

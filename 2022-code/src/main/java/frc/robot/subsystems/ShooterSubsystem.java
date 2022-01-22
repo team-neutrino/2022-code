@@ -4,26 +4,17 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FollowerType;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.Shooter;
 
-
-@SuppressWarnings(
-{ "all" })
 public class ShooterSubsystem extends SubsystemBase
 {
     private CANSparkMax m_wheelMotor;
@@ -31,7 +22,7 @@ public class ShooterSubsystem extends SubsystemBase
     private RelativeEncoder m_encoder;
     private SparkMaxPIDController m_pidController;
   
-    private double m_targetVelocity;
+    private double m_targetRPM;
 
     /**
      * Creates a new Shooter.
@@ -47,16 +38,18 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor2.restoreFactoryDefaults();
         m_wheelMotor.setInverted(true);
         m_wheelMotor2.setInverted(true);
-        m_wheelMotor.setIdleMode(IdleMode.kBrake);
-        m_wheelMotor2.setIdleMode(IdleMode.kBrake);
+        m_wheelMotor.setIdleMode(IdleMode.kCoast);
+        m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
         m_encoder = m_wheelMotor.getEncoder();
+        //this is probbaly not a good number, try again. just random number right now
+        // m_encoder.setVelocityConversionFactor();
         m_pidController = m_wheelMotor.getPIDController();
         m_pidController.setFeedbackDevice(m_encoder);
         m_pidController.setP(Shooter.WHEEL_P);
         m_pidController.setI(Shooter.WHEEL_I);
         m_pidController.setD(Shooter.WHEEL_D);
-        m_pidController.setOutputRange(-1, 1);
+        m_pidController.setOutputRange(0, 1);
     }
 
     @Override
@@ -64,30 +57,29 @@ public class ShooterSubsystem extends SubsystemBase
     {
     }
 
-    public double getVelocity()
+    public double getRPM()
     {
-        return m_encoder.getPosition();
+        return m_encoder.getVelocity();
+    }
+
+    public void setPidOn(double p_targetRPM)
+    {
+        m_targetRPM = p_targetRPM;
+        m_pidController.setReference(m_targetRPM, ControlType.kVelocity);
     }
 
     public double getTargetVelocity()
     {
-        return m_targetVelocity;
+        return m_targetRPM;
     }
 
     public void turnOff()
     {
-        m_targetVelocity = 0;
         setPower(0);
     }
 
     public void setPower(double power)
     {
         m_wheelMotor.set(power);
-    }
-
-    public void setVelocity(double velocity)
-    {
-        m_targetVelocity = velocity;
-        m_wheelMotor.set(velocity);
     }
 }
