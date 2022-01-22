@@ -19,29 +19,21 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-  private NetworkTableEntry m_testOutput;  
   private HttpCamera LLFeed;
 
   /** Creates a new shuffleboard. */
-  public ShuffleboardSubsystem() {
-    System.out.println("Wineinger");
+  public ShuffleboardSubsystem() 
+  {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
-    try {
-    LLFeed = new HttpCamera("limelight", "http://10.39.28.12",
-      HttpCameraKind.kMJPGStreamer);
-    // m_drivestationTab.add(LLFeed);
+    LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
+    HttpCameraKind.kMJPGStreamer);
     CameraServer.startAutomaticCapture(LLFeed);
     m_drivestationTab.add(LLFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
-    System.out.println("cale"); }
-    catch(VideoException e) {
-      System.out.println("swag");
-
-    }
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Shuffleboard.update();
+
   }
 }
