@@ -13,9 +13,13 @@ import frc.robot.Constants;
 
 public class TurretSubsystem extends SubsystemBase {
 
+  double initialAngle;
+  double currentAngle;
+
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
+    initialAngle = (360/1024) * m_turretMotor.getSelectedSensorPosition();
   }
 
   public void stop(){
@@ -23,15 +27,32 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnClockwise(){
+    if (getCurrentAngle() >= 50){
+      stop(); 
+    }
+    else {
     m_turretMotor.set(ControlMode.PercentOutput, 0.5);
+    }
   }
 
   public void turnCounterClockwise(){
+    if (getCurrentAngle() <= -50){
+      stop();
+    }
+    else {
     m_turretMotor.set(ControlMode.PercentOutput, -0.5);
+    }
+  }
+
+  public double getCurrentAngle(){
+    return currentAngle - initialAngle; 
   }
  
   @Override
   public void periodic() {                 
-  
+    currentAngle = (360/1024) * m_turretMotor.getSelectedSensorPosition();
+    // System.out.println(currentAngle); 
+    System.out.println(m_turretMotor.getSelectedSensorPosition());
+   //System.out.println(initialAngle);
   }
 }
