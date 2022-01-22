@@ -10,7 +10,8 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 import frc.robot.Constants.SolenoidId;
@@ -18,9 +19,19 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class IntakeSubSystem extends SubsystemBase {
   private TalonSRX m_IntakeFeedMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_FEED);
-  private Solenoid m_IntakePositionSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, SolenoidId.SOLENOID_INTAKE_POSITION);
+  private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SolenoidId.SOLENOID_INTAKE_FORWARD, SolenoidId.SOLENOID_INTAKE_REVERSE);
+  
   public IntakeSubSystem() {
-    
+
+  }
+
+  public void setDown(){
+    m_IntakeSolenoid.set(Value.kForward);
+
+  }
+
+  public void setUp(){
+    m_IntakeSolenoid.set(Value.kReverse);
   }
 
   @Override

@@ -33,7 +33,8 @@ public final class Constants
     }
     public static final class SolenoidId
     {
-        public static final int SOLENOID_INTAKE_POSITION = 0;
+        public static final int SOLENOID_INTAKE_FORWARD = 0;
+        public static final int SOLENOID_INTAKE_REVERSE = 0;
     }
     public static final class Controllers
     {
