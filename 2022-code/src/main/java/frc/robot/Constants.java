@@ -20,15 +20,20 @@ public final class Constants
         public static final String THEME_SRCURL = "src/main/java/frc/robot/util/themes/";
     }
 
-    public static final class  CanId
+    public static final class CanId
     {
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 15;
         public static final int MOTOR_CONTROLLER_DRIVER_LEFT1 = 1;
         public static final int MOTOR_CONTROLLER_DRIVER_LEFT2 = 2;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT1 = 4;
         public static final int MOTOR_CONTROLLER_DRIVER_RIGHT2 = 5;
         public static final int MOTOR_CONTROLLER_SHOOTER1 = 14;
-        public static final int MOTOR_CONTROLLER_SHOOTER2 =12;
+        public static final int MOTOR_CONTROLLER_SHOOTER2 = 12;
         public static final int MOTOR_CONTROLLER_SHOOTER3 = 11;
+    }
+    public static final class SolenoidId
+    {
+        public static final int SOLENOID_INTAKE_POSITION = 0;
     }
     public static final class Controllers
     {
