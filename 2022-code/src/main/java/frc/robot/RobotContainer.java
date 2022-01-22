@@ -62,8 +62,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
   
     /** Turret mappings */
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true)).whenReleased(new InstantCommand(m_turret::stop));
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false)).whenReleased(new InstantCommand(m_turret::stop));
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
   }
 
