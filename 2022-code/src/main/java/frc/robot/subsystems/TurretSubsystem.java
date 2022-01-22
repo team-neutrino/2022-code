@@ -29,6 +29,14 @@ public class TurretSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, 0);
   }
 
+  public void turnClockwise(){
+    m_turretMotor.set(ControlMode.PercentOutput, 0.5);
+  }
+
+  public void turnCounterClockwise(){
+    m_turretMotor.set(ControlMode.PercentOutput, -0.5);
+  }
+
   private double turretLimit(double angle) {
     double limitAngle = Constants.TurretConstants.TURRET_LIMIT_ANGLE;
     double newAngle = angle;

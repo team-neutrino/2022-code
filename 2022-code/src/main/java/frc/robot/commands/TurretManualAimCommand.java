@@ -5,43 +5,44 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.TurretSubsystem;
 
+
+
 public class TurretManualAimCommand extends CommandBase {
+
   private TurretSubsystem m_turret;
   private boolean m_isClockwise;
 
-  /** Creates a new ContinuousTurnCommand. */
+  /** Creates a new TurretManualAimCommand. */
   public TurretManualAimCommand(TurretSubsystem p_turret, boolean isClockwise) {
+    
     m_turret = p_turret;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_turret);
     m_isClockwise = isClockwise;
+   
+   addRequirements(m_turret);
   }
+
+
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_isClockwise) {
-      m_turret.setSetpoint(m_turret.getCurrentAngle() + Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+    if (m_isClockwise){
+      m_turret.turnClockwise();
     }
     else {
-      m_turret.setSetpoint(m_turret.getCurrentAngle() - Constants.TurretConstants.TURRET_UPDATE_ANGLE);
+      m_turret.turnCounterClockwise();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

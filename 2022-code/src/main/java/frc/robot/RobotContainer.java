@@ -7,9 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
-import frc.robot.commands.TurretToAngleCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.limelightSubsystem;
@@ -55,7 +53,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-    m_turret.setDefaultCommand(new TurretAutoAimCommand(m_turret, m_limelight));
   }
 
   /**
@@ -70,7 +67,6 @@ public class RobotContainer {
     /** Turret mappings */
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true)).whenReleased(new InstantCommand(m_turret::stop));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false)).whenReleased(new InstantCommand(m_turret::stop));
-    m_A.whenPressed(new TurretToAngleCommand(m_turret, 150));
 
   }
 
