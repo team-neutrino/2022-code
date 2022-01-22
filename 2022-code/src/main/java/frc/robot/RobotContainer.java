@@ -29,7 +29,6 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
-  private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
 
