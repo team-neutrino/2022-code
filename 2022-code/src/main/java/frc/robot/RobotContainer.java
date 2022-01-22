@@ -10,8 +10,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -37,6 +39,7 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
   Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
+  private final IntakeSubSystem p_trigger =  new IntakeSubSystem();
   
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   
@@ -57,6 +60,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+    m_TriggerLeft.whileHeld(new IntakeCommand(p_trigger, true));
 
   }
 
