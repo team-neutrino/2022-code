@@ -4,10 +4,14 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.VideoException;
+import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,29 +20,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-  private ShuffleboardTab m_troubleshootTab; 
-
-  private NetworkTableEntry m_limelightFeed;
-  private HttpCamera feed;
-
-  private NetworkTableEntry m_turretCurrentAngle;
-
-  private TurretSubsystem m_turret;
+  private HttpCamera LLFeed;
 
   /** Creates a new shuffleboard. */
-  public ShuffleboardSubsystem(TurretSubsystem p_turret) {
-    m_turret = p_turret;
-
+  public ShuffleboardSubsystem() 
+  {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
-
-    //feed = new HttpCamera("limelight", "http:///limelight.local:5800/stream.mjpg");
-    
-    m_turretCurrentAngle = m_drivestationTab.add("Turret Current Angle", 0).withPosition(6, 0).withSize(2, 2).getEntry();
+    LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",HttpCameraKind.kMJPGStreamer);
+    CameraServer.startAutomaticCapture(LLFeed);
+    m_drivestationTab.add(LLFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
-    m_turretCurrentAngle.setDouble(m_turret.getCurrentAngle());
   }
 }

@@ -6,22 +6,20 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
+import frc.robot.subsystems.DriveTrainSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -40,14 +38,13 @@ public class RobotContainer {
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
   /** Instantiate subsystems below */
+  private final TurretSubsystem m_turret = new TurretSubsystem();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private TurretSubsystem m_turret = new TurretSubsystem();
-  private DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(m_rightJoystick, m_leftJoystick);
-  private ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_turret);
-  private limelightSubsystem m_limelight = new limelightSubsystem();
-
-  /** Instantiate commands below */
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -67,7 +64,7 @@ public class RobotContainer {
     /** Turret mappings */
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true)).whenReleased(new InstantCommand(m_turret::stop));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false)).whenReleased(new InstantCommand(m_turret::stop));
-
+    m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
   }
 
 

@@ -9,12 +9,11 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
-
-public class limelightSubsystem extends SubsystemBase {
+public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
-  
-  public limelightSubsystem() {
+
+  public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
   }
@@ -29,31 +28,31 @@ public class limelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public void setLimelightOn()
-  {
-    ledMode.setNumber(3);
+  public void setLimelightOn(boolean setOn) {
+      if(setOn) {
+        ledMode.setNumber(3);
+      }
+      else {
+        ledMode.setNumber(1); 
+      }
   }
 
-  public double getTx()
-  {
+  public double getTx() {
     NetworkTableEntry tx = limelight.getEntry("tx");
     return tx.getDouble(0.0);
   }
 
-  public double getTy()
-  {
-    NetworkTableEntry ty = limelight.getEntry("tx");
+  public double getTy() {
+    NetworkTableEntry ty = limelight.getEntry("ty");
     return ty.getDouble(0.0);
   }
 
-  public double getTa()
-  {
-    NetworkTableEntry ta = limelight.getEntry("tx");
+  public double getTa() {
+    NetworkTableEntry ta = limelight.getEntry("ta");
     return ta.getDouble(0.0);
   }
 
-  public boolean getTv()
-  {
+  public boolean getTv() {
     NetworkTableEntry tv = limelight.getEntry("tv");
     double validTarget = tv.getDouble(0.0);
     if(validTarget == 1)
