@@ -23,6 +23,7 @@ public final class Constants {
         public static final double TURRET_UPDATE_ANGLE = 10;
         public static final double TURRET_DEAD_ANGLE = 1;
         public static final double TURRET_LIMIT_ANGLE = 160;
+        public static final double TURRET_KP2 = 0.01;
     }
 
     public static final class PortConstants {

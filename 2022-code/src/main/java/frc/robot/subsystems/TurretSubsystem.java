@@ -61,11 +61,18 @@ public class TurretSubsystem extends SubsystemBase {
     prevAngleError = currentAngleError;   
   }
 
+  public void setSetPointAngle(double setpointAngle) {
+    double limitedAngle = turretLimit(setpointAngle);
+    double currentAngleError = limitedAngle - getCurrentAngle();
+    m_turretMotor.set(ControlMode.PercentOutput, currentAngleError * Constants.TurretConstants.TURRET_KP2);
+
+  }
+
   @Override
   public void periodic() {                 
     // This method will be called once per scheduler run
     m_currentAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
-    System.out.println(getCurrentAngle());
-    System.out.println("initial angle: " + m_initialAngle);
+  //  System.out.println(getCurrentAngle());
+  //  System.out.println("initial angle: " + m_initialAngle);
   }
 }
