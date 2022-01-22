@@ -25,15 +25,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public ShuffleboardSubsystem() 
   {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
-    LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
-    HttpCameraKind.kMJPGStreamer);
+    LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",HttpCameraKind.kMJPGStreamer);
     CameraServer.startAutomaticCapture(LLFeed);
     m_drivestationTab.add(LLFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
-
   }
 }
