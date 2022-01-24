@@ -60,7 +60,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_TriggerLeft.whileHeld(new IntakeCommand(p_trigger, true));
+    m_TriggerLeft.whenActive(new IntakeCommand(p_trigger, true));
 
   }
 

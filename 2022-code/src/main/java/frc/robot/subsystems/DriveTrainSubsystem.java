@@ -23,6 +23,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     @Override
     public void periodic()
     {
+        //called once per scheduler run if you didn't already know
     }
     public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) 
     {
