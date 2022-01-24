@@ -42,8 +42,6 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
         m_encoder = m_wheelMotor.getEncoder();
-        //this is probbaly not a good number, try again. just random number right now
-        // m_encoder.setVelocityConversionFactor();
         m_pidController = m_wheelMotor.getPIDController();
         m_pidController.setFeedbackDevice(m_encoder);
         m_pidController.setP(Shooter.WHEEL_P);

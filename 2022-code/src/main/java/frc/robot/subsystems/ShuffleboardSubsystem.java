@@ -4,7 +4,10 @@
 
 package frc.robot.subsystems;
 
+import java.util.Map;
+
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,13 +25,13 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooter = p_shooter; 
 
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
-    m_shooterSpeed = m_drivestationTab.add("Shooter Speed", 0).getEntry();
+    m_shooterSpeed = m_drivestationTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
+      BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 6000)).getEntry();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_shooterSpeed.getDouble(m_shooter.getRPM());
-    
+    m_shooterSpeed.setDouble(m_shooter.getRPM());
   }
 }
