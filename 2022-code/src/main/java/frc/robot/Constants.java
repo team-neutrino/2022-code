@@ -35,12 +35,18 @@ public final class Constants
     {
         public static final int SOLENOID_INTAKE_FORWARD = 0;
         public static final int SOLENOID_INTAKE_REVERSE = 0;
+
+    }
+    public static final class IntakeConstants{
+        public static final double INTAKE_MOTOR_POWER = -1;
+        public static final double OUTTAKE_MOTOR_POWER = 1;
     }
     public static final class Controllers
     {
         public static final int XBOX_CONTROLLER_PORT = 2;
         public static final int LEFT_JOYSTICK_PORT = 0;
         public static final int RIGHT_JOYSTICK_PORT = 1;
+        
     }
     public static final class Shooter
     {

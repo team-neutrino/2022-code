@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -36,12 +37,14 @@ public class RobotContainer {
   private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
   private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
+  private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
   Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
   private final IntakeSubSystem p_trigger =  new IntakeSubSystem();
   
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   
   private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
 
@@ -60,7 +63,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_TriggerLeft.whenActive(new IntakeCommand(p_trigger, true));
+    m_intake.setDefaultCommand(m_intakeDefaultCommand);
+    m_TriggerLeft.whenActive(new IntakeCommand(p_trigger));
 
   }
 

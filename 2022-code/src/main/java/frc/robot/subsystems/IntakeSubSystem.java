@@ -28,23 +28,31 @@ public class IntakeSubSystem extends SubsystemBase {
   public void setDown() {
     m_IntakeSolenoid.set(Value.kForward);
     if("don't know what to put here yet".equals("")) { 
-      m_IntakeSolenoid.set(Value.kOff); //some angle?
+      m_IntakeSolenoid.set(Value.kOff); //some value?
     }
   }
 
   public void setUp(){
     m_IntakeSolenoid.set(Value.kReverse);
     if("don't know what to put here yet".equals("")) {
-      m_IntakeSolenoid.set(Value.kOff); //some angle?
+      m_IntakeSolenoid.set(Value.kOff); //some value?
     }
   }
 
-  /* 
-  public void turnOn() {
-    while(){
+  public void setIntakeOn()
+  {
+      m_IntakeFeedMotor.set(ControlMode.PercentOutput, Constants.IntakeConstants.INTAKE_MOTOR_POWER);
+  }
 
-    }
-  } */
+  public void setIntakeReverse()
+  {
+      m_IntakeFeedMotor.set(ControlMode.PercentOutput, -Constants.IntakeConstants.INTAKE_MOTOR_POWER);
+  }
+
+  public void setIntakeOff()
+  {
+      m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
+  }
 
   @Override
   public void periodic() {
