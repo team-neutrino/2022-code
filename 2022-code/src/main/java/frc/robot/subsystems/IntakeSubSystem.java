@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Constants;
-import frc.robot.Constants.CanId;
 import frc.robot.Constants.SolenoidId;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CANIDConstants;
 
 public class IntakeSubSystem extends SubsystemBase {
-  private TalonSRX m_IntakeFeedMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_FEED);
+  private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
   private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SolenoidId.SOLENOID_INTAKE_FORWARD, SolenoidId.SOLENOID_INTAKE_REVERSE);
   
   public IntakeSubSystem() {

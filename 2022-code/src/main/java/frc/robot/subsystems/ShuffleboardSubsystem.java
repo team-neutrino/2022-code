@@ -4,7 +4,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -12,16 +15,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class ShuffleboardSubsystem extends SubsystemBase {
 
   private ShuffleboardTab m_drivestationTab;
-
+  private HttpCamera LLFeed;
 
   /** Creates a new shuffleboard. */
-  public ShuffleboardSubsystem() {
-    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");  
+  public ShuffleboardSubsystem() 
+  {
+    m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
+    LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",HttpCameraKind.kMJPGStreamer);
+    CameraServer.startAutomaticCapture(LLFeed);
+    m_drivestationTab.add(LLFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
   }
 
   @Override
-  public void periodic() {
+  public void periodic() 
+  {
     // This method will be called once per scheduler run
-  
   }
 }

@@ -24,8 +24,13 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
-
+import frc.robot.commands.TurretManualAimCommand;
+import frc.robot.subsystems.TurretSubsystem;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -34,10 +39,18 @@ import frc.robot.subsystems.DriveTrainSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
+
+  /** Instantiate buttons, joysticks, etc. below */
+  private XboxController m_OperatorController = new XboxController(Constants.PortConstants.XBOX_CONTROLLER_ID);
+  private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
+  private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
+  private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
+  private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
+  private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
+
+  /** Instantiate subsystems below */
+  private final TurretSubsystem m_turret = new TurretSubsystem();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private Joystick m_rightJoystick = new Joystick(Constants.Controllers.RIGHT_JOYSTICK_PORT);
-  private Joystick m_leftJoystick = new Joystick(Constants.Controllers.LEFT_JOYSTICK_PORT);
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
@@ -46,18 +59,17 @@ public class RobotContainer {
   private final IntakeSubSystem p_trigger =  new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
-  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
-  
-  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem();
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
     // Configure the button bindings
     configureButtonBindings();
-  
-    
   }
 
   /**
@@ -66,12 +78,18 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
+
   private void configureButtonBindings() {
+  
+    /** Turret mappings */
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_TriggerLeft.whenActive(new IntakeCommand(p_trigger));
 
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
