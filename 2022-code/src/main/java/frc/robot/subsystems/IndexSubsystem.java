@@ -23,10 +23,28 @@ public class IndexSubsystem extends SubsystemBase
   {
 
   }
-
+ 
   public void motorOneStart()
   {
     m_indexMotor1.set(ControlMode.PercentOutput, 0.5);
+  }
+
+  public void motorOneStop()
+  {
+    m_indexMotor1.set(ControlMode.PercentOutput,0);
+  }
+  public void MotorTwoStart()
+  {
+    m_indexMotor2.set(ControlMode.PercentOutput, 0.5);
+  }
+  public void MotorTwoStop()
+  {
+    m_indexMotor2.set(ControlMode.PercentOutput, 0);
+  }
+
+  public boolean getBeamBreak()
+  {
+    return m_beamBreak.get();
   }
   @Override
   public void periodic() 
