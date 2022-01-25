@@ -43,6 +43,7 @@ public class RobotContainer {
   private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
+  private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
   /** Instantiate subsystems below */
   private final TurretSubsystem m_turret = new TurretSubsystem();
