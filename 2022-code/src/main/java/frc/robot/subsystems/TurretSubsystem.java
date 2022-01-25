@@ -13,13 +13,14 @@ import frc.robot.Constants;
 
 public class TurretSubsystem extends SubsystemBase {
 
-  double initialAngle;
-  double currentAngle;
+  double m_initialAngle;
+  double m_currentAngle;
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    initialAngle = ((360.0/1024.0) * m_turretMotor.getSelectedSensorPosition()) / 3.88;
+    // 3.88 is gear ratio conversion for 2021 robot. Probably delete once code is moved to new robot. 
+    m_initialAngle = ((360.0/1024.0) * m_turretMotor.getSelectedSensorPosition()) / 3.88;
   }
 
   public void stop(){
@@ -31,7 +32,7 @@ public class TurretSubsystem extends SubsystemBase {
       stop(); 
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, 0.5);
+    m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_MOTOR_OUTPUT);
     }
   }
 
@@ -40,19 +41,19 @@ public class TurretSubsystem extends SubsystemBase {
       stop();
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, -0.5);
+    m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_MOTOR_OUTPUT);
     }
   }
 
   public double getCurrentAngle(){
-    return currentAngle - initialAngle; 
+    return m_currentAngle - m_initialAngle; 
   }
  
   @Override
   public void periodic() {                 
-    currentAngle = ((360.0/1024.0) * m_turretMotor.getSelectedSensorPosition()) / 3.88;
-     System.out.println(currentAngle); 
+    m_currentAngle = ((360.0/1024.0) * m_turretMotor.getSelectedSensorPosition()) / 3.88;
+     System.out.println(m_currentAngle); 
    // System.out.println(m_turretMotor.getSelectedSensorPosition());
-   System.out.println(initialAngle);
+   System.out.println(m_initialAngle);
   }
 }
