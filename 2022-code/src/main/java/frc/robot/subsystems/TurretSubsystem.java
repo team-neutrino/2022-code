@@ -19,7 +19,7 @@ public class TurretSubsystem extends SubsystemBase {
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   /** Creates a new TurretSubsystem. */
   public TurretSubsystem() {
-    initialAngle = (360/1024) * m_turretMotor.getSelectedSensorPosition();
+    initialAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
   }
 
   public void stop(){
@@ -27,7 +27,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnClockwise(){
-    if (getCurrentAngle() >= 50){
+    if (getCurrentAngle() >= 100){
       stop(); 
     }
     else {
@@ -36,7 +36,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   public void turnCounterClockwise(){
-    if (getCurrentAngle() <= -50){
+    if (getCurrentAngle() <= -100){
       stop();
     }
     else {
@@ -50,9 +50,9 @@ public class TurretSubsystem extends SubsystemBase {
  
   @Override
   public void periodic() {                 
-    currentAngle = (360/1024) * m_turretMotor.getSelectedSensorPosition();
-    // System.out.println(currentAngle); 
-    System.out.println(m_turretMotor.getSelectedSensorPosition());
+    currentAngle = (360.0/1024.0) * m_turretMotor.getSelectedSensorPosition();
+     System.out.println(currentAngle); 
+   // System.out.println(m_turretMotor.getSelectedSensorPosition());
    //System.out.println(initialAngle);
   }
 }
