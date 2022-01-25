@@ -32,7 +32,7 @@ public class ShooterSetSpeed extends CommandBase
     @Override
     public void execute()
     {
-        m_shooter.setPidOn(m_rpm);
+        m_shooter.setTargetRPM(m_rpm);
     }
 
     // Called once the command ends or is interrupted.

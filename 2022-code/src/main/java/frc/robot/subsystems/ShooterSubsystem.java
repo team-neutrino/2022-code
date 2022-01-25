@@ -60,13 +60,13 @@ public class ShooterSubsystem extends SubsystemBase
         return m_encoder.getVelocity();
     }
 
-    public void setPidOn(double p_targetRPM)
+    public void setTargetRPM(double p_targetRPM)
     {
         m_targetRPM = p_targetRPM;
         m_pidController.setReference(m_targetRPM, ControlType.kVelocity);
     }
 
-    public double getTargetVelocity()
+    public double getTargetRPM()
     {
         return m_targetRPM;
     }
