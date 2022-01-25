@@ -29,8 +29,8 @@ public final class Constants {
     
     public static final class SolenoidId
     {
-        public static final int SOLENOID_INTAKE_FORWARD = 4;
-        public static final int SOLENOID_INTAKE_REVERSE = 5;
+        public static final int SOLENOID_INTAKE_FORWARD = 0;
+        public static final int SOLENOID_INTAKE_REVERSE = 1;
 
     }
     public static final class IntakeConstants{

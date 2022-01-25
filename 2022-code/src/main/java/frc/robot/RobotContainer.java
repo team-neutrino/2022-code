@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
@@ -15,18 +14,13 @@ import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-
-import static edu.wpi.first.wpilibj.XboxController.Button;
-
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.TurretSubsystem;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -54,7 +48,6 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
   Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
@@ -86,7 +79,6 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_A.whileHeld(new IntakeCommand(m_intake));
-    //m_TriggerLeft.whenActive(new IntakeCommand(m_intake));
 
   }
 
