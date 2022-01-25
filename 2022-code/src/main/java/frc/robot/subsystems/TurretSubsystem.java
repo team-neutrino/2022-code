@@ -41,7 +41,7 @@ public class TurretSubsystem extends SubsystemBase {
       stop();
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_MOTOR_OUTPUT);
+    m_turretMotor.set(ControlMode.PercentOutput, (Constants.TurretConstants.TURRET_MOTOR_OUTPUT) * -1);
     }
   }
 
@@ -52,8 +52,5 @@ public class TurretSubsystem extends SubsystemBase {
   @Override
   public void periodic() {                 
     m_currentAngle = ((360.0/1024.0) * m_turretMotor.getSelectedSensorPosition()) / 3.88;
-     System.out.println(m_currentAngle); 
-   // System.out.println(m_turretMotor.getSelectedSensorPosition());
-   System.out.println(m_initialAngle);
   }
 }
