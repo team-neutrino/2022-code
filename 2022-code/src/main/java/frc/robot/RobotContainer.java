@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.Constants.Controllers;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
@@ -56,7 +56,6 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
   Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
-  private final IntakeSubSystem p_trigger =  new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
 
@@ -86,7 +85,8 @@ public class RobotContainer {
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
-    m_TriggerLeft.whenActive(new IntakeCommand(p_trigger));
+    m_A.whileHeld(new IntakeCommand(m_intake));
+    //m_TriggerLeft.whenActive(new IntakeCommand(m_intake));
 
   }
 
