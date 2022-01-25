@@ -48,7 +48,6 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-  Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
 
