@@ -7,20 +7,20 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.Constants.Controllers;
-import frc.robot.Constants.Shooter;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.Constants.Controllers;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -32,18 +32,25 @@ import frc.robot.subsystems.DriveTrainSubsystem;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private Joystick p_rightJoystick = new Joystick(Controllers.RIGHT_JOYSTICK_PORT);
-  private Joystick p_leftJoystick = new Joystick(Controllers.LEFT_JOYSTICK_PORT);
-  private XboxController m_OperatorController = new XboxController(Controllers.XBOX_CONTROLLER_PORT);
+
+  /** Instantiate buttons, joysticks, etc. below */
+  private XboxController m_OperatorController = new XboxController(Constants.PortConstants.XBOX_CONTROLLER_ID);
+  private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
+  private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
+  private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
+  private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
+  private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
-  
-  private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem(p_rightJoystick,p_leftJoystick);
-  private LimelightSubsystem m_limelight = new LimelightSubsystem();
-  private ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_Shooter);
-  
+
+  /** Instantiate subsystems below */
+  private final TurretSubsystem m_turret = new TurretSubsystem();
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -57,10 +64,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() 
-  {
-    m_B.whenHeld(new ShooterSetSpeed(m_Shooter, Shooter.SHOOTER_SPEED));
+
+  private void configureButtonBindings() {
+  
+    /** Turret mappings */
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+
+    m_B.whenHeld(new ShooterSetSpeed(m_shooter, ShooterConstants.SHOOTER_SPEED));
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

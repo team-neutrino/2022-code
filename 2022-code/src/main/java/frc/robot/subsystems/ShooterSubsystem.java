@@ -13,7 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.Shooter;
+import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase
 {
@@ -30,8 +30,8 @@ public class ShooterSubsystem extends SubsystemBase
 
     public ShooterSubsystem()
     {
-        m_wheelMotor = new CANSparkMax(Constants.CanId.MOTOR_CONTROLLER_SHOOTER1, MotorType.kBrushless);
-        m_wheelMotor2 = new CANSparkMax(Constants.CanId.MOTOR_CONTROLLER_SHOOTER2, MotorType.kBrushless);
+        m_wheelMotor = new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_1_ID, MotorType.kBrushless);
+        m_wheelMotor2 = new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_2_ID, MotorType.kBrushless);
         m_wheelMotor2.follow(m_wheelMotor);
 
         m_wheelMotor.restoreFactoryDefaults();
@@ -44,9 +44,9 @@ public class ShooterSubsystem extends SubsystemBase
         m_encoder = m_wheelMotor.getEncoder();
         m_pidController = m_wheelMotor.getPIDController();
         m_pidController.setFeedbackDevice(m_encoder);
-        m_pidController.setP(Shooter.WHEEL_P);
-        m_pidController.setI(Shooter.WHEEL_I);
-        m_pidController.setD(Shooter.WHEEL_D);
+        m_pidController.setP(ShooterConstants.WHEEL_P);
+        m_pidController.setI(ShooterConstants.WHEEL_I);
+        m_pidController.setD(ShooterConstants.WHEEL_D);
         m_pidController.setOutputRange(0, 1);
     }
 

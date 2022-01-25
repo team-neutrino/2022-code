@@ -13,7 +13,18 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveTrainSubsystem": "Subsystem",
       "/LiveWindow/ExampleSubsystem": "Subsystem",
+      "/LiveWindow/LimelightSubsystem": "Subsystem",
+      "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
+      "/LiveWindow/TurretSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+    }
+  },
+  "NetworkTables": {
+    "Shuffleboard": {
+      "Drivestation Tab": {
+        "open": true
+      },
+      "open": true
     }
   }
 }
