@@ -26,6 +26,18 @@ public final class Constants {
         public static final double TURRET_KP2 = 0.01;
     }
 
+    
+    public static final class SolenoidId
+    {
+        public static final int SOLENOID_INTAKE_FORWARD = 0;
+        public static final int SOLENOID_INTAKE_REVERSE = 1;
+
+    }
+    public static final class IntakeConstants{
+        public static final double INTAKE_MOTOR_POWER = -1;
+        public static final double OUTTAKE_MOTOR_POWER = 1;
+    }
+        
     public static final class PortConstants {
         public static final int XBOX_CONTROLLER_ID = 2;
     }
@@ -44,14 +56,15 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
         public static final int SHOOTER_MOTOR_3_ID = 11;
-        }
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
+    }
 
-        public static final class Shooter
-        {
+    public static final class Shooter
+    {
             public static final double WHEEL_P = 0.04;
             public static final double WHEEL_I = 0;
             public static final double WHEEL_D = 2;
             public static final double WHEEL_F = 0.008;
             public static final double SHOOTER_CONVERSION = 0;
-        }
     }
+}
