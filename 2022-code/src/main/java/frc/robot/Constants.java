@@ -44,6 +44,8 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
         public static final int SHOOTER_MOTOR_3_ID = 11;
+        public static final int INDEX_MOTOR_1_ID = 15;
+        public static final int INDEX_MOTOR_2_ID = 16;
         }
 
         public static final class Shooter
@@ -54,4 +56,10 @@ public final class Constants {
             public static final double WHEEL_F = 0.008;
             public static final double SHOOTER_CONVERSION = 0;
         }
+        public static final class IndexConstants
+        {
+            public static final int INDEX_BEAMBREAK = 7;
+        }
+
+       
     }

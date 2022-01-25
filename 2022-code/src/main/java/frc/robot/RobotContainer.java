@@ -17,9 +17,10 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+
 import edu.wpi.first.wpilibj.Joystick;
 
-import frc.robot.subsystems.DriveTrainSubsystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -38,6 +39,7 @@ public class RobotContainer {
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
   /** Instantiate subsystems below */
+  private final IndexSubsystem m_index = new IndexSubsystem();
   private final TurretSubsystem m_turret = new TurretSubsystem();
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
@@ -76,5 +78,10 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
+  }
+
+  public void initAuton()
+  {
+    m_index.motorOneStart();
   }
 }
