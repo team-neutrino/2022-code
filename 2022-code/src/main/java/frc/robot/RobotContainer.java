@@ -19,6 +19,8 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -42,7 +44,8 @@ public class RobotContainer {
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
   Constants.SolenoidId.SOLENOID_INTAKE_FORWARD);
   private final IntakeSubSystem p_trigger =  new IntakeSubSystem();
-  
+  private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   
@@ -50,8 +53,10 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    m_compressor.enableDigital();
     // Configure the button bindings
     configureButtonBindings();
+  
     
   }
 
