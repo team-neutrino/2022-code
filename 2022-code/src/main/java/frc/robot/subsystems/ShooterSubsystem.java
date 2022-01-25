@@ -47,7 +47,7 @@ public class ShooterSubsystem extends SubsystemBase
         m_pidController.setP(ShooterConstants.WHEEL_P);
         m_pidController.setI(ShooterConstants.WHEEL_I);
         m_pidController.setD(ShooterConstants.WHEEL_D);
-        m_pidController.setOutputRange(0, 1);
+        m_pidController.setOutputRange(.1, 1);
     }
 
     @Override
