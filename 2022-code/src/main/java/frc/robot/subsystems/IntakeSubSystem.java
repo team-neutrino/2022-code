@@ -27,16 +27,12 @@ public class IntakeSubSystem extends SubsystemBase {
 
   public void setDown() {
     m_IntakeSolenoid.set(Value.kForward);
-    if("don't know what to put here yet".equals("")) { 
-      m_IntakeSolenoid.set(Value.kOff); //some value?
-    }
+
   }
 
   public void setUp(){
     m_IntakeSolenoid.set(Value.kReverse);
-    if("don't know what to put here yet".equals("")) {
-      m_IntakeSolenoid.set(Value.kOff); //some value?
-    }
+  
   }
 
   public void setIntakeOn()
