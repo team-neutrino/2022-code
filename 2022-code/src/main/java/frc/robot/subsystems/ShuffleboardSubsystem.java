@@ -33,6 +33,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",HttpCameraKind.kMJPGStreamer);
     CameraServer.startAutomaticCapture(LLFeed); 
     m_drivestationTab.add(LLFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
+    m_drivestationTab.add(CameraServer.startAutomaticCapture()).withPosition(7, 0).withSize(7, 7).withWidget(BuiltInWidgets.kCameraStream);
+    
   }
 
   @Override

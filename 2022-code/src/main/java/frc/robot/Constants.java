@@ -22,6 +22,7 @@ public final class Constants {
         public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 5;
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
     }
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
@@ -34,10 +35,21 @@ public final class Constants {
         public static final double TURRET_DEAD_ANGLE = 1;
         public static final double TURRET_LIMIT_ANGLE = 160;
         public static final double TURRET_KP2 = 0.01;
+        public static final double TURRET_MOTOR_OUTPUT = 0.5;
     }
 
-    public static final class PortConstants 
+    public static final class SolenoidId
     {
+        public static final int SOLENOID_INTAKE_FORWARD = 0;
+        public static final int SOLENOID_INTAKE_REVERSE = 1;
+
+    }
+    public static final class IntakeConstants{
+        public static final double INTAKE_MOTOR_POWER = -1;
+        public static final double OUTTAKE_MOTOR_POWER = 1;
+    }
+        
+    public static final class PortConstants {
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
