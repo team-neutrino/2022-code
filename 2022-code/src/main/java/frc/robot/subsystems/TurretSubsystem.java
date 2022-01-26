@@ -56,29 +56,16 @@ public class TurretSubsystem extends SubsystemBase {
     return m_currentAngle - m_initialAngle; 
   }
 
- /* private double turretLimit(double angle) {
-    double newAngle = angle;
-    if (angle > 0) {
-      newAngle = 0;
-    }
-    else if (angle < -350) {
-      newAngle = -350; 
-    }
-    return newAngle;
-  }
-  */
-
-  private double PIDify(double error) {
+  private double PIDify(double error, double derivative, double integral) {
     double kP = Constants.TurretConstants.TURRET_KP;
     double kD = Constants.TurretConstants.TURRET_KD;
-    //double kI = Constants.TurretConstants.TURRET_KI;
-    return kP * error;
+    double kI = Constants.TurretConstants.TURRET_KI;
+    return kP * error + kD * derivative + kI * integral;
   }
 
   public void setSetpoint(double setpointAngle) {
     double currentAngleError = setpointAngle - getCurrentAngle(); 
-   // System.out.println("differenceAngle: " + currentAngleError);
-    m_turretMotor.set(ControlMode.PercentOutput, PIDify(currentAngleError));  
+    m_turretMotor.set(ControlMode.PercentOutput, PIDify(currentAngleError, 0, 0));  
   }
  
   @Override
