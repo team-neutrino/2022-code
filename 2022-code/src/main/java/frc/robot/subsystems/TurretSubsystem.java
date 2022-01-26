@@ -65,9 +65,9 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
   private double PIDify(double error, double derivative, double integral) {
-    double kP = Constants.TurretConstants.TURRET_KP;
-    double kD = Constants.TurretConstants.TURRET_KD;
-    double kI = Constants.TurretConstants.TURRET_KI;
+    double kP = TURRET_KP;
+    double kD = TURRET_KD;
+    double kI = TURRET_KI;
     return kP * error + kD * derivative + kI * integral;
   }
 
