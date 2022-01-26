@@ -23,7 +23,6 @@ public class TurretSubsystem extends SubsystemBase {
   private final double TURRET_MOTOR_OUTPUT = 0.5;
   private final double m_minAngle = 5;
   private final double m_maxAngle = -90;
-  private double m_prevAngleError = 0;
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_initialAngle;
