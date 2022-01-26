@@ -80,7 +80,7 @@ public class RobotContainer {
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
 
-    m_B.whenHeld(new ShooterSetSpeed(m_shooter, ShooterConstants.SHOOTER_SPEED));
+    m_B.whileHeld(new ShooterSetSpeed(m_shooter, ShooterConstants.SHOOTER_SPEED));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_A.whileHeld(new IntakeCommand(m_intake));
 
