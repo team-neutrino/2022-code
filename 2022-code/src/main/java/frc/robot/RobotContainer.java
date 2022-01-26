@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
@@ -37,11 +36,11 @@ import frc.robot.subsystems.DriveTrainSubsystem;
  */
 public class RobotContainer {
   /** Instantiate buttons, joysticks, etc. below */
-  private XboxController m_OperatorController = new XboxController(Constants.PortConstants.XBOX_CONTROLLER_ID);
+  private XboxController m_OperatorController = new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
-  private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
-  private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
+  private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
+  private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
@@ -50,12 +49,10 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter);
 
-
+   /** Instantiate command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
 
@@ -74,18 +71,16 @@ public class RobotContainer {
    */
 
   private void configureButtonBindings() {
-  
-    /** Turret mappings */
+    /** default command mapping */
+    m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+    m_intake.setDefaultCommand(m_intakeDefaultCommand);
+
+    /** xbox button mapping */
+    m_A.whileHeld(new IntakeCommand(m_intake));
+    m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getTargetRPM()));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
-    m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter, ShooterConstants.SHOOTER_SPEED));
-    m_intake.setDefaultCommand(m_intakeDefaultCommand);
-    m_A.whileHeld(new IntakeCommand(m_intake));
-
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -94,6 +89,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_intakeDefaultCommand;
   }
 }
