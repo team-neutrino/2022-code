@@ -55,11 +55,11 @@ public final class Constants {
         public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 5;
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
-        public static final int SHOOTER_MOTOR_3_ID = 11;
         public static final int INDEX_MOTOR_1_ID = 15;
         public static final int INDEX_MOTOR_2_ID = 1;
-        }
         public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
+        }
+       
 
 
         public static final class ShooterConstants
