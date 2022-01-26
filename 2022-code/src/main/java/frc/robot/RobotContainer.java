@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IndexMotorCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -67,6 +68,8 @@ public class RobotContainer {
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+    m_index.setDefaultCommand(new IndexMotorCommand(m_index));
+
   }
 
 
@@ -80,8 +83,5 @@ public class RobotContainer {
     return m_autoCommand;
   }
 
-  public void initAuton()
-  {
-    m_index.motorOneStart();
-  }
+  
 }
