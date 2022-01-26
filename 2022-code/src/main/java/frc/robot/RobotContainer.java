@@ -14,6 +14,7 @@ import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
@@ -49,6 +50,7 @@ public class RobotContainer {
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
 
 
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
@@ -75,10 +77,10 @@ public class RobotContainer {
     /** Turret mappings */
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_turret.setDefaultCommand(new TurretAutoAimCommand(m_turret, m_limelight));
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_A.whileHeld(new IntakeCommand(m_intake));
-
   }
 
 
