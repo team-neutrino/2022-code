@@ -16,35 +16,10 @@ public final class Constants {
 
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
-    public static final class TurretConstants {
-        public static final double TURRET_KP = 0.08;
-        public static final double TURRET_KD = 0.0;
-        public static final double TURRET_KI = 0.0;
-        public static final double TURRET_UPDATE_ANGLE = 10;
-        public static final double TURRET_DEAD_ANGLE = 1;
-        public static final double TURRET_LIMIT_ANGLE = 160;
-        public static final double TURRET_KP2 = 0.01;
-        public static final double TURRET_MOTOR_OUTPUT = 0.5;
-    }
-
-    public static final class SolenoidId
-    {
-        public static final int SOLENOID_INTAKE_FORWARD = 0;
-        public static final int SOLENOID_INTAKE_REVERSE = 1;
-
-    }
-    public static final class IntakeConstants{
-        public static final double INTAKE_MOTOR_POWER = -1;
-        public static final double OUTTAKE_MOTOR_POWER = 1;
-    }
-        
-    public static final class PortConstants {
-        public static final int XBOX_CONTROLLER_ID = 2;
-    }
-
-    public  final class JoystickConstants {
+    public  final class ControllerConstants {
         public static final int LEFT_JOYSTICK_ID = 0;
         public static final int RIGHT_JOYSTICK_ID = 1;
+        public static final int XBOX_CONTROLLER_ID = 2;
     }
 
     public final class CANIDConstants {
@@ -56,15 +31,5 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
         public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
-    }
-
-    public static final class ShooterConstants
-    {
-            public static final double WHEEL_P = 0.04;
-            public static final double WHEEL_I = 0;
-            public static final double WHEEL_D = 2;
-            public static final double WHEEL_F = 0.008;
-            public static final double SHOOTER_CONVERSION = 0;
-            public static final double SHOOTER_SPEED = 4000;
     }
 }
