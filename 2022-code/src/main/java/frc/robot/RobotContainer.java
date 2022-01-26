@@ -11,6 +11,7 @@ import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
