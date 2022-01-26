@@ -13,20 +13,20 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase
 {
+    /** Shooter Constants */
+    private final double WHEEL_P = 0.04;
+    private final double WHEEL_I = 0;
+    private final double WHEEL_D = 2;
+
     private CANSparkMax m_wheelMotor;
     private CANSparkMax m_wheelMotor2;
     private RelativeEncoder m_encoder;
     private SparkMaxPIDController m_pidController;
   
     private double m_targetRPM;
-
-    /**
-     * Creates a new Shooter.
-     */
 
     public ShooterSubsystem()
     {
@@ -44,9 +44,9 @@ public class ShooterSubsystem extends SubsystemBase
         m_encoder = m_wheelMotor.getEncoder();
         m_pidController = m_wheelMotor.getPIDController();
         m_pidController.setFeedbackDevice(m_encoder);
-        m_pidController.setP(ShooterConstants.WHEEL_P);
-        m_pidController.setI(ShooterConstants.WHEEL_I);
-        m_pidController.setD(ShooterConstants.WHEEL_D);
+        m_pidController.setP(WHEEL_P);
+        m_pidController.setI(WHEEL_I);
+        m_pidController.setD(WHEEL_D);
         m_pidController.setOutputRange(.1, 1);
     }
 
