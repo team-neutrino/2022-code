@@ -53,6 +53,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter);
 
 
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);

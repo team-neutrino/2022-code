@@ -13,21 +13,10 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static final class CANIDConstants
-    {
-        public static final int TURRET_MOTOR_ID = 7;
-        public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 1;
-        public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
-        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 4;
-        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 5;
-        public static final int SHOOTER_MOTOR_1_ID = 14;
-        public static final int SHOOTER_MOTOR_2_ID =12;
-        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
-    }
+
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
-    public static final class TurretConstants 
-    {
+    public static final class TurretConstants {
         public static final double TURRET_KP = 0.03;
         public static final double TURRET_KD = 0.02;
         public static final double TURRET_KI = 0.01;
@@ -53,18 +42,29 @@ public final class Constants {
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
-    public static final class ShooterConstants
-    {
-        public static final double WHEEL_P = 0.01;
-        public static final double WHEEL_I = 0;
-        public static final double WHEEL_D = 0;
-        public static final double SHOOTER_CONVERSION = 0;
-        public static final double SHOOTER_SPEED = 4000;
-    }
-    
-    public  final class JoystickConstants 
-    {
+    public  final class JoystickConstants {
         public static final int LEFT_JOYSTICK_ID = 0;
         public static final int RIGHT_JOYSTICK_ID = 1;
+    }
+
+    public final class CANIDConstants {
+        public static final int TURRET_MOTOR_ID = 7;
+        public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 1;
+        public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
+        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 4;
+        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 5;
+        public static final int SHOOTER_MOTOR_1_ID = 14;
+        public static final int SHOOTER_MOTOR_2_ID =12;
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
+    }
+
+    public static final class ShooterConstants
+    {
+            public static final double WHEEL_P = 0.04;
+            public static final double WHEEL_I = 0;
+            public static final double WHEEL_D = 2;
+            public static final double WHEEL_F = 0.008;
+            public static final double SHOOTER_CONVERSION = 0;
+            public static final double SHOOTER_SPEED = 4000;
     }
 }
