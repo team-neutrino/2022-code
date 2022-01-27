@@ -30,24 +30,13 @@ public final class Constants {
         public static final int MOTOR_CONTROLLER_INTAKE_FEED = 5;
         public static final int TURRET_MOTOR_ID = 7;
       
-        public static final int SHOOTER_MOTOR_1_ID = 14;
-        public static final int SHOOTER_MOTOR_2_ID =12;
+        public static final int SHOOTER_MOTOR_1_ID = 8;
+        public static final int SHOOTER_MOTOR_2_ID =9;
         public static final int INDEX_MOTOR_1_ID = 15;
         public static final int INDEX_MOTOR_2_ID = 1;
      
         }
-       
-
-
-        public static final class ShooterConstants
-    {
-            public static final double WHEEL_P = 0.04;
-            public static final double WHEEL_I = 0;
-            public static final double WHEEL_D = 2;
-            public static final double WHEEL_F = 0.008;
-            public static final double SHOOTER_CONVERSION = 0;
-            public static final double SHOOTER_SPEED = 4000;
-    }
+    
         public static final class IndexConstants
         {
             public static final int INDEX_BEAMBREAK = 0;
