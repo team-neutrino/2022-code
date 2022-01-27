@@ -29,16 +29,14 @@ public class IndexMotorCommand extends CommandBase {
   public void execute() 
   {
     if(index.getBeamBreak())
-   { 
+    { 
       index.motorOneStart();
       index.MotorTwoStop();
-      System.out.println("returning true");
     }
-    else if(index.getBeamBreak()==false)
+    else if(!index.getBeamBreak())
    {
      index.motorOneStop();
      index.MotorTwoStart();
-     System.out.println("returning false");
    }
   }
 
@@ -52,7 +50,7 @@ public class IndexMotorCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished()
-   {
+  {
     return false;
   }
 }
