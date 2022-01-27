@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexMotorCommand;
@@ -85,7 +84,7 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexMotorCommand(m_index));
 
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter, ShooterConstants.SHOOTER_SPEED));
+    
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
 
     /** xbox button mapping */
