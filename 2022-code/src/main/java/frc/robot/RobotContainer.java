@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IndexMotorCommand;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
@@ -30,6 +31,9 @@ import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -47,6 +51,7 @@ public class RobotContainer {
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
   /** Instantiate subsystems below */
+  private final IndexSubsystem m_index = new IndexSubsystem();
   private final TurretSubsystem m_turret = new TurretSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
@@ -76,6 +81,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+    m_index.setDefaultCommand(new IndexMotorCommand(m_index)); 
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
 
     /** xbox button mapping */
@@ -94,4 +100,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_intakeDefaultCommand;
   }
+
+  
 }

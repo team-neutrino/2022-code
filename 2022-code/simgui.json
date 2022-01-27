@@ -1,20 +1,25 @@
 {
   "HALProvider": {
-    "Other Devices": {
-      "SPARK MAX [1]": {
-        "header": {
-          "open": true
-        }
+    "DIO": {
+      "window": {
+        "visible": true
       }
     },
-    "Solenoids": {
-      "0": {
+    "Other Devices": {
+      "SPARK MAX [14]": {
         "header": {
           "open": true
         }
       },
-      "window": {
-        "visible": true
+      "SPARK MAX [16]": {
+        "header": {
+          "open": true
+        }
+      },
+      "SPARK MAX [1]": {
+        "header": {
+          "open": true
+        }
       }
     }
   },
@@ -23,16 +28,19 @@
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/DriveTrainSubsystem": "Subsystem",
       "/LiveWindow/ExampleSubsystem": "Subsystem",
+      "/LiveWindow/IndexSubsystem": "Subsystem",
       "/LiveWindow/IntakeSubSystem": "Subsystem",
       "/LiveWindow/LimelightSubsystem": "Subsystem",
+      "/LiveWindow/ShooterSubsystem": "Subsystem",
       "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
+      "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }
   },
   "NetworkTables": {
     "LiveWindow": {
-      "IntakeSubSystem": {
+      "IndexSubsystem": {
         "open": true
       },
       "open": true
