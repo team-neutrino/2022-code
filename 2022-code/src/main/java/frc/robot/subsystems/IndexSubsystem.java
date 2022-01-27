@@ -11,15 +11,14 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.CANIDConstants;
-import frc.robot.Constants.IndexConstants;
+import frc.robot.Constants.DigitalConstants;
 
 public class IndexSubsystem extends SubsystemBase
  {
   private TalonSRX m_indexMotor1 = new TalonSRX(CANIDConstants.INDEX_MOTOR_1_ID);
   private CANSparkMax m_indexMotor2 = new CANSparkMax(CANIDConstants.INDEX_MOTOR_2_ID, MotorType.kBrushless);
-  private DigitalInput m_beamBreak = new DigitalInput(IndexConstants.INDEX_BEAMBREAK);
+  private DigitalInput m_beamBreak = new DigitalInput(DigitalConstants.INDEX_BEAMBREAK);
   /** Creates a new IndexSubsystem. */
   public IndexSubsystem() 
   {
