@@ -5,47 +5,40 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
 
-
-
-public class TurretManualAimCommand extends CommandBase {
-
+public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
-  private boolean m_isClockwise;
-
-  /** Creates a new TurretManualAimCommand. */
-  public TurretManualAimCommand(TurretPIDSubsystem p_turret, boolean isClockwise) {
-    
+  private LimelightSubsystem m_limelight;
+  /** Creates a new TurretAutoAimCommand. */
+  public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
+    // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
-    m_isClockwise = isClockwise;
-   
-    addRequirements(m_turret);
+    m_limelight = p_limelight;
+    addRequirements(m_turret, m_limelight);
   }
-
-
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_limelight.setLimelightOn(true);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_isClockwise){
-      m_turret.turnClockwise();
+    if(m_limelight.getTv() == true) {
+      m_turret.setTargetAngle(m_turret.getCurrentAngle() + m_limelight.getTx());
     }
     else {
-      m_turret.turnCounterClockwise();
+      m_turret.stop();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

@@ -16,6 +16,7 @@ import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
+import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -45,12 +46,12 @@ public class RobotContainer {
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
 
   /** Instantiate subsystems below */
-  private final TurretSubsystem m_turret = new TurretSubsystem();
+  private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter);
+  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
 
    /** Instantiate command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
