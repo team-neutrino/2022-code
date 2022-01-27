@@ -62,6 +62,18 @@ public class TurretSubsystem extends SubsystemBase {
   public double getCurrentAngle(){
     return m_currentAngle - m_initialAngle; 
   }
+
+  private double PIDify(double error, double derivative, double integral) {
+    double kP = TURRET_KP;
+    double kD = TURRET_KD;
+    double kI = TURRET_KI;
+    return kP * error + kD * derivative + kI * integral;
+  }
+
+  public void setSetpoint(double setpointAngle) {
+    double currentAngleError = setpointAngle - getCurrentAngle(); 
+    m_turretMotor.set(ControlMode.PercentOutput, PIDify(currentAngleError, 0, 0));  
+  }
  
   @Override
   public void periodic() {                 
