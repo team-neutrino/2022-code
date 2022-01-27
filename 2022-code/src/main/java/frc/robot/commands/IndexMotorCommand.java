@@ -12,8 +12,8 @@ public class IndexMotorCommand extends CommandBase {
   private final IndexSubsystem index;
   public IndexMotorCommand(IndexSubsystem indexSubsystem) 
   {
-    index = indexSubsystem;
     addRequirements(indexSubsystem);
+    index = indexSubsystem;
 
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -29,16 +29,18 @@ public class IndexMotorCommand extends CommandBase {
   @Override
   public void execute() 
   {
-    if(index.getBeamBreak()==false)
-    { 
+    if(index.getBeamBreak())
+   { 
       index.motorOneStart();
       index.MotorTwoStop();
+      System.out.println("returning true");
     }
-    else
-    {
-      index.motorOneStop();
-      index.MotorTwoStart();
-    }
+    else if(index.getBeamBreak()==false)
+   {
+     index.motorOneStop();
+     index.MotorTwoStart();
+     System.out.println("returning false");
+   }
   }
 
   // Called once the command ends or is interrupted.

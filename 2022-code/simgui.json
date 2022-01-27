@@ -6,6 +6,11 @@
       }
     },
     "Other Devices": {
+      "SPARK MAX [14]": {
+        "header": {
+          "open": true
+        }
+      },
       "SPARK MAX [16]": {
         "header": {
           "open": true
@@ -24,7 +29,9 @@
       "/LiveWindow/DriveTrainSubsystem": "Subsystem",
       "/LiveWindow/ExampleSubsystem": "Subsystem",
       "/LiveWindow/IndexSubsystem": "Subsystem",
+      "/LiveWindow/IntakeSubSystem": "Subsystem",
       "/LiveWindow/LimelightSubsystem": "Subsystem",
+      "/LiveWindow/ShooterSubsystem": "Subsystem",
       "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
@@ -32,6 +39,12 @@
     }
   },
   "NetworkTables": {
+    "LiveWindow": {
+      "IndexSubsystem": {
+        "open": true
+      },
+      "open": true
+    },
     "Shuffleboard": {
       "Drivestation Tab": {
         "open": true

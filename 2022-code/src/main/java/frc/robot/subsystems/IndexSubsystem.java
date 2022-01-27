@@ -24,7 +24,7 @@ public class IndexSubsystem extends SubsystemBase
   public IndexSubsystem() 
   {
       m_indexMotor1.setInverted(true);
-      m_indexMotor2.setInverted(false);
+      m_indexMotor2.setInverted(true);
   }
  
   public void motorOneStart()
