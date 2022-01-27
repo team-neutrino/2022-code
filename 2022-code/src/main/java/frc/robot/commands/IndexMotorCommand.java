@@ -12,10 +12,9 @@ public class IndexMotorCommand extends CommandBase {
   private final IndexSubsystem index;
   public IndexMotorCommand(IndexSubsystem indexSubsystem) 
   {
+     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(indexSubsystem);
-    index = indexSubsystem;
-
-    // Use addRequirements() here to declare subsystem dependencies.
+    index = indexSubsystem;  
   }
 
   // Called when the command is initially scheduled.
