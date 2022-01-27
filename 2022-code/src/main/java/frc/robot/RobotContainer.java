@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
@@ -19,13 +20,13 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.TurretManualAimCommand;
-import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -38,8 +39,8 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 public class RobotContainer {
   /** Instantiate buttons, joysticks, etc. below */
   private XboxController m_OperatorController = new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
-  private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
-  private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
+  private POVButton m_leftPovButton = new POVButton(m_OperatorController, 180);
+  private POVButton m_rightPovButton = new POVButton(m_OperatorController, 0);
   private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
@@ -50,12 +51,14 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
-  private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
+  private final LimelightSubsystem m_limelight = new LimelightSubsystem();
 
    /** Instantiate command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
+  private final TurretAutoAimCommand m_turretAutoAimCommand = new TurretAutoAimCommand(m_turret, m_limelight);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -75,6 +78,7 @@ public class RobotContainer {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
+    m_turret.setDefaultCommand(m_turretAutoAimCommand);
 
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));

@@ -16,9 +16,9 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRX m_turretMotor = new TalonSRX(7);
   private double m_currentAngle;
 
-  private final double ANGLES_PER_REVOLUTION = 360.0;
-  private final double RADIANS_PER_REVOLUTION = 2*Math.PI;
-  private final double ENCODER_UNITS_PER_REVOLUTION = 1024.0;
+  public static final double ANGLES_PER_REVOLUTION = 360.0;
+  private final double RADIANS_PER_REVOLUTION = 2 * Math.PI;
+  public static final double ENCODER_UNITS_PER_REVOLUTION = 1024.0;
   
   
 
@@ -32,12 +32,12 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
   }
 
-  private double convertAnglesToEncoderUnits(double angles) {
+  public static double convertAnglesToEncoderUnits(double angles) {
     return angles * ENCODER_UNITS_PER_REVOLUTION / ANGLES_PER_REVOLUTION;
   }
 
   private double convertEncoderUnitsToAngles(double rawUnits) {
-    return ANGLES_PER_REVOLUTION / ENCODER_UNITS_PER_REVOLUTION;
+    return rawUnits * ANGLES_PER_REVOLUTION / ENCODER_UNITS_PER_REVOLUTION;
   }
 
   public void setTargetAngle(double targetAngle) {
@@ -53,7 +53,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void turnClockwise(){
-    if (getCurrentAngle() >= 0){
+    if (getCurrentAngle() >= 10000){
       stop(); 
     }
     else {
@@ -62,18 +62,18 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void turnCounterClockwise(){
-    if (getCurrentAngle() <= 100){
+    if (getCurrentAngle() <= -10000){
       stop();
     }
     else {
-      m_turretMotor.set(ControlMode.PercentOutput, 0.5 * -1);
+      m_turretMotor.set(ControlMode.PercentOutput, -0.5);
     }
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_currentAngle = convertEncoderUnitsToAngles(m_turretMotor.getSelectedSensorPosition());
+    m_currentAngle = m_turretMotor.getSelectedSensorPosition(1);
     /*if(Math.abs(m_currentAngle) >= 360.0) {
       m_currentAngle = m_currentAngle % 360.0;
     }*/

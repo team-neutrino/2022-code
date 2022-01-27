@@ -34,6 +34,8 @@ public class TurretAutoAimCommand extends CommandBase {
     else {
       m_turret.stop();
     }
+    System.out.println("getTx(): " + m_limelight.getTx());
+    System.out.println("getCurrentAngle(): " + m_turret.getCurrentAngle());
   }
 
   // Called once the command ends or is interrupted.
