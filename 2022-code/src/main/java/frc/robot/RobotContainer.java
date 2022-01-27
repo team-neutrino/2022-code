@@ -32,7 +32,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -82,9 +81,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexMotorCommand(m_index));
-
-    
+    m_index.setDefaultCommand(new IndexMotorCommand(m_index)); 
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
 
     /** xbox button mapping */
