@@ -37,7 +37,7 @@ public final class Constants {
      
         }
     
-        public static final class IndexConstants
+        public static final class DigitalConstants
         {
             public static final int INDEX_BEAMBREAK = 0;
         }
