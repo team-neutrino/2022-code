@@ -7,7 +7,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
 
-public class IndexMotorCommand extends CommandBase {
+public class IndexMotorCommand extends CommandBase 
+{
   /** Creates a new IndexMotorCommand. */
   private final IndexSubsystem index;
   public IndexMotorCommand(IndexSubsystem indexSubsystem) 
