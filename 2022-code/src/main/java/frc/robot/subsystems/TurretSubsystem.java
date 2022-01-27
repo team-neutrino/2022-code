@@ -12,14 +12,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class TurretSubsystem extends SubsystemBase {
-
-  private double m_initialAngle;
-  private double m_currentAngle;
+  /** Turret Constants */
+  private final double TURRET_KP = 0.03;
+  private final double TURRET_KD = 0.02;
+  private final double TURRET_KI = 0.01;
+  private final double TURRET_UPDATE_ANGLE = 10;
+  private final double TURRET_DEAD_ANGLE = 1;
+  private final double TURRET_LIMIT_ANGLE = 160;
+  private final double TURRET_KP2 = 0.01;
+  private final double TURRET_MOTOR_OUTPUT = 0.5;
   private final double m_minAngle = 5;
   private final double m_maxAngle = -90;
 
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
-  /** Creates a new TurretSubsystem. */
+  private double m_initialAngle;
+  private double m_currentAngle;
+
   public TurretSubsystem() {
     // 3.88 is gear ratio conversion for 2021 robot. Probably delete once code is moved to new robot. 
     m_initialAngle = angleConversion(m_turretMotor.getSelectedSensorPosition());
@@ -38,7 +46,7 @@ public class TurretSubsystem extends SubsystemBase {
       stop(); 
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, Constants.TurretConstants.TURRET_MOTOR_OUTPUT);
+    m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
     }
   }
 
@@ -47,7 +55,7 @@ public class TurretSubsystem extends SubsystemBase {
       stop();
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, (Constants.TurretConstants.TURRET_MOTOR_OUTPUT) * -1);
+    m_turretMotor.set(ControlMode.PercentOutput, (TURRET_MOTOR_OUTPUT) * -1);
     }
   }
 

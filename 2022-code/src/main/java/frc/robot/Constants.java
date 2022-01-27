@@ -16,48 +16,25 @@ public final class Constants {
 
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
-    public static final class TurretConstants {
-        public static final double TURRET_KP = 0.03;
-        public static final double TURRET_KD = 0.02;
-        public static final double TURRET_KI = 0.01;
-        public static final double TURRET_UPDATE_ANGLE = 10;
-        public static final double TURRET_DEAD_ANGLE = 1;
-        public static final double TURRET_LIMIT_ANGLE = 160;
-        public static final double TURRET_KP2 = 0.01;
-        public static final double TURRET_MOTOR_OUTPUT = 0.5;
-    }
-
-    public static final class SolenoidId
-    {
-        public static final int SOLENOID_INTAKE_FORWARD = 0;
-        public static final int SOLENOID_INTAKE_REVERSE = 1;
-
-    }
-    public static final class IntakeConstants{
-        public static final double INTAKE_MOTOR_POWER = -1;
-        public static final double OUTTAKE_MOTOR_POWER = 1;
-    }
-        
-    public static final class PortConstants {
+    public  final class ControllerConstants {
+        public static final int LEFT_JOYSTICK_ID = 0;
+        public static final int RIGHT_JOYSTICK_ID = 1;
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
-    public  final class JoystickConstants {
-        public static final int LEFT_JOYSTICK_ID = 0;
-        public static final int RIGHT_JOYSTICK_ID = 1;
-    }
-
     public final class CANIDConstants {
+        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
+        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
+        public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 3;
+        public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 4;
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 5;
         public static final int TURRET_MOTOR_ID = 7;
-        public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 9;
-        public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 2;
-        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 4;
-        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 5;
+      
         public static final int SHOOTER_MOTOR_1_ID = 14;
         public static final int SHOOTER_MOTOR_2_ID =12;
         public static final int INDEX_MOTOR_1_ID = 15;
         public static final int INDEX_MOTOR_2_ID = 1;
-        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 3;
+     
         }
        
 
