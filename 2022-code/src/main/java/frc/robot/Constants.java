@@ -37,7 +37,6 @@ public final class Constants {
     public static final class IntakeConstants{
         public static final double INTAKE_MOTOR_POWER = -1;
         public static final double OUTTAKE_MOTOR_POWER = 1;
-        public static final double LEFT_TRIGGER_THRESHOLD = 0.5;
     }
         
     public static final class PortConstants {

@@ -41,8 +41,7 @@ public class RobotContainer {
   private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
-  private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
-  Constants.IntakeConstants.LEFT_TRIGGER_THRESHOLD);
+  private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
 
   /** Instantiate subsystems below */
   private final TurretSubsystem m_turret = new TurretSubsystem();
