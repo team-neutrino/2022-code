@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IndexMotorCommand;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -17,9 +18,11 @@ import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
+import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
@@ -30,6 +33,9 @@ import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -48,11 +54,13 @@ public class RobotContainer {
   private JoystickButton m_start = new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
 
   /** Instantiate subsystems below */
+  private final IndexSubsystem m_index = new IndexSubsystem();
   private final TurretSubsystem m_turret = new TurretSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
   private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter);
 
    /** Instantiate command below */
@@ -77,6 +85,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
+    m_index.setDefaultCommand(new IndexMotorCommand(m_index)); 
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
 
@@ -97,4 +106,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_intakeDefaultCommand;
   }
+
+  
 }
