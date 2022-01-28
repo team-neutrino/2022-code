@@ -51,7 +51,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
   public double getTestRPM()
   {
-    System.out.println("==================testRPM ================="+ testRPM);
     return testRPM;
   }
 }

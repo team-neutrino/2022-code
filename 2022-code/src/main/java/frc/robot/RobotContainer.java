@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
@@ -44,7 +45,7 @@ public class RobotContainer {
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
-  private JoystickButton m_Start = new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
+  private JoystickButton m_start = new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
 
   /** Instantiate subsystems below */
   private final TurretSubsystem m_turret = new TurretSubsystem();
@@ -52,7 +53,7 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter);
+  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter);
 
    /** Instantiate command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
@@ -82,7 +83,7 @@ public class RobotContainer {
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getTargetRPM()));
-    m_Start.whileHeld(new ShooterSetSpeed(m_shooter, shuffleboard.getTestRPM()));
+    m_start.whileHeld(new TestShooterRPMCommand(m_shooter, m_shuffleboard));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
   }
