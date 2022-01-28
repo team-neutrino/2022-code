@@ -22,7 +22,8 @@ public final class Constants {
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
-    public final class CANIDConstants {
+    public final class CANIDConstants 
+    {
         public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
         public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 3;
@@ -34,14 +35,12 @@ public final class Constants {
         public static final int SHOOTER_MOTOR_2_ID =9;
         public static final int INDEX_MOTOR_1_ID = 15;
         public static final int INDEX_MOTOR_2_ID = 1;
-     
-        }
+    }
     
-        public static final class DigitalConstants
-        {
-            public static final int INDEX_BEAMBREAK = 0;
-        }
-
+    public static final class DigitalConstants
+    {
+        public static final int INDEX_BEAMBREAK = 0;
+    }
  }
 
     
