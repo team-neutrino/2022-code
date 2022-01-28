@@ -10,7 +10,9 @@ package frc.robot.util;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-/** Add your docs here. */
+/**
+ * Add your docs here.
+ */
 public class TriggerToBoolean extends Trigger
 {
     GenericHID m_Joystick;
