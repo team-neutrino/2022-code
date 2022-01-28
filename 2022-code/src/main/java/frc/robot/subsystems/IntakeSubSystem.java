@@ -5,51 +5,53 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import frc.robot.Constants;
-import frc.robot.Constants.SolenoidId;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.CANIDConstants;
+import frc.robot.Constants.SolenoidId;
 
-public class IntakeSubSystem extends SubsystemBase {
-  private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
-  private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SolenoidId.SOLENOID_INTAKE_FORWARD, SolenoidId.SOLENOID_INTAKE_REVERSE);
-  
-  public IntakeSubSystem() {
+public class IntakeSubSystem extends SubsystemBase
+{
+    private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
+    private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,
+        SolenoidId.SOLENOID_INTAKE_FORWARD, SolenoidId.SOLENOID_INTAKE_REVERSE);
 
-  }
+    public IntakeSubSystem()
+    {
+    }
 
-  public void setDown() {
-    m_IntakeSolenoid.set(Value.kForward);
+    public void setDown()
+    {
+        m_IntakeSolenoid.set(Value.kForward);
+    }
 
-  }
+    public void setUp()
+    {
+        m_IntakeSolenoid.set(Value.kReverse);
+    }
 
-  public void setUp(){
-    m_IntakeSolenoid.set(Value.kReverse);
-  
-  }
+    public void setIntakeOn()
+    {
+        m_IntakeFeedMotor.set(ControlMode.PercentOutput, Constants.IntakeConstants.INTAKE_MOTOR_POWER);
+    }
 
-  public void setIntakeOn()
-  {
-      m_IntakeFeedMotor.set(ControlMode.PercentOutput, Constants.IntakeConstants.INTAKE_MOTOR_POWER);
-  }
+    public void setIntakeReverse()
+    {
+        m_IntakeFeedMotor.set(ControlMode.PercentOutput, -Constants.IntakeConstants.INTAKE_MOTOR_POWER);
+    }
 
-  public void setIntakeReverse()
-  {
-      m_IntakeFeedMotor.set(ControlMode.PercentOutput, -Constants.IntakeConstants.INTAKE_MOTOR_POWER);
-  }
+    public void setIntakeOff()
+    {
+        m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
+    }
 
-  public void setIntakeOff()
-  {
-      m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
-  }
-
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+    @Override
+    public void periodic()
+    {
+        // This method will be called once per scheduler run
+    }
 }
