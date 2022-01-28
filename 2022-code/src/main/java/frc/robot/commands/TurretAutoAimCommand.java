@@ -11,6 +11,7 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
+  private double LIMELIGHT_MULTIPLICATION = 20.0;
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,13 +30,11 @@ public class TurretAutoAimCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_limelight.getTv() == true) {
-      m_turret.setTargetAngle(m_turret.getCurrentAngle() + 4096.0/360.0 * m_limelight.getTx());
+      m_turret.setTargetAngle(m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
     }
     else {
       m_turret.stop();
     }
-    System.out.println("getTx(): " + m_limelight.getTx());
-    System.out.println("getCurrentAngle(): " + m_turret.getCurrentAngle());
   }
 
   // Called once the command ends or is interrupted.

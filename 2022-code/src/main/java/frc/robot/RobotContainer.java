@@ -52,10 +52,9 @@ public class RobotContainer {
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  private final ShuffleboardSubsystem shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
 
-   /** Instantiate command below */
+   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand = new TurretAutoAimCommand(m_turret, m_limelight);
@@ -63,6 +62,7 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
+    new ShuffleboardSubsystem(m_shooter, m_turret);
     // Configure the button bindings
     configureButtonBindings();
   }

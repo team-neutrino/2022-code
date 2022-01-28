@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants;
-import frc.robot.Constants.CANIDConstants;
 
 public class DriveTrainSubsystem extends SubsystemBase {
     private CANSparkMax m_rightMotor1 = new CANSparkMax(Constants.CANIDConstants.DRIVETRAIN_MOTOR_RIGHT_1_ID,MotorType.kBrushless);

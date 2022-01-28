@@ -16,16 +16,12 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(7);
   private double m_currentAngle;
-
-  public static final double ANGLES_PER_REVOLUTION = 360.0;
-  private final double RADIANS_PER_REVOLUTION = 2 * Math.PI;
-  public static final double ENCODER_UNITS_PER_REVOLUTION = 1024.0;
-  
-  
+  private double FORWARD_SOFT_LIMIT_THRESHOLD = 400;
+  private double REVERSE_SOFT_LIMIT_THRESHOLD = -400;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 0.6;
+    m_turretMotorConfig.slot0.kP = 1.5;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;
@@ -33,18 +29,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
    // m_turretMotor.configFeedbackNotContinuous(false);
-    m_turretMotor.configForwardSoftLimitThreshold(m_forwardSensorLimit);
-    m_turretMotor.configForwardSoftLimitEnable(m_forwardLimitEnable);
-    m_turretMotor.configReverseSoftLimitThreshold(m_reverseSensorLimit);
-    m_turretMotor.configReverseSoftLimitEnable(m_reverseLimitEnable);
-  }
-
-  private double convertAnglesToEncoderUnits(double angles) {
-    return angles * ENCODER_UNITS_PER_REVOLUTION / ANGLES_PER_REVOLUTION;
-  }
-
-  private double convertEncoderUnitsToAngles(double rawUnits) {
-    return rawUnits * ANGLES_PER_REVOLUTION / ENCODER_UNITS_PER_REVOLUTION;
+    m_turretMotor.configForwardSoftLimitThreshold(FORWARD_SOFT_LIMIT_THRESHOLD);
+    m_turretMotor.configForwardSoftLimitEnable(true);
+    m_turretMotor.configReverseSoftLimitThreshold(REVERSE_SOFT_LIMIT_THRESHOLD);
+    m_turretMotor.configReverseSoftLimitEnable(true);
   }
 
   public void setTargetAngle(double targetAngle) {
@@ -60,21 +48,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void turnClockwise(){
-    if (getCurrentAngle() >= 10000){
-      stop(); 
-    }
-    else {
       m_turretMotor.set(ControlMode.PercentOutput, 0.5);
-    }
   }
 
   public void turnCounterClockwise(){
-    if (getCurrentAngle() <= -10000){
-      stop();
-    }
-    else {
-      m_turretMotor.set(ControlMode.PercentOutput, -0.5);
-    }
+    m_turretMotor.set(ControlMode.PercentOutput, -0.5);
   }
 
   @Override
