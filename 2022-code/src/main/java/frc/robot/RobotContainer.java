@@ -79,7 +79,6 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
-    // m_TriggerLeft.whenInactive(new IntakeDefaultCommand(m_intake));
 
 
   }
