@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
@@ -30,6 +31,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotorConfig.slot0.kF = 0;
     m_turretMotor.configAllSettings(m_turretMotorConfig);
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
+    m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
   }
 
   public static double convertAnglesToEncoderUnits(double angles) {
@@ -73,9 +75,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_currentAngle = m_turretMotor.getSelectedSensorPosition(1);
+    m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
     /*if(Math.abs(m_currentAngle) >= 360.0) {
       m_currentAngle = m_currentAngle % 360.0;
     }*/
+    System.out.println(m_currentAngle);
   }
 }
