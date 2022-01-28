@@ -14,7 +14,7 @@ public class ShooterSetSpeed extends CommandBase
 
 
     private ShooterSubsystem m_shooter;
-    private double m_rpm;
+    private double m_rpm = SHOOTER_RPM_1;
     /**
      * Creates a new ShooterSetSpeedCommand.
      */

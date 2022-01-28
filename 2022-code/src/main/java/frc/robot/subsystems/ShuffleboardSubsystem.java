@@ -23,7 +23,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private NetworkTableEntry m_setShooterRPM;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
-  private static double testRPM;
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(ShooterSubsystem p_shooter) 
@@ -52,7 +51,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
   @Override
   public void periodic() 
   {
-    // testRPM = m_setShooterRPM.getDouble(0.0);
     // This method will be called once per scheduler run
     m_shooterSpeed.setDouble(m_shooter.getRPM());
 
@@ -60,7 +58,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
 
   public double getTestRPM()
   {
-    m_setShooterRPM.getDouble(0.0);
-    return testRPM;
+    return m_setShooterRPM.getDouble(0.0);
   }
 }
