@@ -21,6 +21,7 @@ public class IntakeDefaultCommand extends CommandBase {
     @Override
     public void execute() {
         m_intake.setUp(); 
+        m_intake.setIntakeOff();
     }
 
     // Called once the command ends or is interrupted.

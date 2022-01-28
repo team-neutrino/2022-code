@@ -17,13 +17,12 @@ public class TriggerToBoolean extends Trigger
 {
     GenericHID m_Joystick;
     int m_JoystickID;
-    double m_Threshold;
+    double m_Threshold = 0.5;
 
-    public TriggerToBoolean(GenericHID p_Joystick, int p_JoystickID, double p_Threshold)
+    public TriggerToBoolean(GenericHID p_Joystick, int p_JoystickID)
     {
         m_Joystick = p_Joystick;
         m_JoystickID = p_JoystickID;
-        m_Threshold = p_Threshold;
     }
 
     @Override

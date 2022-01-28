@@ -22,6 +22,7 @@ public class IntakeCommand extends CommandBase {
     @Override
     public void execute() {
         m_intake.setDown();
+        m_intake.setIntakeOn();
 
     }
 
