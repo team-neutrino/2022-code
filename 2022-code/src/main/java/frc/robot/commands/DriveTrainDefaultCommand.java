@@ -14,6 +14,7 @@ public class DriveTrainDefaultCommand extends CommandBase {
     m_rightJoystick = p_rightJoystick;
     addRequirements(subsystem);
   }
+
   @Override
   public void initialize() {
   }
@@ -22,6 +23,7 @@ public class DriveTrainDefaultCommand extends CommandBase {
   public void execute() {
     m_driveTrainSubsystem.setMotors(m_leftJoystick.getY(), m_rightJoystick.getY());
   }
+  
   @Override
   public void end(boolean interrupted) {}
 
