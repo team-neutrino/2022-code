@@ -76,9 +76,5 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
-    /*if(Math.abs(m_currentAngle) >= 360.0) {
-      m_currentAngle = m_currentAngle % 360.0;
-    }*/
-    //System.out.println(m_currentAngle);
   }
 }
