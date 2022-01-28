@@ -91,7 +91,7 @@ public class RobotContainer {
 
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getTargetRPM()));
+    m_B.whileHeld(new ShooterSetSpeed(m_shooter));
     m_start.whileHeld(new TestShooterRPMCommand(m_shooter, m_shuffleboard));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));

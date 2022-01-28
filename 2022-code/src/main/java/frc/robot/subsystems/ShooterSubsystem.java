@@ -20,14 +20,13 @@ public class ShooterSubsystem extends SubsystemBase
     private final double WHEEL_P = 0.08;
     private final double WHEEL_I = 0;
     private final double WHEEL_D = 2;
-    private final double SHOOTER_RPM = 1000;
 
     private CANSparkMax m_wheelMotor;
     private CANSparkMax m_wheelMotor2;
     private RelativeEncoder m_encoder;
     private SparkMaxPIDController m_pidController;
   
-    private double m_targetRPM = SHOOTER_RPM;
+    private double m_targetRPM;
 
     public ShooterSubsystem()
     {

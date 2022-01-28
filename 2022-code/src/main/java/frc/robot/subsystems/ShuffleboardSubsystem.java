@@ -52,7 +52,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
   @Override
   public void periodic() 
   {
-    testRPM = m_setShooterRPM.getDouble(0.0);
+    // testRPM = m_setShooterRPM.getDouble(0.0);
     // This method will be called once per scheduler run
     m_shooterSpeed.setDouble(m_shooter.getRPM());
 
@@ -60,6 +60,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
 
   public double getTestRPM()
   {
+    m_setShooterRPM.getDouble(0.0);
     return testRPM;
   }
 }
