@@ -49,6 +49,7 @@ public class RobotContainer {
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
+  private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
@@ -83,6 +84,8 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexMotorCommand(m_index)); 
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
+    m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
+
 
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));
