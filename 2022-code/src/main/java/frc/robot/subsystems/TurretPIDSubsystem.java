@@ -25,10 +25,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 0.1;
+    m_turretMotorConfig.slot0.kP = 0.6;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
-    m_turretMotorConfig.slot0.kF = 0.1;
+    m_turretMotorConfig.slot0.kF = 0;
     m_turretMotor.configAllSettings(m_turretMotorConfig);
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
@@ -59,7 +59,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
       stop(); 
     }
     else {
-    m_turretMotor.set(ControlMode.PercentOutput, 0.5);
+      m_turretMotor.set(ControlMode.PercentOutput, 0.5);
     }
   }
 
