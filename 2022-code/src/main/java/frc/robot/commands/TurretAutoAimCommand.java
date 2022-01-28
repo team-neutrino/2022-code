@@ -29,7 +29,7 @@ public class TurretAutoAimCommand extends CommandBase {
   @Override
   public void execute() {
     if(m_limelight.getTv() == true) {
-      m_turret.setTargetAngle(m_turret.getCurrentAngle() + m_limelight.getTx());
+      m_turret.setTargetAngle(m_turret.getCurrentAngle() + 1024.0/360.0 * m_limelight.getTx());
     }
     else {
       m_turret.stop();

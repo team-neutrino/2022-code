@@ -25,16 +25,16 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 0.01;
+    m_turretMotorConfig.slot0.kP = 0.1;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
-    m_turretMotorConfig.slot0.kF = 0;
+    m_turretMotorConfig.slot0.kF = 0.1;
     m_turretMotor.configAllSettings(m_turretMotorConfig);
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
   }
 
-  public static double convertAnglesToEncoderUnits(double angles) {
+  private double convertAnglesToEncoderUnits(double angles) {
     return angles * ENCODER_UNITS_PER_REVOLUTION / ANGLES_PER_REVOLUTION;
   }
 
@@ -79,6 +79,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
     /*if(Math.abs(m_currentAngle) >= 360.0) {
       m_currentAngle = m_currentAngle % 360.0;
     }*/
-    System.out.println(m_currentAngle);
+    //System.out.println(m_currentAngle);
   }
 }

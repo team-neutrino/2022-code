@@ -33,7 +33,7 @@ public class TurretManualAimCommand extends CommandBase {
   @Override
   public void execute() {
     if (m_isClockwise){
-      m_turret.turnClockwise();
+      m_turret.setTargetAngle(700);
     }
     else {
       m_turret.turnCounterClockwise();
