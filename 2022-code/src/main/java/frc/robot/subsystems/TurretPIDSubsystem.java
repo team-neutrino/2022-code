@@ -32,6 +32,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configAllSettings(m_turretMotorConfig);
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
+   // m_turretMotor.configFeedbackNotContinuous(false);
+    m_turretMotor.configForwardSoftLimitThreshold(m_forwardSensorLimit);
+    m_turretMotor.configForwardSoftLimitEnable(m_forwardLimitEnable);
+    m_turretMotor.configReverseSoftLimitThreshold(m_reverseSensorLimit);
+    m_turretMotor.configReverseSoftLimitEnable(m_reverseLimitEnable);
   }
 
   private double convertAnglesToEncoderUnits(double angles) {
