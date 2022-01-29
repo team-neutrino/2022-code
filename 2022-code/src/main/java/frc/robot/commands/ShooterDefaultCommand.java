@@ -5,25 +5,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TurretPIDSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
+/** An example command that uses an example subsystem. */
+public class ShooterDefaultCommand extends CommandBase {
+  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+  private final ShooterSubsystem m_shooter;
 
-public class TurretManualAimCommand extends CommandBase {
-
-  private TurretPIDSubsystem m_turret;
-  private boolean m_isClockwise;
-
-  /** Creates a new TurretManualAimCommand. */
-  public TurretManualAimCommand(TurretPIDSubsystem p_turret, boolean isClockwise) {
-    
-    m_turret = p_turret;
-    m_isClockwise = isClockwise;
-   
-    addRequirements(m_turret);
+  /** 
+   * Creates a new ExampleCommand.
+   *
+   * @param subsystem The subsystem used by this command.
+   */
+  public ShooterDefaultCommand(ShooterSubsystem p_shooter) {
+    m_shooter = p_shooter;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_shooter);
   }
-
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -32,19 +31,12 @@ public class TurretManualAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_isClockwise){
-      m_turret.turnClockwise();
-    }
-    else {
-      m_turret.turnCounterClockwise();
-    }
+    m_shooter.turnOff();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    m_turret.stop();
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

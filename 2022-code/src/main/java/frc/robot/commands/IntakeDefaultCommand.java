@@ -1,7 +1,6 @@
 package frc.robot.commands;
 import frc.robot.subsystems.IntakeSubSystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 
 public class IntakeDefaultCommand extends CommandBase {
     private IntakeSubSystem m_intake;
@@ -21,6 +20,7 @@ public class IntakeDefaultCommand extends CommandBase {
     @Override
     public void execute() {
         m_intake.setUp(); 
+        m_intake.setIntakeOff();
     }
 
     // Called once the command ends or is interrupted.

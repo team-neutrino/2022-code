@@ -16,32 +16,31 @@ public final class Constants {
 
     // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
-    public  final class ControllerConstants {
+
+    public final class ControllerConstants {
         public static final int LEFT_JOYSTICK_ID = 0;
         public static final int RIGHT_JOYSTICK_ID = 1;
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
-    public final class CANIDConstants {
+    public final class CANIDConstants 
+    {
         public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
         public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 3;
         public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 4;
         public static final int MOTOR_CONTROLLER_INTAKE_FEED = 5;
         public static final int TURRET_MOTOR_ID = 7;
-      
         public static final int SHOOTER_MOTOR_1_ID = 8;
-        public static final int SHOOTER_MOTOR_2_ID =9;
+        public static final int SHOOTER_MOTOR_2_ID = 9;
         public static final int INDEX_MOTOR_1_ID = 15;
-        public static final int INDEX_MOTOR_2_ID = 1;
-     
-        }
+        public static final int INDEX_MOTOR_2_ID = 5;
+    }
     
-        public static final class DigitalConstants
-        {
-            public static final int INDEX_BEAMBREAK = 0;
-        }
-
+    public static final class DigitalConstants
+    {
+        public static final int INDEX_BEAMBREAK = 0;
+    }
  }
 
     
