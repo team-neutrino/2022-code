@@ -7,11 +7,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
 
-public class IndexMotorCommand extends CommandBase 
+public class IndexDefaultCommand extends CommandBase 
 {
   /** Creates a new IndexMotorCommand. */
   private final IndexSubsystem index;
-  public IndexMotorCommand(IndexSubsystem indexSubsystem) 
+  public IndexDefaultCommand(IndexSubsystem indexSubsystem) 
   {
      // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(indexSubsystem);
@@ -31,12 +31,12 @@ public class IndexMotorCommand extends CommandBase
   {
     if(index.getBeamBreak())
     { 
-      index.motorOneStart();
+      index.MotorOneStart();
       index.MotorTwoStop();
     }
     else if(!index.getBeamBreak())
    {
-     index.motorOneStop();
+     index.MotorOneStop();
      index.MotorTwoStart();
    }
   }
