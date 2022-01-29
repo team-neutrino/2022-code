@@ -33,8 +33,8 @@ public final class Constants {
         public static final int TURRET_MOTOR_ID = 7;
         public static final int SHOOTER_MOTOR_1_ID = 8;
         public static final int SHOOTER_MOTOR_2_ID = 9;
-        public static final int INDEX_MOTOR_1_ID = 15;
-        public static final int INDEX_MOTOR_2_ID = 5;
+        public static final int INDEX_MOTOR_1_ID = 11;
+        public static final int INDEX_MOTOR_2_ID = 12;
     }
     
     public static final class DigitalConstants
