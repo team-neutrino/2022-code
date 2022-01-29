@@ -26,12 +26,12 @@ public class IndexSubsystem extends SubsystemBase
       m_indexMotor2.setInverted(true);
   }
  
-  public void motorOneStart()
+  public void MotorOneStart()
   {
     m_indexMotor1.set(ControlMode.PercentOutput, 0.5);
   }
 
-  public void motorOneStop()
+  public void MotorOneStop()
   {
     m_indexMotor1.set(ControlMode.PercentOutput,0);
   }
