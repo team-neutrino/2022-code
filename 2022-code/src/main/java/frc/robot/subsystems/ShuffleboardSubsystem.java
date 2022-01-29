@@ -23,11 +23,14 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private NetworkTableEntry m_setShooterRPM;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
+  private NetworkTableEntry m_turretAngle;
+  private TurretPIDSubsystem m_turret;
+  
 
   /** Creates a new shuffleboard. */
-  public ShuffleboardSubsystem(ShooterSubsystem p_shooter) 
-  {
+  public ShuffleboardSubsystem(ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret) {
     m_shooter = p_shooter;
+    m_turret = p_turret;
 
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     m_shooterSpeed = m_drivestationTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
@@ -46,6 +49,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     {
 
     }
+    m_turretAngle = m_drivestationTab.add("Turret Angle", 6).withPosition(5, 0).withSize(2, 2).getEntry();
   }
 
   @Override
@@ -53,6 +57,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
   {
     // This method will be called once per scheduler run
     m_shooterSpeed.setDouble(m_shooter.getRPM());
+    m_turretAngle.setDouble(m_turret.getCurrentAngle());
 
   }
 

@@ -33,7 +33,9 @@
       "/LiveWindow/LimelightSubsystem": "Subsystem",
       "/LiveWindow/ShooterSubsystem": "Subsystem",
       "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
+      "/LiveWindow/TurretPIDSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
+      "/LiveWindow/Ungrouped/DigitalInput[0]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
     }

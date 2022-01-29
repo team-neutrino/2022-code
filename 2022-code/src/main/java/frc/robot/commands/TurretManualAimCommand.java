@@ -5,22 +5,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.TurretPIDSubsystem;
 
 
 
 public class TurretManualAimCommand extends CommandBase {
 
-  private TurretSubsystem m_turret;
+  private TurretPIDSubsystem m_turret;
   private boolean m_isClockwise;
 
   /** Creates a new TurretManualAimCommand. */
-  public TurretManualAimCommand(TurretSubsystem p_turret, boolean isClockwise) {
+  public TurretManualAimCommand(TurretPIDSubsystem p_turret, boolean isClockwise) {
     
     m_turret = p_turret;
     m_isClockwise = isClockwise;
    
-   addRequirements(m_turret);
+    addRequirements(m_turret);
   }
 
 
