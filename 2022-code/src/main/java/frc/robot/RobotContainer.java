@@ -29,7 +29,7 @@ import frc.robot.util.TriggerToBoolean;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.TurretManualAimCommand;
-import frc.robot.subsystems.TurretPIDSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -57,13 +57,13 @@ public class RobotContainer {
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
-  private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
+  private final TurretPIDSubsystem m_turret = new Turretubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
-  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
+  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter);
 
    /** Instantiate command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
