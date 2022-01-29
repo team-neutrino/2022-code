@@ -54,7 +54,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void turnCounterClockwise(){
-    m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
+    m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT * -1);
   }
 
   @Override
