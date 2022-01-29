@@ -19,6 +19,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double m_currentAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 400;
   private double REVERSE_SOFT_LIMIT_THRESHOLD = -400;
+  private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
@@ -49,11 +50,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void turnClockwise(){
-      m_turretMotor.set(ControlMode.PercentOutput, 0.5);
+      m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
   }
 
   public void turnCounterClockwise(){
-    m_turretMotor.set(ControlMode.PercentOutput, -0.5);
+    m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
   }
 
   @Override
