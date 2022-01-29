@@ -17,7 +17,7 @@ import frc.robot.Constants;
 public class ShooterSubsystem extends SubsystemBase
 {
     /** Shooter Constants */
-    private final double WHEEL_P = 0.04;
+    private final double WHEEL_P = 0.08;
     private final double WHEEL_I = 0;
     private final double WHEEL_D = 2;
 
