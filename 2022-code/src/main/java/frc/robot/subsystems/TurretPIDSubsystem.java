@@ -11,10 +11,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
-  private TalonSRX m_turretMotor = new TalonSRX(7);
+  private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 400;
   private double REVERSE_SOFT_LIMIT_THRESHOLD = -400;
