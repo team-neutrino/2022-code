@@ -10,12 +10,12 @@ import frc.robot.subsystems.IndexSubsystem;
 public class IndexDefaultCommand extends CommandBase 
 {
   /** Creates a new IndexMotorCommand. */
-  private final IndexSubsystem index;
-  public IndexDefaultCommand(IndexSubsystem indexSubsystem) 
+  private IndexSubsystem m_index;
+  public IndexDefaultCommand(IndexSubsystem p_index) 
   {
      // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(indexSubsystem);
-    index = indexSubsystem;  
+    addRequirements(p_index);
+   m_index = p_index;  
   }
 
   // Called when the command is initially scheduled.
@@ -29,16 +29,16 @@ public class IndexDefaultCommand extends CommandBase
   @Override
   public void execute() 
   {
-    if(index.getBeamBreak())
+    if(m_index.getBeamBreak())
     { 
-      index.MotorOneStart();
-      index.MotorTwoStop();
+     m_index.MotorOneStart();
+     m_index.MotorTwoStop();
     }
-    else if(!index.getBeamBreak())
-   {
-     index.MotorOneStop();
-     index.MotorTwoStart();
-   }
+    else if( m_index.getBeamBreak())
+    {
+     m_index.MotorOneStop();
+     m_index.MotorTwoStart();
+    }
   }
 
   // Called once the command ends or is interrupted.

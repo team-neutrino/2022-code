@@ -10,12 +10,12 @@ import frc.robot.subsystems.IndexSubsystem;
 public class IndexManualCommand extends CommandBase 
 {
   /** Creates a new IndexManualCommand. */
-  private final IndexSubsystem index;
-  public IndexManualCommand(IndexSubsystem indexSubsystem)
+  private IndexSubsystem m_index;
+  public IndexManualCommand(IndexSubsystem p_index)
   {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(indexSubsystem);
-    index = indexSubsystem;  
+    addRequirements(p_index);
+   m_index = p_index;  
   }
 
   // Called when the command is initially scheduled.
@@ -29,16 +29,16 @@ public class IndexManualCommand extends CommandBase
   @Override
   public void execute() 
   {
-      index.MotorOneStart();
-      index.MotorTwoStart();
+     m_index.MotorOneStart();
+     m_index.MotorTwoStart();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) 
   {
-    index.MotorOneStop();
-    index.MotorTwoStop();
+   m_index.MotorOneStop();
+   m_index.MotorTwoStop();
   }
 
   // Returns true when the command should end.
