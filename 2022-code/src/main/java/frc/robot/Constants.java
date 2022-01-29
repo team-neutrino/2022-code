@@ -25,16 +25,18 @@ public final class Constants {
 
     public final class CANIDConstants 
     {
-        public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
-        public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
+        //public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
+        //public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 3;
         public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 4;
-        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 5;
+        public static final int SHOOTER_MOTOR_1_ID = 5;
+        public static final int SHOOTER_MOTOR_2_ID = 6;
         public static final int TURRET_MOTOR_ID = 7;
-        public static final int SHOOTER_MOTOR_1_ID = 8;
-        public static final int SHOOTER_MOTOR_2_ID = 9;
-        public static final int INDEX_MOTOR_1_ID = 15;
-        public static final int INDEX_MOTOR_2_ID = 5;
+        public static final int CLIMBER_MOTOR_1 = 1;
+        public static final int CLIMBER_MOTOR_2 = 2;
+        public static final int MOTOR_CONTROLLER_INTAKE_FEED = 10;
+        public static final int INDEX_MOTOR_1_ID = 11;
+        public static final int INDEX_MOTOR_2_ID = 12;
     }
     
     public static final class DigitalConstants

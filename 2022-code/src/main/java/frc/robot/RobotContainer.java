@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import frc.robot.commands.ClimbDOWNCommand;
+import frc.robot.commands.ClimbUPCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexMotorCommand;
@@ -33,6 +35,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import frc.robot.commands.TurretManualAimCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -53,6 +56,7 @@ public class RobotContainer {
   private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
   private JoystickButton m_start = new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
+  private JoystickButton m_back = new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
 
   /** Instantiate subsystems below */
@@ -64,7 +68,7 @@ public class RobotContainer {
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
   private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
-
+  private final ClimberSubsystem m_climber = new ClimberSubsystem();
    /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
@@ -97,7 +101,8 @@ public class RobotContainer {
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
-    m_start.whileHeld(new TestShooterRPMCommand(m_shooter, m_shuffleboard));
+    m_start.whileHeld(new ClimbUPCommand(m_climber));
+    m_back.whileHeld(new ClimbDOWNCommand(m_climber));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
   }
