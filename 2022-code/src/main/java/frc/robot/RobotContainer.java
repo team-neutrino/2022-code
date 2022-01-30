@@ -11,20 +11,16 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.ClimbDOWNCommand;
 import frc.robot.commands.ClimbUPCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexMotorCommand;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
-import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
-import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,13 +28,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.util.TriggerToBoolean;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import frc.robot.commands.TurretManualAimCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a

@@ -21,7 +21,6 @@ public class ClimbDOWNCommand extends CommandBase {
     {
       m_climberSubsystem.keyUnlock();
       m_climberSubsystem.retractClimber();
-      System.out.println("DOWN");
     }
 
     @Override

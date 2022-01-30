@@ -22,7 +22,6 @@ public class ClimbUPCommand extends CommandBase {
       {
         m_climberSubsystem.keyUnlock();
         m_climberSubsystem.extendClimber();
-        System.out.println("UP");
       }
       
       @Override
