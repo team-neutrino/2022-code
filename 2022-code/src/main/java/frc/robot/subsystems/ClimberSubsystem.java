@@ -8,10 +8,11 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Timer;
 
 public class ClimberSubsystem extends SubsystemBase {
-    private final int SOLENOID_KEYPISTON_EXTEND = 2;
-    private final int SOLENOID_KEYPISTON_RETRACT = 3;
+    private final int SOLENOID_KEYPISTON_EXTEND = 0;
+    private final int SOLENOID_KEYPISTON_RETRACT = 1;
     private double CLIMBER_SPEED = 0.5;
 
     private CANSparkMax m_climber1 = new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);

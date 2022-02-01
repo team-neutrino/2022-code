@@ -20,8 +20,8 @@ public class ClimbUPCommand extends CommandBase {
       @Override
       public void execute() 
       {
-        m_climberSubsystem.keyUnlock();
         m_climberSubsystem.extendClimber();
+        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
       }
       
       @Override

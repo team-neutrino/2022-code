@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.ClimbDOWNCommand;
+import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbUPCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.IndexMotorCommand;
@@ -18,6 +19,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.KeyUnlock;
+import frc.robot.commands.Keylock;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
@@ -25,7 +28,12 @@ import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.util.TriggerToBoolean;
+
+import javax.swing.GroupLayout.SequentialGroup;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -91,12 +99,13 @@ public class RobotContainer {
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
+    m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
-    m_start.whileHeld(new ClimbUPCommand(m_climber));
-    m_back.whileHeld(new ClimbDOWNCommand(m_climber));
+    m_start.whenHeld(new SequentialCommandGroup(new KeyUnlock(m_climber), new WaitCommand(0.5), new ClimbUPCommand(m_climber)));
+    m_back.whenHeld(new SequentialCommandGroup(new KeyUnlock(m_climber),new WaitCommand(0.5), new ClimbDOWNCommand(m_climber), new WaitCommand(0.5), new Keylock(m_climber)));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
   }
