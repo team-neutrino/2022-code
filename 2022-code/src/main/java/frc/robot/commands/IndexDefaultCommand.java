@@ -7,15 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
 
-public class IndexMotorCommand extends CommandBase 
+public class IndexDefaultCommand extends CommandBase 
 {
   /** Creates a new IndexMotorCommand. */
-  private final IndexSubsystem index;
-  public IndexMotorCommand(IndexSubsystem indexSubsystem) 
+  private IndexSubsystem m_index;
+  public IndexDefaultCommand(IndexSubsystem p_index) 
   {
      // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(indexSubsystem);
-    index = indexSubsystem;  
+    addRequirements(p_index);
+   m_index = p_index;  
   }
 
   // Called when the command is initially scheduled.
@@ -29,16 +29,16 @@ public class IndexMotorCommand extends CommandBase
   @Override
   public void execute() 
   {
-    if(index.getBeamBreak())
+    if(m_index.getBeamBreak())
     { 
-      index.motorOneStart();
-      index.MotorTwoStop();
+     m_index.MotorOneStart();
+     m_index.MotorTwoStop();
     }
-    else if(!index.getBeamBreak())
-   {
-     index.motorOneStop();
-     index.MotorTwoStart();
-   }
+    else if( m_index.getBeamBreak())
+    {
+     m_index.MotorOneStop();
+     m_index.MotorTwoStart();
+    }
   }
 
   // Called once the command ends or is interrupted.

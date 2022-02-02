@@ -12,7 +12,13 @@ import frc.robot.commands.ClimbDOWNCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbUPCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
+<<<<<<< HEAD
 import frc.robot.commands.IndexMotorCommand;
+=======
+import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IndexDefaultCommand;
+import frc.robot.commands.IndexManualCommand;
+>>>>>>> main
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -55,8 +61,9 @@ public class RobotContainer {
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
   private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
-  private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
+  private JoystickButton m_B = new JoystickButton(m_OperatorController, XboxController.Button.kB.value);
   private JoystickButton m_A = new JoystickButton(m_OperatorController, XboxController.Button.kA.value);
+  private JoystickButton m_Y = new JoystickButton(m_OperatorController, XboxController.Button.kY.value);
   private JoystickButton m_start = new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
   private JoystickButton m_back = new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
   private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
@@ -94,7 +101,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexMotorCommand(m_index)); 
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index)); 
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
@@ -102,6 +109,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
+    m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
     m_start.whenHeld(new SequentialCommandGroup(new KeyUnlock(m_climber), new WaitCommand(0.5), new ClimbUPCommand(m_climber)));
