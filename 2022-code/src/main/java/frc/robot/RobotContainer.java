@@ -12,13 +12,9 @@ import frc.robot.commands.ClimbDOWNCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbUPCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
-<<<<<<< HEAD
-import frc.robot.commands.IndexMotorCommand;
-=======
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
->>>>>>> main
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShooterSubsystem;
