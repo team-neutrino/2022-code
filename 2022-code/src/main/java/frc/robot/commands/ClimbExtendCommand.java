@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbUPCommand extends CommandBase {
+public class ClimbExtendCommand extends CommandBase {
     private ClimberSubsystem m_climberSubsystem;
     
-    public ClimbUPCommand (ClimberSubsystem subsystem)
+    public ClimbExtendCommand (ClimberSubsystem subsystem)
       {
         m_climberSubsystem = subsystem;
         addRequirements(subsystem);
