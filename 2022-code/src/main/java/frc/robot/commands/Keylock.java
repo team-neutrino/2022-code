@@ -20,7 +20,6 @@ public class Keylock extends CommandBase{
     public void execute() 
     {
         m_climberSubsystem.keyLock();
-        System.out.println("AAAAAAA");
     }
     
     @Override

@@ -15,24 +15,24 @@ import frc.robot.Constants.CANIDConstants;
 
 public class IntakeSubSystem extends SubsystemBase {
   /** Intake Constants */
-  //private final int SOLENOID_INTAKE_FORWARD = 0;
-  //private final int SOLENOID_INTAKE_REVERSE = 1;
+  private final int SOLENOID_INTAKE_FORWARD = 0;
+  private final int SOLENOID_INTAKE_REVERSE = 1;
   private final double INTAKE_MOTOR_POWER = -1;
 
   private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
-  //private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SOLENOID_INTAKE_FORWARD, SOLENOID_INTAKE_REVERSE);
+  private DoubleSolenoid m_IntakeSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, SOLENOID_INTAKE_FORWARD, SOLENOID_INTAKE_REVERSE);
 
   public IntakeSubSystem() {
 
   }
 
   public void setDown() {
-    //m_IntakeSolenoid.set(Value.kForward);
+    m_IntakeSolenoid.set(Value.kForward);
 
   }
 
   public void setUp(){
-    //m_IntakeSolenoid.set(Value.kReverse);
+    m_IntakeSolenoid.set(Value.kReverse);
   
   }
 

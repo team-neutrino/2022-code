@@ -21,7 +21,6 @@ public class ClimbUPCommand extends CommandBase {
       public void execute() 
       {
         m_climberSubsystem.extendClimber();
-        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
       }
       
       @Override

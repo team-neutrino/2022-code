@@ -25,12 +25,11 @@ public class ClimbDOWNCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) 
     {
-      //m_climberSubsystem.climberOff();
     }
   
     @Override
     public boolean isFinished() 
     {
-      return true;
+       return m_climberSubsystem.getLimitSwitch();
     }
 }
