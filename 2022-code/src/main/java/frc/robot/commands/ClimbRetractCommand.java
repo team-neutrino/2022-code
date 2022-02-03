@@ -1,16 +1,16 @@
 package frc.robot.commands;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class Keylock extends CommandBase{
+public class ClimbRetractCommand extends CommandBase {
     private ClimberSubsystem m_climberSubsystem;
 
-    public Keylock (ClimberSubsystem subsystem)
+    public ClimbRetractCommand(ClimberSubsystem subsystem) 
     {
-      m_climberSubsystem = subsystem;
-      addRequirements(subsystem);
+        m_climberSubsystem = subsystem;
+        addRequirements(subsystem);
     }
-  
     @Override
     public void initialize() 
     {
@@ -19,9 +19,9 @@ public class Keylock extends CommandBase{
     @Override
     public void execute() 
     {
-        m_climberSubsystem.keyLock();
+      m_climberSubsystem.retractClimber();
     }
-    
+
     @Override
     public void end(boolean interrupted) 
     {
@@ -30,7 +30,6 @@ public class Keylock extends CommandBase{
     @Override
     public boolean isFinished() 
     {
-      return true;
+       return m_climberSubsystem.getLimitSwitch();
     }
-
 }

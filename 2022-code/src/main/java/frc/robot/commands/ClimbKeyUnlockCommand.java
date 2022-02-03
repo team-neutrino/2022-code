@@ -1,16 +1,17 @@
 package frc.robot.commands;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbDOWNCommand extends CommandBase {
+public class ClimbKeyUnlockCommand extends CommandBase {
+
     private ClimberSubsystem m_climberSubsystem;
 
-    public ClimbDOWNCommand(ClimberSubsystem subsystem) 
+    public ClimbKeyUnlockCommand (ClimberSubsystem subsystem)
     {
-        m_climberSubsystem = subsystem;
-        addRequirements(subsystem);
+      m_climberSubsystem = subsystem;
+      addRequirements(subsystem);
     }
+  
     @Override
     public void initialize() 
     {
@@ -19,9 +20,9 @@ public class ClimbDOWNCommand extends CommandBase {
     @Override
     public void execute() 
     {
-      m_climberSubsystem.retractClimber();
+        m_climberSubsystem.keyUnlock();
     }
-
+    
     @Override
     public void end(boolean interrupted) 
     {
@@ -30,6 +31,8 @@ public class ClimbDOWNCommand extends CommandBase {
     @Override
     public boolean isFinished() 
     {
-       return m_climberSubsystem.getLimitSwitch();
+      return true;
     }
+
 }
+
