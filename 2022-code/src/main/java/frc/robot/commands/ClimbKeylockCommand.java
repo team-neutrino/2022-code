@@ -5,7 +5,7 @@ import frc.robot.subsystems.ClimberSubsystem;
 public class ClimbKeylockCommand extends CommandBase{
     private ClimberSubsystem m_climberSubsystem;
 
-    public ClimbKeyLockCommand (ClimberSubsystem subsystem)
+    public ClimbKeylockCommand (ClimberSubsystem subsystem)
     {
       m_climberSubsystem = subsystem;
       addRequirements(subsystem);
