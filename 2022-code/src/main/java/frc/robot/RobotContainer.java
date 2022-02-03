@@ -22,6 +22,7 @@ import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.commands.TurretManualAimCommand;
+import frc.robot.commands.Trajectories.TestTrajectory;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
@@ -33,6 +34,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
 
 import javax.swing.GroupLayout.SequentialGroup;
@@ -75,6 +77,9 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
   private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
+  
+  private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
+
    /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand = new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick,m_leftJoystick);
@@ -123,7 +128,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_intakeDefaultCommand;
+    return m_autonSelector.getChooserSelect();
   }
 
   
