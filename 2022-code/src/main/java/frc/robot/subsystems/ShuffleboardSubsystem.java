@@ -13,7 +13,11 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import java.util.Map;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.Trajectories.BasicBoy;
 
 public class ShuffleboardSubsystem extends SubsystemBase 
 {
@@ -36,8 +40,9 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_shooterSpeed = m_drivestationTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
     BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 6000)).getEntry();
     m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(0, 1).getEntry();
+    
 
-
+    
     try
     {
       LLFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",HttpCameraKind.kMJPGStreamer);
@@ -58,7 +63,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
     // This method will be called once per scheduler run
     m_shooterSpeed.setDouble(m_shooter.getRPM());
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
-
   }
 
   public double getTestRPM()
