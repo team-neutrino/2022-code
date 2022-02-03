@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbKeyUnlockCommand;
-import frc.robot.commands.ClimbKeyLockCommand;
+import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.ClimbExtendCommand;
+import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.IndexDefaultCommand;
@@ -109,8 +110,8 @@ public class RobotContainer {
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
     m_start.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber), new WaitCommand(0.5), new ClimbExtendCommand(m_climber)));
-    m_back.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber),new WaitCommand(0.5), new ClimbRetractCommand(m_climber), new ClimbKeyLockCommand(m_climber)));
-    m_back.whenReleased(new ClimbKeyLockCommand(m_climber));
+    m_back.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber),new WaitCommand(0.5), new ClimbRetractCommand(m_climber), new ClimbKeyExtendCommand(m_climber)));
+    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
   }
