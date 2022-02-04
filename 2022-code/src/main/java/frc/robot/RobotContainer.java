@@ -30,6 +30,7 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterControlSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -77,6 +78,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
   private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
+  private final ShooterControlSubsystem m_shooterControl = new ShooterControlSubsystem(m_limelight);
   
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
 
