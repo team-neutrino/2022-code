@@ -56,7 +56,7 @@ public class ClimberSubsystem extends SubsystemBase {
     {
         return m_limitSwitch.get();
     }
-    public RelativeEncoder getClimbEncoderOne() {
-        return m_climber1.getVelo
+    public double getClimbEncoderOne() {
+        return m_climber1
     }
 }
