@@ -26,29 +26,48 @@
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/ClimberSubsystem": "Subsystem",
       "/LiveWindow/DriveTrainSubsystem": "Subsystem",
       "/LiveWindow/ExampleSubsystem": "Subsystem",
       "/LiveWindow/IndexSubsystem": "Subsystem",
       "/LiveWindow/IntakeSubSystem": "Subsystem",
       "/LiveWindow/LimelightSubsystem": "Subsystem",
+      "/LiveWindow/ShooterControlSubsystem": "Subsystem",
       "/LiveWindow/ShooterSubsystem": "Subsystem",
       "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
       "/LiveWindow/TurretPIDSubsystem": "Subsystem",
       "/LiveWindow/TurretSubsystem": "Subsystem",
       "/LiveWindow/Ungrouped/DigitalInput[0]": "Digital Input",
+      "/LiveWindow/Ungrouped/DigitalInput[1]": "Digital Input",
       "/LiveWindow/Ungrouped/DigitalInput[7]": "Digital Input",
-      "/LiveWindow/Ungrouped/Scheduler": "Scheduler"
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/SmartDashboard/SendableChooser[0]": "String Chooser"
     }
   },
   "NetworkTables": {
+    "CameraPublisher": {
+      "USB Camera 0": {
+        "open": true
+      },
+      "open": true
+    },
     "LiveWindow": {
       "IndexSubsystem": {
+        "open": true
+      },
+      "LimelightSubsystem": {
         "open": true
       },
       "open": true
     },
     "Shuffleboard": {
       "Drivestation Tab": {
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "SendableChooser[0]": {
         "open": true
       },
       "open": true

@@ -13,12 +13,13 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
   double h = 1.25;
-  double beta = getTy() + 30;
+  double beta;
 
   public LimelightSubsystem()
   {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
+    beta = getTy() + 30;
   }
 
   @Override
