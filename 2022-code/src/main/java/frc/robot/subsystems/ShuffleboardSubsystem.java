@@ -29,7 +29,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private HttpCamera LLFeed;
   private NetworkTableEntry m_turretAngle;
   private TurretPIDSubsystem m_turret;
-  private NetworkTableEntry m_driverStationDisplay;
+  private NetworkTableEntry m_timer;
 
   
 
@@ -42,7 +42,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_shooterSpeed = m_drivestationTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
     BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 6000)).getEntry();
     m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(0, 1).getEntry();
-    m_driverStationDisplay = m_drivestationTab.add("Match Time", 0 ).withPosition(5, 5).withSize(8, 8).getEntry();
+    m_timer = m_drivestationTab.add("Match Time", 0 ).withPosition(5, 5).withSize(8, 8).getEntry();
 
     
     try
@@ -65,7 +65,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     // This method will be called once per scheduler run
     m_shooterSpeed.setDouble(m_shooter.getRPM());
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
-    m_driverStationDisplay.setDouble(DriverStation.getMatchTime());
+    m_timer.setDouble(DriverStation.getMatchTime());
   }
 
   public double getTestRPM()
