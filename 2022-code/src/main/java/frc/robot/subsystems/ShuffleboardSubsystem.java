@@ -23,6 +23,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
 {
 
   private ShuffleboardTab m_drivestationTab;
+  private ShuffleboardTab m_debugTab;
   private NetworkTableEntry m_shooterSpeed;
   private NetworkTableEntry m_setShooterRPM;
   private ShooterSubsystem m_shooter;
@@ -37,6 +38,25 @@ public class ShuffleboardSubsystem extends SubsystemBase
   public ShuffleboardSubsystem(ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret) {
     m_shooter = p_shooter;
     m_turret = p_turret;
+
+    driveStationTab();
+  }
+
+  @Override
+  public void periodic() 
+  {
+    // This method will be called once per scheduler run
+    m_shooterSpeed.setDouble(m_shooter.getRPM());
+    m_turretAngle.setDouble(m_turret.getCurrentAngle());
+    m_timer.setDouble(DriverStation.getMatchTime());
+  }
+
+  public double getTestRPM()
+  {
+    return m_setShooterRPM.getDouble(0.0);
+  }
+
+  public void driveStationTab() {
 
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     m_shooterSpeed = m_drivestationTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
@@ -58,18 +78,10 @@ public class ShuffleboardSubsystem extends SubsystemBase
     }
     m_turretAngle = m_drivestationTab.add("Turret Angle", 6).withPosition(5, 0).withSize(2, 2).getEntry();
   }
-
-  @Override
-  public void periodic() 
-  {
-    // This method will be called once per scheduler run
-    m_shooterSpeed.setDouble(m_shooter.getRPM());
-    m_turretAngle.setDouble(m_turret.getCurrentAngle());
-    m_timer.setDouble(DriverStation.getMatchTime());
-  }
-
-  public double getTestRPM()
-  {
-    return m_setShooterRPM.getDouble(0.0);
+  public void debugTab() {
+      m_debugTab = Shuffleboard.getTab("Debug Tab");
+      m_shooterSpeed = m_debugTab.add("Shooter RPM", 0).withPosition(0, 0).withSize(2, 2).withWidget(
+        BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 6000)).getEntry();
+      
   }
 }
