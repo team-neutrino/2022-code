@@ -21,7 +21,7 @@ public class InterpolatedShooterSpeed extends CommandBase {
     m_shooterControl = p_shooterControl;
     m_shooter = p_shooter;
 
-    addRequirements(m_shooterControl);
+    addRequirements(m_shooterControl, m_shooter);
   }
 
   // Called when the command is initially scheduled.
