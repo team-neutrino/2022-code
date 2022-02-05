@@ -23,7 +23,8 @@ public class ShooterSubsystem extends SubsystemBase
 
     private CANSparkMax m_wheelMotor;
     private CANSparkMax m_wheelMotor2;
-    private RelativeEncoder m_encoder;
+    private RelativeEncoder m_encoder1;
+    private RelativeEncoder m_encoder2;
     private SparkMaxPIDController m_pidController;
   
     private double m_targetRPM;
@@ -41,9 +42,10 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor.setIdleMode(IdleMode.kCoast);
         m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
-        m_encoder = m_wheelMotor.getEncoder();
+        m_encoder1 = m_wheelMotor.getEncoder();
+        m_encoder2 = m_wheelMotor2.getEncoder();
         m_pidController = m_wheelMotor.getPIDController();
-        m_pidController.setFeedbackDevice(m_encoder);
+        m_pidController.setFeedbackDevice(m_encoder1);
         m_pidController.setP(WHEEL_P);
         m_pidController.setI(WHEEL_I);
         m_pidController.setD(WHEEL_D);
@@ -55,11 +57,14 @@ public class ShooterSubsystem extends SubsystemBase
     {
     }
 
-    public double getRPM()
+    public double getRPM1()
     {
-        return m_encoder.getVelocity();
+        return m_encoder1.getVelocity();
     }
-
+    public double getRPM2()
+    {
+        return m_encoder2.getVelocity();
+    }
     public void setTargetRPM(double p_targetRPM)
     {
         m_targetRPM = p_targetRPM;

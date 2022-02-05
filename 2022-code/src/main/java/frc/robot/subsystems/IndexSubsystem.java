@@ -27,7 +27,7 @@ public class IndexSubsystem extends SubsystemBase
   {
       m_indexMotor1.setInverted(true);
       m_indexMotor2.setInverted(true);
-      m_indexMotor2.getEncoder();
+      m_encoder1 = m_indexMotor2.getEncoder();
   }
  
   public void MotorOneStart()
@@ -59,5 +59,5 @@ public class IndexSubsystem extends SubsystemBase
   }
   public double getIndexEncoder1() {
     return m_encoder1.getVelocity();
-}
+  }
 }
