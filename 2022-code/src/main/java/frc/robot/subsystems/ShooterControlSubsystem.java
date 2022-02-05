@@ -19,7 +19,9 @@ public class ShooterControlSubsystem extends SubsystemBase {
     m_limelight = p_limelight;
 
     m_distanceRPMData.put(1.0, 100.0);
-    m_distanceRPMData.put(2.0, 200.0);
+    m_distanceRPMData.put(2.0, 400.0);
+    m_distanceRPMData.put(3.0, 900.0);
+    m_distanceRPMData.put(4.0, 1600.0);
   }
 
   public double InterpolateDistance() {
@@ -30,7 +32,7 @@ public class ShooterControlSubsystem extends SubsystemBase {
 
   //  boolean foundTheLargeOne = false;
 
-  double limeLightDistance = 1.5; //m_limelight.getDistance();
+  double limeLightDistance = 1.8; //m_limelight.getDistance();
 
   if (limeLightDistance <= m_distanceRPMData.firstKey())
     {
