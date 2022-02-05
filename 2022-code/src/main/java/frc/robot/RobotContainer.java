@@ -75,9 +75,9 @@ public class RobotContainer {
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
-  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  
+  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain,m_index);
+
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
 
    /** Instantiate default command below */

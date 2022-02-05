@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -16,6 +17,8 @@ import frc.robot.Constants.DigitalConstants;
 
 public class IndexSubsystem extends SubsystemBase
  {
+  private RelativeEncoder m_encoder1;
+
   private TalonSRX m_indexMotor1 = new TalonSRX(CANIDConstants.INDEX_MOTOR_1_ID);
   private CANSparkMax m_indexMotor2 = new CANSparkMax(CANIDConstants.INDEX_MOTOR_2_ID, MotorType.kBrushless);
   private DigitalInput m_beamBreak = new DigitalInput(DigitalConstants.INDEX_BEAMBREAK);
@@ -24,6 +27,7 @@ public class IndexSubsystem extends SubsystemBase
   {
       m_indexMotor1.setInverted(true);
       m_indexMotor2.setInverted(true);
+      m_indexMotor2.getEncoder();
   }
  
   public void MotorOneStart()
@@ -53,4 +57,7 @@ public class IndexSubsystem extends SubsystemBase
   {
     // This method will be called once per scheduler run
   }
+  public double getIndexEncoder1() {
+    return m_encoder1.getVelocity();
+}
 }

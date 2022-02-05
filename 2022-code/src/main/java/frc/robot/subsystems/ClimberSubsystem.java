@@ -15,6 +15,8 @@ public class ClimberSubsystem extends SubsystemBase {
     private final int SOLENOID_KEYPISTON_EXTEND = 2;
     private final int SOLENOID_KEYPISTON_RETRACT = 3;
     private double CLIMBER_SPEED = 0.5;
+    private RelativeEncoder m_encoder1;
+    private RelativeEncoder m_encoder2;
 
     private CANSparkMax m_climber1 = new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
     private CANSparkMax m_climber2 = new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_2, MotorType.kBrushless);
@@ -26,6 +28,8 @@ public class ClimberSubsystem extends SubsystemBase {
     public ClimberSubsystem() 
     {
         m_climber2.follow(m_climber1);
+        m_encoder1 = m_climber1.getEncoder();
+        m_encoder2 = m_climber2.getEncoder();
     }
 
     public void keyLock() 
@@ -57,6 +61,11 @@ public class ClimberSubsystem extends SubsystemBase {
         return m_limitSwitch.get();
     }
     public double getClimbEncoderOne() {
-        return m_climber1
+        
+        return m_encoder1.getVelocity();
+    }
+    public double getClimbEncoderTwo() {
+
+        return m_encoder2.getVelocity();
     }
 }
