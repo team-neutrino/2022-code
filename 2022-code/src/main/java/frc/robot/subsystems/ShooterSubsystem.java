@@ -85,4 +85,9 @@ public class ShooterSubsystem extends SubsystemBase
     {
         m_wheelMotor.set(power);
     }
+
+    public setP()
+    {
+        m_wheelMotor.set(p)
+    }
 }

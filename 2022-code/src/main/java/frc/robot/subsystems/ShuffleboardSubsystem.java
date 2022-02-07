@@ -43,6 +43,8 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[4];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_ShooterPID[] = new NetworkTableEntry[3];
+  private NetworkTableEntry m_TurretPID[] = new NetworkTableEntry[3];
   
 
   /** Creates a new shuffleboard. */
@@ -79,7 +81,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_limelightVariables[1].setDouble(m_limelight.getTy());
     m_limelightVariables[2].setDouble(m_limelight.getTa());
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
-    
   }
 
   public double getTestRPM()
@@ -94,7 +95,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
     BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 6000)).getEntry();
     m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(0, 1).getEntry();
     m_timer = m_drivestationTab.add("Match Time", 0 ).withPosition(5, 5).withSize(8, 8).getEntry();
-
     
     try
     {
@@ -104,9 +104,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
       m_drivestationTab.add(CameraServer.startAutomaticCapture()).withPosition(9, 0).withSize(7, 7).withWidget(BuiltInWidgets.kCameraStream);
     }
     catch(VideoException e) 
-    {
-
-    }
+    {}
   }
   public void debugTab() {
       m_debugTab = Shuffleboard.getTab("Debug Tab");
@@ -128,5 +126,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
       m_limelightVariables[1] = m_debugTab.add("Limelight Ty", 0).withPosition(6, 4).withSize(1, 1).getEntry();
       m_limelightVariables[2] = m_debugTab.add("Limelight Ta", 0).withPosition(8, 4).withSize(1, 1).getEntry();
       m_limelightVariables[3] = m_debugTab.add("Limelight Tv", 0).withPosition(10, 4).withSize(1, 1).getEntry();
+      m_ShooterPID[0] = m_debugTab.add("P", )
   }
 }
