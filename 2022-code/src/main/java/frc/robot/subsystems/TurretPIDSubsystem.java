@@ -17,8 +17,8 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
-  private double FORWARD_SOFT_LIMIT_THRESHOLD = 400;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = -400;
+  private double FORWARD_SOFT_LIMIT_THRESHOLD = 600;
+  private double REVERSE_SOFT_LIMIT_THRESHOLD = 200;
   private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
@@ -61,5 +61,29 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
+  }
+  public double getP()
+  {
+      return m_turretMotorConfig.slot0.kP;
+  }
+  public void setP(double P)
+  {
+      m_turretMotorConfig.slot0.kP = P;
+  }
+  public double getI()
+  {
+      return m_turretMotorConfig.slot0.kD;
+  }
+  public void setI(double I)
+  {
+      m_turretMotorConfig.slot0.kP = I;
+  }
+  public double getD()
+  {
+      return m_turretMotorConfig.slot0.kD;
+  }
+  public void setD(double D)
+  {
+      m_turretMotorConfig.slot0.kP = D;
   }
 }

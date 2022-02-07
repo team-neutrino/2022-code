@@ -78,10 +78,10 @@ public class RobotContainer {
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
-  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShooterControlSubsystem m_shooterControl = new ShooterControlSubsystem(m_limelight);
-  
+  private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain,m_index,m_limelight);
+
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
 
    /** Instantiate default command below */
@@ -122,8 +122,8 @@ public class RobotContainer {
     m_start.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber), new WaitCommand(0.5), new ClimbExtendCommand(m_climber)));
     m_back.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber),new WaitCommand(0.5), new ClimbRetractCommand(m_climber), new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
   }
 
   /**
