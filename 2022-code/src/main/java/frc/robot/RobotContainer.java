@@ -117,8 +117,8 @@ public class RobotContainer {
     m_start.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber), new WaitCommand(0.5), new ClimbExtendCommand(m_climber)));
     m_back.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber),new WaitCommand(0.5), new ClimbRetractCommand(m_climber), new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
   }
 
   /**
