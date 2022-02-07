@@ -12,17 +12,12 @@ import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
-import edu.wpi.first.wpilibj.shuffleboard.ComplexWidget;
-
 import java.util.Map;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.ClimbRetractCommand;
-import frc.robot.commands.SetShooterPIDCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
@@ -33,8 +28,6 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private ShuffleboardTab m_drivestationTab;
   private ShuffleboardTab m_debugTab;
   private NetworkTableEntry m_setShooterRPM;
-  private ComplexWidget m_toggleShooterPID;
-  private NetworkTableEntry m_toggleTurretPID;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
   private NetworkTableEntry m_turretAngle;
@@ -49,8 +42,8 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[4];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_ShooterPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry m_TurretPID[] = new NetworkTableEntry[3];
+  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[3];
+  private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret, ClimberSubsystem p_climber, DriveTrainSubsystem p_drivetrain, IndexSubsystem p_index, LimelightSubsystem p_limelight) {
@@ -86,9 +79,12 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_limelightVariables[1].setDouble(m_limelight.getTy());
     m_limelightVariables[2].setDouble(m_limelight.getTa());
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
-    m_shooter.setP(m_ShooterPID[0].getDouble(0.0));
-    m_shooter.setI(m_ShooterPID[1].getDouble(0.0));
-    m_shooter.setD(m_ShooterPID[2].getDouble(0.0));
+    m_shooter.setP(m_shooterPID[0].getDouble(0.0));
+    m_shooter.setI(m_shooterPID[1].getDouble(0.0));
+    m_shooter.setD(m_shooterPID[2].getDouble(0.0));
+    m_turret.setP(m_turretPID[0].getDouble(0.0));
+    m_turret.setI(m_turretPID[1].getDouble(0.0));
+    m_turret.setD(m_turretPID[2].getDouble(0.0));
   }
 
   public double getTestRPM()
@@ -134,8 +130,11 @@ public class ShuffleboardSubsystem extends SubsystemBase
       m_limelightVariables[1] = m_debugTab.add("Limelight Ty", 0).withPosition(6, 4).withSize(1, 1).getEntry();
       m_limelightVariables[2] = m_debugTab.add("Limelight Ta", 0).withPosition(8, 4).withSize(1, 1).getEntry();
       m_limelightVariables[3] = m_debugTab.add("Limelight Tv", 0).withPosition(10, 4).withSize(1, 1).getEntry();
-      m_ShooterPID[0] = m_debugTab.add("P", m_shooter.getP()).withPosition(2, 0).withSize(1, 0).getEntry();
-      m_ShooterPID[1] = m_debugTab.add("I", m_shooter.getI()).withPosition(2, 1).withSize(1, 0).getEntry();
-      m_ShooterPID[2] = m_debugTab.add("D", m_shooter.getD()).withPosition(2, 2).withSize(1, 0).getEntry();
+      m_shooterPID[0] = m_debugTab.add("Shooter P", m_shooter.getP()).withPosition(0, 2).withSize(1, 1).getEntry();
+      m_shooterPID[1] = m_debugTab.add("Shooter I", m_shooter.getI()).withPosition(0, 3).withSize(1, 1).getEntry();
+      m_shooterPID[2] = m_debugTab.add("Shooter D", m_shooter.getD()).withPosition(0, 4).withSize(1, 1).getEntry();
+      m_turretPID[0] = m_debugTab.add("Turret P", m_turret.getP()).withPosition(1, 2).withSize(1, 1).getEntry();
+      m_turretPID[1] = m_debugTab.add("Turret I", m_turret.getI()).withPosition(1, 3).withSize(1, 1).getEntry();
+      m_turretPID[2] = m_debugTab.add("Turret D", m_turret.getD()).withPosition(1, 4).withSize(1, 1).getEntry();
   }
 }
