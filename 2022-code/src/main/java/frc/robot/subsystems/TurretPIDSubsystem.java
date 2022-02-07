@@ -62,4 +62,28 @@ public class TurretPIDSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
   }
+  public double getP()
+  {
+      return m_turretMotorConfig.slot0.kP;
+  }
+  public void setP(double P)
+  {
+      m_turretMotorConfig.slot0.kP = P;
+  }
+  public double getI()
+  {
+      return m_turretMotorConfig.slot0.kD;
+  }
+  public void setI(double I)
+  {
+      m_turretMotorConfig.slot0.kP = I;
+  }
+  public double getD()
+  {
+      return m_turretMotorConfig.slot0.kD;
+  }
+  public void setD(double D)
+  {
+      m_turretMotorConfig.slot0.kP = D;
+  }
 }

@@ -11,8 +11,6 @@ public class ShooterSetSpeed extends CommandBase
 {
     /** shooter rpm constant */
     private final double SHOOTER_RPM_1 = 3000;
-
-
     private ShooterSubsystem m_shooter;
     private double m_rpm = SHOOTER_RPM_1;
     /**
@@ -20,9 +18,9 @@ public class ShooterSetSpeed extends CommandBase
      */
     public ShooterSetSpeed(ShooterSubsystem p_shooter)
     {
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(p_shooter);
         m_shooter = p_shooter;
+        // Use addRequirements() here to declare subsystem dependencies.
+        addRequirements(m_shooter);
     }
 
     // Called when the command is initially scheduled.

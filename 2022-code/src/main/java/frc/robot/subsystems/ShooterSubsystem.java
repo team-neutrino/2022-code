@@ -85,4 +85,29 @@ public class ShooterSubsystem extends SubsystemBase
     {
         m_wheelMotor.set(power);
     }
+
+    public double getP()
+    {
+        return m_pidController.getP();
+    }
+    public void setP(double P)
+    {
+        m_pidController.setP(P);
+    }
+    public double getI()
+    {
+        return m_pidController.getI();
+    }
+    public void setI(double I)
+    {
+        m_pidController.setI(I);
+    }
+    public double getD()
+    {
+        return m_pidController.getD();
+    }
+    public void setD(double D)
+    {
+        m_pidController.setD(D);
+    }
 }
