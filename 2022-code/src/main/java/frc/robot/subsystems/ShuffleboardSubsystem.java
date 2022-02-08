@@ -79,6 +79,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_limelightVariables[1].setDouble(m_limelight.getTy());
     m_limelightVariables[2].setDouble(m_limelight.getTa());
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
+    m_limelightVariables[4].setDouble(m_limelight.getDistance());
     m_shooter.setP(m_shooterPID[0].getDouble(0.0));
     m_shooter.setI(m_shooterPID[1].getDouble(0.0));
     m_shooter.setD(m_shooterPID[2].getDouble(0.0));
