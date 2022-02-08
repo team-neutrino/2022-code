@@ -40,7 +40,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[4];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[4];
+  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
@@ -130,6 +130,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
       m_limelightVariables[1] = m_debugTab.add("Limelight Ty", 0).withPosition(6, 4).withSize(1, 1).getEntry();
       m_limelightVariables[2] = m_debugTab.add("Limelight Ta", 0).withPosition(8, 4).withSize(1, 1).getEntry();
       m_limelightVariables[3] = m_debugTab.add("Limelight Tv", 0).withPosition(10, 4).withSize(1, 1).getEntry();
+      m_limelightVariables[4] = m_debugTab.add("Limelight Distance", 0).withPosition(11, 4).withSize(1, 1).getEntry();
       m_shooterPID[0] = m_debugTab.add("Shooter P", m_shooter.getP()).withPosition(0, 2).withSize(1, 1).getEntry();
       m_shooterPID[1] = m_debugTab.add("Shooter I", m_shooter.getI()).withPosition(0, 3).withSize(1, 1).getEntry();
       m_shooterPID[2] = m_debugTab.add("Shooter D", m_shooter.getD()).withPosition(0, 4).withSize(1, 1).getEntry();
