@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase
 {
@@ -28,6 +29,8 @@ public class ShooterSubsystem extends SubsystemBase
     private SparkMaxPIDController m_pidController;
   
     private double m_targetRPM;
+
+    private CalculateRPM RPMCalculator;
 
     public ShooterSubsystem()
     {
