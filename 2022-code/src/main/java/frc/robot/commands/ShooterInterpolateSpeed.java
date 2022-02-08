@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterControlSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class InterpolatedShooterSpeed extends CommandBase {
+public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
 
     ShooterControlSubsystem m_shooterControl;
     ShooterSubsystem m_shooter;
     Double targetRPM;
 
-  public InterpolatedShooterSpeed(ShooterControlSubsystem p_shooterControl, ShooterSubsystem p_shooter) {
+  public ShooterInterpolateSpeed(ShooterControlSubsystem p_shooterControl, ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
 
     m_shooterControl = p_shooterControl;
