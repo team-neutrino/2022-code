@@ -13,13 +13,12 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
   double h = 1.25;
-  double beta;
+  double limelightMountAngle = 30;
 
   public LimelightSubsystem()
   {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
-    beta = getTy() + 30;
   }
 
   @Override
@@ -68,7 +67,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public double  getDistance()
   {
-    return h / Math.tan(Math.toRadians(beta));
+    return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
 
 }

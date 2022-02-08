@@ -64,8 +64,7 @@ public class ShooterControlSubsystem extends SubsystemBase {
       }
     }
   }
-    
-// replace constant with limelight distance 
+
 // System.out.println(m_smallerDistance);
 // System.out.println(m_distanceRPMData.keySet());
 RPM = m_distanceRPMData.get(smallerDistance) + ((limeLightDistance - smallerDistance)) * 
