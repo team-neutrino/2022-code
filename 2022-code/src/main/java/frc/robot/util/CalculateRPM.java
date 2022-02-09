@@ -28,21 +28,19 @@ public class CalculateRPM {
   
     public double InterpolateDistance() {
   
-      Double smallerDistance = 0.0;
-      Double largerDistance = 0.0;
-      Double RPM = 0.0;
+      double smallerDistance = 0.0;
+      double largerDistance = 0.0;
+      double rpm = 0.0;
   
     double limeLightDistance = 1.8; //m_limelight.getDistance();
   
     if (limeLightDistance <= m_distanceRPMData.firstKey())
       {
-       System.out.println(m_distanceRPMData.get(m_distanceRPMData.firstKey()));
        return m_distanceRPMData.get(m_distanceRPMData.firstKey());
   
       }
     else if (limeLightDistance >= m_distanceRPMData.lastKey())
       {
-        System.out.println(m_distanceRPMData.get(m_distanceRPMData.lastKey()));
         return m_distanceRPMData.get(m_distanceRPMData.lastKey());
       }
     else
@@ -63,10 +61,10 @@ public class CalculateRPM {
       }
     }
   
-  RPM = m_distanceRPMData.get(smallerDistance) + ((limeLightDistance - smallerDistance)) * 
+  rpm = m_distanceRPMData.get(smallerDistance) + ((limeLightDistance - smallerDistance)) * 
   ( (m_distanceRPMData.get(largerDistance) - m_distanceRPMData.get(smallerDistance)) / ( largerDistance - smallerDistance));  
     
-    return RPM;
+    return rpm;
   
   }
 }
