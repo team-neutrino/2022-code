@@ -11,7 +11,7 @@ public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
 
     ShooterSubsystem m_shooter;
-    Double targetRPM;
+    Double m_targetRPM;
 
   public ShooterInterpolateSpeed(ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -25,12 +25,8 @@ public class ShooterInterpolateSpeed extends CommandBase {
   @Override
   public void initialize() {
    
-    targetRPM = m_shooter.CalculateRPM();
-
-    m_shooter.setTargetRPM(targetRPM);
-
-
-
+    m_targetRPM = m_shooter.CalculateRPM();
+    m_shooter.setTargetRPM(m_targetRPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
