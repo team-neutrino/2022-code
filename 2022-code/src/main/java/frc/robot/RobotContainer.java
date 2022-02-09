@@ -25,18 +25,18 @@ import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.Trajectories.TestTrajectory;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
-import frc.robot.commands.InterpolatedShooterSpeed;
 import frc.robot.commands.ShooterDefaultCommand;
+import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterControlSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.util.AutonSelector;
+import frc.robot.util.CalculateRPM;
 import frc.robot.util.TriggerToBoolean;
 
 import javax.swing.GroupLayout.SequentialGroup;
@@ -73,13 +73,12 @@ public class RobotContainer {
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
-  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  private final ShooterControlSubsystem m_shooterControl = new ShooterControlSubsystem(m_limelight);
   private final ShuffleboardSubsystem m_shuffleboard = new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain,m_index,m_limelight);
 
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
@@ -118,7 +117,7 @@ public class RobotContainer {
     m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
-    m_X.whileHeld(new InterpolatedShooterSpeed(m_shooterControl, m_shooter));
+    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_start.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber), new WaitCommand(0.5), new ClimbExtendCommand(m_climber)));
     m_back.whenHeld(new SequentialCommandGroup(new ClimbKeyUnlockCommand(m_climber),new WaitCommand(0.5), new ClimbRetractCommand(m_climber), new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));

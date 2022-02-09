@@ -5,13 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterControlSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
 
-    ShooterControlSubsystem m_shooterControl;
     ShooterSubsystem m_shooter;
     Double targetRPM;
 
@@ -20,7 +18,7 @@ public class ShooterInterpolateSpeed extends CommandBase {
 
     m_shooter = p_shooter;
 
-    addRequirements(m_shooterControl, m_shooter);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
