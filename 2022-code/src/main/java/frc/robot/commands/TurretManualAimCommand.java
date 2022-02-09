@@ -7,8 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
-
-
 public class TurretManualAimCommand extends CommandBase {
 
   private TurretPIDSubsystem m_turret;
@@ -16,14 +14,12 @@ public class TurretManualAimCommand extends CommandBase {
 
   /** Creates a new TurretManualAimCommand. */
   public TurretManualAimCommand(TurretPIDSubsystem p_turret, boolean isClockwise) {
-    
+
     m_turret = p_turret;
     m_isClockwise = isClockwise;
-   
+
     addRequirements(m_turret);
   }
-
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -32,10 +28,9 @@ public class TurretManualAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_isClockwise){
+    if (m_isClockwise) {
       m_turret.turnClockwise();
-    }
-    else {
+    } else {
       m_turret.turnCounterClockwise();
     }
   }
