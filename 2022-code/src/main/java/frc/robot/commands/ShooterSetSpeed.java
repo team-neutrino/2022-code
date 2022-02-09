@@ -7,46 +7,38 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class ShooterSetSpeed extends CommandBase
-{
-    /** shooter rpm constant */
-    private final double SHOOTER_RPM_1 = 3000;
-    private ShooterSubsystem m_shooter;
-    private double m_rpm = SHOOTER_RPM_1;
-    /**
-     * Creates a new ShooterSetSpeedCommand.
-     */
-    public ShooterSetSpeed(ShooterSubsystem p_shooter)
-    {
-        m_shooter = p_shooter;
-        // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(m_shooter);
-    }
+public class ShooterSetSpeed extends CommandBase {
+  /** shooter rpm constant */
+  private final double SHOOTER_RPM_1 = 3000;
 
-    // Called when the command is initially scheduled.
-    @Override
-    public void initialize()
-    {
-    }
+  private ShooterSubsystem m_shooter;
+  private double m_rpm = SHOOTER_RPM_1;
+  /** Creates a new ShooterSetSpeedCommand. */
+  public ShooterSetSpeed(ShooterSubsystem p_shooter) {
+    m_shooter = p_shooter;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_shooter);
+  }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute()
-    {
-        m_shooter.setTargetRPM(m_rpm);
-    }
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
 
-    // Called once the command ends or is interrupted.
-    @Override
-    public void end(boolean interrupted)
-    {
-        m_shooter.turnOff();
-    }
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    m_shooter.setTargetRPM(m_rpm);
+  }
 
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished()
-    {
-        return false;
-    }
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    m_shooter.turnOff();
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    return false;
+  }
 }
