@@ -15,10 +15,9 @@ public class ShooterInterpolateSpeed extends CommandBase {
     ShooterSubsystem m_shooter;
     Double targetRPM;
 
-  public ShooterInterpolateSpeed(ShooterControlSubsystem p_shooterControl, ShooterSubsystem p_shooter) {
+  public ShooterInterpolateSpeed(ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
 
-    m_shooterControl = p_shooterControl;
     m_shooter = p_shooter;
 
     addRequirements(m_shooterControl, m_shooter);
@@ -28,7 +27,7 @@ public class ShooterInterpolateSpeed extends CommandBase {
   @Override
   public void initialize() {
    
-    targetRPM = m_shooterControl.InterpolateDistance();
+    targetRPM = m_shooter.CalculateRPM();
 
     m_shooter.setTargetRPM(targetRPM);
 
