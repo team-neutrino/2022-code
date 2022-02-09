@@ -13,6 +13,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase
 {
@@ -26,11 +27,17 @@ public class ShooterSubsystem extends SubsystemBase
     private RelativeEncoder m_encoder1;
     private RelativeEncoder m_encoder2;
     private SparkMaxPIDController m_pidController;
+    private LimelightSubsystem m_limelight;
   
     private double m_targetRPM;
 
-    public ShooterSubsystem()
+    private CalculateRPM RPMCalculator;
+
+    public ShooterSubsystem(LimelightSubsystem p_limelight)
     {
+        m_limelight = p_limelight;
+        RPMCalculator = new CalculateRPM(m_limelight);
+
         m_wheelMotor = new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_1_ID, MotorType.kBrushless);
         m_wheelMotor2 = new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_2_ID, MotorType.kBrushless);
         m_wheelMotor.restoreFactoryDefaults();
@@ -55,6 +62,11 @@ public class ShooterSubsystem extends SubsystemBase
     @Override
     public void periodic()
     {
+    }
+
+    public double CalculateRPM()
+    {
+        return RPMCalculator.InterpolateDistance();
     }
 
     public double getRPM1()

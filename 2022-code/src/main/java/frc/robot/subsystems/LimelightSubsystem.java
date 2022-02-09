@@ -12,6 +12,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
+  double h = 1.25;
+  double limelightMountAngle = 30;
 
   public LimelightSubsystem()
   {
@@ -62,4 +64,10 @@ public class LimelightSubsystem extends SubsystemBase {
     }
     return false;
   }
+
+  public double  getDistance()
+  {
+    return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
+  }
+
 }

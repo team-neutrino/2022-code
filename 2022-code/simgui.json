@@ -32,6 +32,7 @@
       "/LiveWindow/IndexSubsystem": "Subsystem",
       "/LiveWindow/IntakeSubSystem": "Subsystem",
       "/LiveWindow/LimelightSubsystem": "Subsystem",
+      "/LiveWindow/ShooterControlSubsystem": "Subsystem",
       "/LiveWindow/ShooterSubsystem": "Subsystem",
       "/LiveWindow/ShuffleboardSubsystem": "Subsystem",
       "/LiveWindow/TurretPIDSubsystem": "Subsystem",
@@ -44,6 +45,12 @@
     }
   },
   "NetworkTables": {
+    "CameraPublisher": {
+      "USB Camera 0": {
+        "open": true
+      },
+      "open": true
+    },
     "LiveWindow": {
       "IndexSubsystem": {
         "open": true
@@ -55,6 +62,12 @@
     },
     "Shuffleboard": {
       "Drivestation Tab": {
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "SendableChooser[0]": {
         "open": true
       },
       "open": true
