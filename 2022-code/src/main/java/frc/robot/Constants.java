@@ -23,8 +23,7 @@ public final class Constants {
         public static final int XBOX_CONTROLLER_ID = 2;
     }
 
-    public final class CANIDConstants 
-    {
+    public final class CANIDConstants {
         public static final int DRIVETRAIN_MOTOR_LEFT_1_ID = 1;
         public static final int DRIVETRAIN_MOTOR_LEFT_2_ID = 2;
         public static final int DRIVETRAIN_MOTOR_RIGHT_1_ID = 3;
