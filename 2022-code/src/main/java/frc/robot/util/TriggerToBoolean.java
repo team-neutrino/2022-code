@@ -10,27 +10,20 @@ package frc.robot.util;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
-/**
- * Add your docs here.
- */
-public class TriggerToBoolean extends Trigger
-{
-    GenericHID m_Joystick;
-    int m_JoystickID;
-    double m_Threshold = 0.5;
+/** Add your docs here. */
+public class TriggerToBoolean extends Trigger {
+  GenericHID m_Joystick;
+  int m_JoystickID;
+  double m_Threshold = 0.5;
 
-    public TriggerToBoolean(GenericHID p_Joystick, int p_JoystickID)
-    {
-        m_Joystick = p_Joystick;
-        m_JoystickID = p_JoystickID;
-    }
+  public TriggerToBoolean(GenericHID p_Joystick, int p_JoystickID) {
+    m_Joystick = p_Joystick;
+    m_JoystickID = p_JoystickID;
+  }
 
-    @Override
-    public boolean get()
-    {
-        if (m_Joystick.getRawAxis(m_JoystickID) > m_Threshold)
-            return true;
-        else
-            return false;
-    }
+  @Override
+  public boolean get() {
+    if (m_Joystick.getRawAxis(m_JoystickID) > m_Threshold) return true;
+    else return false;
+  }
 }

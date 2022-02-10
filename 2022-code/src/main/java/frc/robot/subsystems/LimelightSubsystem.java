@@ -6,8 +6,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
@@ -15,8 +15,7 @@ public class LimelightSubsystem extends SubsystemBase {
   double h = 1.25;
   double limelightMountAngle = 30;
 
-  public LimelightSubsystem()
-  {
+  public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
   }
@@ -32,12 +31,11 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   public void setLimelightOn(boolean setOn) {
-      if(setOn) {
-        ledMode.setNumber(3);
-      }
-      else {
-        ledMode.setNumber(1);
-      }
+    if (setOn) {
+      ledMode.setNumber(3);
+    } else {
+      ledMode.setNumber(1);
+    }
   }
 
   public double getTx() {
@@ -58,16 +56,13 @@ public class LimelightSubsystem extends SubsystemBase {
   public boolean getTv() {
     NetworkTableEntry tv = limelight.getEntry("tv");
     double validTarget = tv.getDouble(0.0);
-    if(validTarget == 1)
-    {
+    if (validTarget == 1) {
       return true;
     }
     return false;
   }
 
-  public double  getDistance()
-  {
+  public double getDistance() {
     return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
-
 }
