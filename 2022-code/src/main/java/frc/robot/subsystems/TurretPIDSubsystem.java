@@ -9,7 +9,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -30,7 +29,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configAllSettings(m_turretMotorConfig);
     m_turretMotor.setNeutralMode(NeutralMode.Coast);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-   // m_turretMotor.configFeedbackNotContinuous(false);
+    // m_turretMotor.configFeedbackNotContinuous(false);
     m_turretMotor.configForwardSoftLimitThreshold(FORWARD_SOFT_LIMIT_THRESHOLD);
     m_turretMotor.configForwardSoftLimitEnable(true);
     m_turretMotor.configReverseSoftLimitThreshold(REVERSE_SOFT_LIMIT_THRESHOLD);
@@ -45,15 +44,15 @@ public class TurretPIDSubsystem extends SubsystemBase {
     return m_currentAngle;
   }
 
-  public void stop(){
+  public void stop() {
     m_turretMotor.set(ControlMode.PercentOutput, 0);
   }
 
-  public void turnClockwise(){
-      m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
+  public void turnClockwise() {
+    m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT);
   }
 
-  public void turnCounterClockwise(){
+  public void turnCounterClockwise() {
     m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT * -1);
   }
 
@@ -62,28 +61,28 @@ public class TurretPIDSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
   }
-  public double getP()
-  {
-      return m_turretMotorConfig.slot0.kP;
+
+  public double getP() {
+    return m_turretMotorConfig.slot0.kP;
   }
-  public void setP(double P)
-  {
-      m_turretMotorConfig.slot0.kP = P;
+
+  public void setP(double P) {
+    m_turretMotorConfig.slot0.kP = P;
   }
-  public double getI()
-  {
-      return m_turretMotorConfig.slot0.kD;
+
+  public double getI() {
+    return m_turretMotorConfig.slot0.kD;
   }
-  public void setI(double I)
-  {
-      m_turretMotorConfig.slot0.kP = I;
+
+  public void setI(double I) {
+    m_turretMotorConfig.slot0.kP = I;
   }
-  public double getD()
-  {
-      return m_turretMotorConfig.slot0.kD;
+
+  public double getD() {
+    return m_turretMotorConfig.slot0.kD;
   }
-  public void setD(double D)
-  {
-      m_turretMotorConfig.slot0.kP = D;
+
+  public void setD(double D) {
+    m_turretMotorConfig.slot0.kP = D;
   }
 }
