@@ -108,8 +108,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(0, 1).getEntry();
-    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(5, 5).withSize(8, 8).getEntry();
+    m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(2, 0).getEntry();
+    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
 
     try {
       LLFeed =
@@ -118,13 +118,13 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       CameraServer.startAutomaticCapture(LLFeed);
       m_drivestationTab
           .add(LLFeed)
-          .withPosition(1, 0)
-          .withSize(3, 2)
+          .withPosition(0, 2)
+          .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
       m_drivestationTab
           .add(CameraServer.startAutomaticCapture())
-          .withPosition(9, 0)
-          .withSize(7, 7)
+          .withPosition(3, 0)
+          .withSize(5, 5)
           .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
