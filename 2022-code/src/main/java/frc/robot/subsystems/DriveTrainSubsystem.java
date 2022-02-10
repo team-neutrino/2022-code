@@ -1,11 +1,19 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.SPI;
 
 public class DriveTrainSubsystem extends SubsystemBase {
     private RelativeEncoder m_encoder1;
@@ -21,6 +29,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     private MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
     private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
+    private final DifferentialDriveOdometry m_odometry;
+    private AHRS m_navX = new AHRS(SPI.Port.kMXP);
+
     public DriveTrainSubsystem()
     {
         m_leftMotors.setInverted(true);
@@ -28,6 +39,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
         m_encoder2 = m_rightMotor2.getEncoder();
         m_encoder3 = m_leftMotor1.getEncoder();
         m_encoder4 = m_leftMotor2.getEncoder();
+        
+        m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
     }
 
     @Override
@@ -41,17 +54,42 @@ public class DriveTrainSubsystem extends SubsystemBase {
         m_leftMotors.set(m_setLeftSpeed);
         m_rightMotors.set(m_setRightSpeed);
     }
+
+    public double getYaw()
+    {
+        return m_navX.getYaw();
+    }
+
+    public Pose2d getPose()
+    {
+        return m_odometry.getPoseMeters();
+    }
+
     public double getDriveEncoder1() {
         return m_encoder1.getVelocity();
     }
+
     public double getDriveEncoder2() {
         return m_encoder2.getVelocity();
     }
+
     public double getDriveEncoder3() {
         return m_encoder3.getVelocity();
     }
+
     public double getDriveEncoder4() {
         return m_encoder4.getVelocity();
+    }
+
+    public void setTankDriveVolts(double leftVolts, double rightVolts)
+    {
+        m_leftMotors.setVoltage(leftVolts);
+        m_rightMotors.setVoltage(rightVolts);
+    }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds()
+    {
+        return new DifferentialDriveWheelSpeeds(getDriveEncoder1(), getDriveEncoder2());
     }
 }
 
