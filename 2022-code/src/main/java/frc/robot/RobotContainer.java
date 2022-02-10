@@ -40,6 +40,8 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -85,7 +87,7 @@ public class RobotContainer {
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
-
+  private final AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
