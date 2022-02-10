@@ -1,11 +1,14 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.SPI;
+import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrainSubsystem extends SubsystemBase {
   private RelativeEncoder m_encoder1;
@@ -25,6 +28,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private MotorControllerGroup m_rightMotors =
       new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
   private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
+
+  private AHRS m_navX = new AHRS(SPI.Port.kMXP);
 
   public DriveTrainSubsystem() {
     m_leftMotors.setInverted(true);
