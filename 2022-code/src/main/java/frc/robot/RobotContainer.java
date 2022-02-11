@@ -85,7 +85,6 @@ public class RobotContainer {
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
-
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
