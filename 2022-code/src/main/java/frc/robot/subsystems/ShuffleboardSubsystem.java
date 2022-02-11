@@ -121,7 +121,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     }
     catch(VideoException e) 
     {}
-  }
+  } 
 
   public void debugTab() {
       m_debugTab = Shuffleboard.getTab("Debug Tab");
