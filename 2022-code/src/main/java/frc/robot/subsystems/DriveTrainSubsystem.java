@@ -65,14 +65,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public double getNavX() {
-    return m_navX.getDisplacementX();  
+    return m_navX.getDisplacementX();
   }
-  
+
   public double getNavY() {
-      return m_navX.getDisplacementY();
+    return m_navX.getDisplacementY();
   }
 
   public double getNavYaw() {
-      return m_navX.getYaw();
+    return m_navX.getYaw();
   }
 }
