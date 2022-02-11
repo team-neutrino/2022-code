@@ -10,6 +10,7 @@ public class ClimbDefaultCommand extends CommandBase {
         m_climberSubsystem = subsystem;
         addRequirements(subsystem);
     }
+    
     @Override
     public void initialize() 
     {
