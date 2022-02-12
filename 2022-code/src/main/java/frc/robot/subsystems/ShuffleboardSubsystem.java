@@ -36,7 +36,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[3];
+  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[4];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
 
   /** Creates a new shuffleboard. */
@@ -68,6 +68,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooter.setP(m_shooterPID[0].getDouble(0.0));
     m_shooter.setI(m_shooterPID[1].getDouble(0.0));
     m_shooter.setD(m_shooterPID[2].getDouble(0.0));
+    m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
@@ -165,6 +166,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_debugTab.add("Shooter I", m_shooter.getI()).withPosition(3, 3).withSize(1, 1).getEntry();
     m_shooterPID[2] =
         m_debugTab.add("Shooter D", m_shooter.getD()).withPosition(3, 4).withSize(1, 1).getEntry();
+    m_shooterPID[3] =
+        m_debugTab
+            .add("Shooter FF", m_shooter.getFF())
+            .withPosition(3, 5)
+            .withSize(1, 1)
+            .getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
