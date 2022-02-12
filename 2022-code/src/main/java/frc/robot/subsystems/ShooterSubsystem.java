@@ -16,10 +16,11 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.08;
+  private final double WHEEL_P = 0.01;
 
   private final double WHEEL_I = 0;
-  private final double WHEEL_D = 2;
+  private final double WHEEL_D = 0;
+  private final double WHEEL_FF = 0;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
@@ -44,8 +45,6 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor2.restoreFactoryDefaults();
     m_wheelMotor2.follow(m_wheelMotor);
 
-    m_wheelMotor.setInverted(true);
-    m_wheelMotor2.setInverted(true);
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
@@ -56,6 +55,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setP(WHEEL_P);
     m_pidController.setI(WHEEL_I);
     m_pidController.setD(WHEEL_D);
+    m_pidController.setFF(WHEEL_FF);
     m_pidController.setOutputRange(.1, 1);
   }
 
@@ -95,6 +95,10 @@ public class ShooterSubsystem extends SubsystemBase {
     return m_pidController.getP();
   }
 
+  public double getFF() {
+    return m_pidController.getFF();
+  }
+
   public void setP(double P) {
     m_pidController.setP(P);
   }
@@ -113,5 +117,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setD(double D) {
     m_pidController.setD(D);
+  }
+
+  public void setFF(double FF) {
+    m_pidController.setFF(FF);
   }
 }

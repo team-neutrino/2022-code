@@ -24,7 +24,7 @@ public class IndexSubsystem extends SubsystemBase {
   /** Creates a new IndexSubsystem. */
   public IndexSubsystem() {
     m_indexMotor1.setInverted(true);
-    m_indexMotor2.setInverted(true);
+    m_indexMotor2.setInverted(false);
     m_encoder1 = m_indexMotor2.getEncoder();
   }
 
