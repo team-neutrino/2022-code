@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.Map;
-import java.util.Locale;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_drivestationTab;
@@ -175,10 +174,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_debugTab.add("DriveLMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
     m_driveVariables[3] =
         m_debugTab.add("DriveLMotor2", 0).withPosition(5, 2).withSize(1, 1).getEntry();
-    m_driveVariables[4] = m_debugTab.add("Navx X", "Navx X1").withPosition(8, 4).withSize(1, 1).getEntry();
-    m_driveVariables[5] = m_debugTab.add("Navx Y", "Navx Y1").withPosition(9, 4).withSize(1, 1).getEntry();
+    m_driveVariables[4] =
+        m_debugTab.add("Navx X", "Navx X1").withPosition(8, 4).withSize(1, 1).getEntry();
+    m_driveVariables[5] =
+        m_debugTab.add("Navx Y", "Navx Y1").withPosition(9, 4).withSize(1, 1).getEntry();
     m_driveVariables[6] =
-        m_debugTab.add("Navx Yaw", "Navx Yaw1"  ).withPosition(10, 4).withSize(1, 1).getEntry();
+        m_debugTab.add("Navx Yaw", "Navx Yaw1").withPosition(10, 4).withSize(1, 1).getEntry();
 
     m_climberVariables[0] =
         m_debugTab.add("Climber 1", 0).withPosition(9, 0).withSize(1, 1).getEntry();
@@ -208,14 +209,30 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_debugTab.add("Index Beambreak", 0).withPosition(6, 4).withSize(1, 1).getEntry();
 
     m_limelightVariables[0] =
-        m_debugTab.add("Limelight Tx", "Limelight Tx1").withPosition(10, 2).withSize(1, 1).getEntry();
+        m_debugTab
+            .add("Limelight Tx", "Limelight Tx1")
+            .withPosition(10, 2)
+            .withSize(1, 1)
+            .getEntry();
     m_limelightVariables[1] =
-        m_debugTab.add("Limelight Ty", "Limelight Ty1").withPosition(11, 2).withSize(1, 1).getEntry();
+        m_debugTab
+            .add("Limelight Ty", "Limelight Ty1")
+            .withPosition(11, 2)
+            .withSize(1, 1)
+            .getEntry();
     m_limelightVariables[2] =
-        m_debugTab.add("Limelight Ta", "Limelight Ta1").withPosition(12, 2).withSize(1, 1).getEntry();
+        m_debugTab
+            .add("Limelight Ta", "Limelight Ta1")
+            .withPosition(12, 2)
+            .withSize(1, 1)
+            .getEntry();
     m_limelightVariables[3] =
         m_debugTab.add("Limelight Tv", 0).withPosition(10, 3).withSize(1, 1).getEntry();
     m_limelightVariables[4] =
-        m_debugTab.add("Limelight Distance", "Limelight Distance1").withPosition(11, 3).withSize(1, 1).getEntry();
+        m_debugTab
+            .add("Limelight Distance", "Limelight Distance1")
+            .withPosition(11, 3)
+            .withSize(1, 1)
+            .getEntry();
   }
 }
