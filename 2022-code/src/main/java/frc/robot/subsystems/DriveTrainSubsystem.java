@@ -63,4 +63,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getDriveEncoder4() {
     return m_encoder4.getVelocity();
   }
+
+  public double getNavX() {
+    return m_navX.getDisplacementX();
+  }
+
+  public double getNavY() {
+    return m_navX.getDisplacementY();
+  }
+
+  public double getNavYaw() {
+    return m_navX.getYaw();
+  }
 }
