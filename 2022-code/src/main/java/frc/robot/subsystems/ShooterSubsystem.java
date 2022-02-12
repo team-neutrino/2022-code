@@ -16,7 +16,7 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.08;
+  private final double WHEEL_P = 0.01;
 
   private final double WHEEL_I = 0;
   private final double WHEEL_D = 0;
@@ -45,8 +45,6 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor2.restoreFactoryDefaults();
     m_wheelMotor2.follow(m_wheelMotor);
 
-    m_wheelMotor.setInverted(true);
-    m_wheelMotor2.setInverted(true);
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
