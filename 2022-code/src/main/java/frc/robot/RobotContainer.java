@@ -30,7 +30,7 @@ import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -75,7 +75,7 @@ public class RobotContainer {
   private final IndexSubsystem m_index = new IndexSubsystem();
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
-  private final IntakeSubsystem m_intake = new IntakeSubsystem();
+  private final IntakeSubSystem m_intake = new IntakeSubSystem();
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem(); 
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);

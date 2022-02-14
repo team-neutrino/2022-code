@@ -5,7 +5,7 @@ package frc.robot.commands.Autonomi.TwoBall;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import edu.wpi.first.math.controller.PIDController;
@@ -28,7 +28,7 @@ public class TwoBallAuton extends SequentialCommandGroup
 
     public TwoBallAuton(DriveTrainSubsystem p_drive, 
                         TurretPIDSubsystem p_turret, 
-                        IntakeSubsystem p_intake, 
+                        IntakeSubSystem p_intake, 
                         ShooterSubsystem p_shooter)
     {
 

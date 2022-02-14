@@ -1,11 +1,11 @@
 package frc.robot.commands;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class IntakeDefaultCommand extends CommandBase {
-    private IntakeSubsystem m_intake;
+    private IntakeSubSystem m_intake;
 
-    public IntakeDefaultCommand(IntakeSubsystem subsystem){
+    public IntakeDefaultCommand(IntakeSubSystem subsystem){
         m_intake = subsystem;
         addRequirements(subsystem);
 
