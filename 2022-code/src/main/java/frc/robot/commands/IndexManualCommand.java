@@ -28,9 +28,9 @@ public class IndexManualCommand extends CommandBase
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() 
-  {
+  {/*
      m_index.MotorOneStart();
-     m_index.MotorTwoStart();
+     m_index.MotorTwoStart();*/
   }
 
   // Called once the command ends or is interrupted.
@@ -38,7 +38,7 @@ public class IndexManualCommand extends CommandBase
   public void end(boolean interrupted) 
   {
    m_index.MotorOneStop();
-   m_index.MotorTwoStop();
+   //m_index.MotorTwoStop();
   }
 
   // Returns true when the command should end.

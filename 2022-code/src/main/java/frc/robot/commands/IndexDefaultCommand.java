@@ -32,12 +32,12 @@ public class IndexDefaultCommand extends CommandBase
     if(m_index.getBeamBreak())
     { 
      m_index.MotorOneStart();
-     m_index.MotorTwoStop();
+    // m_index.MotorTwoStop();
     }
     else if( m_index.getBeamBreak())
     {
      m_index.MotorOneStop();
-     m_index.MotorTwoStart();
+     //m_index.MotorTwoStart();
     }
   }
 
