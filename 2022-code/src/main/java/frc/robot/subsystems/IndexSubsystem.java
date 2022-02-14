@@ -20,14 +20,14 @@ public class IndexSubsystem extends SubsystemBase
   private RelativeEncoder m_encoder1;
 
   private TalonSRX m_indexMotor1 = new TalonSRX(CANIDConstants.INDEX_MOTOR_1_ID);
-  private CANSparkMax m_indexMotor2 = new CANSparkMax(CANIDConstants.INDEX_MOTOR_2_ID, MotorType.kBrushless);
+  //private CANSparkMax m_indexMotor2 = new CANSparkMax(CANIDConstants.INDEX_MOTOR_2_ID, MotorType.kBrushless);
   private DigitalInput m_beamBreak = new DigitalInput(DigitalConstants.INDEX_BEAMBREAK);
   /** Creates a new IndexSubsystem. */
   public IndexSubsystem() 
   {
       m_indexMotor1.setInverted(true);
-      m_indexMotor2.setInverted(true);
-      m_encoder1 = m_indexMotor2.getEncoder();
+      //m_indexMotor2.setInverted(true);
+      //m_encoder1 = m_indexMotor1.getEncoder();
   }
  
   public void MotorOneStart()
@@ -39,6 +39,7 @@ public class IndexSubsystem extends SubsystemBase
   {
     m_indexMotor1.set(ControlMode.PercentOutput,0);
   }
+  /*
   public void MotorTwoStart()
   {
     m_indexMotor2.set(0.5);
@@ -47,7 +48,7 @@ public class IndexSubsystem extends SubsystemBase
   {
     m_indexMotor2.set(0);
   }
-
+*/
   public boolean getBeamBreak()
   {
     return m_beamBreak.get();
@@ -57,7 +58,7 @@ public class IndexSubsystem extends SubsystemBase
   {
     // This method will be called once per scheduler run
   }
-  public double getIndexEncoder1() {
+  /*public double getIndexEncoder1() {
     return m_encoder1.getVelocity();
-  }
+  }*/
 }

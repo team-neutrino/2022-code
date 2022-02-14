@@ -39,7 +39,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
   private DriveTrainSubsystem m_drivetrain;
   private IndexSubsystem m_index;
   private LimelightSubsystem m_limelight;
-  private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[4];
+  private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
@@ -84,12 +84,14 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_driveVariables[1].setDouble(m_drivetrain.getDriveEncoder2());
     m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
     m_driveVariables[3].setDouble(m_drivetrain.getDriveEncoder4());
+    m_driveVariables[4].setDouble(m_drivetrain.getnavX());
+    m_driveVariables[5].setDouble(m_drivetrain.getnavY());
 
     m_climberVariables[0].setDouble(m_climber.getClimbEncoderOne());
     m_climberVariables[1].setDouble(m_climber.getClimbEncoderTwo());
     m_climberVariables[2].setBoolean(m_climber.getLimitSwitch());
 
-    m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
+    //m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
 
     m_limelightVariables[0].setDouble(m_limelight.getTx());
@@ -140,6 +142,8 @@ public class ShuffleboardSubsystem extends SubsystemBase
       m_driveVariables[1] = m_debugTab.add("DriveRMotor2", 0).withPosition(3, 2).withSize(1, 1).getEntry();
       m_driveVariables[2] = m_debugTab.add("DriveLMotor1", 0).withPosition(4, 2).withSize(1, 1).getEntry();
       m_driveVariables[3] = m_debugTab.add("DriveLMotor2", 0).withPosition(5, 2).withSize(1, 1).getEntry();
+      m_driveVariables[4] = m_debugTab.add("navX", 0).withPosition(7, 2).withSize(1, 1).getEntry();
+      m_driveVariables[5] = m_debugTab.add("navY", 0).withPosition(7, 4).withSize(1, 1).getEntry();
 
       m_climberVariables[0] = m_debugTab.add("Climber 1", 0).withPosition(4, 3).withSize(1, 1).getEntry();
       m_climberVariables[1] = m_debugTab.add("Climber 2", 0).withPosition(6, 3).withSize(1, 1).getEntry();
