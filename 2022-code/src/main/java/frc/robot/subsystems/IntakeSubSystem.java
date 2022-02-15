@@ -20,7 +20,6 @@ public class IntakeSubSystem extends SubsystemBase {
   private final int SOLENOID_INTAKE_REVERSE = 1;
   private final double INTAKE_MOTOR_POWER = -1;
 
-//   private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
   private CANSparkMax m_IntakeFeedMotor = new CANSparkMax(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED, MotorType.kBrushless);
   private DoubleSolenoid m_IntakeSolenoid =
       new DoubleSolenoid(
@@ -37,17 +36,14 @@ public class IntakeSubSystem extends SubsystemBase {
   }
 
   public void setIntakeOn() {
-    // m_IntakeFeedMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR_POWER);
     m_IntakeFeedMotor.set(INTAKE_MOTOR_POWER);
   }
 
   public void setIntakeReverse() {
-    // m_IntakeFeedMotor.set(ControlMode.PercentOutput, -INTAKE_MOTOR_POWER);
     m_IntakeFeedMotor.set(-INTAKE_MOTOR_POWER);
   }
 
   public void setIntakeOff() {
-    // m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
     m_IntakeFeedMotor.set(0);
   }
 

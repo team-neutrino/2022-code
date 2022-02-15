@@ -18,7 +18,6 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("intake setting on");
     m_intake.setDown();
     m_intake.setIntakeOn();
   }
