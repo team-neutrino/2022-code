@@ -6,9 +6,9 @@ import frc.robot.subsystems.IntakeSubSystem;
 public class IntakeCommand extends CommandBase {
   private IntakeSubSystem m_intake;
 
-  public IntakeCommand(IntakeSubSystem subsystem) {
-    m_intake = subsystem;
-    addRequirements(subsystem);
+  public IntakeCommand(IntakeSubSystem p_intake) {
+    m_intake = p_intake;
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
@@ -18,6 +18,7 @@ public class IntakeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("intake setting on");
     m_intake.setDown();
     m_intake.setIntakeOn();
   }

@@ -18,6 +18,7 @@ public class IndexSubsystem extends SubsystemBase {
   private RelativeEncoder m_encoder1;
 
   private TalonSRX m_indexMotor1 = new TalonSRX(CANIDConstants.INDEX_MOTOR_1_ID);
+
   private CANSparkMax m_indexMotor2 =
       new CANSparkMax(CANIDConstants.INDEX_MOTOR_2_ID, MotorType.kBrushless);
   private DigitalInput m_beamBreak = new DigitalInput(DigitalConstants.INDEX_BEAMBREAK);
