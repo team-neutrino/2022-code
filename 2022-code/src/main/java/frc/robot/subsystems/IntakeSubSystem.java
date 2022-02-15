@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -17,10 +15,12 @@ import frc.robot.Constants.CANIDConstants;
 public class IntakeSubSystem extends SubsystemBase {
   /** Intake Constants */
   private final int SOLENOID_INTAKE_FORWARD = 0;
+
   private final int SOLENOID_INTAKE_REVERSE = 1;
   private final double INTAKE_MOTOR_POWER = 1;
 
-  private CANSparkMax m_IntakeFeedMotor = new CANSparkMax(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED, MotorType.kBrushless);
+  private CANSparkMax m_IntakeFeedMotor =
+      new CANSparkMax(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED, MotorType.kBrushless);
   private DoubleSolenoid m_IntakeSolenoid =
       new DoubleSolenoid(
           PneumaticsModuleType.CTREPCM, SOLENOID_INTAKE_FORWARD, SOLENOID_INTAKE_REVERSE);
