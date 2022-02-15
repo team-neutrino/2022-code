@@ -91,7 +91,7 @@ public class ShuffleboardSubsystem extends SubsystemBase
     m_climberVariables[1].setDouble(m_climber.getClimbEncoderTwo());
     m_climberVariables[2].setBoolean(m_climber.getLimitSwitch());
 
-    m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
+    //m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
 
     m_limelightVariables[0].setDouble(m_limelight.getTx());
