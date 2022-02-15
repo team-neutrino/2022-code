@@ -8,27 +8,27 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 
-
 /** An example command that uses an example subsystem. */
 public class TestShooterRPMCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShuffleboardSubsystem m_shuffleboard;
+
   private ShooterSubsystem m_shooter;
   private double testRPM;
 
-  /** 
+  /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-public TestShooterRPMCommand(ShooterSubsystem p_shooter, ShuffleboardSubsystem p_shuffleboard) {
+  public TestShooterRPMCommand(ShooterSubsystem p_shooter, ShuffleboardSubsystem p_shuffleboard) {
     m_shuffleboard = p_shuffleboard;
     m_shooter = p_shooter;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter, m_shuffleboard);
   }
 
-// Called when the command is initially scheduled.
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 

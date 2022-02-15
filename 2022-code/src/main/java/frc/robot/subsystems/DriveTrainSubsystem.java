@@ -1,11 +1,12 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrainSubsystem extends SubsystemBase {
@@ -66,4 +67,41 @@ public class DriveTrainSubsystem extends SubsystemBase {
     }
 }
 
+  @Override
+  public void periodic() {
+    // called once per scheduler run if you didn't already know
+  }
 
+  public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
+    m_leftMotors.set(m_setLeftSpeed);
+    m_rightMotors.set(m_setRightSpeed);
+  }
+
+  public double getDriveEncoder1() {
+    return m_encoder1.getVelocity();
+  }
+
+  public double getDriveEncoder2() {
+    return m_encoder2.getVelocity();
+  }
+
+  public double getDriveEncoder3() {
+    return m_encoder3.getVelocity();
+  }
+
+  public double getDriveEncoder4() {
+    return m_encoder4.getVelocity();
+  }
+
+  public double getNavX() {
+    return m_navX.getDisplacementX();
+  }
+
+  public double getNavY() {
+    return m_navX.getDisplacementY();
+  }
+
+  public double getNavYaw() {
+    return m_navX.getYaw();
+  }
+}
