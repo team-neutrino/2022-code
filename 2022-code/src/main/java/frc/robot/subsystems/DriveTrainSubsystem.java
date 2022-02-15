@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import frc.robot.Constants;
@@ -23,7 +24,17 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     public DriveTrainSubsystem()
     {
-        m_leftMotors.setInverted(true);
+        m_rightMotor1.restoreFactoryDefaults();
+        m_rightMotor2.restoreFactoryDefaults();
+        m_leftMotor1.restoreFactoryDefaults();
+        m_leftMotor2.restoreFactoryDefaults();
+
+        m_rightMotor1.setIdleMode(IdleMode.kCoast);
+        m_rightMotor2.setIdleMode(IdleMode.kCoast);
+        m_leftMotor1.setIdleMode(IdleMode.kCoast);
+        m_leftMotor2.setIdleMode(IdleMode.kCoast);
+
+        m_rightMotors.setInverted(true);
         m_encoder1 = m_rightMotor1.getEncoder();
         m_encoder2 = m_rightMotor2.getEncoder();
         m_encoder3 = m_leftMotor1.getEncoder();
