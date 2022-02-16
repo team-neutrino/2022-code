@@ -30,6 +30,7 @@ import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
+import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
@@ -51,6 +52,7 @@ public class RobotContainer {
   /** Instantiate buttons, joysticks, etc. below */
   private XboxController m_OperatorController =
       new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
+  
 
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
@@ -81,10 +83,11 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  private final ShuffleboardSubsystem m_shuffleboard =
-      new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+  //private final ShuffleboardSubsystem m_shuffleboard =
+      //new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
-  private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
+  
+  private final TwoBallAuton m_twoBallAuton = new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
@@ -94,6 +97,8 @@ public class RobotContainer {
       new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
+
+private AutonSelector m_autonSelector = new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
