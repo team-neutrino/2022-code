@@ -16,11 +16,11 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.01;
+  private final double WHEEL_P = 0.7;
 
   private final double WHEEL_I = 0;
   private final double WHEEL_D = 0;
-  private final double WHEEL_FF = 0.15;
+  private final double WHEEL_FF = 0.2;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
@@ -48,7 +48,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
-    m_wheelMotor.setClosedLoopRampRate(2);
+    m_wheelMotor.setClosedLoopRampRate(1.5);
 
     m_encoder1 = m_wheelMotor.getEncoder();
     m_encoder2 = m_wheelMotor2.getEncoder();
