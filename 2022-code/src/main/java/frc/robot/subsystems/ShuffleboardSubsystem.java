@@ -242,5 +242,4 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withSize(1, 1)
             .getEntry();
   }
-
 }

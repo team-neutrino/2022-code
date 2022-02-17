@@ -2,10 +2,9 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -30,10 +29,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private CANSparkMax m_leftMotor2 =
       new CANSparkMax(Constants.CANIDConstants.DRIVETRAIN_MOTOR_LEFT_2_ID, MotorType.kBrushless);
 
-  private MotorControllerGroup m_rightMotors = new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
+  private MotorControllerGroup m_rightMotors =
+      new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
   private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
-  
   private final DifferentialDriveOdometry m_odometry;
 
   private AHRS m_navX = new AHRS(SPI.Port.kMXP);
@@ -49,7 +48,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor2.setIdleMode(IdleMode.kCoast);
     m_rightMotor1.setIdleMode(IdleMode.kCoast);
     m_rightMotor2.setIdleMode(IdleMode.kCoast);
-  
+
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
   }
 
@@ -63,14 +62,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_rightMotors.set(-m_setRightSpeed);
   }
 
-  public Pose2d getPose()
-  {
-      return m_odometry.getPoseMeters();
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
   }
 
-  public double getYaw()
-  {
-      return m_navX.getYaw();
+  public double getYaw() {
+    return m_navX.getYaw();
   }
 
   public double getDriveEncoder1() {
@@ -101,14 +98,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return m_navX.getYaw();
   }
 
-  public void setTankDriveVolts(double leftVolts, double rightVolts)
-  {
-      m_leftMotor1.setVoltage(-leftVolts);
-      m_rightMotor1.setVoltage(-rightVolts);
+  public void setTankDriveVolts(double leftVolts, double rightVolts) {
+    m_leftMotor1.setVoltage(-leftVolts);
+    m_rightMotor1.setVoltage(-rightVolts);
   }
 
-  public DifferentialDriveWheelSpeeds getWheelSpeeds()
-  {
-      return new DifferentialDriveWheelSpeeds(getDriveEncoder1(), getDriveEncoder3());
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getDriveEncoder1(), getDriveEncoder3());
   }
 }

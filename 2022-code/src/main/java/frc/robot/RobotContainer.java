@@ -15,13 +15,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.ClimbKeyUnlockCommand;
 import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
-import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
@@ -30,14 +30,12 @@ import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
-import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
@@ -52,7 +50,6 @@ public class RobotContainer {
   /** Instantiate buttons, joysticks, etc. below */
   private XboxController m_OperatorController =
       new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
-  
 
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
@@ -83,11 +80,11 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  //private final ShuffleboardSubsystem m_shuffleboard =
-      //new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+  // private final ShuffleboardSubsystem m_shuffleboard =
+  // new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
-  
-  private final TwoBallAuton m_twoBallAuton = new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
+  private final TwoBallAuton m_twoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
@@ -98,7 +95,8 @@ public class RobotContainer {
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
-private AutonSelector m_autonSelector = new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
+  private AutonSelector m_autonSelector =
+      new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
