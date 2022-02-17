@@ -47,8 +47,8 @@ public class TwoBallAuton extends SequentialCommandGroup
             p_drive);
 
         addCommands(new InstantCommand(p_intake::setDown),
-                    twoBall0Command, 
-                    new InstantCommand(() -> p_drive.setMotors(0, 0))
+                    twoBall0Command,   
+                    new InstantCommand(() -> p_drive.setTankDriveVolts(0, 0))
                     );
     }
 }

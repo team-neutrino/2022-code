@@ -59,7 +59,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {/*
+  public void periodic() {
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
@@ -95,7 +95,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[1].setString(String.format("%,.2f", m_limelight.getTy()));
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
-    m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));*/
+    m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
   }
 
   public double getTestRPM() {
