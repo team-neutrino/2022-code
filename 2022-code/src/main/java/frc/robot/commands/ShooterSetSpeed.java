@@ -9,7 +9,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterSetSpeed extends CommandBase {
   /** shooter rpm constant */
-  private final double SHOOTER_RPM_1 = 5000;
+  private final double SHOOTER_RPM_1 = 2000;
 
   private ShooterSubsystem m_shooter;
   private double m_rpm = SHOOTER_RPM_1;
