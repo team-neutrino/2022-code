@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+import frc.robot.commands.Autonomi.TwoBall.TwoBallTrajectory;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -36,6 +37,7 @@ import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
@@ -70,6 +72,8 @@ public class RobotContainer {
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
 
+  private TwoBallTrajectory twoBallTrajectory = new TwoBallTrajectory();
+
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
 
@@ -80,8 +84,8 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  // private final ShuffleboardSubsystem m_shuffleboard =
-  // new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+  private final ShuffleboardSubsystem m_shuffleboard =
+  new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
   private final TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
@@ -89,11 +93,11 @@ public class RobotContainer {
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
-      new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick, m_leftJoystick);
+  new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick, m_leftJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
-      new TurretAutoAimCommand(m_turret, m_limelight);
+  new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
-      new ShooterDefaultCommand(m_shooter);
+  new ShooterDefaultCommand(m_shooter);
 
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
@@ -149,6 +153,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autonSelector.getChooserSelect();
+    
+    m_driveTrain.resetOdometry(twoBallTrajectory.getInitialPose2d());
+    return m_autonSelector.getChooserSelect().andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));
   }
 }

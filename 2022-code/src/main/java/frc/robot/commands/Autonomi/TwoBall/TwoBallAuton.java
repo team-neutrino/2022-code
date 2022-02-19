@@ -46,7 +46,6 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
     addCommands(
         new InstantCommand(p_intake::setDown),
-        twoBall0Command,
-        new InstantCommand(() -> p_drive.setTankDriveVolts(0, 0)));
+        twoBall0Command); // tankDriveVolts(0, 0) called in robot container
   }
 }

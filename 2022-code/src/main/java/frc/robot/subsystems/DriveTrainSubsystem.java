@@ -32,7 +32,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   private MotorControllerGroup m_rightMotors =
       new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
-  private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
+  private MotorControllerGroup m_leftMotors = 
+      new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
   private final DifferentialDriveOdometry m_odometry;
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -50,37 +51,43 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kCoast);
     m_leftMotor2.setIdleMode(IdleMode.kCoast);
 
-    m_leftMotors.setInverted(true);
-    m_leftMotor1.setInverted(true);
-    m_leftMotor2.setInverted(true);
-
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
     m_encoder3 = m_leftMotor1.getEncoder();
     m_encoder4 = m_leftMotor2.getEncoder();
     
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
+
+    m_rightMotor2.follow(m_rightMotor1);
+    m_leftMotor2.follow(m_leftMotor1);
   }
 
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
     m_odometry.update(
-        getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+        m_navX.getRotation2d(), 
+        m_encoder1.getPosition(), 
+        m_encoder2.getPosition());
   }
-/*
-  public void resetEncoders() {
-    m_rightEncoder.reset();
-  }
-*//*
-  public void resetOdometry(Pose2d pose) {
-    resetEncoders();
-    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
-  }*/
 
   public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
-    m_leftMotors.set(m_setLeftSpeed);
-    m_rightMotors.set(m_setRightSpeed);
+    m_leftMotor1.set(m_setLeftSpeed);
+    //m_leftMotor2.set(m_setLeftSpeed); don't need with motor controller group/follow
+    m_rightMotor1.set(m_setRightSpeed);
+    //m_rightMotor2.set(m_setRightSpeed);
+  }
+
+  public void resetEncoders() {
+    m_encoder1.setPosition(0);
+    m_encoder2.setPosition(0);
+    m_encoder3.setPosition(0);
+    m_encoder4.setPosition(0);
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, m_navX.getRotation2d());
   }
 
   public Pose2d getPose() {
@@ -121,7 +128,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
     m_leftMotor1.setVoltage(leftVolts);
+    //m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
     m_rightMotor1.setVoltage(rightVolts); 
+    //m_rightMotor2.setVoltage(rightVolts); same
+    m_diffDrive.feed();
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
