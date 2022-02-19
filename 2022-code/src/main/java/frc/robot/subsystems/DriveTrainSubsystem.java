@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -34,6 +35,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
   private final DifferentialDriveOdometry m_odometry;
+  private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   private AHRS m_navX = new AHRS(SPI.Port.kMXP);
 
@@ -49,27 +51,36 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor2.setIdleMode(IdleMode.kCoast);
 
     m_leftMotors.setInverted(true);
+    m_leftMotor1.setInverted(true);
+    m_leftMotor2.setInverted(true);
+
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
     m_encoder3 = m_leftMotor1.getEncoder();
     m_encoder4 = m_leftMotor2.getEncoder();
-
-    m_leftMotor1.setIdleMode(IdleMode.kCoast);
-    m_leftMotor2.setIdleMode(IdleMode.kCoast);
-    m_rightMotor1.setIdleMode(IdleMode.kCoast);
-    m_rightMotor2.setIdleMode(IdleMode.kCoast);
-
+    
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
   }
 
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
+    m_odometry.update(
+        getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
   }
+/*
+  public void resetEncoders() {
+    m_rightEncoder.reset();
+  }
+*//*
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+  }*/
 
   public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
-    m_leftMotors.set(-m_setLeftSpeed);
-    m_rightMotors.set(-m_setRightSpeed);
+    m_leftMotors.set(m_setLeftSpeed);
+    m_rightMotors.set(m_setRightSpeed);
   }
 
   public Pose2d getPose() {
@@ -109,8 +120,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotor1.setVoltage(-leftVolts);
-    m_rightMotor1.setVoltage(-rightVolts);
+    m_leftMotor1.setVoltage(leftVolts);
+    m_rightMotor1.setVoltage(rightVolts); 
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
