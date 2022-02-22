@@ -85,7 +85,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
 
     m_climberVariables[0].setDouble(m_climber.getClimbEncoderOne());
-    m_climberVariables[1].setDouble(m_climber.getClimbEncoderTwo());
     m_climberVariables[2].setBoolean(m_climber.getLimitSwitch());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
