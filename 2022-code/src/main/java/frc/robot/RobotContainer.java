@@ -4,6 +4,18 @@
 
 package frc.robot;
 
+import java.util.List;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.RamseteController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -11,6 +23,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -151,10 +164,62 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    
-    m_driveTrain.resetOdometry(twoBallTrajectory.getInitialPose2d());
-    return m_autonSelector.getChooserSelect().andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));
+public Command getAutonomousCommand() {
+
+    // Create a voltage constraint to ensure we don't accelerate too fast
+    var autoVoltageConstraint =
+        new DifferentialDriveVoltageConstraint(
+            new SimpleMotorFeedforward(
+                TrajectoryConfigConstants.KS_VOLTS,
+                TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
+                TrajectoryConfigConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
+            10);
+
+    // Create config for trajectory
+    TrajectoryConfig config =
+        new TrajectoryConfig(
+                TrajectoryConfigConstants.K_MAX_SPEED_METERS_PER_SECOND,
+                TrajectoryConfigConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+            // Add kinematics to ensure max speed is actually obeyed
+            .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
+            // Apply the voltage constraint
+            .addConstraint(autoVoltageConstraint);
+
+    // An example trajectory to follow.  All units in meters.
+    Trajectory exampleTrajectory =
+        TrajectoryGenerator.generateTrajectory(
+            // Start at the origin facing the +X direction
+            new Pose2d(0, 0, new Rotation2d(0)),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(3, 0, new Rotation2d(0)),
+            // Pass config
+            config);
+
+    RamseteCommand ramseteCommand =
+        new RamseteCommand(
+            exampleTrajectory,
+            m_driveTrain::getPose,
+            new RamseteController(TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
+            new SimpleMotorFeedforward(
+                TrajectoryConfigConstants.KS_VOLTS,
+                TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
+                TrajectoryConfigConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
+            m_driveTrain::getWheelSpeeds,
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            // RamseteCommand passes volts to the callback
+            m_driveTrain::setTankDriveVolts,
+            m_driveTrain);
+
+    // Reset odometry to the starting pose of the trajectory.
+    m_driveTrain.resetOdometry(exampleTrajectory.getInitialPose());
+
+    // Run path following command, then stop at the end.
+    return ramseteCommand.andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));
   }
 }
+
