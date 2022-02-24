@@ -31,7 +31,6 @@ import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
-import frc.robot.commands.TurretOverrideCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
@@ -147,15 +146,9 @@ public class RobotContainer {
         new WaitCommand(0.5),
         new ClimbRetractCommand(m_climber),
         new ClimbKeyExtendCommand(m_climber)));
-    m_upPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(-90), m_turret))
-            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
-    m_rightPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(0), m_turret))
-            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
-    m_downPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(90), m_turret))
-            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
+    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
+    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
     m_BumperLeft.whileHeld(new ShooterSetSpeed(m_shooter, 1000));
-    m_rightJoystickButton.whenActive(
-        new TurretOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
   }
 
   /**
