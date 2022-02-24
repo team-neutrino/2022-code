@@ -78,7 +78,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
     }
     if (m_shooterPID[4].getDouble(0.0) != m_shooter.getShuffleboardRPM()) {
-        m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
+      m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
     }
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
@@ -179,7 +179,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(3, 5)
             .withSize(1, 1)
             .getEntry();
-    m_shooterPID[4] = m_debugTab.add("Shooter Target RPM", m_shooter.getShuffleboardRPM()).withPosition(3, 6).withSize(1, 1).getEntry();
+    m_shooterPID[4] =
+        m_debugTab
+            .add("Shooter Target RPM", m_shooter.getShuffleboardRPM())
+            .withPosition(3, 6)
+            .withSize(1, 1)
+            .getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();

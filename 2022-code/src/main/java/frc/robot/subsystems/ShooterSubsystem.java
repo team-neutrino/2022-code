@@ -85,8 +85,12 @@ public class ShooterSubsystem extends SubsystemBase {
     return m_targetRPM;
   }
 
-  public double getDefaultRPM() {
-      return m_defaultTargetRPM;
+  public double getShuffleboardRPM() {
+    return m_defaultTargetRPM;
+  }
+
+  public void setShuffleboardRPM(double shuffleboardRPM) {
+    m_defaultTargetRPM = shuffleboardRPM;
   }
 
   public void turnOff() {
