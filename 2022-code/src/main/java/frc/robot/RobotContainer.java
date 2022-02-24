@@ -31,6 +31,7 @@ import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
+import frc.robot.commands.TurretOverrideCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
@@ -41,6 +42,7 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -73,10 +75,13 @@ public class RobotContainer {
       new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
   private JoystickButton m_back =
       new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
+  private JoystickButton m_rightJoystickButton = 
+      new JoystickButton(m_OperatorController, XboxController.Button.kRightStick.value);
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
   private TriggerToBoolean m_TriggerRight = 
       new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
+      
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
@@ -149,6 +154,8 @@ public class RobotContainer {
     m_downPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(90), m_turret))
             .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
     m_BumperLeft.whileHeld(new ShooterSetSpeed());
+    m_rightJoystickButton.whenActive(
+        new TurretOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
   }
 
   /**
