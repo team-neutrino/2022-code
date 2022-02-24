@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -14,22 +15,18 @@ public class ClimberSubsystem extends SubsystemBase {
   private final int SOLENOID_KEYPISTON_EXTEND = 2;
   private final int SOLENOID_KEYPISTON_RETRACT = 3;
   private double CLIMBER_SPEED = 0.5;
-  private RelativeEncoder m_encoder1;
-  private RelativeEncoder m_encoder2;
+  private RelativeEncoder m_encoder;
 
-  private CANSparkMax m_climber1 =
+  private CANSparkMax m_climber =
       new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
-  private CANSparkMax m_climber2 =
-      new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_2, MotorType.kBrushless);
   private DoubleSolenoid m_keyPiston =
       new DoubleSolenoid(
           PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_EXTEND, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
 
   public ClimberSubsystem() {
-    m_climber2.follow(m_climber1);
-    m_encoder1 = m_climber1.getEncoder();
-    m_encoder2 = m_climber2.getEncoder();
+    m_climber.setIdleMode(IdleMode.kBrake);
+    m_encoder = m_climber.getEncoder();
   }
 
   public void keyLock() {
@@ -41,15 +38,15 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void extendClimber() {
-    m_climber1.set(CLIMBER_SPEED);
+    m_climber.set(CLIMBER_SPEED);
   }
 
   public void retractClimber() {
-    m_climber1.set(CLIMBER_SPEED * -1);
+    m_climber.set(CLIMBER_SPEED * -1);
   }
 
   public void climberOff() {
-    m_climber1.set(0);
+    m_climber.set(0);
   }
 
   public Boolean getLimitSwitch() {
@@ -58,11 +55,6 @@ public class ClimberSubsystem extends SubsystemBase {
 
   public double getClimbEncoderOne() {
 
-    return m_encoder1.getVelocity();
-  }
-
-  public double getClimbEncoderTwo() {
-
-    return m_encoder2.getVelocity();
+    return m_encoder.getVelocity();
   }
 }
