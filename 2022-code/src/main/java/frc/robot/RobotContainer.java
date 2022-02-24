@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -53,9 +54,13 @@ public class RobotContainer {
       new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
 
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
+  private POVButton m_upPovButton = new POVButton(m_OperatorController, 0);
+  private POVButton m_downPovButton = new POVButton(m_OperatorController, 180);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
   private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
+  private JoystickButton m_BumperLeft = 
+      new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value);
   private JoystickButton m_B =
       new JoystickButton(m_OperatorController, XboxController.Button.kB.value);
   private JoystickButton m_A =
@@ -70,6 +75,8 @@ public class RobotContainer {
       new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
+  private TriggerToBoolean m_TriggerRight = 
+      new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
@@ -80,6 +87,7 @@ public class RobotContainer {
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
+
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
@@ -116,27 +124,31 @@ public class RobotContainer {
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
+    m_TriggerRight.whileActiveOnce(new IndexDefaultCommand(m_index));
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_Y.whileHeld(new IndexManualCommand(m_index));
-    m_A.whileHeld(new IntakeCommand(m_intake));
+    //m_Y.whileHeld();
+    //m_A.whileHeld();
     m_B.whileHeld(new ShooterSetSpeed(m_shooter));
-    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    m_X.whileHeld(
+        new SequentialCommandGroup(
+        new ClimbKeyUnlockCommand(m_climber),
+        new WaitCommand(0.5),
+        new ClimbExtendCommand(m_climber)));
     m_start.whenHeld(
         new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbExtendCommand(m_climber)));
-    m_back.whenHeld(
-        new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber),
-            new ClimbKeyExtendCommand(m_climber)));
-    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+        new ClimbKeyUnlockCommand(m_climber),
+        new WaitCommand(0.5),
+        new ClimbRetractCommand(m_climber),
+        new ClimbKeyExtendCommand(m_climber)));
+    m_upPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(-90), m_turret))
+            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
+    m_rightPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(0), m_turret))
+            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
+    m_downPovButton.whileHeld(new InstantCommand(() -> m_turret.setTargetAngle(90), m_turret))
+            .whenReleased(new InstantCommand(() -> m_turret.setP(0), m_turret));
+    m_BumperLeft.whileHeld(new ShooterSetSpeed());
   }
 
   /**
