@@ -121,7 +121,7 @@ public class RobotContainer {
     /** xbox button mapping */
     m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter));
+    m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_start.whenHeld(
         new SequentialCommandGroup(

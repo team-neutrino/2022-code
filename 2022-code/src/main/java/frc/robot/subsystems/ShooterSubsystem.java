@@ -33,6 +33,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private CalculateRPM RPMCalculator;
 
+  public double m_defaultTargetRPM = 5000;
+
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
     m_limelight = p_limelight;
     RPMCalculator = new CalculateRPM(m_limelight);
@@ -83,6 +85,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getTargetRPM() {
     return m_targetRPM;
+  }
+
+  public double getShuffleboardRPM() {
+    return m_defaultTargetRPM;
+  }
+
+  public void setShuffleboardRPM(double shuffleboardRPM) {
+    m_defaultTargetRPM = shuffleboardRPM;
   }
 
   public void turnOff() {
