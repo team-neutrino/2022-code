@@ -131,9 +131,7 @@ private JoystickButton m_BumperRight =
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
-
     m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_upPovButton.whileHeld(
@@ -143,13 +141,15 @@ private JoystickButton m_BumperRight =
         new ClimbExtendCommand(m_climber)));
     m_downPovButton.whileHeld(
         new SequentialCommandGroup(
-        new ClimbKeyUnlockCommand(m_climber),
-        new WaitCommand(0.5),
-        new ClimbRetractCommand(m_climber),
-        new ClimbKeyExtendCommand(m_climber)));
+            new ClimbKeyUnlockCommand(m_climber),
+            new WaitCommand(0.5),
+            new ClimbRetractCommand(m_climber),
+            new ClimbKeyExtendCommand(m_climber)));
+    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
+    
+    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
-    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
   }
