@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -41,7 +40,6 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -60,9 +58,9 @@ public class RobotContainer {
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
   private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
-  private JoystickButton m_BumperLeft = 
+  private JoystickButton m_BumperLeft =
       new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value);
-private JoystickButton m_BumperRight = 
+  private JoystickButton m_BumperRight =
       new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value);
   private JoystickButton m_B =
       new JoystickButton(m_OperatorController, XboxController.Button.kB.value);
@@ -76,13 +74,12 @@ private JoystickButton m_BumperRight =
       new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
   private JoystickButton m_back =
       new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
-  private JoystickButton m_rightJoystickButton = 
+  private JoystickButton m_rightJoystickButton =
       new JoystickButton(m_OperatorController, XboxController.Button.kRightStick.value);
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
-  private TriggerToBoolean m_TriggerRight = 
+  private TriggerToBoolean m_TriggerRight =
       new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
-      
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
@@ -101,6 +98,7 @@ private JoystickButton m_BumperRight =
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
+
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick, m_leftJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
@@ -136,9 +134,9 @@ private JoystickButton m_BumperRight =
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_upPovButton.whileHeld(
         new SequentialCommandGroup(
-        new ClimbKeyUnlockCommand(m_climber),
-        new WaitCommand(0.5),
-        new ClimbExtendCommand(m_climber)));
+            new ClimbKeyUnlockCommand(m_climber),
+            new WaitCommand(0.5),
+            new ClimbExtendCommand(m_climber)));
     m_downPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
