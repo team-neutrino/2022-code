@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -115,12 +116,12 @@ public class RobotContainer {
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
-    m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
     m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
+
     m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_start.whenHeld(

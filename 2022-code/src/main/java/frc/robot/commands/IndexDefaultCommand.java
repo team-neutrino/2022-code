@@ -25,11 +25,9 @@ public class IndexDefaultCommand extends CommandBase {
   @Override
   public void execute() {
     if (m_index.getBeamBreak()) {
-      m_index.MotorOneStart();
-      m_index.MotorTwoStop();
-    } else if (m_index.getBeamBreak()) {
+      m_index.MotorOneStart();    } 
+    else {
       m_index.MotorOneStop();
-      m_index.MotorTwoStart();
     }
   }
 
