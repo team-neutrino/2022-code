@@ -131,8 +131,12 @@ private JoystickButton m_BumperRight =
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_A.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(
+    m_Y.whileHeld(new IndexManualCommand(m_index));
+    m_A.whileHeld(new IntakeCommand(m_intake));
+
+    m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
+    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    m_start.whenHeld(
         new SequentialCommandGroup(
         new ClimbKeyUnlockCommand(m_climber),
         new WaitCommand(0.5),
