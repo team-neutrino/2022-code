@@ -26,7 +26,7 @@ public class IntakeSubSystem extends SubsystemBase {
           PneumaticsModuleType.CTREPCM, SOLENOID_INTAKE_FORWARD, SOLENOID_INTAKE_REVERSE);
 
   public IntakeSubSystem() {
-      m_IntakeFeedMotor.setOpenLoopRampRate(.5);
+    m_IntakeFeedMotor.setOpenLoopRampRate(.5);
   }
 
   public void setDown() {

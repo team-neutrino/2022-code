@@ -25,8 +25,8 @@ public class IndexDefaultCommand extends CommandBase {
   @Override
   public void execute() {
     if (m_index.getBeamBreak()) {
-      m_index.MotorOneStart();    } 
-    else {
+      m_index.MotorOneStart();
+    } else {
       m_index.MotorOneStop();
     }
   }
