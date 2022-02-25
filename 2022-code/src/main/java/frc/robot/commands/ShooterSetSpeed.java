@@ -9,13 +9,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterSetSpeed extends CommandBase {
   /** shooter rpm constant */
-  private final double SHOOTER_RPM_1 = 2000;
-
   private ShooterSubsystem m_shooter;
-  private double m_rpm = SHOOTER_RPM_1;
+
+  double m_rpm;
+
   /** Creates a new ShooterSetSpeedCommand. */
-  public ShooterSetSpeed(ShooterSubsystem p_shooter) {
+  public ShooterSetSpeed(ShooterSubsystem p_shooter, double rpm) {
     m_shooter = p_shooter;
+    m_rpm = rpm;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter);
   }
