@@ -136,12 +136,12 @@ private JoystickButton m_BumperRight =
 
     m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_start.whenHeld(
+    m_upPovButton.whileHeld(
         new SequentialCommandGroup(
         new ClimbKeyUnlockCommand(m_climber),
         new WaitCommand(0.5),
         new ClimbExtendCommand(m_climber)));
-    m_start.whenHeld(
+    m_downPovButton.whileHeld(
         new SequentialCommandGroup(
         new ClimbKeyUnlockCommand(m_climber),
         new WaitCommand(0.5),
