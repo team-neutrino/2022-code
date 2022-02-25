@@ -115,12 +115,12 @@ public class RobotContainer {
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
-    m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
     m_Y.whileHeld(new IndexManualCommand(m_index));
     m_A.whileHeld(new IntakeCommand(m_intake));
+
     m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_start.whenHeld(

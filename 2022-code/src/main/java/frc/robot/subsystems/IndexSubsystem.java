@@ -37,7 +37,7 @@ public class IndexSubsystem extends SubsystemBase {
   }
 
   public void MotorTwoStart() {
-    m_indexMotor2.set(1);
+    m_indexMotor2.set(0.5);
   }
 
   public void MotorTwoStop() {
