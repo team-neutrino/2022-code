@@ -37,10 +37,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.restoreFactoryDefaults();
     m_leftMotor2.restoreFactoryDefaults();
 
-    m_rightMotor1.setIdleMode(IdleMode.kCoast);
-    m_rightMotor2.setIdleMode(IdleMode.kCoast);
-    m_leftMotor1.setIdleMode(IdleMode.kCoast);
-    m_leftMotor2.setIdleMode(IdleMode.kCoast);
+    m_rightMotor1.setIdleMode(IdleMode.kBrake);
+    m_rightMotor2.setIdleMode(IdleMode.kBrake);
+    m_leftMotor1.setIdleMode(IdleMode.kBrake);
+    m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
     m_leftMotors.setInverted(true);
     m_encoder1 = m_rightMotor1.getEncoder();
@@ -55,8 +55,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
-    m_leftMotors.set(m_setLeftSpeed);
-    m_rightMotors.set(m_setRightSpeed);
+    m_leftMotors.set(-m_setLeftSpeed);
+    m_rightMotors.set(-m_setRightSpeed);
   }
 
   public double getDriveEncoder1() {
