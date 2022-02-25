@@ -146,7 +146,6 @@ private JoystickButton m_BumperRight =
             new ClimbRetractCommand(m_climber),
             new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    
     m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
