@@ -45,6 +45,7 @@ public class IndexSubsystem extends SubsystemBase {
   }
 
   public boolean getBeamBreak() {
+    System.out.println(m_beamBreak.get());
     return m_beamBreak.get();
   }
 
