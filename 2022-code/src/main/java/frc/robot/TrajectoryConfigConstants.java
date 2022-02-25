@@ -32,4 +32,3 @@ public class TrajectoryConfigConstants {
           .setKinematics(K_DRIVE_KINEMATICS)
           .addConstraint(m_autoVoltageConstraint);
 }
-
