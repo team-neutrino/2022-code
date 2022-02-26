@@ -42,7 +42,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kBrake);
     m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_leftMotors.setInverted(true);
+    m_rightMotors.setInverted(true);
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
     m_encoder3 = m_leftMotor1.getEncoder();
