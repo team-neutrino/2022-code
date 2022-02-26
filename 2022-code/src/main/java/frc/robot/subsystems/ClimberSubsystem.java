@@ -8,20 +8,19 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
-  private final int SOLENOID_KEYPISTON_EXTEND = 2;
-  private final int SOLENOID_KEYPISTON_RETRACT = 3;
+  private final int SOLENOID_KEYPISTON_RETRACT = 7;
   private double CLIMBER_SPEED = 0.5;
   private RelativeEncoder m_encoder;
 
   private CANSparkMax m_climber =
       new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
-  private DoubleSolenoid m_keyPiston =
-      new DoubleSolenoid(
-          PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_EXTEND, SOLENOID_KEYPISTON_RETRACT);
+  private Solenoid m_keyPiston =
+      new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
 
   public ClimberSubsystem() {
@@ -30,11 +29,11 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void keyLock() {
-    m_keyPiston.set(Value.kForward);
+    m_keyPiston.set(false);
   }
 
   public void keyUnlock() {
-    m_keyPiston.set(Value.kReverse);
+    m_keyPiston.set(true);
   }
 
   public void extendClimber() {
