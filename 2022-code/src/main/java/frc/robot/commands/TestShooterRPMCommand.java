@@ -35,7 +35,7 @@ public class TestShooterRPMCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    testRPM = m_shuffleboard.getTestRPM();
+    testRPM = m_shuffleboard.getTargetRPM();
     m_shooter.setTargetRPM(testRPM);
   }
 

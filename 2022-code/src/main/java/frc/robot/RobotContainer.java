@@ -90,7 +90,6 @@ public class RobotContainer {
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
-
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
@@ -130,7 +129,7 @@ public class RobotContainer {
 
     /** xbox button mapping */
     m_B.whileHeld(new IndexManualCommand(m_index));
-    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    m_X.whileHeld(new ShooterSetSpeed(m_shooter));
     m_upPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
@@ -144,7 +143,7 @@ public class RobotContainer {
             new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
-    m_TriggerRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
+    m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
