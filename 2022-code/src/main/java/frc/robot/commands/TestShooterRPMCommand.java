@@ -11,6 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class TestShooterRPMCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSubsystem m_shooter;
+
   private double testRPM;
 
   /**
