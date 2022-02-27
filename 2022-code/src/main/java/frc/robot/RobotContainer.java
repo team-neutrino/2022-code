@@ -28,6 +28,7 @@ import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -129,7 +130,7 @@ public class RobotContainer {
 
     /** xbox button mapping */
     m_B.whileHeld(new IndexManualCommand(m_index));
-    m_X.whileHeld(new ShooterSetSpeed(m_shooter));
+    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_upPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),

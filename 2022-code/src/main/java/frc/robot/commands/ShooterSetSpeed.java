@@ -14,12 +14,6 @@ public class ShooterSetSpeed extends CommandBase {
   double m_rpm;
 
   /** Creates a new ShooterSetSpeedCommand. */
-  public ShooterSetSpeed(ShooterSubsystem p_shooter) {
-    m_shooter = p_shooter;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
-  }
-
   public ShooterSetSpeed(ShooterSubsystem p_shooter, double rpm) {
     m_shooter = p_shooter;
     m_rpm = rpm;
@@ -34,7 +28,6 @@ public class ShooterSetSpeed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_rpm = m_shooter.getShuffleboardRPM();
     m_shooter.setTargetRPM(m_rpm);
   }
 

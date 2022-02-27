@@ -88,9 +88,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
       m_turret.setI(m_turretPID[2].getDouble(0.0));
     }
-
     m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
-    System.out.println(m_shooterPID[4].getDouble(0.0));
 
     m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoder1());
     m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
@@ -109,14 +107,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
-  }
-
-  public double getTargetRPM() {
-    return m_shooterPID[4].getDouble(0.0);
-  }
-
-  public void setShooter() {
-    m_shooter.setTargetRPM(m_shooterPID[4].getDouble(0.0));
   }
 
   public void driveStationTab() {
