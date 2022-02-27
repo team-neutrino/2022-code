@@ -34,7 +34,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configForwardSoftLimitEnable(true);
     m_turretMotor.configReverseSoftLimitThreshold(REVERSE_SOFT_LIMIT_THRESHOLD);
     m_turretMotor.configReverseSoftLimitEnable(true);
-    }
+  }
 
   public void setTargetAngle(double targetAngle) {
     m_turretMotor.set(ControlMode.Position, targetAngle);
