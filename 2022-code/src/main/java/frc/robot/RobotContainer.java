@@ -28,6 +28,7 @@ import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -90,7 +91,6 @@ public class RobotContainer {
   private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
-
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
@@ -129,9 +129,8 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_A.whileHeld(new IntakeCommand(m_intake));
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter, m_shooter.getShuffleboardRPM()));
-    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    m_B.whileHeld(new IndexManualCommand(m_index));
+    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_upPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
@@ -145,7 +144,7 @@ public class RobotContainer {
             new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
-    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
+    m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));

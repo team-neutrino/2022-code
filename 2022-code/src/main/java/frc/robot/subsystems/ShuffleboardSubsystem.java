@@ -19,7 +19,6 @@ import java.util.Map;
 public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_drivestationTab;
   private ShuffleboardTab m_debugTab;
-  private NetworkTableEntry m_setShooterRPM;
   private NetworkTableEntry m_shooterRPMGraph;
   private NetworkTableEntry m_turretPositionGraph;
   private ShooterSubsystem m_shooter;
@@ -77,9 +76,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
     }
-    if (m_shooterPID[4].getDouble(0.0) != m_shooter.getShuffleboardRPM()) {
-      m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
-    }
+    m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
@@ -112,10 +109,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
   }
 
-  public double getTestRPM() {
-    return m_setShooterRPM.getDouble(0.0);
-  }
-
   public void driveStationTab() {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     m_shooterVariables[0] =
@@ -126,7 +119,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(2, 0).getEntry();
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
 
     try {
@@ -180,8 +172,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .getEntry();
     m_shooterPID[4] =
         m_debugTab
-            .add("Shooter Target RPM", m_shooter.getShuffleboardRPM())
-            .withPosition(3, 6)
+            .add("Shooter RPM Set", m_shooter.getShuffleboardRPM())
+            .withPosition(3, 5)
             .withSize(1, 1)
             .getEntry();
 

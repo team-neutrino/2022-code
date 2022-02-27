@@ -17,7 +17,7 @@ public class IntakeSubSystem extends SubsystemBase {
   private final int SOLENOID_INTAKE_FORWARD = 4;
 
   private final int SOLENOID_INTAKE_REVERSE = 5;
-  private final double INTAKE_MOTOR_POWER = .5;
+  private final double INTAKE_MOTOR_POWER = 1;
 
   private CANSparkMax m_IntakeFeedMotor =
       new CANSparkMax(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED, MotorType.kBrushless);
