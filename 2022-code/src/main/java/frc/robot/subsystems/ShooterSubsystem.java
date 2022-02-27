@@ -28,13 +28,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private RelativeEncoder m_encoder2;
   private SparkMaxPIDController m_pidController;
   private LimelightSubsystem m_limelight;
-  private ShuffleboardSubsystem m_shuffle;
-
-  private double m_targetRPM;
-
   private CalculateRPM RPMCalculator;
 
-  public double m_defaultTargetRPM = 5000;
+  private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
 
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
