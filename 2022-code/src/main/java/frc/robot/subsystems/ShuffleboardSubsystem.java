@@ -62,6 +62,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
+    m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
@@ -96,8 +97,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
 
-    m_climberVariables[0].setDouble(m_climber.getClimbEncoderOne());
-    m_climberVariables[2].setBoolean(m_climber.getLimitSwitch());
+    m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
+    m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
@@ -143,7 +144,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
 
-    m_shooterVariables[0] =
+    m_shooterVariables[1] =
         m_debugTab
             .add("Shooter RPM", 0)
             .withPosition(0, 0)
@@ -191,8 +192,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_climberVariables[0] =
         m_debugTab.add("Climber 1", 0).withPosition(9, 0).withSize(1, 1).getEntry();
     m_climberVariables[1] =
-        m_debugTab.add("Climber 2", 0).withPosition(10, 0).withSize(1, 1).getEntry();
-    m_climberVariables[2] =
         m_debugTab.add("Climber Switch", false).withPosition(11, 0).withSize(1, 1).getEntry();
 
     m_turretAngle = m_debugTab.add("TurretAngle", 6).withPosition(7, 0).withSize(1, 1).getEntry();

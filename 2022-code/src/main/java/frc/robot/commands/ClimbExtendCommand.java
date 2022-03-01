@@ -21,7 +21,6 @@ public class ClimbExtendCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_climberSubsystem.climberOff();
   }
 
   @Override
