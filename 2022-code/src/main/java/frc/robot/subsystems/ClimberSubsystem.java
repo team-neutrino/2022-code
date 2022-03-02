@@ -23,8 +23,7 @@ public class ClimberSubsystem extends SubsystemBase {
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public ClimberSubsystem() {
     m_climber.setIdleMode(IdleMode.kBrake);
