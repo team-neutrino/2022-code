@@ -12,7 +12,8 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
   private final int SOLENOID_KEYPISTON_RETRACT = 7;
-  private double CLIMBER_SPEED = 0.5;
+  private double CLIMBER_UP_SPEED = 0.5;
+  private double CLIMBER_DOWN_SPEED = -.5;
   private RelativeEncoder m_encoder;
 
   private CANSparkMax m_climber =
@@ -21,8 +22,13 @@ public class ClimberSubsystem extends SubsystemBase {
       new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
 
+  @Override
+  public void periodic() {}
+
   public ClimberSubsystem() {
     m_climber.setIdleMode(IdleMode.kBrake);
+    m_climber.setInverted(true);
+    m_climber.setOpenLoopRampRate(.5);
     m_encoder = m_climber.getEncoder();
   }
 
@@ -35,11 +41,11 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void extendClimber() {
-    m_climber.set(CLIMBER_SPEED);
+    m_climber.set(CLIMBER_UP_SPEED);
   }
 
   public void retractClimber() {
-    m_climber.set(CLIMBER_SPEED * -1);
+    m_climber.set(CLIMBER_DOWN_SPEED);
   }
 
   public void climberOff() {
@@ -50,7 +56,7 @@ public class ClimberSubsystem extends SubsystemBase {
     return m_limitSwitch.get();
   }
 
-  public double getClimbEncoderOne() {
+  public double getClimbEncoder() {
 
     return m_encoder.getVelocity();
   }

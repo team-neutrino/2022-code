@@ -131,17 +131,16 @@ public class RobotContainer {
     /** xbox button mapping */
     m_B.whileHeld(new IndexManualCommand(m_index));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    m_downPovButton.whileHeld(
+        new SequentialCommandGroup(
+            new ClimbKeyUnlockCommand(m_climber),
+            new WaitCommand(0.5),
+            new ClimbRetractCommand(m_climber)));
     m_upPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber)));
-    m_downPovButton.whileHeld(
-        new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber),
-            new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
     m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
