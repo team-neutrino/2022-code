@@ -18,10 +18,16 @@ public class CalculateRPM {
 
     m_limelight = p_limelight;
 
-    m_distanceRPMData.put(1.0, 100.0);
-    m_distanceRPMData.put(2.0, 400.0);
-    m_distanceRPMData.put(3.0, 900.0);
-    m_distanceRPMData.put(4.0, 1600.0);
+    m_distanceRPMData.put(1.18, 3000.0);
+    m_distanceRPMData.put(1.48, 3000.0);
+    m_distanceRPMData.put(1.66, 3250.0);
+    m_distanceRPMData.put(1.85, 3400.0);
+    m_distanceRPMData.put(2.10, 3700.0);
+    m_distanceRPMData.put(2.40, 4000.0);
+    m_distanceRPMData.put(2.50, 4380.0);
+    m_distanceRPMData.put(2.66, 4450.0);
+    m_distanceRPMData.put(2.77, 4700.0);
+    m_distanceRPMData.put(3.00, 5300.0);
   }
 
   public double InterpolateDistance() {
