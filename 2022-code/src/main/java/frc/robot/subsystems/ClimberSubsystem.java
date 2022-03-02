@@ -12,8 +12,8 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
   private final int SOLENOID_KEYPISTON_RETRACT = 7;
-  private double CLIMBER_UP_SPEED = 0.1;
-  private double CLIMBER_DOWN_SPEED = -.1;
+  private double CLIMBER_UP_SPEED = 0.5;
+  private double CLIMBER_DOWN_SPEED = -.5;
   private RelativeEncoder m_encoder;
 
   private CANSparkMax m_climber =
