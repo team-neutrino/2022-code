@@ -11,8 +11,8 @@ public class TrajectoryConfigConstants {
   public static final double K_TRACK_WIDTH_METERS = 0.7;
   public static final DifferentialDriveKinematics K_DRIVE_KINEMATICS =
       new DifferentialDriveKinematics(K_TRACK_WIDTH_METERS);
-  public static final double K_MAX_SPEED_METERS_PER_SECOND = 1;
-  public static final double K_HALF_SPEED_METERS_PER_SECOND = .5;
+  public static final double K_MAX_SPEED_METERS_PER_SECOND = .5;
+  public static final double K_HALF_SPEED_METERS_PER_SECOND = .25;
   public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
   public static final double K_RAMSETE_BETA = 2;
   public static final double K_RAMSETE_ZETA = 0.7;
