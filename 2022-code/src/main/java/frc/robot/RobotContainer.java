@@ -174,7 +174,7 @@ public Command getAutonomousCommand() {
                 TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
                 TrajectoryConfigConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
             TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
-            10);
+            1);
 
     // Create config for trajectory
     TrajectoryConfig config =
@@ -192,9 +192,9 @@ public Command getAutonomousCommand() {
             // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 0)),
+            List.of(new Translation2d(-0.1, 0)),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
+            new Pose2d(-0.5, 0, new Rotation2d(0)),
             // Pass config
             config);
 
