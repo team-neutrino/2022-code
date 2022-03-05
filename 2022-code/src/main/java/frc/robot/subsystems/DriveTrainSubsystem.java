@@ -90,4 +90,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getXVelocity() {
     return m_navX.getVelocityX();
   }
+
+  public double getZGyro() {
+    return m_navX.getRawGyroZ();
+  }
 }

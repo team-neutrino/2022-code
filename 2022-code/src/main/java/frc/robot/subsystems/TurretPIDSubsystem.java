@@ -50,7 +50,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     double u = currentTurretAngle + turretZero;
     double theta = u + tx;
     double turretAngularVelocity = yVelocity * Math.sin(Math.toRadians(theta) / distance);
-    double rotationalVelocity = -m_driveTrain.getNavYaw();
+    double rotationalVelocity = -m_driveTrain.getZGyro();
     double targetAngle = feedforward.calculate(turretAngularVelocity + rotationalVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
