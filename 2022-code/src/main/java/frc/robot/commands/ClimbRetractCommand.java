@@ -24,7 +24,9 @@ public class ClimbRetractCommand extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_climberSubsystem.keyLock();
+  }
 
   @Override
   public boolean isFinished() {
