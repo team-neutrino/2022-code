@@ -53,6 +53,8 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -185,20 +187,22 @@ public class RobotContainer {
             TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
             1);
 
-    // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(
-                1, 1)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
-            // Apply the voltage constraint
-            .addConstraint(autoVoltageConstraint);
-    
-    Trajectory testTrajectory =
-        TrajectoryGenerator.generateTrajectory(List.of(
-            new Pose2d(0, 0, new Rotation2d(0)),
-            new Pose2d(10, 0, new Rotation2d(0))
-        ), config);
+            
+    // 2018 cross scale auto waypoints.
+    var sideStart = new Pose2d(0.0, 1.0, Rotation2d.fromDegrees(0));
+    var interiorWaypoints = new ArrayList<Translation2d>();
+    interiorWaypoints.add(new Translation2d(0, 2.0));
+    var crossScale = new Pose2d(0, 3.0, Rotation2d.fromDegrees(0));
+
+    TrajectoryConfig config = new TrajectoryConfig(1, 1)
+    .addConstraint(autoVoltageConstraint);
+
+
+    var trajectoryTest = TrajectoryGenerator.generateTrajectory(
+        sideStart,
+        interiorWaypoints,
+        crossScale,
+        config);   
 
     // An example trajectory to follow.  All units in meters.
 /*
@@ -215,7 +219,7 @@ public class RobotContainer {
 
     RamseteCommand ramseteCommand =
         new RamseteCommand(
-            testTrajectory,
+            trajectoryTest,
             m_driveTrain::getPose,
             new RamseteController(
                 TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
@@ -232,7 +236,7 @@ public class RobotContainer {
             m_driveTrain);
 
     // Reset odometry to the starting pose of the trajectory.
-    m_driveTrain.resetOdometry(testTrajectory.getInitialPose());
+    m_driveTrain.resetOdometry(trajectoryTest.getInitialPose());
 
     // Run path following command, then stop at the end.
     return ramseteCommand.andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));
