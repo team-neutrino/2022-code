@@ -63,6 +63,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void periodic() {
     // called once per scheduler run if you didn't already know
     m_odometry.update(m_navX.getRotation2d(), m_encoder1.getPosition(), m_encoder2.getPosition());
+    m_diffDrive.feed();
+    System.out.println("NavX: " + getNavX() + ", NavY: " + getNavY() + ", NavZ: " + getNavZ());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
@@ -114,6 +116,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return m_navX.getDisplacementY();
   }
 
+  public double getNavZ() {
+      return m_navX.getDisplacementZ();
+  }
+
   public double getNavYaw() {
     return m_navX.getYaw();
   }
@@ -123,7 +129,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
     m_rightMotor1.setVoltage(rightVolts);
     // m_rightMotor2.setVoltage(rightVolts); same
-    m_diffDrive.feed();
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
