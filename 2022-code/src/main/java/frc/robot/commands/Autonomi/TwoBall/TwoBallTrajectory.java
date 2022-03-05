@@ -16,8 +16,7 @@ public class TwoBallTrajectory {
               new Pose2d(1, 0, Rotation2d.fromDegrees(0))),
           TrajectoryConfigConstants.m_ForwardConfig);
 
-  public Pose2d getInitialPose2d()
-  {
-      return twoBall0.getInitialPose();
+  public Pose2d getInitialPose2d() {
+    return twoBall0.getInitialPose();
   }
 }

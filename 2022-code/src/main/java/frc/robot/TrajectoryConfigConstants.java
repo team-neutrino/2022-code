@@ -27,8 +27,7 @@ public class TrajectoryConfigConstants {
           10);
 
   public static final TrajectoryConfig m_ForwardConfig =
-      new TrajectoryConfig(
-              1, 1)
+      new TrajectoryConfig(1, 1)
           .setKinematics(K_DRIVE_KINEMATICS)
           .addConstraint(m_autoVoltageConstraint);
 }

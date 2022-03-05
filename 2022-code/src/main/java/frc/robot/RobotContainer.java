@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import java.util.List;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -55,6 +53,7 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+import java.util.List;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -109,7 +108,7 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ShuffleboardSubsystem m_shuffleboard =
-  new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+      new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
   private final TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
@@ -117,11 +116,11 @@ public class RobotContainer {
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
-  new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick, m_leftJoystick);
+      new DriveTrainDefaultCommand(m_driveTrain, m_rightJoystick, m_leftJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
-  new TurretAutoAimCommand(m_turret, m_limelight);
+      new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
-  new ShooterDefaultCommand(m_shooter);
+      new ShooterDefaultCommand(m_shooter);
 
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
@@ -174,7 +173,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-public Command getAutonomousCommand() {
+  public Command getAutonomousCommand() {
 
     // Create a voltage constraint to ensure we don't accelerate too fast
     var autoVoltageConstraint =
@@ -195,15 +194,15 @@ public Command getAutonomousCommand() {
             .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
-/*
-    Trajectory testTrajectory = 
+    /*
+    Trajectory testTrajectory =
         TrajectoryGenerator.generateTrajectory(List.of(
             new Pose2d(0, 0, new Rotation2d(0)),
             new Pose2d(1, 0, new Rotation2d(0))
         ), config);*/
 
     // An example trajectory to follow.  All units in meters.
-    
+
     Trajectory testTrajectory =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
@@ -219,7 +218,8 @@ public Command getAutonomousCommand() {
         new RamseteCommand(
             testTrajectory,
             m_driveTrain::getPose,
-            new RamseteController(TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
+            new RamseteController(
+                TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
             new SimpleMotorFeedforward(
                 TrajectoryConfigConstants.KS_VOLTS,
                 TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
@@ -239,4 +239,3 @@ public Command getAutonomousCommand() {
     return ramseteCommand.andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));
   }
 }
-
