@@ -17,7 +17,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 600;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = 200;
+  private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
   private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
@@ -27,9 +27,9 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;
     m_turretMotor.configAllSettings(m_turretMotorConfig);
-    m_turretMotor.setNeutralMode(NeutralMode.Coast);
+    m_turretMotor.setNeutralMode(NeutralMode.Brake);
     m_turretMotor.configSelectedFeedbackSensor(FeedbackDevice.Analog);
-    // m_turretMotor.configFeedbackNotContinuous(false);
+    m_turretMotor.configFeedbackNotContinuous(false, 0);
     m_turretMotor.configForwardSoftLimitThreshold(FORWARD_SOFT_LIMIT_THRESHOLD);
     m_turretMotor.configForwardSoftLimitEnable(true);
     m_turretMotor.configReverseSoftLimitThreshold(REVERSE_SOFT_LIMIT_THRESHOLD);

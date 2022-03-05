@@ -10,7 +10,7 @@ public class DriveTrainDefaultCommand extends CommandBase {
   private Joystick m_leftJoystick;
 
   public DriveTrainDefaultCommand(
-      DriveTrainSubsystem subsystem, Joystick p_rightJoystick, Joystick p_leftJoystick) {
+      DriveTrainSubsystem subsystem, Joystick p_leftJoystick, Joystick p_rightJoystick) {
     m_driveTrainSubsystem = subsystem;
     m_leftJoystick = p_leftJoystick;
     m_rightJoystick = p_rightJoystick;

@@ -32,8 +32,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   private MotorControllerGroup m_rightMotors =
       new MotorControllerGroup(m_rightMotor1, m_rightMotor2);
-  private MotorControllerGroup m_leftMotors = 
-      new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
+  private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
   private final DifferentialDriveOdometry m_odometry;
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
@@ -46,36 +45,29 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.restoreFactoryDefaults();
     m_leftMotor2.restoreFactoryDefaults();
 
-    m_rightMotor1.setIdleMode(IdleMode.kCoast);
-    m_rightMotor2.setIdleMode(IdleMode.kCoast);
-    m_leftMotor1.setIdleMode(IdleMode.kCoast);
-    m_leftMotor2.setIdleMode(IdleMode.kCoast);
+    m_rightMotor1.setIdleMode(IdleMode.kBrake);
+    m_rightMotor2.setIdleMode(IdleMode.kBrake);
+    m_leftMotor1.setIdleMode(IdleMode.kBrake);
+    m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
+    m_rightMotors.setInverted(true);
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
     m_encoder3 = m_leftMotor1.getEncoder();
     m_encoder4 = m_leftMotor2.getEncoder();
-    
-    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
 
-    m_rightMotor2.follow(m_rightMotor1);
-    m_leftMotor2.follow(m_leftMotor1);
+    m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
   }
 
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_odometry.update(
-        m_navX.getRotation2d(), 
-        m_encoder1.getPosition(), 
-        m_encoder2.getPosition());
+    m_odometry.update(m_navX.getRotation2d(), m_encoder1.getPosition(), m_encoder2.getPosition());
   }
 
-  public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
-    m_leftMotor1.set(m_setLeftSpeed);
-    //m_leftMotor2.set(m_setLeftSpeed); don't need with motor controller group/follow
-    m_rightMotor1.set(m_setRightSpeed);
-    //m_rightMotor2.set(m_setRightSpeed);
+  public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
+    m_leftMotors.set(m_setLeftSpeed);
+    m_rightMotors.set(m_setRightSpeed);
   }
 
   public void resetEncoders() {
@@ -128,9 +120,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
     m_leftMotor1.setVoltage(leftVolts);
-    //m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
-    m_rightMotor1.setVoltage(rightVolts); 
-    //m_rightMotor2.setVoltage(rightVolts); same
+    // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
+    m_rightMotor1.setVoltage(rightVolts);
+    // m_rightMotor2.setVoltage(rightVolts); same
     m_diffDrive.feed();
   }
 

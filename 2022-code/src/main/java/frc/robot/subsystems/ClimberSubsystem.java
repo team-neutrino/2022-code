@@ -1,68 +1,63 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
-  private final int SOLENOID_KEYPISTON_EXTEND = 2;
-  private final int SOLENOID_KEYPISTON_RETRACT = 3;
-  private double CLIMBER_SPEED = 0.5;
-  private RelativeEncoder m_encoder1;
-  private RelativeEncoder m_encoder2;
+  private final int SOLENOID_KEYPISTON_RETRACT = 7;
+  private double CLIMBER_UP_SPEED = 0.5;
+  private double CLIMBER_DOWN_SPEED = -.5;
+  private RelativeEncoder m_encoder;
 
-  private CANSparkMax m_climber1 =
+  private CANSparkMax m_climber =
       new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
-  private CANSparkMax m_climber2 =
-      new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_2, MotorType.kBrushless);
-  private DoubleSolenoid m_keyPiston =
-      new DoubleSolenoid(
-          PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_EXTEND, SOLENOID_KEYPISTON_RETRACT);
+  private Solenoid m_keyPiston =
+      new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
 
+  @Override
+  public void periodic() {}
+
   public ClimberSubsystem() {
-    m_climber2.follow(m_climber1);
-    m_encoder1 = m_climber1.getEncoder();
-    m_encoder2 = m_climber2.getEncoder();
+    m_climber.setIdleMode(IdleMode.kBrake);
+    m_climber.setInverted(true);
+    m_climber.setOpenLoopRampRate(.5);
+    m_encoder = m_climber.getEncoder();
   }
 
   public void keyLock() {
-    m_keyPiston.set(Value.kForward);
+    m_keyPiston.set(false);
   }
 
   public void keyUnlock() {
-    m_keyPiston.set(Value.kReverse);
+    m_keyPiston.set(true);
   }
 
   public void extendClimber() {
-    m_climber1.set(CLIMBER_SPEED);
+    m_climber.set(CLIMBER_UP_SPEED);
   }
 
   public void retractClimber() {
-    m_climber1.set(CLIMBER_SPEED * -1);
+    m_climber.set(CLIMBER_DOWN_SPEED);
   }
 
   public void climberOff() {
-    m_climber1.set(0);
+    m_climber.set(0);
   }
 
   public Boolean getLimitSwitch() {
     return m_limitSwitch.get();
   }
 
-  public double getClimbEncoderOne() {
+  public double getClimbEncoder() {
 
-    return m_encoder1.getVelocity();
-  }
-
-  public double getClimbEncoderTwo() {
-
-    return m_encoder2.getVelocity();
+    return m_encoder.getVelocity();
   }
 }
