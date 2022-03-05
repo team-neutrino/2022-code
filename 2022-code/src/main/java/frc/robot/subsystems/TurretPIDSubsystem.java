@@ -24,6 +24,9 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
   private double TURRET_MOTOR_OUTPUT = 0.5;
   private double turretZero = 0;
+  private double turretKs = 0;
+  private double turretKv = 0;
+  SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(turretKs, turretKv);
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
@@ -46,8 +49,9 @@ public class TurretPIDSubsystem extends SubsystemBase {
     double yVelocity = m_driveTrain.getXVelocity();
     double u = currentTurretAngle + turretZero;
     double theta = u + tx;
-    double angularVelocity = yVelocity * Math.sin(Math.toRadians(theta) / distance);
-    double targetAngle = feedForward(angularVelocity)
+    double turretAngularVelocity = yVelocity * Math.sin(Math.toRadians(theta) / distance);
+    double rotationalVelocity = -m_driveTrain.getNavYaw();
+    double targetAngle = feedforward.calculate(turretAngularVelocity + rotationalVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
 
