@@ -21,7 +21,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 600;
   private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
   private double TURRET_MOTOR_OUTPUT = 0.5;
-  private double turretZero = 0;
+  private double turretZero = 420;
   private double turretKs = 0;
   private double turretKv = 0;
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(turretKs, turretKv);
@@ -45,10 +45,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
 
     double yVelocity = m_driveTrain.getXVelocity();
-    double u = currentTurretAngle + turretZero;
+    double u = (currentTurretAngle + turretZero) * 0.4736;
     double theta = u + tx;
     double turretAngularVelocity = yVelocity * Math.sin(Math.toRadians(theta) / distance);
-    double rotationalVelocity = -m_driveTrain.getZGyro();
+    double rotationalVelocity = -Math.toRadians(m_driveTrain.getZGyro());
     double targetAngle = feedforward.calculate(turretAngularVelocity + rotationalVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
