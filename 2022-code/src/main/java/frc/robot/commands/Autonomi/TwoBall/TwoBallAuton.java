@@ -28,7 +28,6 @@ public class TwoBallAuton extends SequentialCommandGroup
                         IntakeSubSystem p_intake, 
                         ShooterSubsystem p_shooter)
     {
-
         m_twoBall0 = TwoBallTrajectory.twoBall0;
 
         RamseteCommand twoBall0Command = 
