@@ -9,6 +9,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -37,6 +39,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDriveOdometry m_odometry;
   private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
+  NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");
+  NetworkTableEntry m_yEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("Y");
+
   private AHRS m_navX = new AHRS(SPI.Port.kMXP);
 
   public DriveTrainSubsystem() {
@@ -62,9 +67,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_odometry.update(m_navX.getRotation2d(), m_encoder1.getPosition(), m_encoder2.getPosition());
+    m_odometry.update(m_navX.getRotation2d(), m_encoder3.getPosition(), m_encoder1.getPosition());
     m_diffDrive.feed();
-    System.out.println("NavX: " + getNavX() + ", NavY: " + getNavY() + ", NavZ: " + getNavZ());
+    var translation = m_odometry.getPoseMeters().getTranslation();
+    m_xEntry.setNumber(translation.getX());
+    m_yEntry.setNumber(translation.getY());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
