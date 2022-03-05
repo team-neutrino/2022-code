@@ -53,6 +53,8 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -188,17 +190,21 @@ public class RobotContainer {
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
-                1, 1)
+                TrajectoryConfigConstants.K_MAX_SPEED_METERS_PER_SECOND,
+                TrajectoryConfigConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
+
+    List<Pose2d> waypoints = new ArrayList<Pose2d>();
+    waypoints.add(new Pose2d(0, 0, new Rotation2d(0)));
+    waypoints.add(new Pose2d(5, 0, new Rotation2d(0)));
+
     
     Trajectory testTrajectory =
-        TrajectoryGenerator.generateTrajectory(List.of(
-            new Pose2d(0, 0, new Rotation2d(0)),
-            new Pose2d(10, 0, new Rotation2d(0))
-        ), config);
+        TrajectoryGenerator.generateTrajectory(
+            waypoints, config);
 
     // An example trajectory to follow.  All units in meters.
 /*
