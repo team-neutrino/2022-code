@@ -50,6 +50,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kBrake);
     m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
+
+    m_rightMotors.setInverted(true);
+
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
     m_encoder3 = m_leftMotor1.getEncoder();
@@ -67,9 +70,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_odometry.update(m_navX.getRotation2d(), m_encoder1.getPosition(), m_encoder2.getPosition());
   }
 
-  public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
-    m_leftMotor1.set(m_setLeftSpeed);
-  }
+
   public void resetEncoders() {
     m_encoder1.setPosition(0);
     m_encoder2.setPosition(0);
@@ -87,6 +88,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public double getYaw() {
     return m_navX.getYaw();
+
+  public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
+    m_leftMotors.set(m_setLeftSpeed);
+    m_rightMotors.set(m_setRightSpeed);
   }
 
   public double getDriveEncoder1() {
