@@ -42,6 +42,7 @@ import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -67,9 +68,15 @@ public class RobotContainer {
       new XboxController(Constants.ControllerConstants.XBOX_CONTROLLER_ID);
 
   private POVButton m_leftPovButton = new POVButton(m_OperatorController, 270);
+  private POVButton m_upPovButton = new POVButton(m_OperatorController, 0);
+  private POVButton m_downPovButton = new POVButton(m_OperatorController, 180);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
   private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
   private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
+  private JoystickButton m_BumperLeft =
+      new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value);
+  private JoystickButton m_BumperRight =
+      new JoystickButton(m_OperatorController, XboxController.Button.kRightBumper.value);
   private JoystickButton m_B =
       new JoystickButton(m_OperatorController, XboxController.Button.kB.value);
   private JoystickButton m_A =
@@ -82,8 +89,12 @@ public class RobotContainer {
       new JoystickButton(m_OperatorController, XboxController.Button.kStart.value);
   private JoystickButton m_back =
       new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
+  private JoystickButton m_rightJoystickButton =
+      new JoystickButton(m_OperatorController, XboxController.Button.kRightStick.value);
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
+  private TriggerToBoolean m_TriggerRight =
+      new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
 
   private TwoBallTrajectory twoBallTrajectory = new TwoBallTrajectory();
 
@@ -135,26 +146,25 @@ public class RobotContainer {
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
-    m_TriggerLeft.whileActiveOnce(new IntakeCommand(m_intake));
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_Y.whileHeld(new IndexManualCommand(m_index));
-    m_A.whileHeld(new IntakeCommand(m_intake));
-    m_B.whileHeld(new ShooterSetSpeed(m_shooter));
-    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_start.whenHeld(
+    m_B.whileHeld(new IndexManualCommand(m_index));
+    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    m_downPovButton.whileHeld(
+        new SequentialCommandGroup(
+            new ClimbKeyUnlockCommand(m_climber),
+            new WaitCommand(0.5),
+            new ClimbRetractCommand(m_climber)));
+    m_upPovButton.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber)));
-    m_back.whenHeld(
-        new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber),
-            new ClimbKeyExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
+    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
+    m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
+    m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
   }

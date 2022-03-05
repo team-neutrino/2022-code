@@ -6,14 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ShuffleboardSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class TestShooterRPMCommand extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private ShuffleboardSubsystem m_shuffleboard;
-
   private ShooterSubsystem m_shooter;
+
   private double testRPM;
 
   /**
@@ -21,11 +19,10 @@ public class TestShooterRPMCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TestShooterRPMCommand(ShooterSubsystem p_shooter, ShuffleboardSubsystem p_shuffleboard) {
-    m_shuffleboard = p_shuffleboard;
+  public TestShooterRPMCommand(ShooterSubsystem p_shooter) {
     m_shooter = p_shooter;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter, m_shuffleboard);
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -35,7 +32,7 @@ public class TestShooterRPMCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    testRPM = m_shuffleboard.getTestRPM();
+    testRPM = m_shooter.getShuffleboardRPM();
     m_shooter.setTargetRPM(testRPM);
   }
 
