@@ -11,14 +11,17 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class TurretPIDSubsystem extends SubsystemBase {
+  DriveTrainSubsystem m_driveTrain;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 600;
   private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
   private double TURRET_MOTOR_OUTPUT = 0.5;
+  private double turretZero = 0;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
@@ -36,7 +39,12 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configReverseSoftLimitEnable(true);
   }
 
-  public void setTargetAngle(double targetAngle) {
+  public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
+
+    double yVelocity = m_driveTrain.getXVelocity();
+    double u = currentTurretAngle + turretZero;
+    double theta = u + tx;
+    double targetAngle = yVelocity * Math.sin(Math.toRadians(theta) / distance);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
 

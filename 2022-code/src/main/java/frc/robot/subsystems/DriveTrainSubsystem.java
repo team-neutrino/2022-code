@@ -86,4 +86,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public double getNavYaw() {
     return m_navX.getYaw();
   }
+
+  public double getXVelocity() {
+    return m_navX.getVelocityX();
+  }
 }
