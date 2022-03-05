@@ -185,9 +185,16 @@ public Command getAutonomousCommand() {
             .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
+/*
+    Trajectory testTrajectory = 
+        TrajectoryGenerator.generateTrajectory(List.of(
+            new Pose2d(0, 0, new Rotation2d(0)),
+            new Pose2d(1, 0, new Rotation2d(0))
+        ), config);*/
 
     // An example trajectory to follow.  All units in meters.
-    Trajectory exampleTrajectory =
+    
+    Trajectory testTrajectory =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
@@ -200,7 +207,7 @@ public Command getAutonomousCommand() {
 
     RamseteCommand ramseteCommand =
         new RamseteCommand(
-            exampleTrajectory,
+            testTrajectory,
             m_driveTrain::getPose,
             new RamseteController(TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
             new SimpleMotorFeedforward(
@@ -216,7 +223,7 @@ public Command getAutonomousCommand() {
             m_driveTrain);
 
     // Reset odometry to the starting pose of the trajectory.
-    m_driveTrain.resetOdometry(exampleTrajectory.getInitialPose());
+    m_driveTrain.resetOdometry(testTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
     return ramseteCommand.andThen(() -> m_driveTrain.setTankDriveVolts(0, 0));

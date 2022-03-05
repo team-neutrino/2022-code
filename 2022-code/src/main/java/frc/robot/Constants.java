@@ -17,8 +17,8 @@ public final class Constants {
   // subsystem dogmatic naming convention: {subsystem}_{aspect}_{}
 
   public final class ControllerConstants {
-    public static final int LEFT_JOYSTICK_ID = 0;
-    public static final int RIGHT_JOYSTICK_ID = 1;
+    public static final int LEFT_JOYSTICK_ID = 1;
+    public static final int RIGHT_JOYSTICK_ID = 0;
     public static final int XBOX_CONTROLLER_ID = 2;
   }
 
@@ -38,7 +38,8 @@ public final class Constants {
   }
 
   public static final class DigitalConstants {
-    public static final int INDEX_BEAMBREAK = 0;
+    public static final int INDEX_BEAMBREAK = 7;
     public static final int CLIMBER_SWITCH = 1;
+    public static final int COLOR_SENSOR = 2;
   }
 }
