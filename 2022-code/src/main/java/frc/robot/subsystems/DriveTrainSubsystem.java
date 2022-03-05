@@ -45,10 +45,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.restoreFactoryDefaults();
     m_leftMotor2.restoreFactoryDefaults();
 
-    m_rightMotor1.setIdleMode(IdleMode.kBrake);
-    m_rightMotor2.setIdleMode(IdleMode.kBrake);
-    m_leftMotor1.setIdleMode(IdleMode.kBrake);
-    m_leftMotor2.setIdleMode(IdleMode.kBrake);
+    m_rightMotor1.setIdleMode(IdleMode.kCoast);
+    m_rightMotor2.setIdleMode(IdleMode.kCoast);
+    m_leftMotor1.setIdleMode(IdleMode.kCoast);
+    m_leftMotor2.setIdleMode(IdleMode.kCoast);
 
     m_encoder1 = m_rightMotor1.getEncoder();
     m_encoder2 = m_rightMotor2.getEncoder();
@@ -69,15 +69,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setMotors(double m_setRightSpeed, double m_setLeftSpeed) {
     m_leftMotor1.set(m_setLeftSpeed);
-    // m_leftMotor2.set(m_setLeftSpeed); don't need with motor controller group/follow
-    m_rightMotor1.set(-m_setRightSpeed);
-    // m_rightMotor2.set(m_setRightSpeed);
   }
-
   public void resetEncoders() {
     m_encoder1.setPosition(0);
     m_encoder2.setPosition(0);
-    m_encoder3.setPosition(0);
     m_encoder4.setPosition(0);
   }
 

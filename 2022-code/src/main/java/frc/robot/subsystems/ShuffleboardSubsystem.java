@@ -53,13 +53,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_index = p_index;
     m_limelight = p_limelight;
 
-    driveStationTab();
-    debugTab();
+  /*  driveStationTab();
+    debugTab();*/
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    /*
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
@@ -88,9 +89,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_turret.setD(m_turretPID[1].getDouble(0.0));
     }
     if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
-      m_turret.setI(m_turretPID[2].getDouble(0.0));
+      m_turret.setI(m_turretPID[2].getDouble(0.0));*/
     }
-
+/*
     m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoder1());
     m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
@@ -239,6 +240,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .add("Limelight Distance", "Limelight Distance1")
             .withPosition(11, 3)
             .withSize(1, 1)
-            .getEntry();
-  }
+            .getEntry();*/
 }
+

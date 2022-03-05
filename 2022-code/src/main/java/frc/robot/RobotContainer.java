@@ -188,31 +188,30 @@ public class RobotContainer {
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
-                TrajectoryConfigConstants.K_MAX_SPEED_METERS_PER_SECOND,
-                TrajectoryConfigConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+                1, 1)
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(TrajectoryConfigConstants.K_DRIVE_KINEMATICS)
             // Apply the voltage constraint
             .addConstraint(autoVoltageConstraint);
-    /*
+    
     Trajectory testTrajectory =
         TrajectoryGenerator.generateTrajectory(List.of(
             new Pose2d(0, 0, new Rotation2d(0)),
             new Pose2d(1, 0, new Rotation2d(0))
-        ), config);*/
+        ), config);
 
     // An example trajectory to follow.  All units in meters.
-
+/*
     Trajectory testTrajectory =
         TrajectoryGenerator.generateTrajectory(
             // Start at the origin facing the +X direction
             new Pose2d(0, 0, new Rotation2d(0)),
             // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(-0.1, 0)),
+            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
             // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(-0.5, 0, new Rotation2d(0)),
+            new Pose2d(3, 0, new Rotation2d(0)),
             // Pass config
-            config);
+            config);*/
 
     RamseteCommand ramseteCommand =
         new RamseteCommand(
