@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrainSubsystem extends SubsystemBase {
-  private RelativeEncoder m_encoder1;
-  private RelativeEncoder m_encoder2;
-  private RelativeEncoder m_encoder3;
-  private RelativeEncoder m_encoder4;
+  private RelativeEncoder m_encoderL1;
+  private RelativeEncoder m_encoderL2;
+  private RelativeEncoder m_encoderR1;
+  private RelativeEncoder m_encoderR2;
 
   private CANSparkMax m_rightMotor1 =
       new CANSparkMax(Constants.CANIDConstants.DRIVETRAIN_MOTOR_RIGHT_1_ID, MotorType.kBrushless);
@@ -53,28 +53,27 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     m_rightMotors.setInverted(true);
 
-    m_encoder1 = m_rightMotor1.getEncoder();
-    m_encoder2 = m_rightMotor2.getEncoder();
-    m_encoder3 = m_leftMotor1.getEncoder();
-    m_encoder4 = m_leftMotor2.getEncoder();
+    m_encoderL1 = m_rightMotor1.getEncoder();
+    m_encoderL2 = m_rightMotor2.getEncoder();
+    m_encoderR1 = m_leftMotor1.getEncoder();
+    m_encoderR2 = m_leftMotor2.getEncoder();
 
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
 
-    m_rightMotor2.follow(m_rightMotor1);
-    m_leftMotor2.follow(m_leftMotor1);
   }
 
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_odometry.update(m_navX.getRotation2d(), m_encoder1.getPosition(), m_encoder2.getPosition());
+    m_odometry.update(m_navX.getRotation2d(), m_encoderL1.getPosition(), m_encoderR1.getPosition());
   }
 
 
   public void resetEncoders() {
-    m_encoder1.setPosition(0);
-    m_encoder2.setPosition(0);
-    m_encoder4.setPosition(0);
+    m_encoderL1.setPosition(0);
+    m_encoderL2.setPosition(0);
+    m_encoderR1.setPosition(0);
+    m_encoderR2.setPosition(0);
   }
 
   public void resetOdometry(Pose2d pose) {
@@ -88,26 +87,27 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public double getYaw() {
     return m_navX.getYaw();
+  }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
     m_leftMotors.set(m_setLeftSpeed);
     m_rightMotors.set(m_setRightSpeed);
   }
 
-  public double getDriveEncoder1() {
-    return m_encoder1.getVelocity();
+  public double getDriveEncoderL1() {
+    return m_encoderL1.getVelocity();
   }
 
-  public double getDriveEncoder2() {
-    return m_encoder2.getVelocity();
+  public double getDriveEncoderL2() {
+    return m_encoderL2.getVelocity();
   }
 
-  public double getDriveEncoder3() {
-    return m_encoder3.getVelocity();
+  public double getDriveEncoderR1() {
+    return m_encoderR1.getVelocity();
   }
 
-  public double getDriveEncoder4() {
-    return m_encoder4.getVelocity();
+  public double getDriveEncoderR2() {
+    return m_encoderR2.getVelocity();
   }
 
   public double getNavX() {
@@ -131,6 +131,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getDriveEncoder1(), getDriveEncoder3());
+    return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), getDriveEncoderR1());
   }
 }
