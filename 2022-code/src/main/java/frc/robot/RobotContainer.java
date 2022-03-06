@@ -23,6 +23,7 @@ import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.ClimbKeyUnlockCommand;
 import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
+import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
@@ -129,7 +130,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    // m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
