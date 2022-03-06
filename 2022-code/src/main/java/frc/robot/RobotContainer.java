@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
-import frc.robot.commands.Autonomi.TwoBall.TwoBallTrajectory;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -83,8 +82,6 @@ public class RobotContainer {
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
   private TriggerToBoolean m_TriggerRight =
       new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
-
-  private TwoBallTrajectory twoBallTrajectory = new TwoBallTrajectory();
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
