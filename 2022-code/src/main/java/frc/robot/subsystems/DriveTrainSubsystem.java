@@ -12,7 +12,6 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -37,7 +36,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
   private final DifferentialDriveOdometry m_odometry;
-  private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
 
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
@@ -84,9 +82,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_odometry.update(m_navX.getRotation2d(), m_encoderL1.getPosition(), m_encoderR1.getPosition());
-
-    m_diffDrive.feed();
+    m_odometry.update(
+        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     var translation = m_odometry.getPoseMeters().getTranslation();
     m_xEntry.setNumber(translation.getX());
     m_yEntry.setNumber(translation.getY());
@@ -151,9 +148,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
     m_leftMotors.setVoltage(leftVolts);
-    // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
     m_rightMotors.setVoltage(rightVolts);
-    // m_rightMotor2.setVoltage(rightVolts); same
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {

@@ -98,8 +98,6 @@ public class RobotContainer {
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
-  private final TwoBallAuton m_twoBallAuton =
-      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
@@ -110,10 +108,11 @@ public class RobotContainer {
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
-  private AutonSelector m_autonSelector =
-      new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
-  private TwoBallAuton m_TwoBallAuton =
+  private final TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
+  private final AutonSelector m_autonSelector =
+      new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
