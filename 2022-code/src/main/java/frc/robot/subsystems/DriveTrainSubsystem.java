@@ -42,10 +42,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
   private static final double K_WHEEL_CIRCUMFERENCE = Math.PI * K_WHEEL_DIAMETER;
-  private static final double K_ENCODER_CONVERSION = (K_GEAR_RATIO *K_WHEEL_CIRCUMFERENCE); 
+  private static final double K_ENCODER_CONVERSION = (K_GEAR_RATIO * K_WHEEL_CIRCUMFERENCE);
 
-  NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("translationX");
-  NetworkTableEntry m_yEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("translationY");
+  NetworkTableEntry m_xEntry =
+      NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("translationX");
+  NetworkTableEntry m_yEntry =
+      NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("translationY");
 
   private AHRS m_navX = new AHRS(SPI.Port.kMXP);
 
@@ -140,7 +142,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public double getNavZ() {
-      return m_navX.getDisplacementZ();
+    return m_navX.getDisplacementZ();
   }
 
   public double getNavYaw() {

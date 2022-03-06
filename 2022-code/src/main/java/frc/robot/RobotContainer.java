@@ -112,7 +112,8 @@ public class RobotContainer {
 
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
-    private TwoBallAuton m_TwoBallAuton = new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
+  private TwoBallAuton m_TwoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
