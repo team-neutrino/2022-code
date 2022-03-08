@@ -20,6 +20,7 @@ public class CalculateRPM {
 
     m_distanceRPMData.put(1.09, 2100.0);
     m_distanceRPMData.put(2.9, 3000.0);
+    m_distanceRPMData.put(4.0, 4000.0);
     m_distanceRPMData.put(4.6, 5000.0);
   }
 

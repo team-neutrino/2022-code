@@ -37,7 +37,6 @@ import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
@@ -92,8 +91,9 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
-  private final ShuffleboardSubsystem m_shuffleboard =
-      new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+  //   private final ShuffleboardSubsystem m_shuffleboard =
+  //       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index,
+  // m_limelight);
 
   private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
   /** Instantiate default command below */
