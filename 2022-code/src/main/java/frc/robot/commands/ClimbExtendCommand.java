@@ -20,9 +20,7 @@ public class ClimbExtendCommand extends CommandBase {
   }
 
   @Override
-  public void end(boolean interrupted) {
-    m_climberSubsystem.climberOff();
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {

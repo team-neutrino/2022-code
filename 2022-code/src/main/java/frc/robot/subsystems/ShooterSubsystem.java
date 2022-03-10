@@ -28,10 +28,10 @@ public class ShooterSubsystem extends SubsystemBase {
   private RelativeEncoder m_encoder2;
   private SparkMaxPIDController m_pidController;
   private LimelightSubsystem m_limelight;
+  private CalculateRPM RPMCalculator;
 
   private double m_targetRPM;
-
-  private CalculateRPM RPMCalculator;
+  public double m_shuffleBoardRPM = 100;
 
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
     m_limelight = p_limelight;
@@ -83,6 +83,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getTargetRPM() {
     return m_targetRPM;
+  }
+
+  public double getShuffleboardRPM() {
+    return m_shuffleBoardRPM;
+  }
+
+  public void setShuffleboardRPM(double shuffleboardRPM) {
+    m_shuffleBoardRPM = shuffleboardRPM;
   }
 
   public void turnOff() {

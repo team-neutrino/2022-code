@@ -16,14 +16,20 @@ public class ClimbRetractCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_climberSubsystem.retractClimber();
+    if (m_climberSubsystem.getLimitSwitch()) {
+      m_climberSubsystem.climberOff();
+    } else {
+      m_climberSubsystem.retractClimber();
+    }
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_climberSubsystem.keyLock();
+  }
 
   @Override
   public boolean isFinished() {
-    return m_climberSubsystem.getLimitSwitch();
+    return false;
   }
 }

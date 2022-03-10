@@ -19,7 +19,6 @@ import java.util.Map;
 public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_drivestationTab;
   private ShuffleboardTab m_debugTab;
-  private NetworkTableEntry m_setShooterRPM;
   private NetworkTableEntry m_shooterRPMGraph;
   private NetworkTableEntry m_turretPositionGraph;
   private ShooterSubsystem m_shooter;
@@ -36,7 +35,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[4];
+  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
 
   /** Creates a new shuffleboard. */
@@ -61,32 +60,46 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    /*
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
-    m_shooter.setP(m_shooterPID[0].getDouble(0.0));
-    m_shooter.setI(m_shooterPID[1].getDouble(0.0));
-    m_shooter.setD(m_shooterPID[2].getDouble(0.0));
-    m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
+
+    if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
+      m_shooter.setP(m_shooterPID[0].getDouble(0.0));
+    }
+    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getD()) {
+      m_shooter.setD(m_shooterPID[1].getDouble(0.0));
+    }
+    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getI()) {
+      m_shooter.setI(m_shooterPID[2].getDouble(0.0));
+    }
+    if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
+      m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
+    }
+    m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
-    m_turret.setP(m_turretPID[0].getDouble(0.0));
-    m_turret.setI(m_turretPID[1].getDouble(0.0));
-    m_turret.setD(m_turretPID[2].getDouble(0.0));
-
-    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoder1());
-    m_driveVariables[1].setDouble(m_drivetrain.getDriveEncoder2());
-    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
-    m_driveVariables[3].setDouble(m_drivetrain.getDriveEncoder4());
+    if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
+      m_turret.setP(m_turretPID[0].getDouble(0.0));
+    }
+    if (m_turretPID[1].getDouble(0.0) != m_turret.getD()) {
+      m_turret.setD(m_turretPID[1].getDouble(0.0));
+    }
+    if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
+      m_turret.setI(m_turretPID[2].getDouble(0.0));
+    }
+*/ 
+    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1());
+    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
 
-    m_climberVariables[0].setDouble(m_climber.getClimbEncoderOne());
-    m_climberVariables[1].setDouble(m_climber.getClimbEncoderTwo());
-    m_climberVariables[2].setBoolean(m_climber.getLimitSwitch());
+    m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
+    m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
@@ -96,10 +109,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
-  }
-
-  public double getTestRPM() {
-    return m_setShooterRPM.getDouble(0.0);
   }
 
   public void driveStationTab() {
@@ -112,7 +121,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    m_setShooterRPM = m_drivestationTab.add("Set Shooter RPM", 0).withPosition(2, 0).getEntry();
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
 
     try {
@@ -137,18 +145,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
 
-    m_shooterVariables[0] =
+    m_shooterVariables[1] =
         m_debugTab
             .add("Shooter RPM", 0)
             .withPosition(0, 0)
-            .withSize(2, 2)
-            .withWidget(BuiltInWidgets.kDial)
-            .withProperties(Map.of("min", 0, "max", 6000))
-            .getEntry();
-    m_shooterVariables[1] =
-        m_debugTab
-            .add("Shooter RPM2", 0)
-            .withPosition(2, 0)
             .withSize(2, 2)
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
@@ -172,15 +172,17 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(3, 5)
             .withSize(1, 1)
             .getEntry();
+    m_shooterPID[4] =
+        m_debugTab
+            .add("Shooter RPM Set", m_shooter.getShuffleboardRPM())
+            .withPosition(3, 5)
+            .withSize(1, 1)
+            .getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
-    m_driveVariables[1] =
-        m_debugTab.add("DriveRMotor2", 0).withPosition(8, 2).withSize(1, 1).getEntry();
     m_driveVariables[2] =
         m_debugTab.add("DriveLMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
-    m_driveVariables[3] =
-        m_debugTab.add("DriveLMotor2", 0).withPosition(5, 2).withSize(1, 1).getEntry();
     m_driveVariables[4] =
         m_debugTab.add("Navx X", "Navx X1").withPosition(8, 4).withSize(1, 1).getEntry();
     m_driveVariables[5] =
@@ -191,9 +193,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_climberVariables[0] =
         m_debugTab.add("Climber 1", 0).withPosition(9, 0).withSize(1, 1).getEntry();
     m_climberVariables[1] =
-        m_debugTab.add("Climber 2", 0).withPosition(10, 0).withSize(1, 1).getEntry();
-    m_climberVariables[2] =
-        m_debugTab.add("Climber Switch", 0).withPosition(11, 0).withSize(1, 1).getEntry();
+        m_debugTab.add("Climber Switch", false).withPosition(11, 0).withSize(1, 1).getEntry();
 
     m_turretAngle = m_debugTab.add("TurretAngle", 6).withPosition(7, 0).withSize(1, 1).getEntry();
     m_turretPositionGraph =
