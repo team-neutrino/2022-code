@@ -22,7 +22,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 1.5;
+    m_turretMotorConfig.slot0.kP = 2;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;

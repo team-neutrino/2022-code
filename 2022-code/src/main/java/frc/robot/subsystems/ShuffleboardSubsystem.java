@@ -33,7 +33,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
+  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
@@ -108,6 +108,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
+    m_limelightVariables[5].setDouble(m_limelight.getDistance());
   }
 
   public void driveStationTab() {
@@ -121,7 +122,13 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
-
+    m_limelightVariables[5] =
+        m_drivestationTab
+            .add("distance of limelight", 0)
+            .withPosition(2, 0)
+            .withSize(1, 1)
+            .getEntry();
+            
     try {
       LLFeed =
           new HttpCamera(
