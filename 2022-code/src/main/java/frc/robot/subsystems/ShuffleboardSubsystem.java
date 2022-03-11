@@ -128,7 +128,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(2, 0)
             .withSize(1, 1)
             .getEntry();
-            
+
     try {
       LLFeed =
           new HttpCamera(

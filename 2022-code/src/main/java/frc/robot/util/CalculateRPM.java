@@ -25,8 +25,6 @@ public class CalculateRPM {
     m_distanceRPMData.put(3.00, 2980.0);
     m_distanceRPMData.put(3.00, 2980.0);
     m_distanceRPMData.put(6.90, 5000.0);
-
-
   }
 
   public double InterpolateDistance() {
