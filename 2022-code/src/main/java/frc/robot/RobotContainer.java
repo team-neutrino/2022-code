@@ -143,7 +143,7 @@ public class RobotContainer {
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
+    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_BumperRight.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
