@@ -25,6 +25,7 @@ import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
@@ -143,6 +144,7 @@ public class RobotContainer {
             new ClimbExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
+    m_BumperRight.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
