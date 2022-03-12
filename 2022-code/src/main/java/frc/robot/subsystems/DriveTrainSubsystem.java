@@ -65,11 +65,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
     m_encoderL2 = m_leftMotor2.getEncoder();
-
-    m_encoderR1.setPosition(0);
-    m_encoderR2.setPosition(0);
-    m_encoderL1.setPosition(0);
-    m_encoderL1.setPosition(0);
+    resetEncoders();
 
     m_encoderR1.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderR2.setPositionConversionFactor(K_ENCODER_CONVERSION);
