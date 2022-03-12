@@ -23,6 +23,7 @@ import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.ClimbKeyUnlockCommand;
 import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
+import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
@@ -86,7 +87,6 @@ public class RobotContainer {
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
-
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
@@ -99,7 +99,6 @@ public class RobotContainer {
 
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
-
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
@@ -111,8 +110,7 @@ public class RobotContainer {
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-  private AATwoBallAuton m_AATwoBallAuton =
-      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+    private AATwoBallAuton m_AATwoBallAuton = new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
@@ -129,7 +127,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    // m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
@@ -164,7 +162,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
     return m_twoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
