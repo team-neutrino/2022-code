@@ -66,6 +66,16 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_encoderL1 = m_leftMotor1.getEncoder();
     m_encoderL2 = m_leftMotor2.getEncoder();
 
+    m_encoderR1.setPosition(0);
+    m_encoderR2.setPosition(0);
+    m_encoderL1.setPosition(0);
+    m_encoderL1.setPosition(0);
+
+    m_encoderR1.setPositionConversionFactor(K_ENCODER_CONVERSION);
+    m_encoderR2.setPositionConversionFactor(K_ENCODER_CONVERSION);
+    m_encoderL1.setPositionConversionFactor(K_ENCODER_CONVERSION);
+    m_encoderL2.setPositionConversionFactor(K_ENCODER_CONVERSION);
+
     m_encoderR1.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
     m_encoderR2.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
     m_encoderL1.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
@@ -77,12 +87,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_odometry.update(m_navX.getRotation2d(), m_encoderL1.getPosition(), m_encoderR1.getPosition());
+    m_odometry.update(
+        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
+    // var translation = m_odometry.getPoseMeters().getTranslation();
+    m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
+    m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
+    System.out.println("left encoder" + m_encoderL1.getPosition());
+    System.out.println("right endoer" + m_encoderR1.getPosition());
 
-    m_diffDrive.feed();
-    var translation = m_odometry.getPoseMeters().getTranslation();
-    m_xEntry.setNumber(translation.getX());
-    m_yEntry.setNumber(translation.getY());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
@@ -150,6 +162,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), getDriveEncoderR1());
+    return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), -getDriveEncoderR1());
   }
 }
