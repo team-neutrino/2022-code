@@ -113,7 +113,8 @@ public class RobotContainer {
 
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
-    private TwoBallAuton m_TwoBallAuton = new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
+  private TwoBallAuton m_TwoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
@@ -167,6 +168,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
 
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_twoBallAuton.andThen(()->m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_twoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

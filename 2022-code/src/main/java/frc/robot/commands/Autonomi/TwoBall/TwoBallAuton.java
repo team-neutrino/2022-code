@@ -4,7 +4,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -47,7 +46,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
-        new ParallelCommandGroup(new IntakeCommand(p_intake), twoBall0Command)
-        ); // tankDriveVolts(0, 0) called in robot container
+        new ParallelCommandGroup(
+            new IntakeCommand(p_intake),
+            twoBall0Command)); // tankDriveVolts(0, 0) called in robot container
   }
 }

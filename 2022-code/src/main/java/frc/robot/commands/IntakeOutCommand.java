@@ -11,6 +11,7 @@ import frc.robot.subsystems.IntakeSubSystem;
 public class IntakeOutCommand extends CommandBase {
   /** Creates a new IntakeOutCommand. */
   IntakeSubSystem m_intake;
+
   Timer m_timer;
 
   public IntakeOutCommand(IntakeSubSystem p_intake) {
