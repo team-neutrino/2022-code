@@ -132,12 +132,12 @@ public class RobotContainer {
     /** xbox button mapping */
     m_B.whileHeld(new IndexManualCommand(m_index));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_downPovButton.whileHeld(
+    m_back.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbRetractCommand(m_climber)));
-    m_upPovButton.whileHeld(
+    m_start.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
