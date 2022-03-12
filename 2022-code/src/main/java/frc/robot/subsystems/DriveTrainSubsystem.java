@@ -149,9 +149,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
     m_leftMotors.setVoltage(leftVolts);
-    // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
     m_rightMotors.setVoltage(rightVolts);
-    // m_rightMotor2.setVoltage(rightVolts); same
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
