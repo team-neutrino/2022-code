@@ -87,13 +87,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
+    m_diffDrive.feed();
     m_odometry.update(
         Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
     // var translation = m_odometry.getPoseMeters().getTranslation();
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
-    System.out.println("left encoder" + m_encoderL1.getPosition());
-    System.out.println("right endoer" + m_encoderR1.getPosition());
+    // System.out.println("left encoder" + m_encoderL1.getPosition());
+    // System.out.println("right endoer" + m_encoderR1.getPosition());
 
   }
 

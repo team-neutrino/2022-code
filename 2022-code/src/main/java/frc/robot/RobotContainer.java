@@ -167,6 +167,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
 
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_twoBallAuton;
+    return m_twoBallAuton.andThen(()->m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
