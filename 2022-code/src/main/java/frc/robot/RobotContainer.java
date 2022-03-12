@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
-import frc.robot.commands.Autonomi.TwoBall.TwoBallTrajectory;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -84,8 +84,6 @@ public class RobotContainer {
   private TriggerToBoolean m_TriggerRight =
       new TriggerToBoolean(m_OperatorController, Axis.kRightTrigger.value);
 
-  private TwoBallTrajectory twoBallTrajectory = new TwoBallTrajectory();
-
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
 
@@ -99,8 +97,6 @@ public class RobotContainer {
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
-  private final TwoBallAuton m_twoBallAuton =
-      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
@@ -112,8 +108,11 @@ public class RobotContainer {
       new ShooterDefaultCommand(m_shooter);
 
   private AutonSelector m_autonSelector =
-      new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
-    private TwoBallAuton m_TwoBallAuton = new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
+      new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  private TwoBallAuton m_twoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  private AATwoBallAuton m_AATwoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
@@ -167,6 +166,6 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
 
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_twoBallAuton.andThen(()->m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_twoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

@@ -60,7 +60,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    /*
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
@@ -91,7 +90,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
       m_turret.setI(m_turretPID[2].getDouble(0.0));
     }
-*/ 
+
     m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1());
     m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
