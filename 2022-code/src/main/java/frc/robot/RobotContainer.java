@@ -25,6 +25,7 @@ import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
@@ -131,18 +132,19 @@ public class RobotContainer {
     /** xbox button mapping */
     m_B.whileHeld(new IndexManualCommand(m_index));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_downPovButton.whileHeld(
+    m_back.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbRetractCommand(m_climber)));
-    m_upPovButton.whileHeld(
+    m_start.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 750));
+    m_BumperLeft.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
+    m_BumperRight.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerRight.whileActiveContinuous(new ShooterInterpolateSpeed(m_shooter));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
