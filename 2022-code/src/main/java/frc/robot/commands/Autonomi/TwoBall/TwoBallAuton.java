@@ -7,6 +7,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
+import frc.robot.commands.AutonIndexCommand;
 import frc.robot.commands.AutonShootCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -51,8 +52,8 @@ public class TwoBallAuton extends SequentialCommandGroup {
 
     addCommands(
         new SequentialCommandGroup(
-            new AutonShootCommand(p_shooter, p_index, 2500, 4.5),
-            twoBall0Command.alongWith(new IntakeCommand(p_intake)),
-            new AutonShootCommand(p_shooter, p_index, 2500, 4.5)));
+            new AutonShootCommand(p_shooter, p_index, 2100, 4.5),
+            twoBall0Command.alongWith(new AutonIndexCommand(p_intake, 4)),
+            new AutonShootCommand(p_shooter, p_index, 2300, 4.5)));
   }
 }

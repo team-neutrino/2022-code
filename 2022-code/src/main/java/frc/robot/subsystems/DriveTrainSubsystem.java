@@ -91,7 +91,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // called once per scheduler run if you didn't already know
     m_diffDrive.feed();
     m_odometry.update(
-        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
+        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     // var translation = m_odometry.getPoseMeters().getTranslation();
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
@@ -141,6 +141,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return m_encoderL2.getVelocity();
   }
 
+  public double getDriveEncoderR1Position() {
+    return m_encoderR1.getPosition();
+  }
+  
+  public double getDriveEncoderL1Position() {
+    return m_encoderL1.getPosition();
+  }
+
   public double getNavX() {
     return m_navX.getDisplacementX();
   }
@@ -158,9 +166,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotors.setVoltage(leftVolts);
+    m_leftMotors.setVoltage(-leftVolts);
     // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
-    m_rightMotors.setVoltage(rightVolts);
+    m_rightMotors.setVoltage(-rightVolts);
     // m_rightMotor2.setVoltage(rightVolts); same
   }
 

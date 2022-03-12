@@ -91,8 +91,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_turret.setI(m_turretPID[2].getDouble(0.0));
     }
 
-    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1());
-    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1());
+    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
+    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1Position());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));

@@ -87,6 +87,7 @@ public class RobotContainer {
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
+
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
@@ -99,6 +100,7 @@ public class RobotContainer {
 
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
+
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
@@ -110,7 +112,8 @@ public class RobotContainer {
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-    private AATwoBallAuton m_AATwoBallAuton = new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  private AATwoBallAuton m_AATwoBallAuton =
+      new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_compressor.enableDigital();
@@ -134,6 +137,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
+    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 2100));
     m_B.whileHeld(new IndexManualCommand(m_index));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_back.whileHeld(
