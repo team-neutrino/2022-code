@@ -69,10 +69,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
     }
     if (m_shooterPID[1].getDouble(0.0) != m_shooter.getI()) {
-      m_shooter.setD(m_shooterPID[1].getDouble(0.0));
+      m_shooter.setI(m_shooterPID[1].getDouble(0.0));
     }
     if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
-      m_shooter.setI(m_shooterPID[2].getDouble(0.0));
+      m_shooter.setD(m_shooterPID[2].getDouble(0.0));
     }
     if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
