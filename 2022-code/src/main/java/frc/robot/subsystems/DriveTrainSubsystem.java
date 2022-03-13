@@ -67,11 +67,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
     m_encoderL2 = m_leftMotor2.getEncoder();
-
-    m_encoderR1.setPosition(0);
-    m_encoderR2.setPosition(0);
-    m_encoderL1.setPosition(0);
-    m_encoderL1.setPosition(0);
+    resetEncoders();
 
     m_encoderR1.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderR2.setPositionConversionFactor(K_ENCODER_CONVERSION);
@@ -91,13 +87,9 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // called once per scheduler run if you didn't already know
     m_diffDrive.feed();
     m_odometry.update(
-        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
-    // var translation = m_odometry.getPoseMeters().getTranslation();
+        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
-    // System.out.println("left encoder" + m_encoderL1.getPosition());
-    // System.out.println("right endoer" + m_encoderR1.getPosition());
-
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
@@ -166,10 +158,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotors.setVoltage(-leftVolts);
-    // m_leftMotor2.setVoltage(leftVolts); don't need if set follow?
-    m_rightMotors.setVoltage(-rightVolts);
-    // m_rightMotor2.setVoltage(rightVolts); same
+    m_leftMotors.setVoltage(leftVolts);
+    m_rightMotors.setVoltage(rightVolts);
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
