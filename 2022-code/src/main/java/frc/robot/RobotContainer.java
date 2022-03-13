@@ -15,13 +15,13 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
 import frc.robot.commands.ClimbKeyUnlockCommand;
 import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
-import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
@@ -96,7 +96,6 @@ public class RobotContainer {
   private final ShuffleboardSubsystem m_shuffleboard =
       new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
 
-  private final AutonSelector m_autonSelector = new AutonSelector(m_limelight);
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
@@ -106,6 +105,11 @@ public class RobotContainer {
       new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
+
+  private AutonSelector m_autonSelector =
+      new AutonSelector(m_driveTrain, m_turret, m_intake, m_shooter, m_limelight);
+  private TwoBallAuton m_TwoBallAuton =
+      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_shooter);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -123,7 +127,6 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
@@ -158,6 +161,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autonSelector.getChooserSelect();
+    m_driveTrain.resetOdometry(m_driveTrain.getPose());
+    return m_TwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
