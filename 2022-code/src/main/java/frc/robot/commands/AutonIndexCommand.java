@@ -10,7 +10,6 @@ import frc.robot.subsystems.IntakeSubSystem;
 
 /** An example command that uses an example subsystem. */
 public class AutonIndexCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSubSystem m_intake;
   private Timer m_timer;
   private double m_duration;

@@ -11,9 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 /** An example command that uses an example subsystem. */
 public class AAAutonShootCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private ShooterSubsystem m_shooter;
-
   private IndexSubsystem m_index;
   private Timer m_timer;
   private double m_duration;
@@ -25,7 +23,7 @@ public class AAAutonShootCommand extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public AAAutonShootCommand(
-      ShooterSubsystem p_shooter, IndexSubsystem p_index, double p_duration) {
+    ShooterSubsystem p_shooter, IndexSubsystem p_index, double p_duration) {
     m_shooter = p_shooter;
     m_index = p_index;
     m_timer = new Timer();
