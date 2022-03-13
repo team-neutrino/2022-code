@@ -23,7 +23,7 @@ public class AAAutonShootCommand extends CommandBase {
    * @param subsystem The subsystem used by this command.
    */
   public AAAutonShootCommand(
-    ShooterSubsystem p_shooter, IndexSubsystem p_index, double p_duration) {
+      ShooterSubsystem p_shooter, IndexSubsystem p_index, double p_duration) {
     m_shooter = p_shooter;
     m_index = p_index;
     m_timer = new Timer();

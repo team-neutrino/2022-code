@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -24,7 +22,6 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-      System.out.println("limelight distance" + getDistance());
     // This method will be called once per scheduler run
   }
 

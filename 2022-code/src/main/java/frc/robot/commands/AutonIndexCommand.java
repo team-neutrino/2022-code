@@ -30,7 +30,7 @@ public class AutonIndexCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      m_timer.start();
+    m_timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -52,9 +52,8 @@ public class AutonIndexCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(m_timer.get() >= m_duration)
-    {
-        return true;
+    if (m_timer.get() >= m_duration) {
+      return true;
     }
     return false;
   }
