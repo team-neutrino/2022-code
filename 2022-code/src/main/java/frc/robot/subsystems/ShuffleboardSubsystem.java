@@ -84,11 +84,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
       m_turret.setP(m_turretPID[0].getDouble(0.0));
     }
-    if (m_turretPID[1].getDouble(0.0) != m_turret.getD()) {
-      m_turret.setD(m_turretPID[1].getDouble(0.0));
+    if (m_turretPID[1].getDouble(0.0) != m_turret.getI()) {
+      m_turret.setI(m_turretPID[1].getDouble(0.0));
     }
-    if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
-      m_turret.setI(m_turretPID[2].getDouble(0.0));
+    if (m_turretPID[2].getDouble(0.0) != m_turret.getD()) {
+      m_turret.setD(m_turretPID[2].getDouble(0.0));
     }
 
     m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
