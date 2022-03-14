@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.Trajectories.TestTrajectory;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -23,13 +24,14 @@ public class AutonSelector {
       DriveTrainSubsystem p_drive,
       TurretPIDSubsystem p_turret,
       IntakeSubSystem p_intake,
+      IndexSubsystem p_index,
       ShooterSubsystem p_shooter,
       LimelightSubsystem p_limelight) {
     m_chooser = new SendableChooser<>();
     m_limelight = p_limelight;
     m_testTraj = new TestTrajectory(m_limelight);
     m_secondTestTraj = new TestTrajectory(m_limelight);
-    m_twoBallAuton = new TwoBallAuton(p_drive, p_turret, p_intake, p_shooter);
+    m_twoBallAuton = new TwoBallAuton(p_drive, p_turret, p_intake, p_index, p_shooter, p_limelight);
 
     m_chooser.setDefaultOption("Basic Boy", m_testTraj);
     m_chooser.addOption("Secondary Basic Boy", m_secondTestTraj);

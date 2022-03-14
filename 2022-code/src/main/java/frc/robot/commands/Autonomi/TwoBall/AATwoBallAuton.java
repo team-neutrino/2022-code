@@ -7,8 +7,9 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
-import frc.robot.commands.AutonIndexCommand;
-import frc.robot.commands.AutonShootCommand;
+import frc.robot.commands.AAAutonShootCommand;
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -19,11 +20,11 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TwoBallAuton extends SequentialCommandGroup {
+public class AATwoBallAuton extends SequentialCommandGroup {
   /** Creates a new TenBallAuton. */
   private Trajectory m_twoBall0;
 
-  public TwoBallAuton(
+  public AATwoBallAuton(
       DriveTrainSubsystem p_drive,
       TurretPIDSubsystem p_turret,
       IntakeSubSystem p_intake,
@@ -50,9 +51,10 @@ public class TwoBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
-        new SequentialCommandGroup(
-            new AutonShootCommand(p_shooter, p_index, 2100, 4.5),
-            twoBall0Command.alongWith(new AutonIndexCommand(p_intake, 4)),
-            new AutonShootCommand(p_shooter, p_index, 2300, 4.5)));
+        new TurretAutoAimCommand(p_turret, p_limelight)
+            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)),
+        twoBall0Command.alongWith(new IntakeCommand(p_intake)),
+        new TurretAutoAimCommand(p_turret, p_limelight)
+            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)));
   }
 }
