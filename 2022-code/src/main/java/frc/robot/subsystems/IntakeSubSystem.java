@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.AnalogOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -57,13 +56,11 @@ public class IntakeSubSystem extends SubsystemBase {
     m_IntakeFeedMotor.set(0);
   }
 
-  private double getPressureSensorOutputVoltage()
-  {
+  private double getPressureSensorOutputVoltage() {
     return m_PressureSensor.getVoltage();
   }
 
-  public double getPressure()
-  {
-    return 250*(getPressureSensorOutputVoltage()/PRESSURE_SENSOR_INPUT_VOLTAGE)-25;
+  public double getPressure() {
+    return 250 * (getPressureSensorOutputVoltage() / PRESSURE_SENSOR_INPUT_VOLTAGE) - 25;
   }
 }
