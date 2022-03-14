@@ -133,6 +133,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return m_encoderL2.getVelocity();
   }
 
+  public double getDriveEncoderR1Position() {
+    return m_encoderR1.getPosition();
+  }
+
+  public double getDriveEncoderL1Position() {
+    return m_encoderL1.getPosition();
+  }
+
   public double getNavX() {
     return m_navX.getDisplacementX();
   }
