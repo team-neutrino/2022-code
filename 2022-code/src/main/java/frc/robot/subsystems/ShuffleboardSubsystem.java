@@ -34,7 +34,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
+  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
@@ -74,11 +74,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
     }
-    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getD()) {
-      m_shooter.setD(m_shooterPID[1].getDouble(0.0));
+    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getI()) {
+      m_shooter.setI(m_shooterPID[1].getDouble(0.0));
     }
-    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getI()) {
-      m_shooter.setI(m_shooterPID[2].getDouble(0.0));
+    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
+      m_shooter.setD(m_shooterPID[2].getDouble(0.0));
     }
     if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
@@ -90,15 +90,15 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
       m_turret.setP(m_turretPID[0].getDouble(0.0));
     }
-    if (m_turretPID[1].getDouble(0.0) != m_turret.getD()) {
-      m_turret.setD(m_turretPID[1].getDouble(0.0));
+    if (m_turretPID[1].getDouble(0.0) != m_turret.getI()) {
+      m_turret.setI(m_turretPID[1].getDouble(0.0));
     }
-    if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
-      m_turret.setI(m_turretPID[2].getDouble(0.0));
+    if (m_turretPID[2].getDouble(0.0) != m_turret.getD()) {
+      m_turret.setD(m_turretPID[2].getDouble(0.0));
     }
 
-    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoder1());
-    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
+    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
+    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1Position());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
@@ -114,6 +114,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
+    m_limelightVariables[5].setDouble(m_limelight.getDistance());
   }
 
   public void driveStationTab() {
@@ -128,6 +129,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .getEntry();
     
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
+    m_limelightVariables[5] =
+        m_drivestationTab
+            .add("distance of limelight", 0)
+            .withPosition(2, 0)
+            .withSize(1, 1)
+            .getEntry();
 
     try {
       LLFeed =
