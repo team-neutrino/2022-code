@@ -9,9 +9,8 @@ import java.util.*;
 
 /** Add your docs here. */
 public class CalculateRPM {
-
+  private final int TARMAC_RPM = 2100;
   TreeMap<Double, Double> m_distanceRPMData = new TreeMap<Double, Double>();
-
   LimelightSubsystem m_limelight;
 
   public CalculateRPM(LimelightSubsystem p_limelight) {
@@ -35,28 +34,32 @@ public class CalculateRPM {
     double rpm = 0.0;
 
     double limeLightDistance = m_limelight.getDistance();
-
-    if (limeLightDistance <= m_distanceRPMData.firstKey()) {
-      return m_distanceRPMData.get(m_distanceRPMData.firstKey());
-    } else if (limeLightDistance >= m_distanceRPMData.lastKey()) {
-      return m_distanceRPMData.get(m_distanceRPMData.lastKey());
-    } else {
-      for (Double a : m_distanceRPMData.keySet()) {
-        if (a >= limeLightDistance) {
-          largerDistance = a;
-          break;
-        } else {
-          smallerDistance = a;
+    if (m_limelight.getTv()) {
+      if (limeLightDistance <= m_distanceRPMData.firstKey()) {
+        return m_distanceRPMData.get(m_distanceRPMData.firstKey());
+      } else if (limeLightDistance >= m_distanceRPMData.lastKey()) {
+        return m_distanceRPMData.get(m_distanceRPMData.lastKey());
+      } else {
+        for (Double a : m_distanceRPMData.keySet()) {
+          if (a >= limeLightDistance) {
+            largerDistance = a;
+            break;
+          } else {
+            smallerDistance = a;
+          }
         }
       }
+
+      rpm =
+          m_distanceRPMData.get(smallerDistance)
+              + ((limeLightDistance - smallerDistance))
+                  * ((m_distanceRPMData.get(largerDistance)
+                          - m_distanceRPMData.get(smallerDistance))
+                      / (largerDistance - smallerDistance));
+
+      return rpm;
+    } else {
+      return TARMAC_RPM;
     }
-
-    rpm =
-        m_distanceRPMData.get(smallerDistance)
-            + ((limeLightDistance - smallerDistance))
-                * ((m_distanceRPMData.get(largerDistance) - m_distanceRPMData.get(smallerDistance))
-                    / (largerDistance - smallerDistance));
-
-    return rpm;
   }
 }
