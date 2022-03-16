@@ -38,7 +38,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry[] m_colors = new NetworkTableEntry[2]; 
+  private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -127,7 +127,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    
+
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
     m_limelightVariables[5] =
         m_drivestationTab

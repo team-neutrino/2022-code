@@ -7,10 +7,8 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
-
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
-import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ColorSubsystem extends SubsystemBase {
@@ -23,11 +21,11 @@ public class ColorSubsystem extends SubsystemBase {
 
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
-  
+
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
     m_colorMatcher.addColorMatch(K_BLUE);
-    m_colorMatcher.addColorMatch(K_RED); 
+    m_colorMatcher.addColorMatch(K_RED);
   }
 
   @Override
@@ -35,25 +33,20 @@ public class ColorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     Color detectedColor = getSensorColor();
     m_isBlue = (isBlue(detectedColor));
-    System.out.println(m_isBlue);
   }
 
-  public boolean getIsBlue()
-  {
+  public boolean getIsBlue() {
     return m_isBlue;
   }
 
-  public Color getSensorColor()
-  {
+  public Color getSensorColor() {
     return m_colorSensor.getColor();
   }
 
-  public boolean isBlue(Color detectedColor)
-  {
+  public boolean isBlue(Color detectedColor) {
     ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
     boolean isBlue = true;
-    if(matchResult.color == K_RED)
-      isBlue = false;
+    if (matchResult.color == K_RED) isBlue = false;
     return isBlue;
   }
 }
