@@ -21,13 +21,13 @@ public class ColorSubsystem extends SubsystemBase {
   private ColorMatch m_colorMatcher = new ColorMatch();
   private boolean m_isBlue;
 
-  private final Color K_RED = new Color(0.9, 0, 0);
-  private final Color K_BLUE = new Color(0, 0.9, 0);
+  private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
+  private final Color K_RED = new Color(0.898, 0.277, 0.172);
   
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
-    m_colorMatcher.addColorMatch(K_RED);
-    m_colorMatcher.addColorMatch(K_BLUE); 
+    m_colorMatcher.addColorMatch(K_BLUE);
+    m_colorMatcher.addColorMatch(K_RED); 
   }
 
   @Override
