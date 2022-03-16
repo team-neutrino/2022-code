@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
@@ -37,8 +38,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private MotorControllerGroup m_leftMotors = new MotorControllerGroup(m_leftMotor1, m_leftMotor2);
 
   private final DifferentialDriveOdometry m_odometry;
-  private final DifferentialDrive m_diffDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
-
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
   private static final double K_WHEEL_CIRCUMFERENCE = Math.PI * K_WHEEL_DIAMETER;
@@ -62,13 +61,12 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kBrake);
     m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_rightMotors.setInverted(true);
+    m_leftMotors.setInverted(true);
     m_encoderR1 = m_rightMotor1.getEncoder();
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
     m_encoderL2 = m_leftMotor2.getEncoder();
-    resetEncoders();
-
+   
     m_encoderR1.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderR2.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderL1.setPositionConversionFactor(K_ENCODER_CONVERSION);
@@ -80,16 +78,17 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_encoderL2.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
 
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
+    resetOdometry(m_odometry.getPoseMeters());
   }
 
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    m_diffDrive.feed();
     m_odometry.update(
-        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
+        Rotation2d.fromDegrees(getYaw()), -m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
+    System.out.println("odometry pose" + m_odometry.getPoseMeters());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
@@ -106,6 +105,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
+    m_navX.reset();
     m_odometry.resetPosition(pose, Rotation2d.fromDegrees(getYaw()));
   }
 

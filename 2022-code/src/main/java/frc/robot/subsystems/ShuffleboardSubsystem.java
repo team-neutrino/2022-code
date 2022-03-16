@@ -186,9 +186,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .getEntry();
 
     m_driveVariables[0] =
-        m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
+        m_debugTab.add("DriveLMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
     m_driveVariables[2] =
-        m_debugTab.add("DriveLMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
+        m_debugTab.add("DriveRMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
     m_driveVariables[4] =
         m_debugTab.add("Navx X", "Navx X1").withPosition(8, 4).withSize(1, 1).getEntry();
     m_driveVariables[5] =
