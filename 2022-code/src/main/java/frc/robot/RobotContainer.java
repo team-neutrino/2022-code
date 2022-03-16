@@ -35,6 +35,7 @@ import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -95,8 +96,10 @@ public class RobotContainer {
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
+  private final ColorSubsystem m_color = new ColorSubsystem();
   private final ShuffleboardSubsystem m_shuffleboard =
-      new ShuffleboardSubsystem(m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_limelight);
+      new ShuffleboardSubsystem(
+          m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_color, m_limelight);
 
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
