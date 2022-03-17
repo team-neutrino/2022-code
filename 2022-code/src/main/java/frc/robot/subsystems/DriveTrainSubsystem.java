@@ -61,7 +61,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
     m_leftMotor1.setInverted(true);
     m_leftMotor2.setInverted(true);
-    
+
     m_encoderR1 = m_rightMotor1.getEncoder();
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();

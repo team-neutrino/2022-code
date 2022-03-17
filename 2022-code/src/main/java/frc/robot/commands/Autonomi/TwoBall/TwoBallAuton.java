@@ -50,9 +50,9 @@ public class TwoBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
-    new SequentialCommandGroup(
-        new AutonShootCommand(p_shooter, p_index, 2100, 4.5),
-        twoBall0Command.alongWith(new AutonIndexCommand(p_intake, 4)),
-        new AutonShootCommand(p_shooter, p_index, 2300, 2)));
+        new SequentialCommandGroup(
+            new AutonShootCommand(p_shooter, p_index, 2100, 4.5),
+            twoBall0Command.alongWith(new AutonIndexCommand(p_intake, 4)),
+            new AutonShootCommand(p_shooter, p_index, 2300, 2)));
   }
 }
