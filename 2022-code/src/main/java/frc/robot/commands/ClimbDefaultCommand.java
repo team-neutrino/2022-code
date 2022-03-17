@@ -18,6 +18,7 @@ public class ClimbDefaultCommand extends CommandBase {
   @Override
   public void execute() {
     m_climberSubsystem.climberOff();
+    m_climberSubsystem.keyLock();
   }
 
   @Override

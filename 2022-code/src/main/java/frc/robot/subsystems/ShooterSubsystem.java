@@ -16,11 +16,10 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.3;
-
+  private final double WHEEL_P = 0.28;
   private final double WHEEL_I = 0;
   private final double WHEEL_D = 0;
-  private final double WHEEL_FF = 0.2;
+  private final double WHEEL_FF = 0.199;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
