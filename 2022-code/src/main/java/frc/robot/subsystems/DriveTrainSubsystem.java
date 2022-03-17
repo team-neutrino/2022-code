@@ -62,7 +62,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kBrake);
     m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_rightMotors.setInverted(true);
+    m_leftMotors.setInverted(true);
     m_encoderR1 = m_rightMotor1.getEncoder();
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
@@ -87,7 +87,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // called once per scheduler run if you didn't already know
     m_diffDrive.feed();
     m_odometry.update(
-        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), -m_encoderR1.getPosition());
+        Rotation2d.fromDegrees(getYaw()), -m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
   }
