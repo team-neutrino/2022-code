@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.ColorSensorV3;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
@@ -13,7 +12,6 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -61,12 +59,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setIdleMode(IdleMode.kBrake);
     m_leftMotor2.setIdleMode(IdleMode.kBrake);
 
-    m_leftMotors.setInverted(true);
+    m_leftMotor1.setInverted(true);
+    m_leftMotor2.setInverted(true);
+    
     m_encoderR1 = m_rightMotor1.getEncoder();
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
     m_encoderL2 = m_leftMotor2.getEncoder();
-   
+
     m_encoderR1.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderR2.setPositionConversionFactor(K_ENCODER_CONVERSION);
     m_encoderL1.setPositionConversionFactor(K_ENCODER_CONVERSION);
@@ -85,15 +85,15 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public void periodic() {
     // called once per scheduler run if you didn't already know
     m_odometry.update(
-        Rotation2d.fromDegrees(getYaw()), -m_encoderL1.getPosition(), m_encoderR1.getPosition());
+        Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
     System.out.println("odometry pose" + m_odometry.getPoseMeters());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
-    m_leftMotors.set(m_setLeftSpeed);
-    m_rightMotors.set(m_setRightSpeed);
+    m_leftMotors.set(-m_setLeftSpeed);
+    m_rightMotors.set(-m_setRightSpeed);
   }
 
   public void resetEncoders() {
@@ -163,6 +163,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
-    return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), -getDriveEncoderR1());
+    return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), getDriveEncoderR1());
   }
 }
