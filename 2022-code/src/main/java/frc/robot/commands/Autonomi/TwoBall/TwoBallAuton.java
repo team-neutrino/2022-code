@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
@@ -53,6 +54,7 @@ public class TwoBallAuton extends SequentialCommandGroup {
         new SequentialCommandGroup(
             new AutonShootCommand(p_shooter, p_index, 2100, 4.5),
             twoBall0Command.alongWith(new AutonIndexCommand(p_intake, 4)),
+            new InstantCommand(()->p_drive.setTankDriveVolts(0.0, 0.0), p_drive),
             new AutonShootCommand(p_shooter, p_index, 2300, 4.5)));
   }
 }
