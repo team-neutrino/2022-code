@@ -5,11 +5,15 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.MotorFeedbackSensor;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.util.CalculateRPM;
@@ -23,11 +27,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
-  private RelativeEncoder m_encoder1;
-  private RelativeEncoder m_encoder2;
   private SparkMaxPIDController m_pidController;
+  private PIDController m_newPIDController;
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
+  private Encoder m_encoder;
 
   private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
@@ -40,6 +44,7 @@ public class ShooterSubsystem extends SubsystemBase {
         new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_1_ID, MotorType.kBrushless);
     m_wheelMotor2 =
         new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_2_ID, MotorType.kBrushless);
+    m_encoder = new Encoder(4, 3);
     m_wheelMotor.restoreFactoryDefaults();
     m_wheelMotor2.restoreFactoryDefaults();
     m_wheelMotor2.follow(m_wheelMotor);
@@ -48,16 +53,17 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
-
-    m_encoder1 = m_wheelMotor.getEncoder();
-    m_encoder2 = m_wheelMotor2.getEncoder();
-    m_pidController = m_wheelMotor.getPIDController();
-    m_pidController.setFeedbackDevice(m_encoder1);
-    m_pidController.setP(WHEEL_P / 1000.0);
-    m_pidController.setI(WHEEL_I / 1000.0);
-    m_pidController.setD(WHEEL_D / 1000.0);
-    m_pidController.setFF(WHEEL_FF / 1000.0);
-    m_pidController.setOutputRange(.1, 1);
+    m_newPIDController = new PIDController(.3, 0, 0);
+    m_newPIDController.setTolerance(50);
+    // m_encoder1 = m_wheelMotor.getEncoder();
+    // m_encoder2 = m_wheelMotor2.getEncoder();
+    // m_pidController = m_wheelMotor.getPIDController();
+    // m_pidController.setFeedbackDevice(m_encoder);
+    // m_pidController.setP(WHEEL_P / 1000.0);
+    // m_pidController.setI(WHEEL_I / 1000.0);
+    // m_pidController.setD(WHEEL_D / 1000.0);
+    // m_pidController.setFF(WHEEL_FF / 1000.0);
+    // m_pidController.setOutputRange(.1, 1);
   }
 
   @Override
@@ -67,14 +73,28 @@ public class ShooterSubsystem extends SubsystemBase {
     return RPMCalculator.InterpolateDistance();
   }
 
-  public double getRPM1() {
-    return m_encoder1.getVelocity();
+  // public double getRPM1() {
+  //   return m_encoder1.getVelocity();
+  // }
+
+  // public double getRPM2() {
+  //   return m_encoder2.getVelocity();
+  // }
+
+  public void setVelocity(double velocity)
+  {
+    m_newPIDController.setSetpoint(velocity);
   }
 
-  public double getRPM2() {
-    return m_encoder2.getVelocity();
+  public void getVelocity(double velocity)
+  {
+    m_newPIDController.setP(velocity);
   }
 
+  public boolean atVelocity()
+  {
+    return m_newPIDController.atSetpoint();
+  }
   public void setTargetRPM(double p_targetRPM) {
     m_targetRPM = p_targetRPM;
     m_pidController.setReference(m_targetRPM, ControlType.kVelocity);

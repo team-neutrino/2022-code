@@ -66,7 +66,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
-    m_shooterVariables[1].setDouble(m_shooter.getRPM2());
+    // m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(!m_color.getIsBlue());
