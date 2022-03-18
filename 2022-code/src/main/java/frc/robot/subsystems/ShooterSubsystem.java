@@ -10,11 +10,14 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxPIDController;
+
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.util.CalculateRPM;
 
-public class ShooterSubsystem extends SubsystemBase {
+public class ShooterSubsystem extends PIDSubystem
+{
   /** Shooter Constants */
   private final double WHEEL_P = 0.3;
 
@@ -24,9 +27,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
-  private RelativeEncoder m_encoder1;
-  private RelativeEncoder m_encoder2;
-  private SparkMaxPIDController m_pidController;
+  private Encoder m_encoder;
+  private Pidcontroller m_pidController;
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
@@ -50,19 +52,19 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
 
-    m_encoder1 = m_wheelMotor.getEncoder();
-    m_encoder2 = m_wheelMotor2.getEncoder();
-    m_pidController = m_wheelMotor.getPIDController();
-    m_pidController.setFeedbackDevice(m_encoder1);
-    m_pidController.setP(WHEEL_P / 1000.0);
-    m_pidController.setI(WHEEL_I / 1000.0);
-    m_pidController.setD(WHEEL_D / 1000.0);
-    m_pidController.setFF(WHEEL_FF / 1000.0);
-    m_pidController.setOutputRange(.1, 1);
+    m_encoder1 = new Encoder(4, 3);
+    m_pidController = new PidController()
+    // m_pidController.setP(WHEEL_P / 1000.0);
+    // m_pidController.setI(WHEEL_I / 1000.0);
+    // m_pidController.setD(WHEEL_D / 1000.0);
+    // m_pidController.setFF(WHEEL_FF / 1000.0);
+    // m_pidController.setOutputRange(.1, 1);
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    super.periodic();
+  }
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
