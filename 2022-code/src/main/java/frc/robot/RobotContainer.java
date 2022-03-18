@@ -4,10 +4,8 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -92,7 +90,6 @@ public class RobotContainer {
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
-  private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   private final LimelightSubsystem m_limelight = new LimelightSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
@@ -119,7 +116,6 @@ public class RobotContainer {
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_compressor.enableDigital();
     // Configure the button bindings
     configureButtonBindings();
   }

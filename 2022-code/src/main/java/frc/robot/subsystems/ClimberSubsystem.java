@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Compressor;
 
 public class ClimberSubsystem extends SubsystemBase {
   private final int SOLENOID_KEYPISTON_RETRACT = 7;
@@ -21,9 +22,11 @@ public class ClimberSubsystem extends SubsystemBase {
   private Solenoid m_keyPiston =
       new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
+  private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   @Override
-  public void periodic() {}
+  public void periodic(
+  ) {}
 
   public ClimberSubsystem() {
     m_climber.setIdleMode(IdleMode.kBrake);
@@ -59,5 +62,11 @@ public class ClimberSubsystem extends SubsystemBase {
   public double getClimbEncoder() {
 
     return m_encoder.getVelocity();
+  }
+  public void compressorOn(){
+  m_compressor.enableDigital();
+  }
+  public void compressorOff(){
+    m_compressor.disable();
   }
 }
