@@ -39,6 +39,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
+  private NetworkTableEntry m_limelightSize;
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -70,6 +71,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(!m_color.getIsBlue());
+
+    m_limelightSize.setBoolean(m_limelight.isDistanceCorrect());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
@@ -194,6 +197,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_colors[0] = m_debugTab.add("isBlue", true).withPosition(7, 4).withSize(1, 1).getEntry();
     m_colors[1] = m_debugTab.add("isRed", false).withPosition(7, 5).withSize(1, 1).getEntry();
+
+    m_limelightSize = m_debugTab.add("limelight limited", false).withPosition(6, 4).withSize(1, 1).getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();

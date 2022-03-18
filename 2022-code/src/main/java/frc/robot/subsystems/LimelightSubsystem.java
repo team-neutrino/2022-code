@@ -10,10 +10,13 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
-  NetworkTable limelight;
-  NetworkTableEntry ledMode;
-  double h = 1.25;
-  double limelightMountAngle = 30;
+  private NetworkTable limelight;
+  private NetworkTableEntry ledMode;
+  private double h = 1.25;
+  private double limelightMountAngle = 30;
+
+  private double minDist = 1.75;
+  private double maxDist = 4.0;
 
   public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -51,6 +54,12 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getTa() {
     NetworkTableEntry ta = limelight.getEntry("ta");
     return ta.getDouble(0.0);
+  }
+
+  public boolean isDistanceCorrect() {
+    if(minDist < getDistance() && maxDist > getDistance())
+      return true;
+    return false;
   }
 
   public boolean getTv() {
