@@ -5,19 +5,16 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
-
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import frc.robot.util.CalculateRPM;
 
-public class ShooterSubsystem extends PIDSubystem
-{
+public class ShooterSubsystem extends PIDSubsystem {
   /** Shooter Constants */
   private final double WHEEL_P = 0.3;
 
@@ -28,7 +25,7 @@ public class ShooterSubsystem extends PIDSubystem
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
   private Encoder m_encoder;
-  private Pidcontroller m_pidController;
+  private SimpleMotorFeedforward m_feedForward;
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
@@ -36,6 +33,7 @@ public class ShooterSubsystem extends PIDSubystem
   public double m_shuffleBoardRPM = 100;
 
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
+    super(new PIDController(.03, 0, 0));
     m_limelight = p_limelight;
     RPMCalculator = new CalculateRPM(m_limelight);
 
@@ -51,36 +49,12 @@ public class ShooterSubsystem extends PIDSubystem
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
-
-    m_encoder1 = new Encoder(4, 3);
-    m_pidController = new PidController()
-    // m_pidController.setP(WHEEL_P / 1000.0);
-    // m_pidController.setI(WHEEL_I / 1000.0);
-    // m_pidController.setD(WHEEL_D / 1000.0);
-    // m_pidController.setFF(WHEEL_FF / 1000.0);
-    // m_pidController.setOutputRange(.1, 1);
-  }
-
-  @Override
-  public void periodic() {
-    super.periodic();
+    m_encoder = new Encoder(3, 4);
+    // m_feedForward = new SimpleMotorFeedforward(ks, kv)
   }
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
-  }
-
-  public double getRPM1() {
-    return m_encoder1.getVelocity();
-  }
-
-  public double getRPM2() {
-    return m_encoder2.getVelocity();
-  }
-
-  public void setTargetRPM(double p_targetRPM) {
-    m_targetRPM = p_targetRPM;
-    m_pidController.setReference(m_targetRPM, ControlType.kVelocity);
   }
 
   public double getTargetRPM() {
@@ -96,42 +70,61 @@ public class ShooterSubsystem extends PIDSubystem
   }
 
   public void turnOff() {
-    setPower(0);
+    m_wheelMotor.set(0);
   }
 
-  public void setPower(double power) {
-    m_wheelMotor.set(power);
+  @Override
+  public void useOutput(double output, double setpoint) {
+    if(output <= 0)
+    {
+      m_wheelMotor.setVoltage(.1);
+    }else{
+      m_wheelMotor.setVoltage(1);
+    }
   }
 
   public double getP() {
-    return m_pidController.getP() * 1000.0;
+    return getController().getP() * 1000.0;
   }
 
-  public double getFF() {
-    return m_pidController.getFF() * 1000.0;
-  }
+  // public double getFF() {
+  //   return m_pidController.getFF() * 1000.0;
+  // }
 
   public void setP(double P) {
-    m_pidController.setP(P / 1000.0);
+    getController().setP(P / 1000.0);
   }
 
   public double getI() {
-    return m_pidController.getI() * 1000.0;
+    return getController().getI() * 1000.0;
   }
 
   public void setI(double I) {
-    m_pidController.setI(I / 1000.0);
+    getController().setI(I / 1000.0);
   }
 
   public double getD() {
-    return m_pidController.getD() * 1000.0;
+    return getController().getD() * 1000.0;
   }
 
   public void setD(double D) {
-    m_pidController.setD(D / 1000.0);
+    getController().setD(D / 1000.0);
   }
 
-  public void setFF(double FF) {
-    m_pidController.setFF(FF / 1000.0);
+  // public void setFF(double FF) {
+  //   m_pidController.setFF(FF / 1000.0);
+  // }
+
+  @Override
+  public double getMeasurement() {
+    return m_encoder.getRate();
+  }
+
+  public boolean atSetPoint() {
+    return getController().atSetpoint();
+  }
+
+  public double getOutput() {
+    return getController().calculate(getMeasurement(), 0.0);
   }
 }

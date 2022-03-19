@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
-import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+// import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -27,11 +27,12 @@ import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
+import frc.robot.commands.PIDShooterCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
-import frc.robot.commands.ShooterInterpolateSpeed;
-import frc.robot.commands.ShooterSetSpeed;
-import frc.robot.commands.TestShooterRPMCommand;
+// import frc.robot.commands.ShooterInterpolateSpeed;
+// import frc.robot.commands.ShooterSetSpeed;
+// import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -43,7 +44,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
-import frc.robot.util.AutonSelector;
+// import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
 
 /**
@@ -111,10 +112,10 @@ public class RobotContainer {
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
-  private AutonSelector m_autonSelector =
-      new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-  private TwoBallAuton m_twoBallAuton =
-      new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  //   private AutonSelector m_autonSelector =
+  //       new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  //   private TwoBallAuton m_twoBallAuton =
+  //       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private AATwoBallAuton m_AATwoBallAuton =
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -140,10 +141,11 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 2100));
-    m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
+    m_A.whileHeld(new PIDShooterCommand(m_shooter, 50000));
+    // m_A.whileHeld(new ShooterSetSpeed(m_shooter, 2100));
+    // m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    // m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    // m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(new IntakeCommand(m_intake));
@@ -170,6 +172,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_twoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    // return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0),
+    // m_driveTrain);
+    return m_AATwoBallAuton;
   }
 }

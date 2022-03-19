@@ -65,9 +65,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
-    m_shooterVariables[0].setDouble(m_shooter.getRPM1());
-    m_shooterVariables[1].setDouble(m_shooter.getRPM2());
-    m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
+    m_shooterVariables[0].setDouble(m_shooter.getMeasurement());
+    m_shooterRPMGraph.setDouble(m_shooter.getMeasurement());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(!m_color.getIsBlue());
 
@@ -80,9 +79,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
       m_shooter.setD(m_shooterPID[2].getDouble(0.0));
     }
-    if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
-      m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
-    }
+    // if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
+    //   m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
+    // }
     m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
@@ -125,7 +124,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(0, 0)
             .withSize(2, 2)
             .withWidget(BuiltInWidgets.kDial)
-            .withProperties(Map.of("min", 0, "max", 6000))
+            .withProperties(Map.of("min", 0, "max", 100000))
             .getEntry();
 
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
@@ -179,12 +178,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_debugTab.add("Shooter I", m_shooter.getI()).withPosition(3, 3).withSize(1, 1).getEntry();
     m_shooterPID[2] =
         m_debugTab.add("Shooter D", m_shooter.getD()).withPosition(3, 4).withSize(1, 1).getEntry();
-    m_shooterPID[3] =
-        m_debugTab
-            .add("Shooter FF", m_shooter.getFF())
-            .withPosition(3, 5)
-            .withSize(1, 1)
-            .getEntry();
+    // m_shooterPID[3] =
+    //     m_debugTab
+    //         .add("Shooter FF", m_shooter.getFF())
+    //         .withPosition(3, 5)
+    //         .withSize(1, 1)
+    //         .getEntry();
     m_shooterPID[4] =
         m_debugTab
             .add("Shooter RPM Set", m_shooter.getShuffleboardRPM())

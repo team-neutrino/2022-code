@@ -7,9 +7,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
-import frc.robot.commands.AAAutonShootCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.TurretAutoAimCommand;
+// import frc.robot.commands.AAAutonShootCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -51,10 +49,11 @@ public class AATwoBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
-        new TurretAutoAimCommand(p_turret, p_limelight)
-            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)),
-        twoBall0Command.alongWith(new IntakeCommand(p_intake)),
-        new TurretAutoAimCommand(p_turret, p_limelight)
-            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)));
+        // new TurretAutoAimCommand(p_turret, p_limelight)
+        //     .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)),
+        // twoBall0Command.alongWith(new IntakeCommand(p_intake)),
+        // new TurretAutoAimCommand(p_turret, p_limelight)
+        //     .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)));
+        );
   }
 }
