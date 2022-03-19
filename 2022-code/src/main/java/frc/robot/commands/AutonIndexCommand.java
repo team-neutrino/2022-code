@@ -45,8 +45,8 @@ public class AutonIndexCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_timer.stop();
     m_timer.reset();
-    m_intake.setDown();
-    m_intake.setIntakeOn();
+    m_intake.setUp();
+    m_intake.setIntakeOff();
   }
 
   // Returns true when the command should end.
