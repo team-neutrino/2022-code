@@ -21,6 +21,7 @@ public class ClimbRetractCommand extends CommandBase {
     } else {
       m_climberSubsystem.retractClimber();
     }
+    m_climberSubsystem.compressorOff();
   }
 
   @Override

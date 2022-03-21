@@ -4,8 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -19,15 +19,12 @@ public class IntakeSubSystem extends SubsystemBase {
   private final int SOLENOID_INTAKE_REVERSE = 5;
   private final double INTAKE_MOTOR_POWER = 1;
 
-  private CANSparkMax m_IntakeFeedMotor =
-      new CANSparkMax(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED, MotorType.kBrushless);
+  private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
   private DoubleSolenoid m_IntakeSolenoid =
       new DoubleSolenoid(
           PneumaticsModuleType.CTREPCM, SOLENOID_INTAKE_FORWARD, SOLENOID_INTAKE_REVERSE);
 
-  public IntakeSubSystem() {
-    m_IntakeFeedMotor.setOpenLoopRampRate(.5);
-  }
+  public IntakeSubSystem() {}
 
   public void setDown() {
     m_IntakeSolenoid.set(Value.kForward);
@@ -38,15 +35,15 @@ public class IntakeSubSystem extends SubsystemBase {
   }
 
   public void setIntakeOn() {
-    m_IntakeFeedMotor.set(INTAKE_MOTOR_POWER);
+    m_IntakeFeedMotor.set(ControlMode.PercentOutput, -INTAKE_MOTOR_POWER);
   }
 
   public void setIntakeReverse() {
-    m_IntakeFeedMotor.set(-INTAKE_MOTOR_POWER);
+    m_IntakeFeedMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR_POWER);
   }
 
   public void setIntakeOff() {
-    m_IntakeFeedMotor.set(0);
+    m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
   }
 
   @Override
