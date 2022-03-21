@@ -88,7 +88,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
         Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
     m_yEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getY());
-    System.out.println("odometry pose" + m_odometry.getPoseMeters());
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
