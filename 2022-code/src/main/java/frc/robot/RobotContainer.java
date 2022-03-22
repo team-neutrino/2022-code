@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -33,6 +34,7 @@ import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
+import frc.robot.commands.TurretSuppliedOverrideCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -109,6 +111,9 @@ public class RobotContainer {
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
+  private JoystickButton m_joystickButton =
+      new JoystickButton(m_OperatorController, Button.kRightStick.value);
+
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private TwoBallAuton m_twoBallAuton =
@@ -159,6 +164,8 @@ public class RobotContainer {
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_rightJoystickButton.toggleWhenActive(
+        new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
   }
 
   /**

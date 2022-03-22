@@ -56,6 +56,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT * -1);
   }
 
+  public void setPower(double power) {
+    m_turretMotor.set(ControlMode.PercentOutput, power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -71,11 +75,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public double getI() {
-    return m_turretMotorConfig.slot0.kD;
+    return m_turretMotorConfig.slot0.kI;
   }
 
   public void setI(double I) {
-    m_turretMotorConfig.slot0.kP = I;
+    m_turretMotorConfig.slot0.kI = I;
   }
 
   public double getD() {
@@ -83,6 +87,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void setD(double D) {
-    m_turretMotorConfig.slot0.kP = D;
+    m_turretMotorConfig.slot0.kD = D;
   }
 }
