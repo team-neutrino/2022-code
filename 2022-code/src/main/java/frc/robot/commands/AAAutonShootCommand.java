@@ -22,14 +22,17 @@ public class AAAutonShootCommand extends CommandBase {
   private double m_RPM;
   private double LIMELIGHT_MULTIPLICATION = 20.0;
 
-
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
   public AAAutonShootCommand(
-      ShooterSubsystem p_shooter, IndexSubsystem p_index, TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, double p_duration) {
+      ShooterSubsystem p_shooter,
+      IndexSubsystem p_index,
+      TurretPIDSubsystem p_turret,
+      LimelightSubsystem p_limelight,
+      double p_duration) {
     m_shooter = p_shooter;
     m_index = p_index;
     m_turret = p_turret;
