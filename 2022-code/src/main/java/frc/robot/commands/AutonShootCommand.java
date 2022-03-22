@@ -52,6 +52,8 @@ public class AutonShootCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_index.MotorOneStop();
+    m_index.MotorTwoStop();
     m_timer.stop();
     m_timer.reset();
   }

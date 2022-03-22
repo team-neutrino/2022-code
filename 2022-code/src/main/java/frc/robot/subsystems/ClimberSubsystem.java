@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -21,6 +22,7 @@ public class ClimberSubsystem extends SubsystemBase {
   private Solenoid m_keyPiston =
       new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
   private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
+  private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   @Override
   public void periodic() {}
@@ -59,5 +61,13 @@ public class ClimberSubsystem extends SubsystemBase {
   public double getClimbEncoder() {
 
     return m_encoder.getVelocity();
+  }
+
+  public void compressorOn() {
+    m_compressor.enableDigital();
+  }
+
+  public void compressorOff() {
+    m_compressor.disable();
   }
 }
