@@ -37,7 +37,8 @@ public final class Constants {
   }
 
   public static final class DigitalConstants {
-    public static final int INDEX_BEAMBREAK = 7;
+    public static final int PRESSURE_SENSOR = 0;
     public static final int CLIMBER_SWITCH = 1;
+    public static final int INDEX_BEAMBREAK = 7;
   }
 }

@@ -21,6 +21,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_debugTab;
   private NetworkTableEntry m_shooterRPMGraph;
   private NetworkTableEntry m_turretPositionGraph;
+  private NetworkTableEntry m_pressureSensor;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
   private NetworkTableEntry m_turretAngle;
@@ -30,6 +31,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private ColorSubsystem m_color;
   private DriveTrainSubsystem m_drivetrain;
   private IndexSubsystem m_index;
+  private IntakeSubSystem m_intake;
   private LimelightSubsystem m_limelight;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
@@ -47,6 +49,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       ClimberSubsystem p_climber,
       DriveTrainSubsystem p_drivetrain,
       IndexSubsystem p_index,
+      IntakeSubSystem p_intake,
       ColorSubsystem p_color,
       LimelightSubsystem p_limelight) {
     m_shooter = p_shooter;
@@ -54,6 +57,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_climber = p_climber;
     m_drivetrain = p_drivetrain;
     m_index = p_index;
+    m_intake = p_intake;
     m_color = p_color;
     m_limelight = p_limelight;
 
@@ -108,6 +112,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
+    m_pressureSensor.setDouble(m_intake.getPressure());
 
     m_limelightVariables[0].setString(String.format("%,.2f", m_limelight.getTx()));
     m_limelightVariables[1].setString(String.format("%,.2f", m_limelight.getTy()));
@@ -135,7 +140,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(2, 0)
             .withSize(1, 1)
             .getEntry();
-
+    m_pressureSensor =
+        m_drivestationTab
+            .add("Pressure", 0)
+            .withPosition(1, 1)
+            .withSize(1, 1)
+            .withWidget(BuiltInWidgets.kDial)
+            .withProperties(Map.of("empty", 0, "pressured", 0))
+            .getEntry();
     try {
       LLFeed =
           new HttpCamera(
