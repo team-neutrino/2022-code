@@ -4,16 +4,16 @@
 
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.TurretPIDSubsystem;
+import java.util.function.DoubleSupplier;
 
 public class TurretSuppliedOverrideCommand extends CommandBase {
   TurretPIDSubsystem m_turret;
   DoubleSupplier m_doubleSupplier;
   /** Creates a new TurretSuppliedOverrideCommand. */
-  public TurretSuppliedOverrideCommand(TurretPIDSubsystem p_turret, DoubleSupplier p_doubleSupplier) {
+  public TurretSuppliedOverrideCommand(
+      TurretPIDSubsystem p_turret, DoubleSupplier p_doubleSupplier) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(p_turret);
     m_turret = p_turret;
