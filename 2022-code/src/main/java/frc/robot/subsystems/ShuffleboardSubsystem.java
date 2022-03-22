@@ -49,6 +49,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       ClimberSubsystem p_climber,
       DriveTrainSubsystem p_drivetrain,
       IndexSubsystem p_index,
+      IntakeSubSystem p_intake,
       ColorSubsystem p_color,
       LimelightSubsystem p_limelight) {
     m_shooter = p_shooter;
@@ -56,6 +57,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_climber = p_climber;
     m_drivetrain = p_drivetrain;
     m_index = p_index;
+    m_intake = p_intake;
     m_color = p_color;
     m_limelight = p_limelight;
 
