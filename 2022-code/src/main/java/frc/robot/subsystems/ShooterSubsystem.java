@@ -59,6 +59,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setD(WHEEL_D / 1000.0);
     m_pidController.setFF(WHEEL_FF / 1000.0);
     m_pidController.setOutputRange(.1, 1);
+    m_pidController.setIZone(100);
   }
 
   @Override
