@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+import frc.robot.commands.Trajectories.FourBallAuton;
+import frc.robot.commands.Trajectories.FourBallTrajectory;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -120,7 +122,8 @@ public class RobotContainer {
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private AATwoBallAuton m_AATwoBallAuton =
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  private FourBallAuton m_fourBallAuton = new FourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+      /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -176,6 +179,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
