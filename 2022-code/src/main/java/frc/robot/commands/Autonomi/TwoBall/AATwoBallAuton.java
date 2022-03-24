@@ -4,12 +4,14 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TrajectoryConfigConstants;
 import frc.robot.commands.AAAutonShootCommand;
-import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.TurretAutoAimCommand;
+import frc.robot.commands.AutonIndexCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -51,10 +53,13 @@ public class AATwoBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
-        new TurretAutoAimCommand(p_turret, p_limelight)
-            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)),
-        twoBall0Command.alongWith(new IntakeCommand(p_intake)),
-        new TurretAutoAimCommand(p_turret, p_limelight)
-            .alongWith(new AAAutonShootCommand(p_shooter, p_index, 4.5)));
+        new SequentialCommandGroup(
+            new ParallelCommandGroup(twoBall0Command, new AutonIndexCommand(p_intake, 3)),
+            new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4),
+            new AutonIndexCommand(p_intake, 1),
+            new WaitCommand(.5),
+            new AutonIndexCommand(p_intake, 1),
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)));
   }
 }
