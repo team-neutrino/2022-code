@@ -18,7 +18,7 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
   private final double WHEEL_P = 0.3;
 
-  private final double WHEEL_I = 0;
+  private final double WHEEL_I = 0.0008;
   private final double WHEEL_D = 0;
   private final double WHEEL_FF = 0.2;
 
@@ -58,6 +58,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setI(WHEEL_I / 1000.0);
     m_pidController.setD(WHEEL_D / 1000.0);
     m_pidController.setFF(WHEEL_FF / 1000.0);
+    m_pidController.setIZone(100);
     m_pidController.setOutputRange(.1, 1);
   }
 
