@@ -134,16 +134,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .getEntry();
 
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
-    
-    m_colors[0] = m_drivestationTab.add("isBlue", true).withPosition(6, 0).withSize(1, 1).getEntry();
-    m_colors[1] = m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
+
+    m_colors[0] =
+        m_drivestationTab.add("isBlue", true).withPosition(6, 0).withSize(1, 1).getEntry();
+    m_colors[1] =
+        m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
-        m_drivestationTab
-            .add("Distance", 0)
-            .withPosition(4, 0)
-            .withSize(1, 1)
-            .getEntry();
+        m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
     m_pressureSensor =
         m_drivestationTab
             .add("Pressure", 0)
