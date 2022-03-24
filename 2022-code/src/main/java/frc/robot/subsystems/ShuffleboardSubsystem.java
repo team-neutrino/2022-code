@@ -127,26 +127,28 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooterVariables[0] =
         m_drivestationTab
             .add("Shooter RPM", 0)
-            .withPosition(0, 0)
-            .withSize(2, 2)
+            .withPosition(0, 1)
+            .withSize(3, 2)
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
 
-    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
+    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
+
+    m_colors[0] =
+        m_drivestationTab.add("isBlue", true).withPosition(6, 0).withSize(1, 1).getEntry();
+    m_colors[1] =
+        m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
+
     m_limelightVariables[5] =
-        m_drivestationTab
-            .add("distance of limelight", 0)
-            .withPosition(2, 0)
-            .withSize(1, 1)
-            .getEntry();
+        m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
     m_pressureSensor =
         m_drivestationTab
             .add("Pressure", 0)
-            .withPosition(1, 1)
+            .withPosition(5, 0)
             .withSize(1, 1)
             .withWidget(BuiltInWidgets.kDial)
-            .withProperties(Map.of("empty", 0, "pressured", 0))
+            .withProperties(Map.of("empty", 0, "pressured", 130))
             .getEntry();
     try {
       LLFeed =
@@ -155,12 +157,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       CameraServer.startAutomaticCapture(LLFeed);
       m_drivestationTab
           .add(LLFeed)
-          .withPosition(0, 2)
+          .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
       m_drivestationTab
           .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 0)
+          .withPosition(3, 1)
           .withSize(5, 5)
           .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
@@ -203,9 +205,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(3, 5)
             .withSize(1, 1)
             .getEntry();
-
-    m_colors[0] = m_debugTab.add("isBlue", true).withPosition(7, 4).withSize(1, 1).getEntry();
-    m_colors[1] = m_debugTab.add("isRed", false).withPosition(7, 5).withSize(1, 1).getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveLMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
