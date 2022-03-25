@@ -16,8 +16,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
-import frc.robot.commands.Trajectories.FourBallAuton;
-import frc.robot.commands.Trajectories.FourBallTrajectory;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -34,6 +32,7 @@ import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TestShooterRPMCommand;
+import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.TurretSuppliedOverrideCommand;
@@ -122,8 +121,9 @@ public class RobotContainer {
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private AATwoBallAuton m_AATwoBallAuton =
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-  private FourBallAuton m_fourBallAuton = new FourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-      /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  private FourBallAuton m_fourBallAuton =
+      new FourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
