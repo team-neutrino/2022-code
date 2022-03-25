@@ -95,14 +95,10 @@ public class FourBallAuton extends SequentialCommandGroup {
         new SequentialCommandGroup(
             new ParallelCommandGroup(fourBall0Command, new AutonIndexCommand(p_intake, 3)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4),
-            new AutonIndexCommand(p_intake, .5),
-            new WaitCommand(.2),
-            new AutonIndexCommand(p_intake, .5),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4),
-            new ParallelCommandGroup(fourBall1Command, new AutonIndexCommand(p_intake, 6)),
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3),
+            new ParallelCommandGroup(fourBall1Command, new AutonIndexCommand(p_intake, 5)),
             fourBall2Command,
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)));
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)));
   }
 }
