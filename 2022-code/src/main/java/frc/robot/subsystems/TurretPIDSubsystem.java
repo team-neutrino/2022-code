@@ -18,7 +18,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double m_currentAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 770;
   private double REVERSE_SOFT_LIMIT_THRESHOLD = 200;
-  private double TURRET_MOTOR_OUTPUT = 0.5;
+  private double TURRET_MOTOR_OUTPUT = 0.7;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
