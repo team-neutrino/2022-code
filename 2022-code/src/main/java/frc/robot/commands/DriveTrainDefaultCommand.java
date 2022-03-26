@@ -1,19 +1,16 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class DriveTrainDefaultCommand extends CommandBase {
   private final DriveTrainSubsystem m_driveTrainSubsystem;
-  private Joystick m_rightJoystick;
-  private Joystick m_leftJoystick;
+  private final XboxController m_xBox;
 
-  public DriveTrainDefaultCommand(
-      DriveTrainSubsystem subsystem, Joystick p_leftJoystick, Joystick p_rightJoystick) {
+  public DriveTrainDefaultCommand(DriveTrainSubsystem subsystem, XboxController p_xBox) {
     m_driveTrainSubsystem = subsystem;
-    m_leftJoystick = p_leftJoystick;
-    m_rightJoystick = p_rightJoystick;
+    m_xBox = p_xBox;
     addRequirements(subsystem);
   }
 
@@ -22,7 +19,7 @@ public class DriveTrainDefaultCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_driveTrainSubsystem.setMotors(m_leftJoystick.getY(), m_rightJoystick.getY());
+    m_driveTrainSubsystem.setMotors(m_xBox.getLeftX(), m_xBox.getRightY());
   }
 
   @Override

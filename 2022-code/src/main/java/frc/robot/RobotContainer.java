@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -62,8 +61,8 @@ public class RobotContainer {
   private POVButton m_upPovButton = new POVButton(m_OperatorController, 0);
   private POVButton m_downPovButton = new POVButton(m_OperatorController, 180);
   private POVButton m_rightPovButton = new POVButton(m_OperatorController, 90);
-  private Joystick m_rightJoystick = new Joystick(Constants.ControllerConstants.RIGHT_JOYSTICK_ID);
-  private Joystick m_leftJoystick = new Joystick(Constants.ControllerConstants.LEFT_JOYSTICK_ID);
+  //   private JoystickButton m_leftStick = new JoystickButton(m_OperatorController, 9);
+  //   private JoystickButton m_rightStick = new JoystickButton(m_OperatorController, 10);
   private JoystickButton m_BumperLeft =
       new JoystickButton(m_OperatorController, XboxController.Button.kLeftBumper.value);
   private JoystickButton m_BumperRight =
@@ -104,8 +103,10 @@ public class RobotContainer {
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
+  //   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
+  //       new DriveTrainDefaultCommand(m_driveTrain, m_leftStick, m_rightStick);
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
-      new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
+      new DriveTrainDefaultCommand(m_driveTrain, m_OperatorController);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
       new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
