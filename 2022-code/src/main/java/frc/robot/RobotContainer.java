@@ -31,7 +31,6 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
-import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
@@ -148,7 +147,9 @@ public class RobotContainer {
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_X.whileHeld(new ShooterSetSpeed(m_shooter, 1800));
-    m_Y.whileHeld(new TestShooterRPMCommand(m_shooter));
+    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3405));
+
+    // m_Y.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
@@ -180,6 +181,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
