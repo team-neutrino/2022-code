@@ -62,7 +62,7 @@ public class AAAutonShootCommand extends CommandBase {
     }
 
     m_shooter.setTargetRPM(m_RPM);
-    if (m_timer.get() >= 2) {
+    if (m_timer.get() >= 1.9) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }

@@ -46,6 +46,7 @@ import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
+import frc.robot.commands.ForwardAnglecommand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -110,6 +111,7 @@ public class RobotContainer {
       new TurretAutoAimCommand(m_turret, m_limelight);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
+  private final ForwardAnglecommand m_ForwardAnglecommand = new ForwardAnglecommand(m_turret);
 
   private JoystickButton m_joystickButton =
       new JoystickButton(m_OperatorController, Button.kRightStick.value);
@@ -169,6 +171,7 @@ public class RobotContainer {
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+    m_upPovButton.whileHeld(new ForwardAnglecommand(m_turret));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
   }
@@ -181,6 +184,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

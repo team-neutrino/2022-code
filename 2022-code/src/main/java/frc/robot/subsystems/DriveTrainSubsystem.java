@@ -38,6 +38,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDriveOdometry m_odometry;
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
+  public static final double DEADZONE = .1;
   private static final double K_WHEEL_CIRCUMFERENCE = Math.PI * K_WHEEL_DIAMETER;
   private static final double K_ENCODER_CONVERSION = (K_GEAR_RATIO * K_WHEEL_CIRCUMFERENCE);
 
@@ -84,7 +85,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    // System.out.println(getPose());
+    System.out.println(getPose());
     m_odometry.update(
         Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());
@@ -92,8 +93,18 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
-    m_leftMotors.set(-m_setLeftSpeed);
-    m_rightMotors.set(-m_setRightSpeed);
+    m_leftMotors.set(includeDeadzone(-m_setLeftSpeed));
+    m_rightMotors.set(includeDeadzone(-m_setRightSpeed));
+  }
+
+  public double includeDeadzone(double m_joystickAxis)
+  {
+    if(Math.abs(m_joystickAxis) <= DEADZONE) {
+      return 0;
+    }
+    else {
+      return m_joystickAxis;
+    }
   }
 
   public void resetEncoders() {

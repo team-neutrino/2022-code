@@ -70,55 +70,55 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
-    m_shooterVariables[1].setDouble(m_shooter.getRPM2());
-    m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
+    // m_shooterVariables[1].setDouble(m_shooter.getRPM2());
+    // m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(!m_color.getIsBlue());
 
-    if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
-      m_shooter.setP(m_shooterPID[0].getDouble(0.0));
-    }
-    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getI()) {
-      m_shooter.setI(m_shooterPID[1].getDouble(0.0));
-    }
-    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
-      m_shooter.setD(m_shooterPID[2].getDouble(0.0));
-    }
-    if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
-      m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
-    }
-    m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
+    // if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
+    //   m_shooter.setP(m_shooterPID[0].getDouble(0.0));
+    // }
+    // if (m_shooterPID[1].getDouble(0.0) != m_shooter.getI()) {
+    //   m_shooter.setI(m_shooterPID[1].getDouble(0.0));
+    // }
+    // if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
+    //   m_shooter.setD(m_shooterPID[2].getDouble(0.0));
+    // }
+    // if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
+    //   m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
+    // }
+    // m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
-    m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
-    if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
-      m_turret.setP(m_turretPID[0].getDouble(0.0));
-    }
-    if (m_turretPID[1].getDouble(0.0) != m_turret.getI()) {
-      m_turret.setI(m_turretPID[1].getDouble(0.0));
-    }
-    if (m_turretPID[2].getDouble(0.0) != m_turret.getD()) {
-      m_turret.setD(m_turretPID[2].getDouble(0.0));
-    }
+    // m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
+    // if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
+    //   m_turret.setP(m_turretPID[0].getDouble(0.0));
+    // }
+    // if (m_turretPID[1].getDouble(0.0) != m_turret.getI()) {
+    //   m_turret.setI(m_turretPID[1].getDouble(0.0));
+    // }
+    // if (m_turretPID[2].getDouble(0.0) != m_turret.getD()) {
+    //   m_turret.setD(m_turretPID[2].getDouble(0.0));
+    // }
 
-    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
-    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1Position());
-    m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
-    m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
-    m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
+    // m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
+    // m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1Position());
+    // m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
+    // m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
+    // m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
 
-    m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
-    m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
+    // m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
+    // m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
     m_pressureSensor.setDouble(m_intake.getPressure());
 
-    m_limelightVariables[0].setString(String.format("%,.2f", m_limelight.getTx()));
-    m_limelightVariables[1].setString(String.format("%,.2f", m_limelight.getTy()));
-    m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
-    m_limelightVariables[3].setBoolean(m_limelight.getTv());
-    m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
+    // m_limelightVariables[0].setString(String.format("%,.2f", m_limelight.getTx()));
+    // m_limelightVariables[1].setString(String.format("%,.2f", m_limelight.getTy()));
+    // m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
+    // m_limelightVariables[3].setBoolean(m_limelight.getTv());
+    // m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
     m_limelightVariables[5].setDouble(m_limelight.getDistance());
   }
 
