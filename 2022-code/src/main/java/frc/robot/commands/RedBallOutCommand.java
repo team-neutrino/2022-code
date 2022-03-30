@@ -4,43 +4,51 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 
-public class IndexDefaultCommand extends CommandBase {
-  /** Creates a new IndexMotorCommand. */
+public class RedBallOutCommand extends CommandBase {
   private IndexSubsystem m_index;
-  private ColorSubsystem m_color;
-
-  public IndexDefaultCommand(IndexSubsystem p_index, ColorSubsystem p_color) {
+  private IntakeSubSystem m_intake;
+  private Timer m_timer;
+  /** Creates a new RedBallOutCommand. */
+  public RedBallOutCommand(IndexSubsystem p_index, IntakeSubSystem p_intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_index = p_index;
-    m_color = p_color;
-    addRequirements(m_index, m_color);
+    m_intake = p_intake;
+    addRequirements(m_index, m_intake);
+
+    m_timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_timer.start();
+    m_index.motorOneBack();
+    m_intake.setIntakeReverse();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    if (m_index.getBeamBreak()) {
-      m_index.motorOneStart();
-    } else {
-      m_index.motorOneStop();
-    }
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_timer.stop();
+    m_index.motorOneStop();
+    m_intake.setIntakeOff();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (m_timer.get() > 5)
+      return true;
+    else
+      return false;
   }
 }

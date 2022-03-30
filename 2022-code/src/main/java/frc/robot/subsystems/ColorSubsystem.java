@@ -18,14 +18,18 @@ public class ColorSubsystem extends SubsystemBase {
   private ColorSensorV3 m_colorSensor = new ColorSensorV3(i2cPort);
   private ColorMatch m_colorMatcher = new ColorMatch();
   private boolean m_isBlue;
+  private boolean m_isRed;
 
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
+
+  private final double K_THRESHOLD = 0.20; // default smth like 0.9
 
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
     m_colorMatcher.addColorMatch(K_BLUE);
     m_colorMatcher.addColorMatch(K_RED);
+    m_colorMatcher.setConfidenceThreshold(K_THRESHOLD);
   }
 
   @Override
@@ -33,10 +37,15 @@ public class ColorSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     Color detectedColor = getSensorColor();
     m_isBlue = (isBlue(detectedColor));
+    m_isRed = (isRed(detectedColor));
   }
 
   public boolean getIsBlue() {
     return m_isBlue;
+  }
+
+  public boolean getIsRed() {
+    return m_isRed;
   }
 
   public Color getSensorColor() {
@@ -46,7 +55,14 @@ public class ColorSubsystem extends SubsystemBase {
   public boolean isBlue(Color detectedColor) {
     ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
     boolean isBlue = true;
-    if (matchResult.color == K_RED) isBlue = false;
+    if (matchResult.color != K_BLUE) isBlue = false;
     return isBlue;
+  }
+
+  public boolean isRed(Color detectedColor) {
+    ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
+    boolean isRed = true;
+    if (matchResult.color != K_RED) isRed = false;
+    return isRed;
   }
 }

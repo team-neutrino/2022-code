@@ -40,7 +40,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
+  private NetworkTableEntry[] m_colors = new NetworkTableEntry[2]; // {isBlue, isRed}
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -73,7 +73,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
-    m_colors[1].setBoolean(!m_color.getIsBlue());
+    m_colors[1].setBoolean(m_color.getIsRed());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
@@ -136,7 +136,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
 
     m_colors[0] =
-        m_drivestationTab.add("isBlue", true).withPosition(6, 0).withSize(1, 1).getEntry();
+        m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
     m_colors[1] =
         m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
 

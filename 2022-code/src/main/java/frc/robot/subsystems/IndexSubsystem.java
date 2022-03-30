@@ -16,6 +16,7 @@ import frc.robot.Constants.DigitalConstants;
 
 public class IndexSubsystem extends SubsystemBase {
   private RelativeEncoder m_encoder1;
+  private boolean m_isBlue;
 
   private TalonSRX m_indexMotor1 = new TalonSRX(CANIDConstants.INDEX_MOTOR_1_ID);
   private CANSparkMax m_indexMotor2 =
@@ -28,19 +29,27 @@ public class IndexSubsystem extends SubsystemBase {
     m_encoder1 = m_indexMotor2.getEncoder();
   }
 
-  public void MotorOneStart() {
+  public boolean getIsBlue() {
+    return m_isBlue;
+  }
+
+  public void motorOneStart() {
     m_indexMotor1.set(ControlMode.PercentOutput, 0.5);
   }
 
-  public void MotorOneStop() {
+  public void motorOneStop() {
     m_indexMotor1.set(ControlMode.PercentOutput, 0);
   }
 
-  public void MotorTwoStart() {
+  public void motorOneBack() {
+    m_indexMotor1.set(ControlMode.PercentOutput, -0.5);
+  }
+
+  public void motorTwoStart() {
     m_indexMotor2.set(0.5);
   }
 
-  public void MotorTwoStop() {
+  public void motorTwoStop() {
     m_indexMotor2.set(0);
   }
 
