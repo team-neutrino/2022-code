@@ -82,6 +82,13 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setReference(m_targetRPM, ControlType.kVelocity);
   }
 
+  public void setMagicRPM(double p_targetRPM, boolean magicTest) {
+    m_targetRPM = p_targetRPM;
+    if (magicTest == true) {
+      m_pidController.setReference(m_targetRPM, ControlType.kVelocity);
+    }
+  }
+
   public double getTargetRPM() {
     return m_targetRPM;
   }
@@ -132,5 +139,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setFF(double FF) {
     m_pidController.setFF(FF / 1000.0);
+  }
+
+  public boolean magicShooter(double RPM, double TRPM) {
+    return Math.abs(RPM - TRPM) <= 10;
   }
 }
