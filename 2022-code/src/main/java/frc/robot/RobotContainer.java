@@ -27,7 +27,7 @@ import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
-import frc.robot.commands.ReverseIntakeCommand;
+import frc.robot.commands.IntakeReverseCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
@@ -136,7 +136,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index, m_color));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
@@ -148,7 +148,7 @@ public class RobotContainer {
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
-    m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
+    m_BumperLeft.whileActiveContinuous(new IntakeReverseCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(
             new IntakeCommand(m_intake), new WaitCommand(0.1), new IntakeDownCommand(m_intake)));

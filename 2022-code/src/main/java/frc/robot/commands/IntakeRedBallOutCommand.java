@@ -9,12 +9,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 
-public class RedBallOutCommand extends CommandBase {
+public class IntakeRedBallOutCommand extends CommandBase {
   private IndexSubsystem m_index;
   private IntakeSubSystem m_intake;
   private Timer m_timer;
+  private double K_OUTTAKE_TIME = 5.0;
   /** Creates a new RedBallOutCommand. */
-  public RedBallOutCommand(IndexSubsystem p_index, IntakeSubSystem p_intake) {
+  public IntakeRedBallOutCommand(IndexSubsystem p_index, IntakeSubSystem p_intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_index = p_index;
     m_intake = p_intake;
@@ -28,6 +29,7 @@ public class RedBallOutCommand extends CommandBase {
   public void initialize() {
     m_timer.start();
     m_index.motorOneBack();
+    m_index.motorTwoBack();
     m_intake.setIntakeReverse();
   }
 
@@ -40,13 +42,14 @@ public class RedBallOutCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_timer.stop();
     m_index.motorOneStop();
+    m_index.motorTwoStop();
     m_intake.setIntakeOff();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() > 5)
+    if (m_timer.get() > K_OUTTAKE_TIME)
       return true;
     else
       return false;

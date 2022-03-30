@@ -53,6 +53,10 @@ public class IndexSubsystem extends SubsystemBase {
     m_indexMotor2.set(0);
   }
 
+  public void motorTwoBack() {
+    m_indexMotor2.set(-0.5);
+  }
+
   public boolean getBeamBreak() {
     return m_beamBreak.get();
   }
