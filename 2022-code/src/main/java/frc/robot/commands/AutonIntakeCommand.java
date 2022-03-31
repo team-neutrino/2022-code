@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubSystem;
 
 /** An example command that uses an example subsystem. */
-public class AutonIndexCommand extends CommandBase {
+public class AutonIntakeCommand extends CommandBase {
   private IntakeSubSystem m_intake;
   private Timer m_timer;
   private double m_duration;
@@ -19,7 +19,7 @@ public class AutonIndexCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AutonIndexCommand(IntakeSubSystem p_intake, double p_duration) {
+  public AutonIntakeCommand(IntakeSubSystem p_intake, double p_duration) {
     m_intake = p_intake;
     m_timer = new Timer();
     m_duration = p_duration;
