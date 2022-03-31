@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TrajectoryConfigConstants;
 import frc.robot.commands.AutonIntakeCommand;
-import frc.robot.commands.AutonIntakeCommand;
 import frc.robot.commands.AutonShootCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
