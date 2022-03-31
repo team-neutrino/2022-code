@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
 import frc.robot.commands.AAAutonShootCommand;
-import frc.robot.commands.AutonIndexCommand;
+import frc.robot.commands.AutonIntakeCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -92,10 +92,10 @@ public class FourBallAuton extends SequentialCommandGroup {
 
     addCommands(
         new SequentialCommandGroup(
-            new ParallelCommandGroup(fourBall0Command, new AutonIndexCommand(p_intake, 3)),
+            new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 3)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
             new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3),
-            new ParallelCommandGroup(fourBall1Command, new AutonIndexCommand(p_intake, 3)),
+            new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
             fourBall2Command,
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
             new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)));
