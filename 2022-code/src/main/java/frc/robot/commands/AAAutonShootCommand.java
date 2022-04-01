@@ -40,7 +40,7 @@ public class AAAutonShootCommand extends CommandBase {
     m_timer = new Timer();
     m_duration = p_duration;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
+    addRequirements(m_shooter, m_index);
   }
 
   // Called when the command is initially scheduled.
