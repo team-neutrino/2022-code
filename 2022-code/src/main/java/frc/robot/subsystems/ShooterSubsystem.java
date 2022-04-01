@@ -133,4 +133,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setFF(double FF) {
     m_pidController.setFF(FF / 1000.0);
   }
+
+  public boolean magicShooter(double RPM, double TRPM) {
+    return Math.abs(RPM - TRPM) <= 10;
+  }
 }
