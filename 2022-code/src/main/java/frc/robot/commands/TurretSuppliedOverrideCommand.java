@@ -13,22 +13,29 @@ public class TurretSuppliedOverrideCommand extends CommandBase {
   TurretPIDSubsystem m_turret;
   LimelightSubsystem m_limelight;
   DoubleSupplier m_doubleSupplier;
+  boolean m_setLimelightOn;
   /** Creates a new TurretSuppliedOverrideCommand. */
   public TurretSuppliedOverrideCommand(
       TurretPIDSubsystem p_turret,
       LimelightSubsystem p_limelight,
-      DoubleSupplier p_doubleSupplier) {
+      DoubleSupplier p_doubleSupplier,
+      boolean p_setLimelightOn) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
     m_limelight = p_limelight;
     addRequirements(m_turret, m_limelight);
     m_doubleSupplier = p_doubleSupplier;
+    m_setLimelightOn = p_setLimelightOn;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_limelight.setLimelightOff();
+    if (m_setLimelightOn) {
+      m_limelight.setLimelightOn();
+    } else {
+      m_limelight.setLimelightOff();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
