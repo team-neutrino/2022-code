@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.TrajectoryConfigConstants;
 import frc.robot.commands.AAAutonShootCommand;
-import frc.robot.commands.AutonIndexCommand;
+import frc.robot.commands.AutonIntakeCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
@@ -54,12 +54,12 @@ public class AATwoBallAuton extends SequentialCommandGroup {
 
     addCommands(
         new SequentialCommandGroup(
-            new ParallelCommandGroup(twoBall0Command, new AutonIndexCommand(p_intake, 3)),
+            new ParallelCommandGroup(twoBall0Command, new AutonIntakeCommand(p_intake, 3)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
             new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4),
-            new AutonIndexCommand(p_intake, 1),
+            new AutonIntakeCommand(p_intake, 1),
             new WaitCommand(.5),
-            new AutonIndexCommand(p_intake, 1),
+            new AutonIntakeCommand(p_intake, 1),
             new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)));
   }
 }

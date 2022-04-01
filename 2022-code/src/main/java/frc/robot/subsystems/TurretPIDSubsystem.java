@@ -16,8 +16,8 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
-  private double FORWARD_SOFT_LIMIT_THRESHOLD = 790;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
+  private double FORWARD_SOFT_LIMIT_THRESHOLD = 770;
+  private double REVERSE_SOFT_LIMIT_THRESHOLD = 200;
   private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
