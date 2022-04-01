@@ -35,8 +35,8 @@ import frc.robot.commands.ShooterSetSpeed;
 import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
-import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.TurretSuppliedOverrideCommand;
+import frc.robot.commands.TurretToAngleCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -168,10 +168,15 @@ public class RobotContainer {
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
-    m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
-    m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
+
+    // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
+    m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
+    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 300));
+    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 500));
+    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 700));
     m_rightJoystickButton.toggleWhenActive(
-        new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
+        new TurretSuppliedOverrideCommand(
+            m_turret, m_limelight, () -> m_OperatorController.getRightX()));
   }
 
   /**

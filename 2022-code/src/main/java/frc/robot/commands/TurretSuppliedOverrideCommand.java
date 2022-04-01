@@ -5,24 +5,31 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import java.util.function.DoubleSupplier;
 
 public class TurretSuppliedOverrideCommand extends CommandBase {
   TurretPIDSubsystem m_turret;
+  LimelightSubsystem m_limelight;
   DoubleSupplier m_doubleSupplier;
   /** Creates a new TurretSuppliedOverrideCommand. */
   public TurretSuppliedOverrideCommand(
-      TurretPIDSubsystem p_turret, DoubleSupplier p_doubleSupplier) {
+      TurretPIDSubsystem p_turret,
+      LimelightSubsystem p_limelight,
+      DoubleSupplier p_doubleSupplier) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(p_turret);
     m_turret = p_turret;
+    m_limelight = p_limelight;
+    addRequirements(m_turret, m_limelight);
     m_doubleSupplier = p_doubleSupplier;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_limelight.setLimelightOff();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -32,7 +39,9 @@ public class TurretSuppliedOverrideCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_limelight.setLimelightOn();
+  }
 
   // Returns true when the command should end.
   @Override
