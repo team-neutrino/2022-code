@@ -14,6 +14,6 @@ import frc.robot.subsystems.LimelightSubsystem;
 public class TestTrajectory extends SequentialCommandGroup {
   /** Creates a new TenBallAuton. */
   public TestTrajectory(LimelightSubsystem p_limelight) {
-    addCommands(new InstantCommand(() -> p_limelight.setLimelightOn(true)));
+    addCommands(new InstantCommand(() -> p_limelight.setLimelightOn()));
   }
 }

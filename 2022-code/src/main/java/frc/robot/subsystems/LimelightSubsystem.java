@@ -30,12 +30,12 @@ public class LimelightSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run during simulation
   }
 
-  public void setLimelightOn(boolean setOn) {
-    if (setOn) {
-      ledMode.setNumber(3);
-    } else {
-      ledMode.setNumber(1);
-    }
+  public void setLimelightOn() {
+    ledMode.setNumber(3);
+  }
+
+  public void setLimelightOff() {
+    ledMode.setNumber(1);
   }
 
   public double getTx() {
