@@ -27,7 +27,7 @@ import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
-import frc.robot.commands.MBC;
+import frc.robot.commands.MagicButtonCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
@@ -149,7 +149,7 @@ public class RobotContainer {
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_Y.whileHeld(new MBC(m_shooter, m_index));
+    m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
 
     m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
