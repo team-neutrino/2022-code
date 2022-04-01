@@ -82,6 +82,8 @@ public class RobotContainer {
       new JoystickButton(m_OperatorController, XboxController.Button.kBack.value);
   private JoystickButton m_rightJoystickButton =
       new JoystickButton(m_OperatorController, XboxController.Button.kRightStick.value);
+    private JoystickButton m_leftJoystickButton =
+      new JoystickButton(m_OperatorController, XboxController.Button.kLeftStick.value);
   private TriggerToBoolean m_TriggerLeft =
       new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value);
   private TriggerToBoolean m_TriggerRight =
@@ -169,8 +171,10 @@ public class RobotContainer {
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_leftPovButton.whileHeld(new TurretManualAimCommand(m_turret, false));
     m_rightPovButton.whileHeld(new TurretManualAimCommand(m_turret, true));
-    m_rightJoystickButton.toggleWhenActive(
-        new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX()));
+    m_rightJoystickButton.whenActive(
+        new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX(), m_limelight, false));
+    m_leftJoystickButton.toggleWhenActive(
+        new TurretSuppliedOverrideCommand(m_turret, () -> m_OperatorController.getRightX(), m_limelight, true));
   }
 
   /**
