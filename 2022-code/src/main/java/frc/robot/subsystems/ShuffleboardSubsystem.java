@@ -160,11 +160,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
-      //   m_drivestationTab
-      //       .add(CameraServer.startAutomaticCapture())
-      //       .withPosition(3, 1)
-      //       .withSize(5, 5)
-      //       .withWidget(BuiltInWidgets.kCameraStream);
+         m_drivestationTab
+             .add(CameraServer.startAutomaticCapture())
+             .withPosition(3, 1)
+             .withSize(5, 5)
+             .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
   }
