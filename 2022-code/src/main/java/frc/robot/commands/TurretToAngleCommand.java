@@ -15,9 +15,8 @@ public class TurretToAngleCommand extends CommandBase {
   private double m_initialAngle;
 
   /** Creates a new TurretAutoAimCommand. */
-  public TurretToAngleCommand(TurretPIDSubsystem p_turret,
-                              LimelightSubsystem p_limelight,
-                              double p_setpointAngle) {
+  public TurretToAngleCommand(
+      TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, double p_setpointAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
     m_limelight = p_limelight;
@@ -30,19 +29,19 @@ public class TurretToAngleCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_limelight.setLimelightOn(false);
+    m_limelight.setLimelightOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_turret.setTargetAngle(m_initialAngle + m_setpointAngle);
+    m_turret.setTargetAngle(m_initialAngle + m_setpointAngle);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_limelight.setLimelightOn(true);
+    m_limelight.setLimelightOn();
     m_turret.stop();
   }
 

@@ -18,12 +18,12 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double m_currentAngle;
   private double m_initialAngle;
   private double FORWARD_SOFT_LIMIT_THRESHOLD = 790;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
+  private double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 1.5;
+    m_turretMotorConfig.slot0.kP = 10.0;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;
@@ -39,7 +39,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void setTargetAngle(double targetAngle) {
-    m_turretMotor.set(ControlMode.Position, targetAngle);
+    if (targetAngle > FORWARD_SOFT_LIMIT_THRESHOLD)
+      m_turretMotor.set(ControlMode.Position, FORWARD_SOFT_LIMIT_THRESHOLD - 25.0);
+    else if (targetAngle < REVERSE_SOFT_LIMIT_THRESHOLD)
+      m_turretMotor.set(ControlMode.Position, REVERSE_SOFT_LIMIT_THRESHOLD + 25.0);
+    else m_turretMotor.set(ControlMode.Position, targetAngle);
   }
 
   public double getInitialAngle() {

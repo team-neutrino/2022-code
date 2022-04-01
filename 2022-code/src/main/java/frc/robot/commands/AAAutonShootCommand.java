@@ -46,7 +46,7 @@ public class AAAutonShootCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_limelight.setLimelightOn(true);
+    m_limelight.setLimelightOn();
     m_RPM = m_shooter.CalculateRPM();
     m_timer.start();
   }
