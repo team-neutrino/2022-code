@@ -10,14 +10,18 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 
 public class TurretToAngleCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
+  private LimelightSubsystem m_limelight;
   private double m_setpointAngle;
   private double m_initialAngle;
 
   /** Creates a new TurretAutoAimCommand. */
-  public TurretToAngleCommand(TurretPIDSubsystem p_turret, double p_setpointAngle) {
+  public TurretToAngleCommand(TurretPIDSubsystem p_turret,
+                              LimelightSubsystem p_limelight,
+                              double p_setpointAngle) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
-    addRequirements(m_turret);
+    m_limelight = p_limelight;
+    addRequirements(m_turret, m_limelight);
 
     m_setpointAngle = p_setpointAngle;
     m_initialAngle = m_turret.getInitialAngle();
@@ -26,6 +30,7 @@ public class TurretToAngleCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_limelight.setLimelightOn(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +42,7 @@ public class TurretToAngleCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_limelight.setLimelightOn(true);
     m_turret.stop();
   }
 
