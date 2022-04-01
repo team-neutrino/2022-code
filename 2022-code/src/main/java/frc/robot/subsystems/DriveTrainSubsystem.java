@@ -38,7 +38,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDriveOdometry m_odometry;
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
-  public static final double DEADZONE = .1;
+  public static final double DEADZONE = .2;
   private static final double K_WHEEL_CIRCUMFERENCE = Math.PI * K_WHEEL_DIAMETER;
   private static final double K_ENCODER_CONVERSION = (K_GEAR_RATIO * K_WHEEL_CIRCUMFERENCE);
 
@@ -63,6 +63,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor1.setInverted(true);
     m_leftMotor2.setInverted(true);
 
+    m_leftMotor1.burnFlash();
+    m_leftMotor2.burnFlash();
+    m_rightMotor1.burnFlash();
+    m_rightMotor2.burnFlash();
+
     m_encoderR1 = m_rightMotor1.getEncoder();
     m_encoderR2 = m_rightMotor2.getEncoder();
     m_encoderL1 = m_leftMotor1.getEncoder();
@@ -85,7 +90,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // called once per scheduler run if you didn't already know
-    System.out.println(getPose());
+    // System.out.println(getPose());
     m_odometry.update(
         Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
     m_xEntry.setNumber(m_odometry.getPoseMeters().getTranslation().getX());

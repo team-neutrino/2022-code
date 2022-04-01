@@ -10,6 +10,7 @@ import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -63,6 +64,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     driveStationTab();
     debugTab();
+    LiveWindow.disableAllTelemetry();
   }
 
   @Override
@@ -160,11 +162,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
-      m_drivestationTab
-          .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 1)
-          .withSize(5, 5)
-          .withWidget(BuiltInWidgets.kCameraStream);
+    //   m_drivestationTab
+    //       .add(CameraServer.startAutomaticCapture())
+    //       .withPosition(3, 1)
+    //       .withSize(5, 5)
+    //       .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
   }
