@@ -32,7 +32,7 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
-import frc.robot.commands.TestShooterRPMCommand;
+import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretManualAimCommand;
 import frc.robot.commands.TurretSuppliedOverrideCommand;
@@ -121,6 +121,8 @@ public class RobotContainer {
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private AATwoBallAuton m_AATwoBallAuton =
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+  private FourBallAuton m_fourBallAuton =
+      new FourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -143,10 +145,12 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 2150));
+    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_Y.whileHeld(new MBC(m_shooter, m_index));
+    m_X.whileHeld(new ShooterSetSpeed(m_shooter, 1800));
+    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3405));
+
+    // m_Y.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
