@@ -16,11 +16,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+import frc.robot.commands.Climb1ExtendCommand;
+import frc.robot.commands.Climb1RetractCommand;
+import frc.robot.commands.Climb2ExtendCommand;
+import frc.robot.commands.Climb2RetractCommand;
 import frc.robot.commands.ClimbDefaultCommand;
-import frc.robot.commands.ClimbExtendCommand;
-import frc.robot.commands.ClimbKeyExtendCommand;
-import frc.robot.commands.ClimbKeyUnlockCommand;
-import frc.robot.commands.ClimbRetractCommand;
 import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
@@ -158,21 +158,14 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new IntakeCommand(m_intake), new WaitCommand(0.1), new IntakeDownCommand(m_intake)));
     m_back.whileHeld(
-        new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber)));
+        new Climb1RetractCommand(m_climber));
     m_start.whileHeld(
-        new SequentialCommandGroup(
-            new ClimbKeyUnlockCommand(m_climber),
-            new WaitCommand(0.5),
-            new ClimbExtendCommand(m_climber)));
-    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
+    new Climb1ExtendCommand(m_climber));
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
     m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
-    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 300));
-    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 500));
+    m_upPovButton.whileHeld(new Climb2ExtendCommand(m_climber));
+    m_rightPovButton.whileHeld(new Climb2RetractCommand(m_climber));
     m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 700));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(

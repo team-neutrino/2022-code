@@ -59,7 +59,7 @@ public class ClimberSubsystem extends SubsystemBase {
     m_climberArm2.set(CLIMBER_UP_SPEED);
   }
 
-  public void setclimberArm1Off() {
+  public void setClimberArm1Off() {
     m_climberArm1.set(0);
   }
 

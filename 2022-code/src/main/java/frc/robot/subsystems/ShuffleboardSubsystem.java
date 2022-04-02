@@ -107,8 +107,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
 
-    m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
-    m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
+    //m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
+    //m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
