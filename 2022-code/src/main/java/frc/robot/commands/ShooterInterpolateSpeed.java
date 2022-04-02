@@ -24,13 +24,15 @@ public class ShooterInterpolateSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_targetRPM = m_shooter.CalculateRPM();
-    m_shooter.setTargetRPM(m_targetRPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_targetRPM = m_shooter.CalculateRPM();
+    m_shooter.setTargetRPM(m_targetRPM);
+    m_shooter.setTopRollerRPM(m_targetRPM);
+  }
 
   // Called once the command ends or is interrupted.
   @Override

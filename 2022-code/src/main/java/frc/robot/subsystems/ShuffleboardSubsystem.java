@@ -38,7 +38,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[3];
-  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
+  private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
 
@@ -89,6 +89,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
     }
     m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
+    m_shooter.setTopRollerShuffleboardRPM(m_shooterPID[5].getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
@@ -214,6 +215,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(3, 5)
             .withSize(1, 1)
             .getEntry();
+    m_shooterPID[5] =
+            m_debugTab
+                .add("Top Roller RPM Set", m_shooter.getTopRollerShuffleboardRPM())
+                .withPosition(4, 5)
+                .withSize(1, 1)
+                .getEntry();
 
     m_driveVariables[0] =
         m_debugTab.add("DriveLMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();

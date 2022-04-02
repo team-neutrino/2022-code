@@ -16,11 +16,15 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.3;
-
-  private final double WHEEL_I = 0.0008;
+  private final double WHEEL_P = 0.06;
+  private final double WHEEL_I = 1.0;
   private final double WHEEL_D = 0;
-  private final double WHEEL_FF = 0.2;
+  private final double WHEEL_FF = 0.07;
+
+  private final double ROLLER_P = 0.3;
+  private final double ROLLER_I = 0.0008;
+  private final double ROLLER_D = 0;
+  private final double ROLLER_FF = 0.2;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
@@ -34,6 +38,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private CalculateRPM RPMCalculator;
 
   private double m_targetRPM;
+private double m_topRollerShuffleboardRPM = 100;
   public double m_shuffleBoardRPM = 100;
 
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
@@ -52,6 +57,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
+    m_topRoller.setInverted(true);
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
 
@@ -70,17 +76,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_TopRollerPidController = m_topRoller.getPIDController();
     m_TopRollerPidController.setFeedbackDevice(m_topRollerEncoder);
-    m_TopRollerPidController.setP(WHEEL_P / 1000.0);
-    m_TopRollerPidController.setI(WHEEL_I / 1000.0);
-    m_TopRollerPidController.setD(WHEEL_D / 1000.0);
-    m_TopRollerPidController.setFF(WHEEL_FF / 1000.0);
-    m_TopRollerPidController.setIZone(100);
+    m_TopRollerPidController.setP(ROLLER_P / 1000.0);
+    m_TopRollerPidController.setI(ROLLER_I / 1000.0);
+    m_TopRollerPidController.setD(ROLLER_D / 1000.0);
+    m_TopRollerPidController.setFF(ROLLER_FF / 1000.0);
+    m_TopRollerPidController.setIZone(200);
     m_TopRollerPidController.setOutputRange(.1, 1);
   }
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
@@ -99,7 +104,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void setTopRollerRPM(double p_RPM) {
-    m_TopRollerPidController.setReference(p_RPM + 200, ControlType.kVelocity);
+    m_TopRollerPidController.setReference(p_RPM * 1.2, ControlType.kVelocity);
   }
 
   public void setTargetRPM(double p_targetRPM) {
@@ -115,8 +120,16 @@ public class ShooterSubsystem extends SubsystemBase {
     return m_shuffleBoardRPM;
   }
 
+  public double getTopRollerShuffleboardRPM() {
+    return m_topRollerShuffleboardRPM;
+  }
+
   public void setShuffleboardRPM(double shuffleboardRPM) {
     m_shuffleBoardRPM = shuffleboardRPM;
+  }
+
+  public void setTopRollerShuffleboardRPM(double shuffleboardRPM) {
+    m_topRollerShuffleboardRPM = shuffleboardRPM;
   }
 
   public void turnOff() {
@@ -125,38 +138,39 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setPower(double power) {
     m_wheelMotor.set(power);
+    m_topRoller.set(power);
   }
 
   public double getP() {
-    return m_pidController.getP() * 1000.0;
+    return m_TopRollerPidController.getP() * 1000.0;
   }
 
   public double getFF() {
-    return m_pidController.getFF() * 1000.0;
+    return m_TopRollerPidController.getFF() * 1000.0;
   }
 
   public void setP(double P) {
-    m_pidController.setP(P / 1000.0);
+    m_TopRollerPidController.setP(P / 1000.0);
   }
 
   public double getI() {
-    return m_pidController.getI() * 1000.0;
+    return m_TopRollerPidController.getI() * 1000.0;
   }
 
   public void setI(double I) {
-    m_pidController.setI(I / 1000.0);
+    m_TopRollerPidController.setI(I / 1000.0);
   }
 
   public double getD() {
-    return m_pidController.getD() * 1000.0;
+    return m_TopRollerPidController.getD() * 1000.0;
   }
 
   public void setD(double D) {
-    m_pidController.setD(D / 1000.0);
+    m_TopRollerPidController.setD(D / 1000.0);
   }
 
   public void setFF(double FF) {
-    m_pidController.setFF(FF / 1000.0);
+    m_TopRollerPidController.setFF(FF / 1000.0);
   }
 
   public boolean magicShooter(double RPM, double TRPM) {

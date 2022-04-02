@@ -34,7 +34,7 @@ public class TestShooterRPMCommand extends CommandBase {
   public void execute() {
     testRPM = m_shooter.getShuffleboardRPM();
     m_shooter.setTargetRPM(testRPM);
-    m_shooter.setTopRollerRPM(testRPM);
+    m_shooter.setTopRollerRPM(m_shooter.getTopRollerShuffleboardRPM());
   }
 
   // Called once the command ends or is interrupted.
