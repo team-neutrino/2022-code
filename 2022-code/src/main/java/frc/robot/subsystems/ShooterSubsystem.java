@@ -80,8 +80,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    m_targetRPM = CalculateRPM();
-    setTopRollerRPM(m_targetRPM + 200);
   }
 
   public double CalculateRPM() {
@@ -101,7 +99,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void setTopRollerRPM(double p_RPM) {
-    m_TopRollerPidController.setReference(p_RPM, ControlType.kVelocity);
+    m_TopRollerPidController.setReference(p_RPM + 200, ControlType.kVelocity);
   }
 
   public void setTargetRPM(double p_targetRPM) {

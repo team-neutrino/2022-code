@@ -26,7 +26,6 @@ public class ShooterInterpolateSpeed extends CommandBase {
   public void initialize() {
     m_targetRPM = m_shooter.CalculateRPM();
     m_shooter.setTargetRPM(m_targetRPM);
-    m_shooter.setTopRollerRPM(m_targetRPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
