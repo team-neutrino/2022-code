@@ -142,7 +142,7 @@ public class RobotContainer {
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
-    m_shooter.setDefaultCommand(m_shooterDefaultCommand);
+    m_shooter.setDefaultCommand(new ShooterDefaultCommand(m_shooter));
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */

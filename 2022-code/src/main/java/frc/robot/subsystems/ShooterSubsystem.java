@@ -24,9 +24,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
+  private CANSparkMax m_topRoller;
   private RelativeEncoder m_encoder1;
   private RelativeEncoder m_encoder2;
+  private RelativeEncoder m_topRollerEncoder;
   private SparkMaxPIDController m_pidController;
+  private SparkMaxPIDController m_TopRollerPidController;
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
@@ -41,6 +44,8 @@ public class ShooterSubsystem extends SubsystemBase {
         new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_1_ID, MotorType.kBrushless);
     m_wheelMotor2 =
         new CANSparkMax(Constants.CANIDConstants.SHOOTER_MOTOR_2_ID, MotorType.kBrushless);
+    m_topRoller =
+        new CANSparkMax(Constants.CANIDConstants.SHOOTER_ROLLER_MOTOR_ID, MotorType.kBrushless);
     m_wheelMotor.restoreFactoryDefaults();
     m_wheelMotor2.restoreFactoryDefaults();
     m_wheelMotor2.follow(m_wheelMotor);
@@ -52,6 +57,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_encoder1 = m_wheelMotor.getEncoder();
     m_encoder2 = m_wheelMotor2.getEncoder();
+    m_topRollerEncoder = m_topRoller.getEncoder();
+
     m_pidController = m_wheelMotor.getPIDController();
     m_pidController.setFeedbackDevice(m_encoder1);
     m_pidController.setP(WHEEL_P / 1000.0);
@@ -60,10 +67,22 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setFF(WHEEL_FF / 1000.0);
     m_pidController.setIZone(100);
     m_pidController.setOutputRange(.1, 1);
+
+    m_TopRollerPidController = m_topRoller.getPIDController();
+    m_TopRollerPidController.setFeedbackDevice(m_topRollerEncoder);
+    m_TopRollerPidController.setP(WHEEL_P / 1000.0);
+    m_TopRollerPidController.setI(WHEEL_I / 1000.0);
+    m_TopRollerPidController.setD(WHEEL_D / 1000.0);
+    m_TopRollerPidController.setFF(WHEEL_FF / 1000.0);
+    m_TopRollerPidController.setIZone(100);
+    m_TopRollerPidController.setOutputRange(.1, 1);
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    m_targetRPM = CalculateRPM();
+    setTopRollerRPM(m_targetRPM + 200);
+  }
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
@@ -75,6 +94,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getRPM2() {
     return m_encoder2.getVelocity();
+  }
+
+  public double getTopRollerRPM() {
+    return m_topRollerEncoder.getVelocity();
+  }
+
+  public void setTopRollerRPM(double p_RPM) {
+    m_TopRollerPidController.setReference(p_RPM, ControlType.kVelocity);
   }
 
   public void setTargetRPM(double p_targetRPM) {

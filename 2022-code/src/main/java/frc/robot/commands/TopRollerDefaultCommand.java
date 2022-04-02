@@ -8,40 +8,32 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class TestShooterRPMCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+public class TopRollerDefaultCommand extends CommandBase {
   private ShooterSubsystem m_shooter;
-
-  private double testRPM;
+  private double m_targetRPM;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public TestShooterRPMCommand(ShooterSubsystem p_shooter) {
-    m_shooter = p_shooter;
-    // Use addRequirements() here to declare subsystem dependencies.
+  public TopRollerDefaultCommand(ShooterSubsystem p_shotoer) {
+    m_shooter = p_shotoer;
     addRequirements(m_shooter);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    testRPM = m_shooter.getShuffleboardRPM();
-    m_shooter.setTargetRPM(testRPM);
-    m_shooter.setTopRollerRPM(testRPM);
+    m_targetRPM = m_shooter.CalculateRPM();
+    m_shooter.setTopRollerRPM(m_targetRPM);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

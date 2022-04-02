@@ -37,7 +37,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
-  private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
@@ -71,6 +71,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
+    m_shooterVariables[2].setDouble(m_shooter.getTopRollerRPM());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(!m_color.getIsBlue());
@@ -176,6 +177,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_debugTab
             .add("Shooter RPM", 0)
             .withPosition(0, 0)
+            .withSize(2, 2)
+            .withWidget(BuiltInWidgets.kDial)
+            .withProperties(Map.of("min", 0, "max", 6000))
+            .getEntry();
+    m_shooterVariables[2] =
+        m_debugTab
+            .add("Top Roller RPM", 0)
+            .withPosition(0, 3)
             .withSize(2, 2)
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
