@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -11,43 +7,34 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
-/** An example command that uses an example subsystem. */
-public class AAAutonShootCommand extends CommandBase {
+public class AAMagicButtonCommand extends CommandBase {
+
+  private final double LIMELIGHT_MULTIPLICATION = 6.0;
   private ShooterSubsystem m_shooter;
   private IndexSubsystem m_index;
   private LimelightSubsystem m_limelight;
   private TurretPIDSubsystem m_turret;
+  private double m_targetRPM;
   private Timer m_timer;
-  private double m_duration;
-  private double m_RPM;
-  private double LIMELIGHT_MULTIPLICATION = 6.0;
+  private double m_time;
 
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public AAAutonShootCommand(
+  public AAMagicButtonCommand(
       ShooterSubsystem p_shooter,
       IndexSubsystem p_index,
-      TurretPIDSubsystem p_turret,
       LimelightSubsystem p_limelight,
-      double p_duration) {
+      TurretPIDSubsystem p_turret,
+      double p_time) {
     m_shooter = p_shooter;
-    m_index = p_index;
-    m_turret = p_turret;
     m_limelight = p_limelight;
+    m_index = p_index;
     m_timer = new Timer();
-    m_duration = p_duration;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter, m_index);
+    m_time = p_time;
+    addRequirements(m_index, m_shooter, m_limelight);
   }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_limelight.setLimelightOn();
-    m_RPM = m_shooter.CalculateRPM();
     m_timer.start();
   }
 
@@ -61,8 +48,9 @@ public class AAAutonShootCommand extends CommandBase {
       m_turret.stop();
     }
 
-    m_shooter.setTargetRPM(m_RPM);
-    if (m_timer.get() >= 2) {
+    m_targetRPM = m_shooter.CalculateRPM();
+    m_shooter.setTargetRPM(m_targetRPM);
+    if (m_shooter.magicShooter(m_shooter.getRPM1(), m_targetRPM)) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }
@@ -80,7 +68,7 @@ public class AAAutonShootCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (m_timer.get() >= m_duration) {
+    if (m_timer.get() >= m_time) {
       return true;
     }
     return false;
