@@ -17,8 +17,8 @@ public class ClimbDefaultCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_climberSubsystem.climberOff();
-    m_climberSubsystem.compressorOn();
+    m_climberSubsystem.setClimberArm1Off();
+    m_climberSubsystem.setClimberArm2Off();
   }
 
   @Override

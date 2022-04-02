@@ -3,10 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbExtendCommand extends CommandBase {
+public class Climb2RetractCommand extends CommandBase {
   private ClimberSubsystem m_climberSubsystem;
 
-  public ClimbExtendCommand(ClimberSubsystem subsystem) {
+  public Climb2RetractCommand(ClimberSubsystem subsystem) {
     m_climberSubsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -16,11 +16,12 @@ public class ClimbExtendCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_climberSubsystem.extendClimber();
+    m_climberSubsystem.retractClimberArm2();
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   @Override
   public boolean isFinished() {

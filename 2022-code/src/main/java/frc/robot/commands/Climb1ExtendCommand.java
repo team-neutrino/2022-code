@@ -3,11 +3,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbKeyUnlockCommand extends CommandBase {
-
+public class Climb1ExtendCommand extends CommandBase {
   private ClimberSubsystem m_climberSubsystem;
 
-  public ClimbKeyUnlockCommand(ClimberSubsystem subsystem) {
+  public Climb1ExtendCommand(ClimberSubsystem subsystem) {
     m_climberSubsystem = subsystem;
     addRequirements(subsystem);
   }
@@ -17,7 +16,7 @@ public class ClimbKeyUnlockCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_climberSubsystem.keyUnlock();
+    m_climberSubsystem.extendClimberArm1();
   }
 
   @Override
@@ -25,6 +24,6 @@ public class ClimbKeyUnlockCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

@@ -12,62 +12,68 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
-  private final int SOLENOID_KEYPISTON_RETRACT = 7;
   private double CLIMBER_UP_SPEED = 0.5;
   private double CLIMBER_DOWN_SPEED = -.5;
-  private RelativeEncoder m_encoder;
+  private RelativeEncoder m_encoder1;
+  private RelativeEncoder m_encoder2;
+  //add limit switch, should determine how and when
 
-  private CANSparkMax m_climber =
+  private CANSparkMax m_climberArm1 =
       new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
-  private Solenoid m_keyPiston =
-      new Solenoid(PneumaticsModuleType.CTREPCM, SOLENOID_KEYPISTON_RETRACT);
-  private DigitalInput m_limitSwitch = new DigitalInput(Constants.DigitalConstants.CLIMBER_SWITCH);
-  private final Compressor m_compressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  private CANSparkMax m_climberArm2 =
+      new CANSparkMax(Constants.CANIDConstants.CLIMBER_MOTOR_1, MotorType.kBrushless);
 
   @Override
   public void periodic() {}
 
   public ClimberSubsystem() {
-    m_climber.setIdleMode(IdleMode.kBrake);
-    m_climber.setInverted(true);
-    m_climber.setOpenLoopRampRate(.5);
-    m_encoder = m_climber.getEncoder();
+    m_climberArm1.setIdleMode(IdleMode.kBrake);
+    m_climberArm2.setIdleMode(IdleMode.kBrake);
+
+    m_climberArm1.setInverted(true);
+    m_climberArm2.setInverted(true);
+
+    m_climberArm1.setOpenLoopRampRate(.5);
+    m_climberArm2.setOpenLoopRampRate(.5);
+
+    m_encoder1 = m_climberArm1.getEncoder();
+    m_encoder2 = m_climberArm2.getEncoder();
   }
 
-  public void keyLock() {
-    m_keyPiston.set(false);
+  public void retractClimberArm1() {
+    m_climberArm1.set(CLIMBER_DOWN_SPEED);
   }
 
-  public void keyUnlock() {
-    m_keyPiston.set(true);
+  public void retractClimberArm2()
+  {
+    m_climberArm2.set(CLIMBER_DOWN_SPEED);
   }
 
-  public void extendClimber() {
-    m_climber.set(CLIMBER_UP_SPEED);
+  public void extendClimberArm1()
+  {
+    m_climberArm1.set(CLIMBER_UP_SPEED);
   }
 
-  public void retractClimber() {
-    m_climber.set(CLIMBER_DOWN_SPEED);
+  public void extendClimberArm2()
+  {
+    m_climberArm2.set(CLIMBER_UP_SPEED);
   }
 
-  public void climberOff() {
-    m_climber.set(0);
+  public void setclimberArm1Off() {
+    m_climberArm1.set(0);
   }
 
-  public Boolean getLimitSwitch() {
-    return m_limitSwitch.get();
+  public void setClimberArm2Off() {
+    m_climberArm2.set(0);
   }
 
-  public double getClimbEncoder() {
+  public double getClimbArm1Encoder() {
 
-    return m_encoder.getVelocity();
+    return m_encoder1.getVelocity();
   }
 
-  public void compressorOn() {
-    m_compressor.enableDigital();
-  }
+  public double getClimbArm2Encoder() {
 
-  public void compressorOff() {
-    m_compressor.disable();
+    return m_encoder2.getVelocity();
   }
 }
