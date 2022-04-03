@@ -11,7 +11,7 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
-  private double LIMELIGHT_MULTIPLICATION = 10.0;
+  private double LIMELIGHT_MULTIPLICATION = 6.0;
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
     // Use addRequirements() here to declare subsystem dependencies.

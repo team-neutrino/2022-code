@@ -20,7 +20,7 @@ public class AAAutonShootCommand extends CommandBase {
   private Timer m_timer;
   private double m_duration;
   private double m_RPM;
-  private double LIMELIGHT_MULTIPLICATION = 20.0;
+  private double LIMELIGHT_MULTIPLICATION = 6.0;
 
   /**
    * Creates a new ExampleCommand.

@@ -38,12 +38,12 @@ public class TrajectoryConfigConstants {
           .addConstraint(m_autoVoltageConstraint);
 
   public static final TrajectoryConfig m_speedyForwardConfig =
-      new TrajectoryConfig(8, K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+      new TrajectoryConfig(10, K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
           .setKinematics(K_DRIVE_KINEMATICS)
           .addConstraint(m_autoVoltageConstraint);
 
   public static final TrajectoryConfig m_ReverseConfig =
-      new TrajectoryConfig(8, K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+      new TrajectoryConfig(10, K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
           .setKinematics(K_DRIVE_KINEMATICS)
           .addConstraint(m_autoVoltageConstraint)
           .setReversed(true);
