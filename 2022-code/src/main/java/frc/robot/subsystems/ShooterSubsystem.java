@@ -58,6 +58,7 @@ private double m_topRollerShuffleboardRPM = 100;
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
     m_topRoller.setInverted(true);
+    m_topRoller.setSmartCurrentLimit(40);
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
 
@@ -82,6 +83,7 @@ private double m_topRollerShuffleboardRPM = 100;
     m_TopRollerPidController.setFF(ROLLER_FF / 1000.0);
     m_TopRollerPidController.setIZone(200);
     m_TopRollerPidController.setOutputRange(.1, 1);
+    m_topRoller.burnFlash();
   }
 
   @Override
