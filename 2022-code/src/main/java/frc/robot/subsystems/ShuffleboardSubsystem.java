@@ -240,7 +240,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_indexVariables[0] =
         m_debugTab.add("Index Motor 2", 0).withPosition(5, 4).withSize(1, 1).getEntry();
     m_indexVariables[1] =
-        m_debugTab.add("Index Beambreak", 0).withPosition(6, 4).withSize(1, 1).getEntry();
+        m_debugTab.add("Index Beambreak", false).withPosition(6, 4).withSize(1, 1).getEntry();
 
     m_limelightVariables[0] =
         m_debugTab
