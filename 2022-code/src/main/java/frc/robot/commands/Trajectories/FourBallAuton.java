@@ -27,6 +27,7 @@ public class FourBallAuton extends SequentialCommandGroup {
 
   private Trajectory m_fourBall1;
   private Trajectory m_fourBall2;
+  private Trajectory m_fourBall3;
 
   public FourBallAuton(
       DriveTrainSubsystem p_drive,
@@ -38,6 +39,7 @@ public class FourBallAuton extends SequentialCommandGroup {
     m_fourBall0 = FourBallTrajectory.fourBall0;
     m_fourBall1 = FourBallTrajectory.fourBall1;
     m_fourBall2 = FourBallTrajectory.fourBall2;
+    m_fourBall3 = FourBallTrajectory.fourBall3;
 
     RamseteCommand fourBall0Command =
         new RamseteCommand(
@@ -90,14 +92,31 @@ public class FourBallAuton extends SequentialCommandGroup {
             p_drive::setTankDriveVolts,
             p_drive);
 
+    RamseteCommand fourBall3Command =
+        new RamseteCommand(
+            m_fourBall3,
+            p_drive::getPose,
+            new RamseteController(
+                TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
+            new SimpleMotorFeedforward(
+                TrajectoryConfigConstants.KS_VOLTS,
+                TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
+                TrajectoryConfigConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
+            p_drive::getWheelSpeeds,
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            p_drive::setTankDriveVolts,
+            p_drive);
+
     addCommands(
+        new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 3)),
+        new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
+        new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3),
+        new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
+        fourBall2Command,
         new SequentialCommandGroup(
-            new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 3)),
-            new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3),
-            new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
-            fourBall2Command,
-            new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)));
+                fourBall3Command, new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
+            .alongWith(new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)));
   }
 }

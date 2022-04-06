@@ -28,6 +28,13 @@ public class FourBallTrajectory {
       TrajectoryGenerator.generateTrajectory(
           List.of(
               new Pose2d(5.6, 0, Rotation2d.fromDegrees(0)),
+              new Pose2d(3, 0, Rotation2d.fromDegrees(0))),
+          TrajectoryConfigConstants.m_ReverseConfig);
+
+  public static final Trajectory fourBall3 =
+      TrajectoryGenerator.generateTrajectory(
+          List.of(
+              new Pose2d(3, 0, Rotation2d.fromDegrees(0)),
               new Pose2d(1.5, 0, Rotation2d.fromDegrees(0))),
           TrajectoryConfigConstants.m_ReverseConfig);
 }
