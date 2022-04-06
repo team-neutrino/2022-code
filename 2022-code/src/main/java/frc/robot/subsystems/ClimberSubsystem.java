@@ -30,7 +30,6 @@ public class ClimberSubsystem extends SubsystemBase {
   public ClimberSubsystem() {
     m_climber.setIdleMode(IdleMode.kBrake);
     m_climber.setInverted(true);
-    m_climber.setSmartCurrentLimit(80);
     m_climber.setOpenLoopRampRate(.5);
     m_encoder = m_climber.getEncoder();
     m_climber.burnFlash();
