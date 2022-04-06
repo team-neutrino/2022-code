@@ -29,7 +29,7 @@ public final class Constants {
     public static final int DRIVETRAIN_MOTOR_RIGHT_2_ID = 4;
     public static final int SHOOTER_MOTOR_1_ID = 5;
     public static final int SHOOTER_MOTOR_2_ID = 6;
-    public static final int TURRET_MOTOR_ID = 7;
+    public static final int TURRET_MOTOR_ID = 10;
     public static final int CLIMBER_MOTOR_1 = 8;
     public static final int MOTOR_CONTROLLER_INTAKE_FEED = 14;
     public static final int INDEX_MOTOR_1_ID = 11;
@@ -38,7 +38,7 @@ public final class Constants {
 
   public static final class DigitalConstants {
     public static final int PRESSURE_SENSOR = 0;
-    public static final int CLIMBER_SWITCH = 1;
+    public static final int CLIMBER_SWITCH = 2;
     public static final int INDEX_BEAMBREAK = 7;
   }
 }

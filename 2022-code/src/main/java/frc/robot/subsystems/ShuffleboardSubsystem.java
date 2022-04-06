@@ -73,7 +73,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_colors[0].setBoolean(m_color.getIsBlue());
-    m_colors[1].setBoolean(!m_color.getIsBlue());
+    m_colors[1].setBoolean(m_color.getIsRed());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
@@ -112,6 +112,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
+
     m_pressureSensor.setDouble(m_intake.getPressure());
 
     m_limelightVariables[0].setString(String.format("%,.2f", m_limelight.getTx()));
@@ -136,7 +137,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
 
     m_colors[0] =
-        m_drivestationTab.add("isBlue", true).withPosition(6, 0).withSize(1, 1).getEntry();
+        m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
     m_colors[1] =
         m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
 
@@ -167,6 +168,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
+
+    m_indexVariables[1] =
+        m_drivestationTab.add("Index Beambreak", false).withPosition(6, 4).withSize(1, 1).getEntry();
   }
 
   public void debugTab() {
@@ -239,8 +243,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0] =
         m_debugTab.add("Index Motor 2", 0).withPosition(5, 4).withSize(1, 1).getEntry();
-    m_indexVariables[1] =
-        m_debugTab.add("Index Beambreak", false).withPosition(6, 4).withSize(1, 1).getEntry();
 
     m_limelightVariables[0] =
         m_debugTab
