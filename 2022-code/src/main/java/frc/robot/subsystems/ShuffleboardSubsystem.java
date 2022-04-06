@@ -170,7 +170,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     }
 
     m_indexVariables[1] =
-        m_drivestationTab.add("Index Beambreak", false).withPosition(6, 4).withSize(1, 1).getEntry();
+        m_drivestationTab
+            .add("Index Beambreak", false)
+            .withPosition(6, 4)
+            .withSize(1, 1)
+            .getEntry();
   }
 
   public void debugTab() {
