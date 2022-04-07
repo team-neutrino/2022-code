@@ -27,6 +27,7 @@ import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
+import frc.robot.commands.LowGoalCommand;
 import frc.robot.commands.MagicButtonCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
@@ -151,7 +152,7 @@ public class RobotContainer {
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
 
-    m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1400));
+    m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
@@ -171,8 +172,8 @@ public class RobotContainer {
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
     m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
-    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 300));
-    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 500));
+    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 340));
+    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 540));
     m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 700));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(
@@ -187,6 +188,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

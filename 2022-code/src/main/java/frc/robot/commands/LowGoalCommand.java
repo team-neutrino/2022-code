@@ -6,19 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretPIDSubsystem;
 
-/** An example command that uses an example subsystem. */
-public class ShooterDefaultCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_shooter;
+public class LowGoalCommand extends CommandBase {
+  /** shooter rpm constant */
+  private ShooterSubsystem m_shooter;
 
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   */
-  public ShooterDefaultCommand(ShooterSubsystem p_shooter) {
+  private TurretPIDSubsystem m_turret;
+
+  double m_rpm;
+
+  /** Creates a new ShooterSetSpeedCommand. */
+  public LowGoalCommand(ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret, double rpm) {
     m_shooter = p_shooter;
+    m_turret = p_turret;
+    m_rpm = rpm;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter);
   }
@@ -30,12 +32,15 @@ public class ShooterDefaultCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setTargetRPM(1400);
+    m_turret.setTargetAngle(340);
+    m_shooter.setTargetRPM(m_rpm);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_shooter.turnOff();
+  }
 
   // Returns true when the command should end.
   @Override

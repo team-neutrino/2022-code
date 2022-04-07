@@ -11,12 +11,14 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
+  private boolean m_hitLimit;
   private double LIMELIGHT_MULTIPLICATION = 10.0;
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
     m_limelight = p_limelight;
+    m_hitLimit = false;
     addRequirements(m_turret, m_limelight);
   }
 
@@ -35,9 +37,13 @@ public class TurretAutoAimCommand extends CommandBase {
     } else {
       if (m_turret.getCurrentAngle() <= m_turret.REVERSE_SOFT_LIMIT_THRESHOLD) {
         m_turret.setPower(.2);
-        ;
-      } else if (m_turret.getCurrentAngle() >= m_turret.FORWARD_SOFT_LIMIT_THRESHOLD) {
+        m_hitLimit = false;
+      } else if (m_turret.getCurrentAngle() >= m_turret.FORWARD_SOFT_LIMIT_THRESHOLD - 40) {
         m_turret.setPower(-.2);
+        m_hitLimit = true;
+      } else {
+        if (m_hitLimit) m_turret.setPower(-.2);
+        else m_turret.setPower(.2);
       }
     }
   }

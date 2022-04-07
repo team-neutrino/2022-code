@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class TurretPIDSubsystem extends SubsystemBase {
-  public static double FORWARD_SOFT_LIMIT_THRESHOLD = 780;
+  public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
   public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
@@ -23,7 +23,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 10.0;
+    m_turretMotorConfig.slot0.kP = 5.0;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;
