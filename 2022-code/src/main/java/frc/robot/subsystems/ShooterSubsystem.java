@@ -63,8 +63,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
