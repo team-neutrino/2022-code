@@ -77,6 +77,11 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_encoderL1.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
     m_encoderL2.setVelocityConversionFactor(K_ENCODER_CONVERSION / 60);
 
+    m_rightMotor1.burnFlash();
+    m_rightMotor2.burnFlash();
+    m_leftMotor1.burnFlash();
+    m_leftMotor2.burnFlash();
+
     m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getYaw()));
     resetOdometry(m_odometry.getPoseMeters());
   }

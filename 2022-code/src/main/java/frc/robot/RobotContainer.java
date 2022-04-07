@@ -151,7 +151,7 @@ public class RobotContainer {
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
 
-    m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1200));
+    m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1400));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
