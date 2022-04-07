@@ -16,15 +16,15 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.06;
-  private final double WHEEL_I = 1.0;
-  private final double WHEEL_D = 0;
-  private final double WHEEL_FF = 0.07;
-
-  private final double ROLLER_P = 0.3;
-  private final double ROLLER_I = 0.0008;
+  private final double ROLLER_P = 0.06;
+  private final double ROLLER_I = 1.0;
   private final double ROLLER_D = 0;
-  private final double ROLLER_FF = 0.2;
+  private final double ROLLER_FF = 0.07;
+
+  private final double WHEEL_P = 0.3;
+  private final double WHEEL_I = 0.0008;
+  private final double WHEEL_D = 0;
+  private final double WHEEL_FF = 0.2;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
@@ -57,7 +57,7 @@ private double m_topRollerShuffleboardRPM = 100;
 
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
-    m_topRoller.setInverted(true);
+    m_topRoller.setInverted(false);
 
     m_wheelMotor.setClosedLoopRampRate(1.5);
 

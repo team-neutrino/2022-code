@@ -37,7 +37,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
-  private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
@@ -52,7 +51,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       IntakeSubSystem p_intake,
       ColorSubsystem p_color,
       LimelightSubsystem p_limelight) {
-    m_shooter = p_shooter;
+    m_shooter = p_shooter;]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
     m_turret = p_turret;
     m_climber = p_climber;
     m_drivetrain = p_drivetrain;
@@ -162,11 +161,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
-      m_drivestationTab
-          .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 1)
-          .withSize(5, 5)
-          .withWidget(BuiltInWidgets.kCameraStream);
+    //   m_drivestationTab
+    //       .add(CameraServer.startAutomaticCapture())
+    //       .withPosition(3, 1)
+    //       .withSize(5, 5)
+    //       .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
   }
