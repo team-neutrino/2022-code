@@ -29,12 +29,16 @@ public class TurretAutoAimCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_limelight.setLimelightOn();
     if (m_limelight.getTv() == true) {
       m_turret.setTargetAngle(
           m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
     } else {
-      m_turret.stop();
+      if (m_turret.getCurrentAngle() <= m_turret.REVERSE_SOFT_LIMIT_THRESHOLD) {
+        m_turret.setPower(.2);
+        ;
+      } else if (m_turret.getCurrentAngle() >= m_turret.FORWARD_SOFT_LIMIT_THRESHOLD) {
+        m_turret.setPower(-.2);
+      }
     }
   }
 

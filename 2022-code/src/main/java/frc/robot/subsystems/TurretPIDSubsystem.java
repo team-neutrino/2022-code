@@ -13,12 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class TurretPIDSubsystem extends SubsystemBase {
+  public static double FORWARD_SOFT_LIMIT_THRESHOLD = 780;
+  public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
   private double m_initialAngle;
-  private double FORWARD_SOFT_LIMIT_THRESHOLD = 780;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private double TURRET_MOTOR_OUTPUT = 0.5;
 
   /** Creates a new TurretPIDSubsystem. */
