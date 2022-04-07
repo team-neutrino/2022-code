@@ -32,6 +32,7 @@ public class ClimberSubsystem extends SubsystemBase {
     m_climber.setInverted(true);
     m_climber.setOpenLoopRampRate(.5);
     m_encoder = m_climber.getEncoder();
+    m_climber.burnFlash();
   }
 
   public void keyLock() {

@@ -17,7 +17,7 @@ import frc.robot.Constants.DigitalConstants;
 public class IntakeSubSystem extends SubsystemBase {
   private final int SOLENOID_INTAKE_FORWARD = 4;
   private final int SOLENOID_INTAKE_REVERSE = 5;
-  private final double INTAKE_MOTOR_POWER = 1;
+  private final double INTAKE_MOTOR_POWER = 0.7;
   private final double PRESSURE_SENSOR_INPUT_VOLTAGE = 4.94;
 
   private TalonSRX m_IntakeFeedMotor = new TalonSRX(CANIDConstants.MOTOR_CONTROLLER_INTAKE_FEED);
