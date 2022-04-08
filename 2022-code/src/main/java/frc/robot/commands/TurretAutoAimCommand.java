@@ -12,13 +12,15 @@ public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
   private boolean m_hitLimit;
+  private boolean m_notAuton;
   private double LIMELIGHT_MULTIPLICATION = 10.0;
   /** Creates a new TurretAutoAimCommand. */
-  public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
+  public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, boolean p_notAuton) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
     m_limelight = p_limelight;
     m_hitLimit = false;
+    m_notAuton = m_notAuton;
     addRequirements(m_turret, m_limelight);
   }
 
@@ -35,19 +37,26 @@ public class TurretAutoAimCommand extends CommandBase {
       m_turret.setTargetAngle(
           m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
     } else {
-      if (m_turret.getCurrentAngle() <= m_turret.REVERSE_SOFT_LIMIT_THRESHOLD) {
-        m_turret.setPower(.2);
-        m_hitLimit = false;
-      } else if (m_turret.getCurrentAngle() >= m_turret.FORWARD_SOFT_LIMIT_THRESHOLD - 40) {
-        m_turret.setPower(-.2);
-        m_hitLimit = true;
-      } else {
-        if (m_hitLimit) m_turret.setPower(-.2);
-        else m_turret.setPower(.2);
+      if(m_notAuton)
+      {
+        if (m_turret.getCurrentAngle() <= m_turret.REVERSE_SOFT_LIMIT_THRESHOLD) {
+          m_turret.setPower(.2);
+          m_hitLimit = false;
+        } else if (m_turret.getCurrentAngle() >= m_turret.FORWARD_SOFT_LIMIT_THRESHOLD - 40) {
+          m_turret.setPower(-.2);
+          m_hitLimit = true;
+        } else {
+          if (m_hitLimit) m_turret.setPower(-.2);
+          else m_turret.setPower(.2);
+        }
       }
     }
   }
 
+  public void setNotAuton()
+  {
+    m_notAuton = true;
+  }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}

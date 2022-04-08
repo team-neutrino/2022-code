@@ -112,7 +112,7 @@ public class RobotContainer {
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
-      new TurretAutoAimCommand(m_turret, m_limelight);
+      new TurretAutoAimCommand(m_turret, m_limelight, true);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
@@ -145,8 +145,8 @@ public class RobotContainer {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
-    m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
+    m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
@@ -184,6 +184,10 @@ public class RobotContainer {
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));
   }
 
+  public void teleopInit()
+  {
+      m_turretAutoAimCommand.setNotAuton();
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -191,7 +195,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    m_turret.setDefaultCommand(new ATurretCommand(m_turret, m_limelight));
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
     return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
