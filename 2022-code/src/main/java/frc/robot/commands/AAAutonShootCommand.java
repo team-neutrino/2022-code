@@ -19,6 +19,7 @@ public class AAAutonShootCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private Timer m_timer;
   private double m_duration;
+  private double m_spinUp;
   private double m_RPM;
   private double LIMELIGHT_MULTIPLICATION = 20.0;
 
@@ -39,6 +40,25 @@ public class AAAutonShootCommand extends CommandBase {
     m_limelight = p_limelight;
     m_timer = new Timer();
     m_duration = p_duration;
+    m_spinUp = 1.8;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_shooter, m_index);
+  }
+
+  public AAAutonShootCommand(
+      ShooterSubsystem p_shooter,
+      IndexSubsystem p_index,
+      TurretPIDSubsystem p_turret,
+      LimelightSubsystem p_limelight,
+      double p_duration,
+      double p_spinUp) {
+    m_shooter = p_shooter;
+    m_index = p_index;
+    m_turret = p_turret;
+    m_limelight = p_limelight;
+    m_timer = new Timer();
+    m_duration = p_duration;
+    m_spinUp = p_spinUp;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter, m_index);
   }
@@ -62,7 +82,7 @@ public class AAAutonShootCommand extends CommandBase {
     }
 
     m_shooter.setTargetRPM(m_RPM);
-    if (m_timer.get() >= 1.8) {
+    if (m_timer.get() >= m_spinUp) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }

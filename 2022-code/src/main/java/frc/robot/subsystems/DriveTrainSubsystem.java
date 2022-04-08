@@ -102,14 +102,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_rightMotors.set(power(-m_setRightSpeed));
   }
 
-  public double power(double speed)
-  {
-    if(speed > 1.0)
-      return 1.0;
-    else if(speed < -1)
-      return -1.0;
-    else 
-      return speed;
+  public double power(double speed) {
+    if (speed > 1.0) return 1.0;
+    else if (speed < -1) return -1.0;
+    else return speed;
   }
 
   public double deadzone(double speed) {

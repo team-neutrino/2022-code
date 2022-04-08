@@ -98,6 +98,7 @@ public class FourBallAuton extends SequentialCommandGroup {
             new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
             fourBall2Command,
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3).alongWith(new AutonIntakeCommand(p_intake, 3))));
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)
+                .alongWith(new AutonIntakeCommand(p_intake, 3))));
   }
 }
