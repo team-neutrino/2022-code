@@ -98,8 +98,18 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
-    m_leftMotors.set(deadzone(-m_setLeftSpeed));
-    m_rightMotors.set(deadzone(-m_setRightSpeed));
+    m_leftMotors.set(power(-m_setLeftSpeed));
+    m_rightMotors.set(power(-m_setRightSpeed));
+  }
+
+  public double power(double speed)
+  {
+    if(speed > 1.0)
+      return 1.0;
+    else if(speed < -1)
+      return -1.0;
+    else 
+      return speed;
   }
 
   public double deadzone(double speed) {

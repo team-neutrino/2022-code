@@ -21,13 +21,13 @@ public class FourBallTrajectory {
           List.of(
               new Pose2d(1.5, 0, Rotation2d.fromDegrees(0)),
               new Pose2d(3.2, 0, Rotation2d.fromDegrees(0)),
-              new Pose2d(5.5, -.6, Rotation2d.fromDegrees(0))),
+              new Pose2d(5.8, -1, Rotation2d.fromDegrees(0))),
           TrajectoryConfigConstants.m_speedyForwardConfig);
 
   public static final Trajectory fourBall2 =
       TrajectoryGenerator.generateTrajectory(
           List.of(
-              new Pose2d(5.6, 0, Rotation2d.fromDegrees(0)),
-              new Pose2d(1.5, 0, Rotation2d.fromDegrees(0))),
+              new Pose2d(5.8, -1, Rotation2d.fromDegrees(0)),
+              new Pose2d(1.35, 0, Rotation2d.fromDegrees(0))),
           TrajectoryConfigConstants.m_ReverseConfig);
 }
