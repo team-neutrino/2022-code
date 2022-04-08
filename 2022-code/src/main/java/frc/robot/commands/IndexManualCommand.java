@@ -6,15 +6,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 public class IndexManualCommand extends CommandBase {
   /** Creates a new IndexManualCommand. */
   private IndexSubsystem m_index;
+  private ShooterSubsystem m_shooter;
 
-  public IndexManualCommand(IndexSubsystem p_index) {
+  public IndexManualCommand(IndexSubsystem p_index, ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(p_index);
     m_index = p_index;
+    m_shooter = p_shooter;
+    addRequirements(m_index, m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -24,8 +27,11 @@ public class IndexManualCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_index.MotorOneStart();
-    m_index.MotorTwoStart();
+    if(m_shooter.okShoot())
+    {
+      m_index.MotorOneStart();
+      m_index.MotorTwoStart();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -33,6 +39,7 @@ public class IndexManualCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_index.MotorOneStop();
     m_index.MotorTwoStop();
+    m_shooter.resetCounter();
   }
 
   // Returns true when the command should end.
