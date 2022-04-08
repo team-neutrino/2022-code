@@ -17,7 +17,7 @@ public class IndexManualCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     m_index = p_index;
     m_shooter = p_shooter;
-    addRequirements(m_index, m_shooter);
+    addRequirements(m_index);
   }
 
   // Called when the command is initially scheduled.
