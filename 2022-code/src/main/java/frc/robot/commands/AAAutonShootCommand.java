@@ -67,7 +67,6 @@ public class AAAutonShootCommand extends CommandBase {
   @Override
   public void initialize() {
     m_limelight.setLimelightOn();
-    m_RPM = m_shooter.CalculateRPM();
     m_timer.start();
   }
 
@@ -81,6 +80,7 @@ public class AAAutonShootCommand extends CommandBase {
       m_turret.stop();
     }
 
+    m_RPM = m_shooter.CalculateRPM();
     m_shooter.setTargetRPM(m_RPM);
     if (m_timer.get() >= m_spinUp) {
       m_index.MotorOneStart();

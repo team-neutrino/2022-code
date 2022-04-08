@@ -154,7 +154,7 @@ public class RobotContainer {
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
+    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3500));
 
     m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter));
@@ -176,9 +176,9 @@ public class RobotContainer {
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
     m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
-    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 340));
-    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 540));
-    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 700));
+    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 270));
+    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 468));
+    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 662));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));

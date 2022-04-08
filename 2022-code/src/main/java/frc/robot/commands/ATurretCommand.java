@@ -11,7 +11,6 @@ import frc.robot.subsystems.TurretPIDSubsystem;
 public class ATurretCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
-  private boolean m_hitLimit;
   private double LIMELIGHT_MULTIPLICATION = 10.0;
   /** Creates a new TurretAutoAimCommand. */
   public ATurretCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {

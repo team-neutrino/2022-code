@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
-  private int coolCounter; 
+  private int coolCounter;
   private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
 
@@ -66,26 +66,25 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {}
 
-  public int getCounter()
+  public void setCounter(int num)
   {
+    coolCounter = num;
+  }
+  
+  public int getCounter() {
     return coolCounter;
   }
 
-  public void iterateCounter(double p_targetRPM)
-  {
-    if(Math.abs(p_targetRPM - getRPM1()) < 20)
-      coolCounter++;
-    else
-      resetCounter();
+  public void iterateCounter(double p_targetRPM) {
+    if (Math.abs(p_targetRPM - getRPM1()) < 20) coolCounter++;
+    else resetCounter();
   }
 
-  public void resetCounter()
-  {
+  public void resetCounter() {
     coolCounter = 0;
   }
 
-  public boolean okShoot()
-  {
+  public boolean okShoot() {
     return coolCounter >= 3;
   }
 
