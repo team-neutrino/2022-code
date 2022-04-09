@@ -82,7 +82,7 @@ public class ShooterSubsystem extends SubsystemBase {
     } else if (Math.abs(p_targetRPM - getRPM1()) < 50) {
       coolCounter += .5;
     } else if (Math.abs(p_targetRPM - getRPM1()) < 100) {
-      coolCounter += -1;
+      coolCounter -= 1;
     } else {
       resetCounter();
     }
