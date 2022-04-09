@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.util.CalculateRPM;
 
 public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
@@ -28,6 +29,9 @@ public class ShooterInterpolateSpeed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    System.out.println("target rpm: " +m_shooter.CalculateRPM());
+    System.out.println("actual rpm: " + m_shooter.getRPM1());
+
     m_shooter.setTargetRPM(m_shooter.CalculateRPM());
     m_shooter.iterateCounter(m_shooter.CalculateRPM());
   }
