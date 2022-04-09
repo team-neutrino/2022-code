@@ -68,18 +68,24 @@ public class ShooterSubsystem extends SubsystemBase {
     System.out.println("counter: " + coolCounter);
   }
 
-  public void setCounter(int num)
-  {
+  public void setCounter(int num) {
     coolCounter = num;
   }
-  
+
   public int getCounter() {
     return coolCounter;
   }
 
   public void iterateCounter(double p_targetRPM) {
-    if (Math.abs(p_targetRPM - getRPM1()) < 20) coolCounter++;
-    else resetCounter();
+    if (Math.abs(p_targetRPM - getRPM1()) < 20) {
+      coolCounter++;
+    } else if (Math.abs(p_targetRPM - getRPM1()) < 50) {
+      coolCounter += .5;
+    } else if (Math.abs(p_targetRPM - getRPM1()) < 100) {
+      coolCounter += -1;
+    } else {
+      resetCounter();
+    }
   }
 
   public void resetCounter() {
@@ -87,7 +93,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public boolean okShoot() {
-    return coolCounter >= 3;
+    return coolCounter >= 5;
   }
 
   public double CalculateRPM() {

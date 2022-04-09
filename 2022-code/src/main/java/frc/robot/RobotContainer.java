@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.ATurretCommand;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.ClimbDefaultCommand;
@@ -29,7 +28,6 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
 import frc.robot.commands.LowGoalCommand;
-import frc.robot.commands.MagicButtonCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
@@ -184,9 +182,8 @@ public class RobotContainer {
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));
   }
 
-  public void teleopInit()
-  {
-      m_turretAutoAimCommand.setNotAuton();
+  public void teleopInit() {
+    m_turretAutoAimCommand.setNotAuton();
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

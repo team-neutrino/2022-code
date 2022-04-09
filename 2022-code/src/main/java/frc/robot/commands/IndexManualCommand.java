@@ -11,6 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class IndexManualCommand extends CommandBase {
   /** Creates a new IndexManualCommand. */
   private IndexSubsystem m_index;
+
   private ShooterSubsystem m_shooter;
 
   public IndexManualCommand(IndexSubsystem p_index, ShooterSubsystem p_shooter) {
