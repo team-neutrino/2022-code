@@ -98,7 +98,8 @@ public class SchnellFourBall extends SequentialCommandGroup {
             new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
             new SequentialCommandGroup(
                     fourBall2Command, new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
-                .alongWith(new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3, 4.5))
+                .alongWith(
+                    new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3, 4.5))
                 .alongWith(new AutonIntakeCommand(p_intake, 3))));
   }
 }

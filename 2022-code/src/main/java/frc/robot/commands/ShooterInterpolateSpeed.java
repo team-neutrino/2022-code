@@ -6,17 +6,25 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.util.CalculateRPM;
 
 public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
   ShooterSubsystem m_shooter;
 
+  boolean m_driverControl;
+  double m_RPM;
+
   public ShooterInterpolateSpeed(ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
-
     m_shooter = p_shooter;
+    m_driverControl = false;
+    addRequirements(m_shooter);
+  }
 
+  public ShooterInterpolateSpeed(ShooterSubsystem p_shooter, boolean p_driverControl) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    m_shooter = p_shooter;
+    p_driverControl = true;
     addRequirements(m_shooter);
   }
 
@@ -29,11 +37,15 @@ public class ShooterInterpolateSpeed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("target rpm: " +m_shooter.CalculateRPM());
-    System.out.println("actual rpm: " + m_shooter.getRPM1());
+    m_RPM = m_shooter.CalculateRPM();
 
-    m_shooter.setTargetRPM(m_shooter.CalculateRPM());
-    m_shooter.iterateCounter(m_shooter.CalculateRPM());
+    if (m_driverControl) {
+      m_shooter.setCounter(10);
+      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
+    } else {
+      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
+      m_shooter.iterateCounter(m_shooter.CalculateRPM());
+    }
   }
 
   // Called once the command ends or is interrupted.

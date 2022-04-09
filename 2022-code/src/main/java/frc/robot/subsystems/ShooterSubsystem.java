@@ -68,11 +68,10 @@ public class ShooterSubsystem extends SubsystemBase {
     System.out.println("counter: " + coolCounter);
   }
 
-  public void setCounter(int num)
-  {
+  public void setCounter(int num) {
     coolCounter = num;
   }
-  
+
   public int getCounter() {
     return coolCounter;
   }

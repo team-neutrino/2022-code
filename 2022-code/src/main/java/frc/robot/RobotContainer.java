@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.commands.ATurretCommand;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
 import frc.robot.commands.ClimbDefaultCommand;
@@ -29,12 +28,10 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
 import frc.robot.commands.LowGoalCommand;
-import frc.robot.commands.MagicButtonCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
-import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.Trajectories.OneBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
@@ -153,7 +150,8 @@ public class RobotContainer {
     /** xbox button mapping */
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    // m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
     m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3500));
 
     m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
@@ -184,9 +182,8 @@ public class RobotContainer {
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));
   }
 
-  public void teleopInit()
-  {
-      m_turretAutoAimCommand.setNotAuton();
+  public void teleopInit() {
+    m_turretAutoAimCommand.setNotAuton();
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
