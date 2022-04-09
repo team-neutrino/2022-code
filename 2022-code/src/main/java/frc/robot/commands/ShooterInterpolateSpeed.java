@@ -24,7 +24,7 @@ public class ShooterInterpolateSpeed extends CommandBase {
   public ShooterInterpolateSpeed(ShooterSubsystem p_shooter, boolean p_driverControl) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = p_shooter;
-    p_driverControl = true;
+    m_driverControl = p_driverControl;
     addRequirements(m_shooter);
   }
 

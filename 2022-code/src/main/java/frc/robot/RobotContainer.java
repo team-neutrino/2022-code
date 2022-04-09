@@ -109,7 +109,7 @@ public class RobotContainer {
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
-      new TurretAutoAimCommand(m_turret, m_limelight, true);
+      new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 

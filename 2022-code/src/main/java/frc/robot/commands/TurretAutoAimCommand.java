@@ -21,7 +21,7 @@ public class TurretAutoAimCommand extends CommandBase {
     m_turret = p_turret;
     m_limelight = p_limelight;
     m_hitLimit = false;
-    m_notAuton = m_notAuton;
+    m_notAuton = p_notAuton;
     addRequirements(m_turret, m_limelight);
   }
 
