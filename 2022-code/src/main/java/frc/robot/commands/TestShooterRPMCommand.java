@@ -34,9 +34,6 @@ public class TestShooterRPMCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // System.out.println("target rpm: " +testRPM);
-    // System.out.println("actual rpm: " + m_shooter.getRPM1());
-
     testRPM = m_shooter.getShuffleboardRPM();
     m_shooter.setTargetRPM(testRPM);
     m_shooter.iterateCounter(testRPM);

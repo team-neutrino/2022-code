@@ -64,9 +64,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    System.out.println("counter: " + coolCounter);
-  }
+  public void periodic() {}
 
   public void setCounter(int num) {
     coolCounter = num;
