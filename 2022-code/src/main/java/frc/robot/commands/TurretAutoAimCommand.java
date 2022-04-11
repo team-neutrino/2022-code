@@ -5,18 +5,24 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
 public class TurretAutoAimCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
+  private DriveTrainSubsystem m_drive;
+
   private double LIMELIGHT_MULTIPLICATION = 10.0;
+  private double VELOCITY_DEADZONE = 0.1;
+  private double ANGLE_MULTIPLIER = 10;
   /** Creates a new TurretAutoAimCommand. */
-  public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight) {
+  public TurretAutoAimCommand(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, DriveTrainSubsystem p_drive) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_turret = p_turret;
     m_limelight = p_limelight;
+    m_drive = p_drive;
     addRequirements(m_turret, m_limelight);
   }
 
@@ -31,8 +37,33 @@ public class TurretAutoAimCommand extends CommandBase {
   public void execute() {
     m_limelight.setLimelightOn();
     if (m_limelight.getTv() == true) {
-      m_turret.setTargetAngle(
-          m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
+      if (m_drive.getDriveEncoderL1() > VELOCITY_DEADZONE || m_drive.getDriveEncoderR2() > VELOCITY_DEADZONE) {
+          if (m_drive.getNavYaw() > 0) {
+            m_turret.setTargetAngle(
+              m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() 
+              - ANGLE_MULTIPLIER * (m_drive.getDriveEncoderL1() + m_drive.getDriveEncoderR1()) / 2);
+          }
+          else {
+            m_turret.setTargetAngle(
+              m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() 
+              + ANGLE_MULTIPLIER * (m_drive.getDriveEncoderL1() + m_drive.getDriveEncoderR1()) / 2);
+          }
+          // uses limelight instead of NavX
+          // if (m_limelight.getTx() > 0) {
+          //   m_turret.setTargetAngle(
+          //     m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() 
+          //     - ANGLE_MULTIPLIER * (m_drive.getDriveEncoderL1() + m_drive.getDriveEncoderR1()) / 2);
+          // }
+          // else {
+          //   m_turret.setTargetAngle(
+          //     m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() 
+          //     + ANGLE_MULTIPLIER * (m_drive.getDriveEncoderL1() + m_drive.getDriveEncoderR1()) / 2);
+          // }
+      }
+      else {
+        m_turret.setTargetAngle(
+            m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
+      }
     } else {
       m_turret.stop();
     }
