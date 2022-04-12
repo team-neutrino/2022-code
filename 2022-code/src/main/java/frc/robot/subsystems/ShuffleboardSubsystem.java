@@ -10,6 +10,7 @@ import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -22,6 +23,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterRPMGraph;
   private NetworkTableEntry m_turretPositionGraph;
   private NetworkTableEntry m_pressureSensor;
+  private NetworkTableEntry m_calculatedRPM;
+  private NetworkTableEntry m_calculateRPMMatch;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
   private NetworkTableEntry m_turretAngle;
@@ -40,7 +43,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry[] m_colors = new NetworkTableEntry[2];
+  private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -63,6 +66,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     driveStationTab();
     debugTab();
+    LiveWindow.disableAllTelemetry();
+    LiveWindow.setEnabled(false);
   }
 
   @Override
@@ -72,6 +77,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
+    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(m_color.getIsRed());
 
@@ -121,6 +127,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
     m_limelightVariables[5].setDouble(m_limelight.getDistance());
+
+    m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
+    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
   }
 
   public void driveStationTab() {
@@ -175,6 +184,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(6, 4)
             .withSize(1, 1)
             .getEntry();
+
+    m_calculatedRPM =
+        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
+
+    m_calculateRPMMatch =
+        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
   }
 
   public void debugTab() {

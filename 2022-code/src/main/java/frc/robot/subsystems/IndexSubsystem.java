@@ -29,7 +29,7 @@ public class IndexSubsystem extends SubsystemBase {
   }
 
   public void MotorOneStart() {
-    m_indexMotor1.set(ControlMode.PercentOutput, 0.5);
+    m_indexMotor1.set(ControlMode.PercentOutput, .5);
   }
 
   public void MotorOneStop() {
