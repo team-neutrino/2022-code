@@ -59,13 +59,13 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setI(WHEEL_I / 1000.0);
     m_pidController.setD(WHEEL_D / 1000.0);
     m_pidController.setFF(WHEEL_FF / 1000.0);
-    m_pidController.setIZone(100);
+    m_pidController.setIZone(160);
     m_pidController.setOutputRange(.1, 1);
   }
 
   @Override
   public void periodic() {
-    System.out.println("counter: " + coolCounter);
+    // System.out.println("counter: " + coolCounter);
   }
 
   public void setCounter(int num) {
@@ -77,8 +77,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void iterateCounter(double p_targetRPM) {
-    //previous range was 20 for match 71
-    if (Math.abs(p_targetRPM - getRPM1()) < 50) coolCounter++;
+    // previous range was 20 for match 71
+    if (Math.abs(p_targetRPM - getRPM1()) < 30) coolCounter++;
     else resetCounter();
   }
 
@@ -87,8 +87,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public boolean okShoot() {
-    //previous counter was 3 for match 71
-    return coolCounter >= 3;
+    // previous counter was 3 for match 71
+    return coolCounter >= 5;
   }
 
   public double CalculateRPM() {

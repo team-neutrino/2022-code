@@ -44,7 +44,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
-  
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -185,21 +184,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(6, 4)
             .withSize(1, 1)
             .getEntry();
-    
-    m_calculatedRPM = 
-        m_drivestationTab
-            .add("Calculated RPM", 0)
-            .withPosition(9, 0)
-            .withSize(1, 1)
-            .getEntry();
+
+    m_calculatedRPM =
+        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
 
     m_calculateRPMMatch =
-        m_drivestationTab
-            .add("OK Shoot", false)
-            .withPosition(9, 1)
-            .withSize(1, 1)
-            .getEntry();
-        
+        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
   }
 
   public void debugTab() {
