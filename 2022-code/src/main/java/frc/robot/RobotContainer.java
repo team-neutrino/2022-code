@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+import frc.robot.commands.AutoShootCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -112,6 +113,7 @@ public class RobotContainer {
       new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
+ private final AutoShootCommand m_AutoShootCommand = new AutoShootCommand(m_shooter, m_limelight);
 
   private JoystickButton m_joystickButton =
       new JoystickButton(m_OperatorController, Button.kRightStick.value);
@@ -144,7 +146,7 @@ public class RobotContainer {
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
-    m_shooter.setDefaultCommand(m_shooterDefaultCommand);
+    m_shooter.setDefaultCommand(m_AutoShootCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
