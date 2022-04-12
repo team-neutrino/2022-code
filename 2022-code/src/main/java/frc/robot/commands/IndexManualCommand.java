@@ -39,7 +39,6 @@ public class IndexManualCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_index.MotorOneStop();
     m_index.MotorTwoStop();
-    // m_shooter.resetCounter();
   }
 
   // Returns true when the command should end.
