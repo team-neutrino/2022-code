@@ -30,7 +30,7 @@ public class ShooterDefaultCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setTargetRPM(1400);
+    m_shooter.setTargetRPM(2000);
     // m_shooter.turnOff();
   }
 
