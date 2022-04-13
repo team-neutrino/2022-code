@@ -8,16 +8,19 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.Vector;
 
 public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
   double h = 1.25;
   double limelightMountAngle = 30;
+  private Vector hubVec;
 
   public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
     ledMode = limelight.getEntry("ledMode");
+    hubVec = new Vector(0.0, getDistance());
   }
 
   @Override
@@ -28,6 +31,10 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public Vector getHubVec() {
+    return hubVec;
   }
 
   public void setLimelightOn() {
