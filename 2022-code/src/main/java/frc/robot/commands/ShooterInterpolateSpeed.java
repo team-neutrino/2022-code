@@ -5,14 +5,18 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class ShooterInterpolateSpeed extends CommandBase {
   /** Creates a new InterpolatedShooterSpeed. */
+  final double distanceTolerance = .05;
   ShooterSubsystem m_shooter;
+  LimelightSubsystem m_limelight;
 
   boolean m_driverControl;
   double m_RPM;
+  double m_distance;
 
   public ShooterInterpolateSpeed(ShooterSubsystem p_shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -21,9 +25,10 @@ public class ShooterInterpolateSpeed extends CommandBase {
     addRequirements(m_shooter);
   }
 
-  public ShooterInterpolateSpeed(ShooterSubsystem p_shooter, boolean p_driverControl) {
+  public ShooterInterpolateSpeed(ShooterSubsystem p_shooter, LimelightSubsystem p_limelight, boolean p_driverControl) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_shooter = p_shooter;
+    m_limelight = p_limelight;
     m_driverControl = p_driverControl;
     addRequirements(m_shooter);
   }
@@ -37,7 +42,13 @@ public class ShooterInterpolateSpeed extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_RPM = m_shooter.CalculateRPM();
+    m_distance = m_limelight.getDistance();
+    
+    if(Math.abs(m_distance - m_limelight.getDistance()) > distanceTolerance)
+    {
+      m_distance = m_limelight.getDistance();
+      m_RPM = m_shooter.CalculateRPM();
+    }
 
     if (m_driverControl) {
       m_shooter.setCounter(10);
