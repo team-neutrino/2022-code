@@ -28,6 +28,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
 import frc.robot.commands.LowGoalCommand;
+import frc.robot.commands.NoVisionTurretCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
@@ -108,6 +109,8 @@ public class RobotContainer {
 
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
+  private final NoVisionTurretCommand m_NoVisionTurretCommand =
+      new NoVisionTurretCommand(m_turret, m_driveTrain, m_limelight, false);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
       new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
@@ -142,7 +145,7 @@ public class RobotContainer {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
-    m_turret.setDefaultCommand(m_turretAutoAimCommand);
+    m_turret.setDefaultCommand(m_NoVisionTurretCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
