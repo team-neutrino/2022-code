@@ -36,7 +36,6 @@ public class BetterTurretCommand extends CommandBase {
 
   @Override
   public void execute() {
-    System.out.println(m_drive.getNavYaw());
     if (m_limelight.getTv() == true) {
       m_turret.setTargetAngle(
           m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx());
