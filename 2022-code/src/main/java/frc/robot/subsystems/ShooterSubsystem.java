@@ -163,6 +163,4 @@ public class ShooterSubsystem extends SubsystemBase {
   public boolean magicShooter(double RPM, double TRPM) {
     return Math.abs(RPM - TRPM) <= 10;
   }
-
-  
 }
