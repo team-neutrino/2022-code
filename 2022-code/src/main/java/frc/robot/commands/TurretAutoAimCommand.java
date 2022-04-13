@@ -18,7 +18,7 @@ public class TurretAutoAimCommand extends CommandBase {
   private boolean m_notAuton;
   private double LIMELIGHT_MULTIPLICATION = 15.0;
   private double VELOCITY_DEADZONE = 0.1;
-  private double ANGLE_MULTIPLIER = 20;
+  private double ANGLE_MULTIPLIER = 50;
   /** Creates a new TurretAutoAimCommand. */
   public TurretAutoAimCommand(
       TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, DriveTrainSubsystem p_drive, boolean p_notAuton) {
