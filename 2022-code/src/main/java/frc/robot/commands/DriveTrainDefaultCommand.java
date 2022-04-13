@@ -22,7 +22,8 @@ public class DriveTrainDefaultCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_driveTrainSubsystem.setMotors(m_leftJoystick.getY() * 1.2, m_rightJoystick.getY() * 1.2);
+    m_driveTrainSubsystem.setMotors(
+        squareDrive(m_leftJoystick.getY()), squareDrive(m_rightJoystick.getY()));
   }
 
   @Override
@@ -31,5 +32,13 @@ public class DriveTrainDefaultCommand extends CommandBase {
   @Override
   public boolean isFinished() {
     return false;
+  }
+
+  public double squareDrive(double joystickVal) {
+    if (joystickVal <= 0) {
+      return Math.pow(joystickVal, 2) * -1;
+    } else {
+      return Math.pow(joystickVal, 2);
+    }
   }
 }
