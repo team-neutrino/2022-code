@@ -49,7 +49,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
-    m_wheelMotor.setClosedLoopRampRate(1.5);
+    m_wheelMotor.setClosedLoopRampRate(.2);
 
     m_encoder1 = m_wheelMotor.getEncoder();
     m_encoder2 = m_wheelMotor2.getEncoder();
