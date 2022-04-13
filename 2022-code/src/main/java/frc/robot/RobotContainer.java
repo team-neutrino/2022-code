@@ -27,13 +27,13 @@ import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
-import frc.robot.commands.MagicButtonCommand;
+import frc.robot.commands.LowGoalCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
-import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
+import frc.robot.commands.Trajectories.OneBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretSuppliedOverrideCommand;
 import frc.robot.commands.TurretToAngleCommand;
@@ -109,7 +109,7 @@ public class RobotContainer {
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
-      new TurretAutoAimCommand(m_turret, m_limelight, m_driveTrain);
+      new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
 
@@ -118,6 +118,8 @@ public class RobotContainer {
 
   private AutonSelector m_autonSelector =
       new AutonSelector(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
+ /* private OneBallAuton m_oneBallAuton =
+      new OneBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);*/
   private TwoBallAuton m_twoBallAuton =
       new TwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private AATwoBallAuton m_AATwoBallAuton =
@@ -140,19 +142,20 @@ public class RobotContainer {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
-    m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
+    m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
+    // m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
+    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3550));
 
-    m_BumperRight.whileActiveContinuous(new ShooterSetSpeed(m_shooter, 1400));
-    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index));
+    m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
+    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(
@@ -171,14 +174,17 @@ public class RobotContainer {
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
     m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
-    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 300));
-    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 500));
-    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 700));
+    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 270));
+    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 468));
+    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 662));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));
   }
 
+  public void teleopInit() {
+    m_turretAutoAimCommand.setNotAuton();
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -187,6 +193,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_fourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

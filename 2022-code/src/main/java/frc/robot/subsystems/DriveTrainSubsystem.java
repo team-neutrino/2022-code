@@ -38,6 +38,8 @@ public class DriveTrainSubsystem extends SubsystemBase {
   private final DifferentialDriveOdometry m_odometry;
   private static final double K_GEAR_RATIO = 1.0 / 8.0;
   private static final double K_WHEEL_DIAMETER = 0.127;
+  private static final double LEFT_JOYSTICK_DEADZONE = 0.15;
+  private static final double RIGHT_JOYSTICK_DEADZONE = 0.1;
   private static final double K_WHEEL_CIRCUMFERENCE = Math.PI * K_WHEEL_DIAMETER;
   private static final double K_ENCODER_CONVERSION = (K_GEAR_RATIO * K_WHEEL_CIRCUMFERENCE);
 
@@ -96,8 +98,21 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void setMotors(double m_setLeftSpeed, double m_setRightSpeed) {
-    m_leftMotors.set(-m_setLeftSpeed);
-    m_rightMotors.set(-m_setRightSpeed);
+    m_leftMotors.set(power(-m_setLeftSpeed));
+    m_rightMotors.set(power(-m_setRightSpeed));
+  }
+
+  public double power(double speed) {
+    if (speed > 1.0) return 1.0;
+    else if (speed < -1) return -1.0;
+    else return speed;
+  }
+
+  public double deadzone(double speed) {
+    if (Math.abs(speed) <= LEFT_JOYSTICK_DEADZONE) {
+      return 0.0;
+    }
+    return speed;
   }
 
   public void resetEncoders() {

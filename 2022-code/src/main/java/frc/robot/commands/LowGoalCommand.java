@@ -5,44 +5,43 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
-public class TurretToAngleCommand extends CommandBase {
+public class LowGoalCommand extends CommandBase {
+  /** shooter rpm constant */
+  private ShooterSubsystem m_shooter;
+
   private TurretPIDSubsystem m_turret;
-  private LimelightSubsystem m_limelight;
-  private double m_setpointAngle;
-  private double m_initialAngle;
 
-  /** Creates a new TurretAutoAimCommand. */
-  public TurretToAngleCommand(
-      TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight, double p_setpointAngle) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  double m_rpm;
+
+  /** Creates a new ShooterSetSpeedCommand. */
+  public LowGoalCommand(ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret, double rpm) {
+    m_shooter = p_shooter;
     m_turret = p_turret;
-    m_limelight = p_limelight;
-    addRequirements(m_turret, m_limelight);
-
-    m_setpointAngle = p_setpointAngle;
-    m_initialAngle = m_turret.getInitialAngle();
+    m_rpm = rpm;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_limelight.setLimelightOff();
+    m_shooter.setCounter(10);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_turret.setTargetAngle(m_setpointAngle);
+    m_turret.setTargetAngle(270);
+    m_shooter.setTargetRPM(m_rpm);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_limelight.setLimelightOn();
-    m_turret.stop();
+    m_shooter.turnOff();
   }
 
   // Returns true when the command should end.

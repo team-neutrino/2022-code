@@ -30,6 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
+  private int coolCounter;
   private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
 
@@ -48,7 +49,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
-    m_wheelMotor.setClosedLoopRampRate(1.5);
+    m_wheelMotor.setClosedLoopRampRate(.2);
 
     m_encoder1 = m_wheelMotor.getEncoder();
     m_encoder2 = m_wheelMotor2.getEncoder();
@@ -58,12 +59,37 @@ public class ShooterSubsystem extends SubsystemBase {
     m_pidController.setI(WHEEL_I / 1000.0);
     m_pidController.setD(WHEEL_D / 1000.0);
     m_pidController.setFF(WHEEL_FF / 1000.0);
-    m_pidController.setIZone(100);
+    m_pidController.setIZone(160);
     m_pidController.setOutputRange(.1, 1);
   }
 
   @Override
-  public void periodic() {}
+  public void periodic() {
+    // System.out.println("counter: " + coolCounter);
+  }
+
+  public void setCounter(int num) {
+    coolCounter = num;
+  }
+
+  public int getCounter() {
+    return coolCounter;
+  }
+
+  public void iterateCounter(double p_targetRPM) {
+    // previous range was 20 for match 71
+    if (Math.abs(p_targetRPM - getRPM1()) < 30) coolCounter++;
+    else resetCounter();
+  }
+
+  public void resetCounter() {
+    coolCounter = 0;
+  }
+
+  public boolean okShoot() {
+    // previous counter was 3 for match 71
+    return coolCounter >= 5;
+  }
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
