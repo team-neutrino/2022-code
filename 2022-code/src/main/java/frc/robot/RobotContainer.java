@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
+import frc.robot.commands.BetterTurretCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -28,7 +29,6 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
 import frc.robot.commands.LowGoalCommand;
-import frc.robot.commands.NoVisionTurretCommand;
 import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
@@ -109,8 +109,8 @@ public class RobotContainer {
 
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
-  private final NoVisionTurretCommand m_NoVisionTurretCommand =
-      new NoVisionTurretCommand(m_turret, m_driveTrain, m_limelight, false);
+  private final BetterTurretCommand m_BetterTurretCommand =
+      new BetterTurretCommand(m_turret, m_driveTrain, m_limelight, false);
   private final TurretAutoAimCommand m_turretAutoAimCommand =
       new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
@@ -145,7 +145,7 @@ public class RobotContainer {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
-    m_turret.setDefaultCommand(m_NoVisionTurretCommand);
+    m_turret.setDefaultCommand(m_BetterTurretCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));

@@ -9,7 +9,7 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
-public class NoVisionTurretCommand extends CommandBase {
+public class BetterTurretCommand extends CommandBase {
   private TurretPIDSubsystem m_turret;
   private LimelightSubsystem m_limelight;
   private DriveTrainSubsystem m_drive;
@@ -17,7 +17,7 @@ public class NoVisionTurretCommand extends CommandBase {
   private double LIMELIGHT_MULTIPLICATION = 10.0;
 
   /** Creates a new TurretAutoAimCommand. */
-  public NoVisionTurretCommand(
+  public BetterTurretCommand(
       TurretPIDSubsystem p_turret,
       DriveTrainSubsystem p_drive,
       LimelightSubsystem p_limelight,
