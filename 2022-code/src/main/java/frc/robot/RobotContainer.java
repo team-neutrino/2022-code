@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.AutoShootCommand;
 import frc.robot.commands.Autonomi.TwoBall.AATwoBallAuton;
 import frc.robot.commands.Autonomi.TwoBall.TwoBallAuton;
-import frc.robot.commands.AutoShootCommand;
 import frc.robot.commands.ClimbDefaultCommand;
 import frc.robot.commands.ClimbExtendCommand;
 import frc.robot.commands.ClimbKeyExtendCommand;
@@ -113,7 +113,6 @@ public class RobotContainer {
       new TurretAutoAimCommand(m_turret, m_limelight, false);
   private final ShooterDefaultCommand m_shooterDefaultCommand =
       new ShooterDefaultCommand(m_shooter);
- private final AutoShootCommand m_AutoShootCommand = new AutoShootCommand(m_shooter, m_limelight);
 
   private JoystickButton m_joystickButton =
       new JoystickButton(m_OperatorController, Button.kRightStick.value);
@@ -146,12 +145,13 @@ public class RobotContainer {
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_turret.setDefaultCommand(m_turretAutoAimCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
-    m_shooter.setDefaultCommand(m_AutoShootCommand);
+    m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
-    m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
+    m_B.whileHeld(new AutoShootCommand(m_shooter, m_index, m_driveTrain, m_limelight));
+    // m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     // m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
     m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3550));
