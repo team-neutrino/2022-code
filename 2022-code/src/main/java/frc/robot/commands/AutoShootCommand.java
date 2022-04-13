@@ -16,8 +16,9 @@ public class AutoShootCommand extends CommandBase {
   ShooterSubsystem m_shooter;
 
   DriveTrainSubsystem m_drive;
-  final double m_angleTolerance = 1;
-  final double m_driveEncoderTolerance = 10;
+  final double ANGLE_TOLERANCE = 5;
+  final double DRIVE_ENCODER_TOLERANCE = 10;
+  final double TIME_TO_SHOOT = .5;
   IndexSubsystem m_index;
   LimelightSubsystem m_limelight;
   double m_RPM;
@@ -52,10 +53,13 @@ public class AutoShootCommand extends CommandBase {
         "valid target: " + m_limelight.getTv() + "  shooter ok shoot: " + m_shooter.okShoot());
 
     // check that we are within shooting range
-    if (shoot()) {
+    if (shoot() || m_timer.get() < .5) {
+      m_timer.start();
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     } else {
+      m_timer.stop();
+      m_timer.reset();
       m_index.MotorOneStop();
       m_index.MotorTwoStop();
     }
@@ -72,10 +76,10 @@ public class AutoShootCommand extends CommandBase {
   }
 
   private boolean shoot() {
-    return m_drive.getDriveEncoderR1() < m_driveEncoderTolerance
-        && m_drive.getDriveEncoderL1() < m_driveEncoderTolerance
+    return m_drive.getDriveEncoderR1() < DRIVE_ENCODER_TOLERANCE
+        && m_drive.getDriveEncoderL1() < DRIVE_ENCODER_TOLERANCE
         && m_limelight.getTv()
-        && Math.abs(m_limelight.getTx()) < m_angleTolerance
+        && Math.abs(m_limelight.getTx()) < ANGLE_TOLERANCE
         && m_shooter.okShoot();
   }
 }
