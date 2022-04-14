@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,9 +21,10 @@ public class ColorSubsystem extends SubsystemBase {
   private ColorMatch m_colorMatcher = new ColorMatch();
   private boolean m_isBlue;
   private boolean m_isRed;
-
+  private Alliance m_ballColor;
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
+  private final Color K_UNKOWN = new Color(0, 0, 0);
 
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
@@ -35,6 +38,7 @@ public class ColorSubsystem extends SubsystemBase {
     Color detectedColor = getSensorColor();
     m_isBlue = (isBlue(detectedColor));
     m_isRed = (isRed(detectedColor));
+    m_ballColor = ballColor(detectedColor);
   }
 
   public boolean getIsBlue() {
@@ -61,5 +65,25 @@ public class ColorSubsystem extends SubsystemBase {
     boolean isRed = false;
     if (matchResult.color == K_RED) isRed = true;
     return isRed;
+  }
+
+  public Alliance getMatchColor() {
+    return DriverStation.getAlliance();
+  }
+
+  public Alliance ballColor(Color detectedColor) {
+    ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
+    if (matchResult.color == K_BLUE) {
+      return Alliance.Blue;
+    }
+    if (matchResult.color == K_RED) {
+      return Alliance.Red;
+    } else {
+      return Alliance.Invalid;
+    }
+  }
+
+  public boolean error() {
+    return getMatchColor() != m_ballColor;
   }
 }
