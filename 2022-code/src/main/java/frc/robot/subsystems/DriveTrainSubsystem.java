@@ -176,6 +176,10 @@ public class DriveTrainSubsystem extends SubsystemBase {
     return m_navX.getYaw();
   }
 
+  public void resetNavX() {
+    m_navX.reset();
+  }
+
   public void setTankDriveVolts(double leftVolts, double rightVolts) {
     m_leftMotors.setVoltage(leftVolts);
     m_rightMotors.setVoltage(rightVolts);
