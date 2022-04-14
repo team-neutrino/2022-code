@@ -36,6 +36,6 @@ public class DriveTrainDefaultCommand extends CommandBase {
 
   public double squareDrive(double joystickVal) {
     final double SCALE = 1.2;
-    return Math.pow(joystickVal, 2) * ( (joystickVal < 0) ? -SCALE : SCALE );
+    return Math.pow(joystickVal, 2) * ((joystickVal < 0) ? -SCALE : SCALE);
   }
 }
