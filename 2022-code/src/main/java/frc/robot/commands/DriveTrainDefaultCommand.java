@@ -35,10 +35,7 @@ public class DriveTrainDefaultCommand extends CommandBase {
   }
 
   public double squareDrive(double joystickVal) {
-    if (joystickVal <= 0) {
-      return Math.pow(joystickVal, 2) * -1;
-    } else {
-      return Math.pow(joystickVal, 2);
-    }
+    final double SCALE = 1.2;
+    return Math.pow(joystickVal, 2) * ( (joystickVal < 0) ? -SCALE : SCALE );
   }
 }
