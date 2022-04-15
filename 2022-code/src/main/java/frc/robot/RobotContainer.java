@@ -187,6 +187,7 @@ public class RobotContainer {
 
   public void teleopInit() {
     m_turretAutoAimCommand.setNotAuton();
+    m_BetterTurretCommand.setNotAuton();
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
