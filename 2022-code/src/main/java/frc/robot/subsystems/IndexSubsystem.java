@@ -31,6 +31,7 @@ public class IndexSubsystem extends SubsystemBase {
   public void MotorOneStart() {
     m_indexMotor1.set(ControlMode.PercentOutput, .5);
   }
+
   public void MotorOneReverse() {
     m_indexMotor1.set(ControlMode.PercentOutput, -.5);
   }
