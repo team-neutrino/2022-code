@@ -144,7 +144,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index, m_color));
     m_turret.setDefaultCommand(m_BetterTurretCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);

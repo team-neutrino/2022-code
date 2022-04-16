@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
@@ -22,6 +24,7 @@ public class ColorSubsystem extends SubsystemBase {
 
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
+  private final int K_IS_BALL_THRESHOLD = 200;
 
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
@@ -33,8 +36,19 @@ public class ColorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Color detectedColor = getSensorColor();
+    System.out.println(getProximity());
     m_isBlue = (isBlue(detectedColor));
     m_isRed = (isRed(detectedColor));
+  }
+
+  public int getProximity()
+  {
+    return m_colorSensor.getProximity();
+  }
+
+  public boolean isBall()
+  {
+    return getProximity() > K_IS_BALL_THRESHOLD;
   }
 
   public boolean getIsBlue() {
