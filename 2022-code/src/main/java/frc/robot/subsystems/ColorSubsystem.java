@@ -24,7 +24,7 @@ public class ColorSubsystem extends SubsystemBase {
   private Alliance m_ballColor;
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
-  private final Color K_UNKOWN = new Color(0, 0, 0);
+  private final int K_IS_BALL_THRESHOLD = 250;
 
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
@@ -39,6 +39,14 @@ public class ColorSubsystem extends SubsystemBase {
     m_isBlue = (isBlue(detectedColor));
     m_isRed = (isRed(detectedColor));
     m_ballColor = ballColor(detectedColor);
+  }
+
+  public int getProximity() {
+    return m_colorSensor.getProximity();
+  }
+
+  public boolean isBall() {
+    return getProximity() > K_IS_BALL_THRESHOLD;
   }
 
   public boolean getIsBlue() {
@@ -68,6 +76,9 @@ public class ColorSubsystem extends SubsystemBase {
   }
 
   public Alliance getMatchColor() {
+    if (DriverStation.getAlliance() == null) {
+        return Alliance.Invalid;
+    }
     return DriverStation.getAlliance();
   }
 
