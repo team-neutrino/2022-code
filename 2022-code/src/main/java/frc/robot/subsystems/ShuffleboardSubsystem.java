@@ -74,10 +74,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
+
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
-    
+
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
@@ -133,14 +133,17 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_limelightVariables[5].setDouble(m_limelight.getDistance());
 
     m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
-    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
-    m_alliance.setBoolean(m_color.getMatchColor() == Alliance.Blue);
+    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());\
   }
 
   public void driveStationTab() {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     m_alliance =
-        m_drivestationTab.add("Alliance Color").withPosition(8, 0).withSize(1, 1).getEntry();
+        m_drivestationTab
+            .add("Alliance Color", false)
+            .withPosition(8, 0)
+            .withSize(1, 1)
+            .getEntry();
     m_shooterVariables[0] =
         m_drivestationTab
             .add("Shooter RPM", 0)
@@ -153,9 +156,17 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
 
     m_colors[0] =
-        m_drivestationTab.add("isBlue", m_color.getMatchColor() == Alliance.Blue).withPosition(6, 0).withSize(1, 1).getEntry();
+        m_drivestationTab
+            .add("isBlue", true)
+            .withPosition(6, 0)
+            .withSize(1, 1)
+            .getEntry();
     m_colors[1] =
-        m_drivestationTab.add("isRed", m_color.getMatchColor() == Alliance.Red).withPosition(7, 0).withSize(1, 1).getEntry();
+        m_drivestationTab
+            .add("isRed", false)
+            .withPosition(7, 0)
+            .withSize(1, 1)
+            .getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
@@ -177,11 +188,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
-    //   m_drivestationTab
-    //       .add(CameraServer.startAutomaticCapture())
-    //       .withPosition(3, 1)
-    //       .withSize(5, 5)
-    //       .withWidget(BuiltInWidgets.kCameraStream);
+      //   m_drivestationTab
+      //       .add(CameraServer.startAutomaticCapture())
+      //       .withPosition(3, 1)
+      //       .withSize(5, 5)
+      //       .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
 

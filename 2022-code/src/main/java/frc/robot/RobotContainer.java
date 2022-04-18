@@ -26,7 +26,6 @@ import frc.robot.commands.DriveTrainDefaultCommand;
 import frc.robot.commands.IndexDefaultCommand;
 import frc.robot.commands.IndexManualCommand;
 import frc.robot.commands.IntakeCommand;
-import frc.robot.commands.IntakeDefaultCommand;
 import frc.robot.commands.IntakeDownCommand;
 import frc.robot.commands.LowGoalCommand;
 import frc.robot.commands.ReverseIntakeCommand;
@@ -47,7 +46,6 @@ import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
@@ -102,9 +100,9 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ColorSubsystem m_color = new ColorSubsystem();
-  //private final ShuffleboardSubsystem m_shuffleboard =
-      //new ShuffleboardSubsystem(
-          //m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_intake, m_color, m_limelight);
+  // private final ShuffleboardSubsystem m_shuffleboard =
+  // new ShuffleboardSubsystem(
+  // m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_intake, m_color, m_limelight);
 
   /** Instantiate default command below */
   private final spitOutCommand m_spitOutCommand = new spitOutCommand(m_intake, m_color, m_index);
