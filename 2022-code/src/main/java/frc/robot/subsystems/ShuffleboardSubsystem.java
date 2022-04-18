@@ -36,6 +36,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private IndexSubsystem m_index;
   private IntakeSubSystem m_intake;
   private LimelightSubsystem m_limelight;
+  private NetworkTableEntry m_allianceColor;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
@@ -43,7 +44,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_colors[] = new NetworkTableEntry[3];
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -75,13 +76,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
-    /*
+    
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(m_color.getIsRed());
+    m_colors[2].setBoolean(m_color.getIsInvalid());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
@@ -132,7 +134,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
-    */
+
+    m_allianceColor.setBoolean(m_color.isAllianceBlue());
   }
 
   public void driveStationTab() {
@@ -152,6 +155,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
         m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
     m_colors[1] =
         m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
+    m_colors[2] = 
+        m_drivestationTab.add("isUnknown", true).withPosition(8, 0).withSize(1, 1).getEntry();
+
+    m_allianceColor =
+        m_drivestationTab.add("alliance color", false).withPosition(8, 1).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();

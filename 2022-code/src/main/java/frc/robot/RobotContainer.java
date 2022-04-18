@@ -38,7 +38,6 @@ import frc.robot.commands.Trajectories.OneBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
 import frc.robot.commands.TurretSuppliedOverrideCommand;
 import frc.robot.commands.TurretToAngleCommand;
-import frc.robot.commands.spitOutCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.ColorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -106,7 +105,7 @@ public class RobotContainer {
           //m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_intake, m_color, m_limelight);
 
   /** Instantiate default command below */
-  private final spitOutCommand m_spitOutCommand = new spitOutCommand(m_intake, m_color, m_index);
+  private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
 
   private final DriveTrainDefaultCommand m_driveTrainDefaultCommand =
       new DriveTrainDefaultCommand(m_driveTrain, m_leftJoystick, m_rightJoystick);
@@ -147,7 +146,7 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
     m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
     m_turret.setDefaultCommand(m_BetterTurretCommand);
-    m_intake.setDefaultCommand(m_spitOutCommand);
+    m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 

@@ -21,7 +21,7 @@ public class ColorSubsystem extends SubsystemBase {
   private ColorMatch m_colorMatcher = new ColorMatch();
   private boolean m_isBlue;
   private boolean m_isRed;
-  private Alliance m_ballColor;
+  private boolean m_isInvalid;
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
   private final Color K_UNKOWN = new Color(0, 0, 0);
@@ -36,9 +36,9 @@ public class ColorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Color detectedColor = getSensorColor();
-    m_isBlue = (isBlue(detectedColor));
-    m_isRed = (isRed(detectedColor));
-    m_ballColor = ballColor(detectedColor);
+    m_isBlue = isBlue(detectedColor);
+    m_isRed = isRed(detectedColor);
+    m_isInvalid = isInvalid(detectedColor);
   }
 
   public boolean getIsBlue() {
@@ -49,26 +49,28 @@ public class ColorSubsystem extends SubsystemBase {
     return m_isRed;
   }
 
+  public boolean getIsInvalid() {
+      return m_isInvalid;
+  }
+
   public Color getSensorColor() {
     return m_colorSensor.getColor();
   }
 
+  public boolean isInvalid(Color detectedColor) {
+    return ballColor(detectedColor) == Alliance.Invalid;
+  }
+
   public boolean isBlue(Color detectedColor) {
-    ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
-    boolean isBlue = false;
-    if (matchResult.color == K_BLUE) isBlue = true;
-    return isBlue;
+    return ballColor(detectedColor) == Alliance.Blue;
   }
 
   public boolean isRed(Color detectedColor) {
-    ColorMatchResult matchResult = m_colorMatcher.matchClosestColor(detectedColor);
-    boolean isRed = false;
-    if (matchResult.color == K_RED) isRed = true;
-    return isRed;
+    return ballColor(detectedColor) == Alliance.Red;
   }
 
-  public Alliance getMatchColor() {
-    return DriverStation.getAlliance();
+  public boolean isAllianceBlue() {
+      return DriverStation.getAlliance() == Alliance.Blue;
   }
 
   public Alliance ballColor(Color detectedColor) {
@@ -81,9 +83,5 @@ public class ColorSubsystem extends SubsystemBase {
     } else {
       return Alliance.Invalid;
     }
-  }
-
-  public boolean error() {
-    return getMatchColor() != m_ballColor;
   }
 }
