@@ -72,8 +72,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
+    /*
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
@@ -130,6 +132,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
+    */
   }
 
   public void driveStationTab() {
@@ -170,11 +173,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
-      m_drivestationTab
-          .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 1)
-          .withSize(5, 5)
-          .withWidget(BuiltInWidgets.kCameraStream);
+    //   m_drivestationTab
+    //       .add(CameraServer.startAutomaticCapture())
+    //       .withPosition(3, 1)
+    //       .withSize(5, 5)
+    //       .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
 

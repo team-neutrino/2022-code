@@ -47,6 +47,7 @@ public class IntakeSubSystem extends SubsystemBase {
 
   public void setIntakeReverse() {
     m_IntakeFeedMotor.set(ControlMode.PercentOutput, INTAKE_MOTOR_POWER);
+    System.out.println("reverse");
   }
 
   public void setIntakeOff() {
