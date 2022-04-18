@@ -22,6 +22,7 @@ public class ColorSubsystem extends SubsystemBase {
 
   private final Color K_BLUE = new Color(0.145, 0.586, 0.742);
   private final Color K_RED = new Color(0.898, 0.277, 0.172);
+  private final int K_IS_BALL_THRESHOLD = 250;
 
   /** Creates a new ColorSubsystem. */
   public ColorSubsystem() {
@@ -35,6 +36,14 @@ public class ColorSubsystem extends SubsystemBase {
     Color detectedColor = getSensorColor();
     m_isBlue = (isBlue(detectedColor));
     m_isRed = (isRed(detectedColor));
+  }
+
+  public int getProximity() {
+    return m_colorSensor.getProximity();
+  }
+
+  public boolean isBall() {
+    return getProximity() > K_IS_BALL_THRESHOLD;
   }
 
   public boolean getIsBlue() {
