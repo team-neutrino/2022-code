@@ -30,9 +30,6 @@ public class IndexDefaultCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("beam break " + m_index.isBall());
-    System.out.println("proximity " + m_color.isBall());
-
     if(m_index.isBall() && m_timer.get() > .5)
     {
       m_index.MotorOneStop();
