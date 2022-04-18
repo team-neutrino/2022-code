@@ -12,6 +12,7 @@ import frc.robot.subsystems.IndexSubsystem;
 public class IndexDefaultCommand extends CommandBase {
   /** Creates a new IndexMotorCommand. */
   private IndexSubsystem m_index;
+
   private ColorSubsystem m_color;
   private Timer m_timer;
 
@@ -30,16 +31,14 @@ public class IndexDefaultCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(m_index.isBall() && m_timer.get() > .5)
-    {
+    if (m_index.isBall() && m_timer.get() > .5) {
       m_index.MotorOneStop();
       m_timer.stop();
       m_timer.reset();
-    }
-    else if (m_color.isBall() && !m_index.isBall()) {
+    } else if (m_color.isBall() && !m_index.isBall()) {
       m_index.MotorOneStart();
       m_timer.start();
-    } 
+    }
   }
 
   // Called once the command ends or is interrupted.

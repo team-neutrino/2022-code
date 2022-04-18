@@ -38,13 +38,11 @@ public class ColorSubsystem extends SubsystemBase {
     m_isRed = (isRed(detectedColor));
   }
 
-  public int getProximity()
-  {
+  public int getProximity() {
     return m_colorSensor.getProximity();
   }
 
-  public boolean isBall()
-  {
+  public boolean isBall() {
     return getProximity() > K_IS_BALL_THRESHOLD;
   }
 
