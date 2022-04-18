@@ -10,6 +10,7 @@ import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -36,6 +37,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private IndexSubsystem m_index;
   private IntakeSubSystem m_intake;
   private LimelightSubsystem m_limelight;
+  private NetworkTableEntry m_alliance;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
@@ -75,7 +77,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     
     // This method will be called once per scheduler run
     m_timer.setDouble(DriverStation.getMatchTime());
-    /*
+    
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
@@ -132,11 +134,13 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
-    */
+    m_alliance.setBoolean(m_color.getMatchColor() == Alliance.Blue);
   }
 
   public void driveStationTab() {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
+    m_alliance =
+        m_drivestationTab.add("Alliance Color").withPosition(8, 0).withSize(1, 1).getEntry();
     m_shooterVariables[0] =
         m_drivestationTab
             .add("Shooter RPM", 0)
@@ -149,9 +153,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
 
     m_colors[0] =
-        m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
+        m_drivestationTab.add("isBlue", m_color.getMatchColor() == Alliance.Blue).withPosition(6, 0).withSize(1, 1).getEntry();
     m_colors[1] =
-        m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
+        m_drivestationTab.add("isRed", m_color.getMatchColor() == Alliance.Red).withPosition(7, 0).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
