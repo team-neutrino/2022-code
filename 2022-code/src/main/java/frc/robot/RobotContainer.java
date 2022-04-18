@@ -168,12 +168,12 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber, m_shooter)));
+            new ClimbRetractCommand(m_climber, m_shooter, m_turret)));
     m_start.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
-            new ClimbExtendCommand(m_climber, m_shooter)));
+            new ClimbExtendCommand(m_climber, m_shooter, m_turret)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
