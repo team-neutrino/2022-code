@@ -38,12 +38,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private LimelightSubsystem m_limelight;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
-  private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
-  private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_colors[] = new NetworkTableEntry[3];
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -80,6 +80,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
     m_colors[0].setBoolean(m_color.getIsBlue());
     m_colors[1].setBoolean(m_color.getIsRed());
+    m_colors[2].setDouble(m_color.getProximity());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
@@ -118,6 +119,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
+    m_indexVariables[2].setDouble(getNumBall());
 
     m_pressureSensor.setDouble(m_intake.getPressure());
 
@@ -184,6 +186,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(6, 4)
             .withSize(1, 1)
             .getEntry();
+    m_indexVariables[2] =
+        m_drivestationTab.add("Cargo #", 0).withPosition(6, 5).withSize(1, 1).getEntry();
 
     m_calculatedRPM =
         m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
@@ -262,6 +266,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0] =
         m_debugTab.add("Index Motor 2", 0).withPosition(5, 4).withSize(1, 1).getEntry();
+    m_colors[2] = m_debugTab.add("Proximity", 0).withPosition(5, 5).withSize(1, 1).getEntry();
 
     m_limelightVariables[0] =
         m_debugTab
@@ -289,5 +294,14 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(11, 3)
             .withSize(1, 1)
             .getEntry();
+  }
+
+  public int getNumBall() {
+    if (m_color.isBall() && m_index.isBall()) {
+      return 2;
+    } else if (m_color.isBall() || m_index.isBall()) {
+      return 1;
+    }
+    return 0;
   }
 }
