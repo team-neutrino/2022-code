@@ -33,6 +33,7 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+// import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.Trajectories.OneBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
@@ -144,7 +145,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index, m_color));
     m_turret.setDefaultCommand(m_BetterTurretCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
