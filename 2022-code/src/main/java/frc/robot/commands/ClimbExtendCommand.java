@@ -10,7 +10,8 @@ public class ClimbExtendCommand extends CommandBase {
   private ShooterSubsystem m_shooter;
   private TurretPIDSubsystem m_turret;
 
-  public ClimbExtendCommand(ClimberSubsystem p_climber, ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret) {
+  public ClimbExtendCommand(
+      ClimberSubsystem p_climber, ShooterSubsystem p_shooter, TurretPIDSubsystem p_turret) {
     m_climberSubsystem = p_climber;
     m_shooter = p_shooter;
     m_turret = p_turret;
