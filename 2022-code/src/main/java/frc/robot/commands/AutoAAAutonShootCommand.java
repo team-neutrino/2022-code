@@ -12,7 +12,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 
 /** An example command that uses an example subsystem. */
-public class AAAutonShootCommand extends CommandBase {
+public class AutoAAAutonShootCommand extends CommandBase {
   private ShooterSubsystem m_shooter;
   private IndexSubsystem m_index;
   private LimelightSubsystem m_limelight;
@@ -28,7 +28,7 @@ public class AAAutonShootCommand extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public AAAutonShootCommand(
+  public AutoAAAutonShootCommand(
       ShooterSubsystem p_shooter,
       IndexSubsystem p_index,
       TurretPIDSubsystem p_turret,
@@ -40,25 +40,6 @@ public class AAAutonShootCommand extends CommandBase {
     m_limelight = p_limelight;
     m_timer = new Timer();
     m_duration = p_duration;
-    m_spinUp = 1;
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter, m_index);
-  }
-
-  public AAAutonShootCommand(
-      ShooterSubsystem p_shooter,
-      IndexSubsystem p_index,
-      TurretPIDSubsystem p_turret,
-      LimelightSubsystem p_limelight,
-      double p_duration,
-      double p_spinUp) {
-    m_shooter = p_shooter;
-    m_index = p_index;
-    m_turret = p_turret;
-    m_limelight = p_limelight;
-    m_timer = new Timer();
-    m_duration = p_duration;
-    m_spinUp = p_spinUp;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter, m_index);
   }
@@ -67,6 +48,7 @@ public class AAAutonShootCommand extends CommandBase {
   @Override
   public void initialize() {
     m_limelight.setLimelightOn();
+    m_shooter.resetCounter();
     m_timer.start();
   }
 
@@ -82,7 +64,9 @@ public class AAAutonShootCommand extends CommandBase {
 
     m_RPM = m_shooter.CalculateRPM();
     m_shooter.setTargetRPM(m_RPM);
-    if (m_timer.get() >= m_spinUp) {
+    m_shooter.iterateCounter(m_RPM);
+ 
+    if (m_shooter.okShoot()) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }
