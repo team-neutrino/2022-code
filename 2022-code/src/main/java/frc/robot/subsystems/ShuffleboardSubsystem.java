@@ -147,7 +147,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(4, 1).getEntry();
 
     m_wrongColor =
-        m_drivestationTab.add("Wrong color", false).withPosition(8, 1).withSize(1, 1).getEntry();
+        m_drivestationTab.add("Wrong color", false).withPosition(7, 0).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
