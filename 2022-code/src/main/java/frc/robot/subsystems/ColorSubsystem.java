@@ -81,11 +81,11 @@ public class ColorSubsystem extends SubsystemBase {
   {
     if (getAlliance() == null || getAlliance() == Alliance.Invalid)
       m_isWrong = true;
-      
     if (getAlliance() == Alliance.Blue && isRed(detectedColor) ||
         getAlliance() == Alliance.Red && isBlue(detectedColor))
-    {
       m_isWrong = true;
-    }
+    else if (getAlliance() == Alliance.Blue && isBlue(detectedColor) ||
+             getAlliance() == Alliance.Red && isRed(detectedColor))
+      m_isWrong = false;
   }
 }
