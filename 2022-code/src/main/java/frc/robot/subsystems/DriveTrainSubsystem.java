@@ -90,7 +90,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    System.out.println(m_odometry.getPoseMeters());
+    // System.out.println(m_odometry.getPoseMeters());
     // called once per scheduler run if you didn't already know
     m_odometry.update(
         Rotation2d.fromDegrees(getYaw()), m_encoderL1.getPosition(), m_encoderR1.getPosition());
