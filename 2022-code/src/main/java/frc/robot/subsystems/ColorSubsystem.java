@@ -79,6 +79,9 @@ public class ColorSubsystem extends SubsystemBase {
 
   private void checkForWrongBall(Color detectedColor) 
   {
+    if (getAlliance() == Alliance.Invalid)
+      m_isWrong = true;
+      
     if (getAlliance() == Alliance.Blue && isRed(detectedColor) ||
         getAlliance() == Alliance.Red && isBlue(detectedColor))
     {
