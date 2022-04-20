@@ -48,6 +48,10 @@ public class IndexSubsystem extends SubsystemBase {
     return m_beamBreak.get();
   }
 
+  public boolean isBall() {
+    return !getBeamBreak();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

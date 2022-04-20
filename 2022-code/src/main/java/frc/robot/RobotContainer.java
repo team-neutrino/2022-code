@@ -33,6 +33,7 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+// import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.Trajectories.OneBallAuton;
 import frc.robot.commands.TurretAutoAimCommand;
@@ -144,7 +145,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     /** default command mapping */
     m_driveTrain.setDefaultCommand(m_driveTrainDefaultCommand);
-    m_index.setDefaultCommand(new IndexDefaultCommand(m_index));
+    m_index.setDefaultCommand(new IndexDefaultCommand(m_index, m_color));
     m_turret.setDefaultCommand(m_BetterTurretCommand);
     m_intake.setDefaultCommand(m_intakeDefaultCommand);
     m_shooter.setDefaultCommand(m_shooterDefaultCommand);
@@ -167,12 +168,12 @@ public class RobotContainer {
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
-            new ClimbRetractCommand(m_climber)));
+            new ClimbRetractCommand(m_climber, m_shooter, m_turret)));
     m_start.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
-            new ClimbExtendCommand(m_climber)));
+            new ClimbExtendCommand(m_climber, m_shooter, m_turret)));
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
