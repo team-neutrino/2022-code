@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
-import frc.robot.commands.AAAutonShootCommand;
 import frc.robot.commands.AutoAAAutonShootCommand;
 import frc.robot.commands.AutonIntakeCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -27,6 +26,7 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
   private Trajectory m_fourBall0;
 
   private Trajectory m_fourBall1;
+  private Trajectory m_fourBallHalf;
   private Trajectory m_fourBall2;
 
   public SchnellFourBallAuton(
@@ -38,6 +38,7 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
       LimelightSubsystem p_limelight) {
     m_fourBall0 = FourBallTrajectory.fourBall0;
     m_fourBall1 = FourBallTrajectory.fourBall1;
+    m_fourBallHalf = FourBallTrajectory.fourBallHalf;
     m_fourBall2 = FourBallTrajectory.fourBall2;
 
     RamseteCommand fourBall0Command =
@@ -74,6 +75,23 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
             p_drive::setTankDriveVolts,
             p_drive);
 
+    RamseteCommand fourBallHalfCommand =
+        new RamseteCommand(
+            m_fourBallHalf,
+            p_drive::getPose,
+            new RamseteController(
+                TrajectoryConfigConstants.K_RAMSETE_BETA, TrajectoryConfigConstants.K_RAMSETE_ZETA),
+            new SimpleMotorFeedforward(
+                TrajectoryConfigConstants.KS_VOLTS,
+                TrajectoryConfigConstants.KV_VOLT_SECONDS_PER_METER,
+                TrajectoryConfigConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            TrajectoryConfigConstants.K_DRIVE_KINEMATICS,
+            p_drive::getWheelSpeeds,
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(TrajectoryConfigConstants.KP_DRIVE_VEL, 0, 0),
+            p_drive::setTankDriveVolts,
+            p_drive);
+
     RamseteCommand fourBall2Command =
         new RamseteCommand(
             m_fourBall2,
@@ -95,14 +113,17 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
         new SequentialCommandGroup(
             new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 2)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 1.5),
+            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 2),
             new InstantCommand(p_limelight::setLimelightOff),
             new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
-            new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AutonIntakeCommand(p_intake, 1),
+            new SequentialCommandGroup(
+                    fourBallHalfCommand,
+                    new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
+
+                .alongWith(new AutonIntakeCommand(p_intake, 1)),
             fourBall2Command,
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 3)
-                .alongWith(new AutonIntakeCommand(p_intake, 2))));
+            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)
+                .alongWith(new AutonIntakeCommand(p_intake, 1))));
   }
 }

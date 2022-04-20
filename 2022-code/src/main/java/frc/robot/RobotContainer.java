@@ -131,7 +131,7 @@ public class RobotContainer {
       new AATwoBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   private FourBallAuton m_fourBallAuton =
       new FourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
-    private SchnellFourBallAuton m_schnellFourBallAuton =
+  private SchnellFourBallAuton m_schnellFourBallAuton =
       new SchnellFourBallAuton(m_driveTrain, m_turret, m_intake, m_index, m_shooter, m_limelight);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -201,6 +201,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_schnellFourBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_schnellFourBallAuton.andThen(
+        () -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
