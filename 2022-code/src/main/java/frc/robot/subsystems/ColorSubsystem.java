@@ -36,7 +36,6 @@ public class ColorSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     Color detectedColor = getSensorColor();
-    System.out.println(getProximity());
     m_isBlue = (isBlue(detectedColor));
     m_isRed = (isRed(detectedColor));
   }

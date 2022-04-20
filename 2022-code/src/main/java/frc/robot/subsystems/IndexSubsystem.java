@@ -52,6 +52,7 @@ public class IndexSubsystem extends SubsystemBase {
   {
     return !getBeamBreak();
   }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
