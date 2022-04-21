@@ -13,6 +13,8 @@ public class CalculateRPM {
   TreeMap<Double, Double> m_distanceRPMData = new TreeMap<Double, Double>();
 
   LimelightSubsystem m_limelight;
+  public static final double K_MIN_CALCULABLE = 1.78;
+  public static final double K_MAX_CALCULABLE = 6.05;
 
   public CalculateRPM(LimelightSubsystem p_limelight) {
 
