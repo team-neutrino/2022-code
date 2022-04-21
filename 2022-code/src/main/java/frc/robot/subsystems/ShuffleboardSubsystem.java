@@ -190,11 +190,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     // (0, 2), (1, 2), (2, 2)
 
     m_isBoth =
-        m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(1, 6).getEntry();
+        m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(2, 6).getEntry();
     // ()
 
     m_isShootable =
-        m_drivestationTab.add("Shootable", true).withPosition(9, 0).withSize(1, 6).getEntry();
+        m_drivestationTab.add("Shootable", true).withPosition(10, 0).withSize(2, 6).getEntry();
 
     try {
       LLFeed =
@@ -215,21 +215,22 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     } catch (VideoException e) {
     }
 
+    m_calculatedRPM =
+    m_drivestationTab.add("Calculated RPM", 0).withPosition(3, 0).withSize(1, 1).getEntry();
+
     m_indexVariables[1] =
         m_drivestationTab
             .add("Index Beambreak", false)
             .withPosition(6, 4)
             .withSize(1, 1)
             .getEntry();
-
-    m_calculatedRPM =
-        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
-
-    m_calculateRPMMatch =
-        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
   }
 
   public void debugTab() {
+
+    m_calculateRPMMatch =
+    m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
+
     m_debugTab = Shuffleboard.getTab("Debug Tab");
 
     m_howMany = m_debugTab.add("How Many", 0).withPosition(2, 0).withSize(1, 1).getEntry();
