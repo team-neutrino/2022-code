@@ -180,10 +180,10 @@ public class RobotContainer {
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
-    m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
-    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 270));
-    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 468));
-    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 662));
+    m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 100));
+    m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 320));
+    m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 515));
+    m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 707));
     m_rightJoystickButton.toggleWhenActive(
         new TurretSuppliedOverrideCommand(
             m_turret, m_limelight, () -> m_OperatorController.getRightX()));
@@ -201,7 +201,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_schnellFourBallAuton.andThen(
+    return m_AATwoBallAuton.andThen(
         () -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }
