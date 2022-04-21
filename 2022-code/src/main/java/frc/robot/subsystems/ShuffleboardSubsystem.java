@@ -10,6 +10,7 @@ import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
+import edu.wpi.first.cscore.VideoSink;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -47,6 +48,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
+  private VideoSink switched;
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -163,19 +165,27 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("empty", 0, "pressured", 130))
             .getEntry();
+    piFeed = new HttpCamera("camera", "http://10.39.28.69:1181/stream.mjpg", HttpCameraKind.kMJPGStreamer);
+     // CameraServer.startAutomaticCapture(LLFeed);
+    switched = CameraServer.addSwitchedCamera("dashboard cam");
+    switched.setSource(piFeed);
+/*
+    m_drivestationTab
+            .add(piFeed)
+            .withPosition(0, 5)
+            .withSize(5, 5)
+            .withWidget(BuiltInWidgets.kCameraStream);*/
+            /*
     try {
         
         /*LLFeed =
           new HttpCamera(
               "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);*/
-        piFeed = 
-            new HttpCamera("camera", "http://10.39.28.69:1181/stream.mjpg", HttpCameraKind.kMJPGStreamer);
-     // CameraServer.startAutomaticCapture(LLFeed);
-       // CameraServer.startAutomaticCapture(piFeed);
-
+        
+/*
         CameraServer.addCamera(piFeed);
         Shuffleboard.getTab("piFeed").add(piFeed).withPosition(0, 0).withSize(3, 3).withWidget(BuiltInWidgets.kCameraStream);
-
+*/
 
         // m_drivestationTab
             //   .add(LLFeed)
@@ -187,14 +197,11 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             //   .withPosition(3, 1)
             //   .withSize(5, 5)
             //   .withWidget(BuiltInWidgets.kCameraStream);
-        m_drivestationTab
-            .add(piFeed)
-            .withPosition(0, 5)
-            .withSize(5, 5)
-            .withWidget(BuiltInWidgets.kCameraStream);
+        /*
 
     } catch (VideoException e) {
     }
+    */
 
         m_indexVariables[1] =
             m_drivestationTab
