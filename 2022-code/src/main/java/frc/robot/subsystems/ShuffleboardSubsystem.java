@@ -78,7 +78,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    m_isBoth.setBoolean(m_color.isBall() && m_index.getBeamBreak());
+    m_isBoth.setBoolean(m_color.isBall() && m_index.isBall());
     m_isShootable.setBoolean(
         (m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE)
             && (m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE));
