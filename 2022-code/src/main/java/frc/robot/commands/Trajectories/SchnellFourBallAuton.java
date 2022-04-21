@@ -119,7 +119,6 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
             new SequentialCommandGroup(
                     fourBallHalfCommand,
                     new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
-
                 .alongWith(new AutonIntakeCommand(p_intake, 1)),
             fourBall2Command,
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
