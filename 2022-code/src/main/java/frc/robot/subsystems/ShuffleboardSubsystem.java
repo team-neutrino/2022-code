@@ -105,7 +105,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
     }
     m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
-    m_shooter.setShooterAddRPM(m_shooterAdd.getDouble(0.0));
 
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
@@ -156,9 +155,6 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(3, 1).getEntry();
     // (0, 0), (1, 0), (2, 0)
-
-    m_shooterAdd =
-        m_drivestationTab.add("Shooter add", 0).withPosition(3, 0).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();

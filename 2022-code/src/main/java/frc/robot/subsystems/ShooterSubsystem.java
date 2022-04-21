@@ -34,8 +34,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
 
-  private double m_shooterAddRPM;
-
   public ShooterSubsystem(LimelightSubsystem p_limelight) {
     m_limelight = p_limelight;
     RPMCalculator = new CalculateRPM(m_limelight);
@@ -67,10 +65,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {}
-
-  public double getShooterAddRPM() {
-    return m_shooterAddRPM;
-  }
 
   public void setCounter(int num) {
     coolCounter = num;
@@ -122,10 +116,6 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void setShuffleboardRPM(double shuffleboardRPM) {
     m_shuffleBoardRPM = shuffleboardRPM;
-  }
-
-  public void setShooterAddRPM(double shooterAddRPM) {
-    m_shooterAddRPM = shooterAddRPM;
   }
 
   public void turnOff() {
