@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CameraServerCvJNI;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
@@ -27,6 +28,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_calculateRPMMatch;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
+  private HttpCamera piFeed;
   private NetworkTableEntry m_turretAngle;
   private TurretPIDSubsystem m_turret;
   private NetworkTableEntry m_timer;
@@ -164,7 +166,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       LLFeed =
           new HttpCamera(
               "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);
+      piFeed = 
+          new HttpCamera("camera", "http://wpilibpi.local:1181/", HttpCameraKind.kMJPGStreamer);
       CameraServer.startAutomaticCapture(LLFeed);
+      CameraServer.startAutomaticCapture(piFeed);
       m_drivestationTab
           .add(LLFeed)
           .withPosition(0, 3)
@@ -175,6 +180,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
           .withPosition(3, 1)
           .withSize(5, 5)
           .withWidget(BuiltInWidgets.kCameraStream);
+      m_drivestationTab
+        .add(piFeed)
+        .withPosition(0, 5)
+        .withSize(5, 5)
+        .withWidget(BuiltInWidgets.kCameraStream);
+
     } catch (VideoException e) {
     }
 
