@@ -16,10 +16,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.CalculateRPM;
-
 import java.util.Map;
-
-import javax.lang.model.util.ElementScanner6;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_drivestationTab;
@@ -82,8 +79,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     m_isBoth.setBoolean(m_color.isBall() && m_index.getBeamBreak());
-    m_isShootable.setBoolean((m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE) &&
-                             (m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE));
+    m_isShootable.setBoolean(
+        (m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE)
+            && (m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE));
     m_howMany.setDouble(getNumBalls());
 
     m_timer.setDouble(DriverStation.getMatchTime());
@@ -147,22 +145,20 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   }
 
   private int getNumBalls() {
-      if (m_color.isBall() && m_index.getBeamBreak())
-        return 2;
-      else if ((!m_color.isBall() && m_index.getBeamBreak()) ||
-               (m_color.isBall() && !m_index.getBeamBreak()))
-        return 1;
-      else
-        return 0;
+    if (m_color.isBall() && m_index.getBeamBreak()) return 2;
+    else if ((!m_color.isBall() && m_index.getBeamBreak())
+        || (m_color.isBall() && !m_index.getBeamBreak())) return 1;
+    else return 0;
   }
 
   public void driveStationTab() {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
 
-    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(3, 1).getEntry(); 
+    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(3, 1).getEntry();
     // (0, 0), (1, 0), (2, 0)
 
-    m_shooterAdd = m_drivestationTab.add("Shooter add", 0).withPosition(3, 0).withSize(1, 1).getEntry();
+    m_shooterAdd =
+        m_drivestationTab.add("Shooter add", 0).withPosition(3, 0).withSize(1, 1).getEntry();
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
@@ -197,11 +193,13 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     // (0, 1), (1, 1), (2, 1)
     // (0, 2), (1, 2), (2, 2)
 
-    m_isBoth = m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(1, 6).getEntry();
+    m_isBoth =
+        m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(1, 6).getEntry();
     // ()
 
-    m_isShootable = m_drivestationTab.add("Shootable", true).withPosition(9, 0).withSize(1, 6).getEntry();
-    
+    m_isShootable =
+        m_drivestationTab.add("Shootable", true).withPosition(9, 0).withSize(1, 6).getEntry();
+
     try {
       LLFeed =
           new HttpCamera(
@@ -238,12 +236,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
 
-    m_howMany = 
-        m_debugTab
-            .add("How Many", 0)
-            .withPosition(2, 0)
-            .withSize(1, 1)
-            .getEntry();
+    m_howMany = m_debugTab.add("How Many", 0).withPosition(2, 0).withSize(1, 1).getEntry();
 
     m_shooterVariables[1] =
         m_debugTab
@@ -253,7 +246,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-            
+
     m_shooterRPMGraph =
         m_debugTab
             .add("Shooter RPM v Time", 0)
@@ -261,10 +254,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withSize(3, 2)
             .withWidget(BuiltInWidgets.kGraph)
             .getEntry();
-    
-    m_shooterAdd = 
+
+    m_shooterAdd =
         m_debugTab.add("Shooter add speed", 0).withPosition(3, 0).withSize(1, 1).getEntry();
-    
+
     m_shooterPID[0] =
         m_debugTab.add("Shooter P", m_shooter.getP()).withPosition(3, 2).withSize(1, 1).getEntry();
     m_shooterPID[1] =

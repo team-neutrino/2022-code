@@ -66,11 +66,10 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-  }
+  public void periodic() {}
 
   public double getShooterAddRPM() {
-      return m_shooterAddRPM;
+    return m_shooterAddRPM;
   }
 
   public void setCounter(int num) {
