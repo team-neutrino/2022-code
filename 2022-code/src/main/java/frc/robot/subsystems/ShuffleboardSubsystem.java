@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CameraServerCvJNI;
+import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
@@ -163,45 +164,51 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withProperties(Map.of("empty", 0, "pressured", 130))
             .getEntry();
     try {
-      LLFeed =
+        
+        /*LLFeed =
           new HttpCamera(
-              "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);
-      piFeed = 
-          new HttpCamera("camera", "http://wpilibpi.local:1181/", HttpCameraKind.kMJPGStreamer);
-      CameraServer.startAutomaticCapture(LLFeed);
-      CameraServer.startAutomaticCapture(piFeed);
-      m_drivestationTab
-          .add(LLFeed)
-          .withPosition(0, 3)
-          .withSize(3, 3)
-          .withWidget(BuiltInWidgets.kCameraStream);
-      m_drivestationTab
-          .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 1)
-          .withSize(5, 5)
-          .withWidget(BuiltInWidgets.kCameraStream);
-      m_drivestationTab
-        .add(piFeed)
-        .withPosition(0, 5)
-        .withSize(5, 5)
-        .withWidget(BuiltInWidgets.kCameraStream);
+              "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);*/
+        piFeed = 
+            new HttpCamera("camera", "http://10.39.28.69:1181/stream.mjpg", HttpCameraKind.kMJPGStreamer);
+     // CameraServer.startAutomaticCapture(LLFeed);
+       // CameraServer.startAutomaticCapture(piFeed);
+
+        CameraServer.addCamera(piFeed);
+        Shuffleboard.getTab("piFeed").add(piFeed).withPosition(0, 0).withSize(3, 3).withWidget(BuiltInWidgets.kCameraStream);
+
+
+        // m_drivestationTab
+            //   .add(LLFeed)
+            //   .withPosition(0, 3)
+            //   .withSize(3, 3)
+            //   .withWidget(BuiltInWidgets.kCameraStream);
+        //   m_drivestationTab
+            //   .add(CameraServer.startAutomaticCapture())
+            //   .withPosition(3, 1)
+            //   .withSize(5, 5)
+            //   .withWidget(BuiltInWidgets.kCameraStream);
+        m_drivestationTab
+            .add(piFeed)
+            .withPosition(0, 5)
+            .withSize(5, 5)
+            .withWidget(BuiltInWidgets.kCameraStream);
 
     } catch (VideoException e) {
     }
 
-    m_indexVariables[1] =
-        m_drivestationTab
-            .add("Index Beambreak", false)
-            .withPosition(6, 4)
-            .withSize(1, 1)
-            .getEntry();
+        m_indexVariables[1] =
+            m_drivestationTab
+                .add("Index Beambreak", false)
+                .withPosition(6, 4)
+                .withSize(1, 1)
+                .getEntry();
 
-    m_calculatedRPM =
-        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
+        m_calculatedRPM =
+            m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
 
-    m_calculateRPMMatch =
-        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
-  }
+        m_calculateRPMMatch =
+            m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
+        }
 
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
