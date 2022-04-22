@@ -20,9 +20,10 @@ public class CalculateRPM {
 
     m_limelight = p_limelight;
 
-    m_distanceRPMData.put(1.78, 2790.0);
-    m_distanceRPMData.put(2.16, 2790.0);
+    m_distanceRPMData.put(1.78, 2750.0);
+    m_distanceRPMData.put(2.16, 2850.0);
     m_distanceRPMData.put(2.54, 3090.0);
+    
     // add something between
     m_distanceRPMData.put(3.69, 3290.0);
     m_distanceRPMData.put(4.2, 3410.0);

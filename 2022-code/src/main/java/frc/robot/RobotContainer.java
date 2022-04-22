@@ -33,6 +33,7 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 // import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.Trajectories.OneBallAuton;
