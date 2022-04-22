@@ -63,8 +63,8 @@ public class AutoAAAutonShootCommand extends CommandBase {
     }
 
     m_RPM = m_shooter.CalculateRPM();
-    m_shooter.setTargetRPM(m_RPM + 30);
-    m_shooter.iterateCounter(m_RPM + 30);
+    m_shooter.setTargetRPM(m_RPM);
+    m_shooter.iterateCounter(m_RPM);
 
     if (m_shooter.okShoot()) {
       m_index.MotorOneStart();
