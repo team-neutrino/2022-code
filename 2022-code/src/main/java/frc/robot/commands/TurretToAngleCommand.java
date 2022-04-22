@@ -29,7 +29,7 @@ public class TurretToAngleCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_limelight.setLimelightOff();
+    // m_limelight.setLimelightOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,7 +41,7 @@ public class TurretToAngleCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_limelight.setLimelightOn();
+    // m_limelight.setLimelightOn();
     m_turret.stop();
   }
 

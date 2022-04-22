@@ -41,16 +41,18 @@ public class ShooterInterpolateSpeed extends CommandBase {
 
     if (m_driverControl) {
       m_shooter.setCounter(10);
-      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
+      m_shooter.setTargetRPM(m_RPM);
     } else {
-      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
-      m_shooter.iterateCounter(m_shooter.CalculateRPM());
+      m_shooter.setTargetRPM(m_RPM);
+      m_shooter.iterateCounter(m_RPM);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_shooter.resetCounter();
+  }
 
   // Returns true when the command should end.
   @Override

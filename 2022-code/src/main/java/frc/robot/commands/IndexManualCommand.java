@@ -6,6 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class IndexManualCommand extends CommandBase {
@@ -13,12 +14,15 @@ public class IndexManualCommand extends CommandBase {
   private IndexSubsystem m_index;
 
   private ShooterSubsystem m_shooter;
+  private LimelightSubsystem m_limelight;
 
-  public IndexManualCommand(IndexSubsystem p_index, ShooterSubsystem p_shooter) {
+  public IndexManualCommand(
+      IndexSubsystem p_index, ShooterSubsystem p_shooter, LimelightSubsystem p_limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_index = p_index;
     m_shooter = p_shooter;
-    addRequirements(m_index);
+    m_limelight = p_limelight;
+    addRequirements(m_index, m_shooter, m_limelight);
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +32,7 @@ public class IndexManualCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.okShoot()) {
+    if (m_shooter.okShoot() && m_limelight.getTv()) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }

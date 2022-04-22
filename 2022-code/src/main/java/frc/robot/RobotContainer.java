@@ -33,6 +33,7 @@ import frc.robot.commands.ReverseIntakeCommand;
 import frc.robot.commands.ShooterDefaultCommand;
 import frc.robot.commands.ShooterInterpolateSpeed;
 import frc.robot.commands.ShooterSetSpeed;
+import frc.robot.commands.TestShooterRPMCommand;
 // import frc.robot.commands.TestShooterRPMCommand;
 import frc.robot.commands.Trajectories.FourBallAuton;
 import frc.robot.commands.Trajectories.OneBallAuton;
@@ -157,12 +158,12 @@ public class RobotContainer {
     /** xbox button mapping */
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    // m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
-    m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
-    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3550));
+    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    // m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
+    m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3580));
 
     m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
-    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter));
+    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter, m_limelight));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(
@@ -201,7 +202,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     m_driveTrain.resetOdometry(m_driveTrain.getPose());
-    return m_schnellFourBallAuton.andThen(
-        () -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
+    return m_AATwoBallAuton.andThen(() -> m_driveTrain.setTankDriveVolts(0.0, 0.0), m_driveTrain);
   }
 }

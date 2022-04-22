@@ -75,13 +75,18 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     LiveWindow.setEnabled(false);
   }
 
+  private boolean isShootable() {
+    return m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE
+        && m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE
+        && m_limelight.getTv()
+        && m_shooter.okShoot();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     m_isBoth.setBoolean(m_color.isBall() && m_index.isBall());
-    m_isShootable.setBoolean(
-        (m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE)
-            && (m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE));
+    m_isShootable.setBoolean(isShootable());
     m_howMany.setDouble(getNumBalls());
 
     m_timer.setDouble(DriverStation.getMatchTime());
@@ -216,7 +221,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     }
 
     m_calculatedRPM =
-    m_drivestationTab.add("Calculated RPM", 0).withPosition(3, 0).withSize(1, 1).getEntry();
+        m_drivestationTab.add("Calculated RPM", 0).withPosition(3, 0).withSize(1, 1).getEntry();
 
     m_indexVariables[1] =
         m_drivestationTab
@@ -229,7 +234,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   public void debugTab() {
 
     m_calculateRPMMatch =
-    m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
+        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
 
     m_debugTab = Shuffleboard.getTab("Debug Tab");
 
