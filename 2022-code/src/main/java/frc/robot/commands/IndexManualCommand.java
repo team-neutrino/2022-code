@@ -32,7 +32,8 @@ public class IndexManualCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.okShoot() && m_limelight.getTv()) {
+    System.out.println(m_limelight.getTv());
+    if (m_shooter.okShoot()) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }
@@ -43,6 +44,7 @@ public class IndexManualCommand extends CommandBase {
   public void end(boolean interrupted) {
     m_index.MotorOneStop();
     m_index.MotorTwoStop();
+    m_shooter.resetCounter();
   }
 
   // Returns true when the command should end.
