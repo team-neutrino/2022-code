@@ -181,7 +181,7 @@ public class RobotContainer {
     m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
-    m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 100));
+    m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 110));
     m_upPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 320));
     m_rightPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 515));
     m_downPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 707));
