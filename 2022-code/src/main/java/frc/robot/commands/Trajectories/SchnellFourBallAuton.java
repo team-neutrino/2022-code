@@ -120,7 +120,7 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
                     fourBallHalfCommand,
                     new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
                 .alongWith(new AutonIntakeCommand(p_intake, 1)),
-            fourBall2Command.alongWith(new AutonIntakeCommand(p_intake, 1)),
+            fourBall2Command.alongWith(new AutonIntakeCommand(p_intake, 3)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
             new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)
                 .alongWith(new AutonIntakeCommand(p_intake, 1))));
