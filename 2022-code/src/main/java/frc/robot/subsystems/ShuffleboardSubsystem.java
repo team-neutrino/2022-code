@@ -138,6 +138,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   }
 
   public void driveStationTab() {
+
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
     m_shooterVariables[0] =
         m_drivestationTab
@@ -165,57 +166,37 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("empty", 0, "pressured", 130))
             .getEntry();
+
     piFeed = new HttpCamera("camera", "http://10.39.28.69:1181/stream.mjpg", HttpCameraKind.kMJPGStreamer);
-     // CameraServer.startAutomaticCapture(LLFeed);
-    switched = CameraServer.addSwitchedCamera("dashboard cam");
-    switched.setSource(piFeed);
-/*
-    m_drivestationTab
-            .add(piFeed)
-            .withPosition(0, 5)
-            .withSize(5, 5)
-            .withWidget(BuiltInWidgets.kCameraStream);*/
-            /*
+    switched = CameraServer.addSwitchedCamera("dashboard cam"); // addCamera fails
+    switched.setSource(piFeed); // visible
+
     try {
-        
-        /*LLFeed =
+        LLFeed =
           new HttpCamera(
-              "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);*/
-        
-/*
-        CameraServer.addCamera(piFeed);
-        Shuffleboard.getTab("piFeed").add(piFeed).withPosition(0, 0).withSize(3, 3).withWidget(BuiltInWidgets.kCameraStream);
-*/
+              "limelight", "http://limelight.local:5800/stream.mjpg", HttpCameraKind.kMJPGStreamer);
 
-        // m_drivestationTab
-            //   .add(LLFeed)
-            //   .withPosition(0, 3)
-            //   .withSize(3, 3)
-            //   .withWidget(BuiltInWidgets.kCameraStream);
-        //   m_drivestationTab
-            //   .add(CameraServer.startAutomaticCapture())
-            //   .withPosition(3, 1)
-            //   .withSize(5, 5)
-            //   .withWidget(BuiltInWidgets.kCameraStream);
-        /*
-
+        m_drivestationTab
+                .add(LLFeed)
+                .withPosition(0, 3)
+                .withSize(3, 3)
+                .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
-    */
 
-        m_indexVariables[1] =
-            m_drivestationTab
-                .add("Index Beambreak", false)
-                .withPosition(6, 4)
-                .withSize(1, 1)
-                .getEntry();
+    m_indexVariables[1] =
+        m_drivestationTab
+            .add("Index Beambreak", false)
+            .withPosition(6, 4)
+            .withSize(1, 1)
+            .getEntry();
 
-        m_calculatedRPM =
-            m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
+    m_calculatedRPM =
+        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
 
-        m_calculateRPMMatch =
-            m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
-        }
+    m_calculateRPMMatch =
+        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
+  }
 
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
@@ -228,6 +209,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
+
     m_shooterRPMGraph =
         m_debugTab
             .add("Shooter RPM v Time", 0)
@@ -235,12 +217,16 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withSize(3, 2)
             .withWidget(BuiltInWidgets.kGraph)
             .getEntry();
+
     m_shooterPID[0] =
         m_debugTab.add("Shooter P", m_shooter.getP()).withPosition(3, 2).withSize(1, 1).getEntry();
+
     m_shooterPID[1] =
         m_debugTab.add("Shooter I", m_shooter.getI()).withPosition(3, 3).withSize(1, 1).getEntry();
+
     m_shooterPID[2] =
         m_debugTab.add("Shooter D", m_shooter.getD()).withPosition(3, 4).withSize(1, 1).getEntry();
+
     m_shooterPID[3] =
         m_debugTab
             .add("Shooter FF", m_shooter.getFF())
