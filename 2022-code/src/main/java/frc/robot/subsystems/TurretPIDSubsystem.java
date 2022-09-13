@@ -15,11 +15,12 @@ import frc.robot.Constants;
 
 public class TurretPIDSubsystem extends SubsystemBase {
   DriveTrainSubsystem m_driveTrain;
+  public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
+  public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
-  private double FORWARD_SOFT_LIMIT_THRESHOLD = 600;
-  private double REVERSE_SOFT_LIMIT_THRESHOLD = 220;
+  private double m_initialAngle;
   private double TURRET_MOTOR_OUTPUT = 0.5;
   private double turretZero = 420;
   private double turretKs = 0;
@@ -28,7 +29,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem() {
-    m_turretMotorConfig.slot0.kP = 0;
+    m_turretMotorConfig.slot0.kP = 5.0;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
     m_turretMotorConfig.slot0.kF = 0;
@@ -40,6 +41,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configForwardSoftLimitEnable(true);
     m_turretMotor.configReverseSoftLimitThreshold(REVERSE_SOFT_LIMIT_THRESHOLD);
     m_turretMotor.configReverseSoftLimitEnable(true);
+    m_initialAngle = getCurrentAngle();
   }
 
   public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
@@ -51,6 +53,17 @@ public class TurretPIDSubsystem extends SubsystemBase {
     double rotationalVelocity = -Math.toRadians(m_driveTrain.getZGyro());
     double targetAngle = feedforward.calculate(turretAngularVelocity + rotationalVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
+  }
+  public void setTargetAngle(double targetAngle) {
+    if (targetAngle > FORWARD_SOFT_LIMIT_THRESHOLD)
+      m_turretMotor.set(ControlMode.Position, FORWARD_SOFT_LIMIT_THRESHOLD - 25.0);
+    else if (targetAngle < REVERSE_SOFT_LIMIT_THRESHOLD)
+      m_turretMotor.set(ControlMode.Position, REVERSE_SOFT_LIMIT_THRESHOLD + 25.0);
+    else m_turretMotor.set(ControlMode.Position, targetAngle);
+  }
+
+  public double getInitialAngle() {
+    return m_initialAngle;
   }
 
   public double getCurrentAngle() {
@@ -69,6 +82,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, TURRET_MOTOR_OUTPUT * -1);
   }
 
+  public void setPower(double power) {
+    m_turretMotor.set(ControlMode.PercentOutput, power);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -84,11 +101,11 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public double getI() {
-    return m_turretMotorConfig.slot0.kD;
+    return m_turretMotorConfig.slot0.kI;
   }
 
   public void setI(double I) {
-    m_turretMotorConfig.slot0.kP = I;
+    m_turretMotorConfig.slot0.kI = I;
   }
 
   public double getD() {
@@ -96,6 +113,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void setD(double D) {
-    m_turretMotorConfig.slot0.kP = D;
+    m_turretMotorConfig.slot0.kD = D;
   }
 }

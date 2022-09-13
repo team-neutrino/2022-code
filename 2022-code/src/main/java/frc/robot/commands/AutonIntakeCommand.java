@@ -4,43 +4,57 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.IntakeSubSystem;
 
 /** An example command that uses an example subsystem. */
-public class ShooterDefaultCommand extends CommandBase {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ShooterSubsystem m_shooter;
+public class AutonIntakeCommand extends CommandBase {
+  private IntakeSubSystem m_intake;
+  private Timer m_timer;
+  private double m_duration;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ShooterDefaultCommand(ShooterSubsystem p_shooter) {
-    m_shooter = p_shooter;
+  public AutonIntakeCommand(IntakeSubSystem p_intake, double p_duration) {
+    m_intake = p_intake;
+    m_timer = new Timer();
+    m_duration = p_duration;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
+    addRequirements(m_intake);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_timer.start();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setTargetRPM(2000);
-    // m_shooter.turnOff();
+    m_intake.setDown();
+    m_intake.setIntakeOn();
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_timer.stop();
+    m_timer.reset();
+    m_intake.setUp();
+    m_intake.setIntakeOff();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (m_timer.get() >= m_duration) {
+      return true;
+    }
     return false;
   }
 }

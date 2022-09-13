@@ -16,11 +16,11 @@ import frc.robot.util.CalculateRPM;
 
 public class ShooterSubsystem extends SubsystemBase {
   /** Shooter Constants */
-  private final double WHEEL_P = 0.5;
+  private final double WHEEL_P = 0.25;
 
-  private final double WHEEL_I = 0;
+  private final double WHEEL_I = 0.0006;
   private final double WHEEL_D = 0;
-  private final double WHEEL_FF = 0.2;
+  private final double WHEEL_FF = 0.195;
 
   private CANSparkMax m_wheelMotor;
   private CANSparkMax m_wheelMotor2;
@@ -30,6 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private LimelightSubsystem m_limelight;
   private CalculateRPM RPMCalculator;
 
+  private int coolCounter;
   private double m_targetRPM;
   public double m_shuffleBoardRPM = 100;
 
@@ -48,21 +49,45 @@ public class ShooterSubsystem extends SubsystemBase {
     m_wheelMotor.setIdleMode(IdleMode.kCoast);
     m_wheelMotor2.setIdleMode(IdleMode.kCoast);
 
-    m_wheelMotor.setClosedLoopRampRate(1.5);
+    m_wheelMotor.setClosedLoopRampRate(.2);
 
     m_encoder1 = m_wheelMotor.getEncoder();
     m_encoder2 = m_wheelMotor2.getEncoder();
     m_pidController = m_wheelMotor.getPIDController();
     m_pidController.setFeedbackDevice(m_encoder1);
-    m_pidController.setP(WHEEL_P / 1000);
-    m_pidController.setI(WHEEL_I / 1000);
-    m_pidController.setD(WHEEL_D / 1000);
-    m_pidController.setFF(WHEEL_FF / 1000);
+    m_pidController.setP(WHEEL_P / 1000.0);
+    m_pidController.setI(WHEEL_I / 1000.0);
+    m_pidController.setD(WHEEL_D / 1000.0);
+    m_pidController.setFF(WHEEL_FF / 1000.0);
+    m_pidController.setIZone(160);
     m_pidController.setOutputRange(.1, 1);
   }
 
   @Override
   public void periodic() {}
+
+  public void setCounter(int num) {
+    coolCounter = num;
+  }
+
+  public int getCounter() {
+    return coolCounter;
+  }
+
+  public void iterateCounter(double p_targetRPM) {
+    // previous range was 20 for match 71
+    if (Math.abs(p_targetRPM - getRPM1()) < 30) coolCounter++;
+    else resetCounter();
+  }
+
+  public void resetCounter() {
+    coolCounter = 0;
+  }
+
+  public boolean okShoot() {
+    // previous counter was 3 for match 71
+    return coolCounter >= 5;
+  }
 
   public double CalculateRPM() {
     return RPMCalculator.InterpolateDistance();
@@ -102,34 +127,38 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double getP() {
-    return m_pidController.getP() * 1000;
+    return m_pidController.getP() * 1000.0;
   }
 
   public double getFF() {
-    return m_pidController.getFF() * 1000;
+    return m_pidController.getFF() * 1000.0;
   }
 
   public void setP(double P) {
-    m_pidController.setP(P / 1000);
+    m_pidController.setP(P / 1000.0);
   }
 
   public double getI() {
-    return m_pidController.getI() * 1000;
+    return m_pidController.getI() * 1000.0;
   }
 
   public void setI(double I) {
-    m_pidController.setI(I / 1000);
+    m_pidController.setI(I / 1000.0);
   }
 
   public double getD() {
-    return m_pidController.getD() * 1000;
+    return m_pidController.getD() * 1000.0;
   }
 
   public void setD(double D) {
-    m_pidController.setD(D / 1000);
+    m_pidController.setD(D / 1000.0);
   }
 
   public void setFF(double FF) {
-    m_pidController.setFF(FF / 1000);
+    m_pidController.setFF(FF / 1000.0);
+  }
+
+  public boolean magicShooter(double RPM, double TRPM) {
+    return Math.abs(RPM - TRPM) <= 10;
   }
 }

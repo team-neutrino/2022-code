@@ -10,10 +10,12 @@ import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.CalculateRPM;
 import java.util.Map;
 
 public class ShuffleboardSubsystem extends SubsystemBase {
@@ -21,22 +23,32 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private ShuffleboardTab m_debugTab;
   private NetworkTableEntry m_shooterRPMGraph;
   private NetworkTableEntry m_turretPositionGraph;
+  private NetworkTableEntry m_pressureSensor;
+  private NetworkTableEntry m_calculatedRPM;
+  private NetworkTableEntry m_calculateRPMMatch;
   private ShooterSubsystem m_shooter;
   private HttpCamera LLFeed;
   private NetworkTableEntry m_turretAngle;
   private TurretPIDSubsystem m_turret;
   private NetworkTableEntry m_timer;
   private ClimberSubsystem m_climber;
+  private ColorSubsystem m_color;
   private DriveTrainSubsystem m_drivetrain;
   private IndexSubsystem m_index;
+  private IntakeSubSystem m_intake;
   private LimelightSubsystem m_limelight;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
-  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[5];
+  private NetworkTableEntry m_limelightVariables[] = new NetworkTableEntry[6];
   private NetworkTableEntry m_shooterVariables[] = new NetworkTableEntry[2];
   private NetworkTableEntry m_shooterPID[] = new NetworkTableEntry[5];
   private NetworkTableEntry m_turretPID[] = new NetworkTableEntry[3];
+  private NetworkTableEntry m_colors[] = new NetworkTableEntry[2];
+  private NetworkTableEntry m_isBoth;
+  private NetworkTableEntry m_isShootable;
+  private NetworkTableEntry m_shooterAdd;
+  private NetworkTableEntry m_howMany;
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -45,34 +57,49 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       ClimberSubsystem p_climber,
       DriveTrainSubsystem p_drivetrain,
       IndexSubsystem p_index,
+      IntakeSubSystem p_intake,
+      ColorSubsystem p_color,
       LimelightSubsystem p_limelight) {
     m_shooter = p_shooter;
     m_turret = p_turret;
     m_climber = p_climber;
     m_drivetrain = p_drivetrain;
     m_index = p_index;
+    m_intake = p_intake;
+    m_color = p_color;
     m_limelight = p_limelight;
 
     driveStationTab();
     debugTab();
+    LiveWindow.disableAllTelemetry();
+    LiveWindow.setEnabled(false);
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    m_isBoth.setBoolean(m_color.isBall() && m_index.getBeamBreak());
+    m_isShootable.setBoolean(
+        (m_limelight.getDistance() < CalculateRPM.K_MAX_CALCULABLE)
+            && (m_limelight.getDistance() > CalculateRPM.K_MIN_CALCULABLE));
+    m_howMany.setDouble(getNumBalls());
+
     m_timer.setDouble(DriverStation.getMatchTime());
     m_shooterVariables[0].setDouble(m_shooter.getRPM1());
     m_shooterVariables[1].setDouble(m_shooter.getRPM2());
     m_shooterRPMGraph.setDouble(m_shooter.getRPM1());
+    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
+    m_colors[0].setBoolean(m_color.getIsBlue());
+    m_colors[1].setBoolean(m_color.getIsRed());
 
     if (m_shooterPID[0].getDouble(0.0) != m_shooter.getP()) {
       m_shooter.setP(m_shooterPID[0].getDouble(0.0));
     }
-    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getD()) {
-      m_shooter.setD(m_shooterPID[1].getDouble(0.0));
+    if (m_shooterPID[1].getDouble(0.0) != m_shooter.getI()) {
+      m_shooter.setI(m_shooterPID[1].getDouble(0.0));
     }
-    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getI()) {
-      m_shooter.setI(m_shooterPID[2].getDouble(0.0));
+    if (m_shooterPID[2].getDouble(0.0) != m_shooter.getD()) {
+      m_shooter.setD(m_shooterPID[2].getDouble(0.0));
     }
     if (m_shooterPID[3].getDouble(0.0) != m_shooter.getFF()) {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
@@ -84,15 +111,15 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
       m_turret.setP(m_turretPID[0].getDouble(0.0));
     }
-    if (m_turretPID[1].getDouble(0.0) != m_turret.getD()) {
-      m_turret.setD(m_turretPID[1].getDouble(0.0));
+    if (m_turretPID[1].getDouble(0.0) != m_turret.getI()) {
+      m_turret.setI(m_turretPID[1].getDouble(0.0));
     }
-    if (m_turretPID[2].getDouble(0.0) != m_turret.getI()) {
-      m_turret.setI(m_turretPID[2].getDouble(0.0));
+    if (m_turretPID[2].getDouble(0.0) != m_turret.getD()) {
+      m_turret.setD(m_turretPID[2].getDouble(0.0));
     }
 
-    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoder1());
-    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoder3());
+    m_driveVariables[0].setDouble(m_drivetrain.getDriveEncoderL1Position());
+    m_driveVariables[2].setDouble(m_drivetrain.getDriveEncoderR1Position());
     m_driveVariables[4].setString(String.format("%,.2f", m_drivetrain.getNavX()));
     m_driveVariables[5].setString(String.format("%,.2f", m_drivetrain.getNavY()));
     m_driveVariables[6].setString(String.format("%,.2f", m_drivetrain.getNavYaw()));
@@ -103,24 +130,71 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
 
+    m_pressureSensor.setDouble(m_intake.getPressure());
+
     m_limelightVariables[0].setString(String.format("%,.2f", m_limelight.getTx()));
     m_limelightVariables[1].setString(String.format("%,.2f", m_limelight.getTy()));
     m_limelightVariables[2].setString(String.format("%,.2f", m_limelight.getTa()));
     m_limelightVariables[3].setBoolean(m_limelight.getTv());
     m_limelightVariables[4].setString(String.format("%,.2f", m_limelight.getDistance()));
+    m_limelightVariables[5].setDouble(m_limelight.getDistance());
+
+    m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
+    m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
+  }
+
+  private int getNumBalls() {
+    if (m_color.isBall() && m_index.getBeamBreak()) return 2;
+    else if ((!m_color.isBall() && m_index.getBeamBreak())
+        || (m_color.isBall() && !m_index.getBeamBreak())) return 1;
+    else return 0;
   }
 
   public void driveStationTab() {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
+
+    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(3, 1).getEntry();
+    // (0, 0), (1, 0), (2, 0)
+
+    m_limelightVariables[5] =
+        m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
+    // (4, 0)
+
+    m_pressureSensor =
+        m_drivestationTab
+            .add("Pressure", 0)
+            .withPosition(5, 0)
+            .withSize(1, 1)
+            .withWidget(BuiltInWidgets.kDial)
+            .withProperties(Map.of("empty", 0, "pressured", 130))
+            .getEntry();
+    // (5, 0)
+
+    m_colors[0] =
+        m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
+    // (6, 0)
+
+    m_colors[1] =
+        m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
+    // (7, 0)
+
     m_shooterVariables[0] =
         m_drivestationTab
             .add("Shooter RPM", 0)
-            .withPosition(0, 0)
-            .withSize(2, 2)
+            .withPosition(0, 1)
+            .withSize(3, 2)
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 5).withSize(8, 1).getEntry();
+    // (0, 1), (1, 1), (2, 1)
+    // (0, 2), (1, 2), (2, 2)
+
+    m_isBoth =
+        m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(1, 6).getEntry();
+    // ()
+
+    m_isShootable =
+        m_drivestationTab.add("Shootable", true).withPosition(9, 0).withSize(1, 6).getEntry();
 
     try {
       LLFeed =
@@ -129,20 +203,36 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       CameraServer.startAutomaticCapture(LLFeed);
       m_drivestationTab
           .add(LLFeed)
-          .withPosition(0, 2)
+          .withPosition(0, 3)
           .withSize(3, 3)
           .withWidget(BuiltInWidgets.kCameraStream);
+
       m_drivestationTab
           .add(CameraServer.startAutomaticCapture())
-          .withPosition(3, 0)
+          .withPosition(3, 1)
           .withSize(5, 5)
           .withWidget(BuiltInWidgets.kCameraStream);
     } catch (VideoException e) {
     }
+
+    m_indexVariables[1] =
+        m_drivestationTab
+            .add("Index Beambreak", false)
+            .withPosition(6, 4)
+            .withSize(1, 1)
+            .getEntry();
+
+    m_calculatedRPM =
+        m_drivestationTab.add("Calculated RPM", 0).withPosition(9, 0).withSize(1, 1).getEntry();
+
+    m_calculateRPMMatch =
+        m_drivestationTab.add("OK Shoot", false).withPosition(9, 1).withSize(1, 1).getEntry();
   }
 
   public void debugTab() {
     m_debugTab = Shuffleboard.getTab("Debug Tab");
+
+    m_howMany = m_debugTab.add("How Many", 0).withPosition(2, 0).withSize(1, 1).getEntry();
 
     m_shooterVariables[1] =
         m_debugTab
@@ -152,6 +242,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
+
     m_shooterRPMGraph =
         m_debugTab
             .add("Shooter RPM v Time", 0)
@@ -159,6 +250,10 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withSize(3, 2)
             .withWidget(BuiltInWidgets.kGraph)
             .getEntry();
+
+    m_shooterAdd =
+        m_debugTab.add("Shooter add speed", 0).withPosition(3, 0).withSize(1, 1).getEntry();
+
     m_shooterPID[0] =
         m_debugTab.add("Shooter P", m_shooter.getP()).withPosition(3, 2).withSize(1, 1).getEntry();
     m_shooterPID[1] =
@@ -179,9 +274,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .getEntry();
 
     m_driveVariables[0] =
-        m_debugTab.add("DriveRMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
+        m_debugTab.add("DriveLMotor1", 0).withPosition(7, 2).withSize(1, 1).getEntry();
     m_driveVariables[2] =
-        m_debugTab.add("DriveLMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
+        m_debugTab.add("DriveRMotor1", 0).withPosition(7, 3).withSize(1, 1).getEntry();
     m_driveVariables[4] =
         m_debugTab.add("Navx X", "Navx X1").withPosition(8, 4).withSize(1, 1).getEntry();
     m_driveVariables[5] =
@@ -211,19 +306,17 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_indexVariables[0] =
         m_debugTab.add("Index Motor 2", 0).withPosition(5, 4).withSize(1, 1).getEntry();
-    m_indexVariables[1] =
-        m_debugTab.add("Index Beambreak", 0).withPosition(6, 4).withSize(1, 1).getEntry();
 
     m_limelightVariables[0] =
         m_debugTab
             .add("Limelight Tx", "Limelight Tx1")
-            .withPosition(10, 2)
+            .withPosition(9, 1)
             .withSize(1, 1)
             .getEntry();
     m_limelightVariables[1] =
         m_debugTab
             .add("Limelight Ty", "Limelight Ty1")
-            .withPosition(11, 2)
+            .withPosition(9, 2)
             .withSize(1, 1)
             .getEntry();
     m_limelightVariables[2] =

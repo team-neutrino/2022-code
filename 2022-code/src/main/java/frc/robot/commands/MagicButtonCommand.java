@@ -1,26 +1,20 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class IndexManualCommand extends CommandBase {
-  /** Creates a new IndexManualCommand. */
-  private IndexSubsystem m_index;
+public class MagicButtonCommand extends CommandBase {
 
   private ShooterSubsystem m_shooter;
+  private IndexSubsystem m_index;
+  private double m_targetRPM;
 
-  public IndexManualCommand(IndexSubsystem p_index, ShooterSubsystem p_shooter) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_index = p_index;
+  public MagicButtonCommand(ShooterSubsystem p_shooter, IndexSubsystem p_index) {
     m_shooter = p_shooter;
-    addRequirements(m_index);
+    m_index = p_index;
+    addRequirements(m_index, m_shooter);
   }
-
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
@@ -28,7 +22,9 @@ public class IndexManualCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (m_shooter.okShoot()) {
+    m_targetRPM = m_shooter.CalculateRPM();
+    m_shooter.setTargetRPM(m_targetRPM);
+    if (m_shooter.magicShooter(m_shooter.getRPM1(), m_targetRPM)) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
     }

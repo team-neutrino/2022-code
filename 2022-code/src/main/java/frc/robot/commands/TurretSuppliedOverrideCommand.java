@@ -5,39 +5,42 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.TurretPIDSubsystem;
+import java.util.function.DoubleSupplier;
 
-public class ShooterSetSpeed extends CommandBase {
-  /** shooter rpm constant */
-  private ShooterSubsystem m_shooter;
-
-  double m_rpm;
-
-  /** Creates a new ShooterSetSpeedCommand. */
-  public ShooterSetSpeed(ShooterSubsystem p_shooter, double rpm) {
-    m_shooter = p_shooter;
-    m_rpm = rpm;
+public class TurretSuppliedOverrideCommand extends CommandBase {
+  TurretPIDSubsystem m_turret;
+  LimelightSubsystem m_limelight;
+  DoubleSupplier m_doubleSupplier;
+  /** Creates a new TurretSuppliedOverrideCommand. */
+  public TurretSuppliedOverrideCommand(
+      TurretPIDSubsystem p_turret,
+      LimelightSubsystem p_limelight,
+      DoubleSupplier p_doubleSupplier) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
+    m_turret = p_turret;
+    m_limelight = p_limelight;
+    addRequirements(m_turret, m_limelight);
+    m_doubleSupplier = p_doubleSupplier;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.resetCounter();
+    m_limelight.setLimelightOff();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.setTargetRPM(m_rpm);
-    m_shooter.iterateCounter(m_rpm);
+    m_turret.setPower(0.5 * m_doubleSupplier.getAsDouble());
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.turnOff();
+    m_limelight.setLimelightOn();
   }
 
   // Returns true when the command should end.
