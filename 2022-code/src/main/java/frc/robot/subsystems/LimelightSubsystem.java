@@ -10,10 +10,12 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class LimelightSubsystem extends SubsystemBase {
+  private static final String DistanceThree = null;
   NetworkTable limelight;
   NetworkTableEntry ledMode;
   double h = 1.25;
   double limelightMountAngle = 30;
+  double currentDistance;
 
   public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -23,6 +25,7 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    currentDistance = getDistance();
   }
 
   @Override
@@ -65,4 +68,19 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getDistance() {
     return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
+
+  public double[] getPreviousDistance() {
+    double distance = getDistance();
+    double distanceOne = 0;
+    double distanceTwo = 0; 
+    double distanceThree = 0;
+
+    distanceThree = distanceTwo;
+    distanceTwo = distanceOne;
+    distanceOne = distance;
+
+    double array[] = {distanceOne, distanceTwo, distanceThree};
+    return array;
+  }
+
 }
