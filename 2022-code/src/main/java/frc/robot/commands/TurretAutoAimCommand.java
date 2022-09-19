@@ -52,6 +52,7 @@ public class TurretAutoAimCommand extends CommandBase {
       }
     }
   }
+  
 
   public void setNotAuton() {
     m_notAuton = true;

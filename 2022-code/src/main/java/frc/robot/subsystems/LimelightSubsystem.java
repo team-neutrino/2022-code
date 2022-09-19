@@ -14,6 +14,9 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTable limelight;
   NetworkTableEntry ledMode;
   double h = 1.25;
+  int cycles = 0;
+  double deltaD;
+  double deltaA;
   double limelightMountAngle = 30;
   double currentDistance;
 
@@ -26,6 +29,9 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // currentDistance = getDistance();
+    cycles++;
+    distanceAngleUpdater();
+    // getTime();
   }
 
   @Override
@@ -69,7 +75,7 @@ public class LimelightSubsystem extends SubsystemBase {
     return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
 
-  public double[] getPreviousDistance() {
+  public void deltaD() {
     double distance = getDistance();
     double distanceOne = 0;
     double distanceTwo = 0; 
@@ -79,8 +85,41 @@ public class LimelightSubsystem extends SubsystemBase {
     distanceTwo = distanceOne;
     distanceOne = distance;
 
-    double array[] = {distanceOne, distanceTwo, distanceThree};
-    return array;
+    this.deltaD = distanceOne - distanceTwo;
+  }
+
+  public double getDeltaD(){
+    return deltaD;
+  }
+
+  public void deltaA() {
+    double angle = getTx();
+    double angleOne = 0;
+    double angleTwo = 0;
+    double angleThree = 0;
+
+    angleThree = angleTwo;
+    angleTwo = angleOne;
+    angleOne = angle;
+
+    this.deltaA = angleOne - angleTwo;
+  }
+
+  public double getDeltaA(){
+    return deltaA;
+  }
+
+  public void distanceAngleUpdater() {
+    if (cycles % 10 == 0){
+      deltaD();
+      deltaA();
+    }
+   
+    
+  }
+  public double getTanV(){
+    double tanV = getDeltaD() / 0.2;
+    return tanV;
   }
 
 }

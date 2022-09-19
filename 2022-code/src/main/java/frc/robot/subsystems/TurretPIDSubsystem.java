@@ -44,7 +44,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_initialAngle = getCurrentAngle();
   }
 
-  public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
+   public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
 
     double yVelocity = m_driveTrain.getXVelocity();
     double u = (currentTurretAngle + turretZero) * 0.4736;
@@ -55,6 +55,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     double targetAngle = feedforward.calculate(turretAngularVelocity + angularVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
+  
 
   public void setTargetAngle(double targetAngle) {
     if (targetAngle > FORWARD_SOFT_LIMIT_THRESHOLD)
@@ -92,6 +93,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
+
   }
 
   public double getP() {
