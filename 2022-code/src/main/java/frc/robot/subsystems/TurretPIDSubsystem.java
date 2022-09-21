@@ -43,7 +43,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.configReverseSoftLimitEnable(true);
     m_initialAngle = getCurrentAngle();
   }
-
+ /* 
    public void setTargetAngle(double currentTurretAngle, double tx, double distance) {
 
     double yVelocity = m_driveTrain.getXVelocity();
@@ -55,6 +55,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     double targetAngle = feedforward.calculate(turretAngularVelocity + angularVelocity);
     m_turretMotor.set(ControlMode.Position, targetAngle);
   }
+  */
   
 
   public void setTargetAngle(double targetAngle) {

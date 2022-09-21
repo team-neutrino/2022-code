@@ -75,34 +75,61 @@ public class LimelightSubsystem extends SubsystemBase {
     return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
 
-  public void deltaD() {
+  public void deltaX() {
     double distance = getDistance();
+    double deltaD = 0;
+    double deltaDTwo = 0;
+    double deltaDThree = 0;
     double distanceOne = 0;
     double distanceTwo = 0; 
     double distanceThree = 0;
+    double distanceFour = 0;
+    double distanceFive = 0;
+    double distanceSix = 0;
 
+    distanceSix = distanceFive;
+    distanceFive = distanceFour;
+    distanceFour = distanceThree;
     distanceThree = distanceTwo;
     distanceTwo = distanceOne;
     distanceOne = distance;
 
-    this.deltaD = distanceOne - distanceTwo;
+    deltaD = distanceOne - distanceTwo;
+    deltaDTwo = distanceThree - distanceFour;
+    deltaDThree = distanceFive - distanceSix;
+
+
+    this.deltaD = (deltaD + deltaDTwo  + deltaDThree) / 3;
   }
 
-  public double getDeltaD(){
+  public double getDeltaX(){
     return deltaD;
   }
 
   public void deltaA() {
     double angle = getTx();
+    double deltaA = 0;
+    double deltaATwo = 0;
+    double deltaAThree = 0;
     double angleOne = 0;
     double angleTwo = 0;
     double angleThree = 0;
+    double angleFour = 0;
+    double angleFive = 0;
+    double angleSix = 0;
 
+    angleSix = angleFive;
+    angleFive = angleFour;
+    angleFour = angleThree;
     angleThree = angleTwo;
     angleTwo = angleOne;
     angleOne = angle;
 
-    this.deltaA = angleOne - angleTwo;
+    deltaA = angleOne - angleTwo;
+    deltaATwo = angleThree - angleFour;
+    deltaAThree = angleFive - angleSix;
+
+    this.deltaA = (deltaA + deltaATwo + deltaAThree) / 3;
   }
 
   public double getDeltaA(){
@@ -111,14 +138,14 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public void distanceAngleUpdater() {
     if (cycles % 10 == 0){
-      deltaD();
+      deltaX();
       deltaA();
     }
    
     
   }
   public double getTanV(){
-    double tanV = getDeltaD() / 0.2;
+    double tanV = getDeltaX() / 0.2;
     return tanV;
   }
 
