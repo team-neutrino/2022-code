@@ -159,11 +159,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_drivestationTab = Shuffleboard.getTab("Drivestation Tab");
 
     m_timer = m_drivestationTab.add("Match Time", 0).withPosition(0, 0).withSize(3, 1).getEntry();
-    // (0, 0), (1, 0), (2, 0)
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
-    // (4, 0)
 
     m_pressureSensor =
         m_drivestationTab
@@ -173,15 +171,12 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("empty", 0, "pressured", 130))
             .getEntry();
-    // (5, 0)
 
     m_colors[0] =
         m_drivestationTab.add("isBlue", false).withPosition(6, 0).withSize(1, 1).getEntry();
-    // (6, 0)
 
     m_colors[1] =
         m_drivestationTab.add("isRed", false).withPosition(7, 0).withSize(1, 1).getEntry();
-    // (7, 0)
 
     m_shooterVariables[0] =
         m_drivestationTab
@@ -191,12 +186,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withWidget(BuiltInWidgets.kDial)
             .withProperties(Map.of("min", 0, "max", 6000))
             .getEntry();
-    // (0, 1), (1, 1), (2, 1)
-    // (0, 2), (1, 2), (2, 2)
 
     m_isBoth =
         m_drivestationTab.add("Bothofem", false).withPosition(8, 0).withSize(2, 6).getEntry();
-    // ()
 
     m_isShootable =
         m_drivestationTab.add("Shootable", true).withPosition(10, 0).withSize(2, 6).getEntry();
