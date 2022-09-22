@@ -132,7 +132,7 @@ public class LimelightSubsystem extends SubsystemBase {
     this.deltaTx = (deltaTx + deltaTxTwo + deltaTxThree) / 3;
   }
 
-  public double getDeltaA(){
+  public double getDeltaTx(){
     return deltaTx;
   }
 
