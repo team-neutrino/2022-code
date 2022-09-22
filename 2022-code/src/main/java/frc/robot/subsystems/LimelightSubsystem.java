@@ -15,8 +15,8 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ledMode;
   double h = 1.25;
   int cycles = 0;
-  double deltaD;
-  double deltaA;
+  double deltaX;
+  double deltaTx;
   double limelightMountAngle = 30;
   double currentDistance;
 
@@ -77,9 +77,9 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public void deltaX() {
     double distance = getDistance();
-    double deltaD = 0;
-    double deltaDTwo = 0;
-    double deltaDThree = 0;
+    double deltaX = 0;
+    double deltaXTwo = 0;
+    double deltaXThree = 0;
     double distanceOne = 0;
     double distanceTwo = 0; 
     double distanceThree = 0;
@@ -94,23 +94,23 @@ public class LimelightSubsystem extends SubsystemBase {
     distanceTwo = distanceOne;
     distanceOne = distance;
 
-    deltaD = distanceOne - distanceTwo;
-    deltaDTwo = distanceThree - distanceFour;
-    deltaDThree = distanceFive - distanceSix;
+    deltaX = distanceOne - distanceTwo;
+    deltaXTwo = distanceThree - distanceFour;
+    deltaXThree = distanceFive - distanceSix;
 
 
-    this.deltaD = (deltaD + deltaDTwo  + deltaDThree) / 3;
+    this.deltaX = (deltaX + deltaXTwo  + deltaXThree) / 3;
   }
 
   public double getDeltaX(){
-    return deltaD;
+    return deltaX;
   }
 
-  public void deltaA() {
+  public void deltaTx() {
     double angle = getTx();
-    double deltaA = 0;
-    double deltaATwo = 0;
-    double deltaAThree = 0;
+    double deltaTx = 0;
+    double deltaTxTwo = 0;
+    double deltaTxThree = 0;
     double angleOne = 0;
     double angleTwo = 0;
     double angleThree = 0;
@@ -125,21 +125,21 @@ public class LimelightSubsystem extends SubsystemBase {
     angleTwo = angleOne;
     angleOne = angle;
 
-    deltaA = angleOne - angleTwo;
-    deltaATwo = angleThree - angleFour;
-    deltaAThree = angleFive - angleSix;
+    deltaTx = angleOne - angleTwo;
+    deltaTxTwo = angleThree - angleFour;
+    deltaTxThree = angleFive - angleSix;
 
-    this.deltaA = (deltaA + deltaATwo + deltaAThree) / 3;
+    this.deltaTx = (deltaTx + deltaTxTwo + deltaTxThree) / 3;
   }
 
   public double getDeltaA(){
-    return deltaA;
+    return deltaTx;
   }
 
   public void distanceAngleUpdater() {
     if (cycles % 10 == 0){
       deltaX();
-      deltaA();
+      deltaTx();
     }
    
     
