@@ -17,6 +17,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   DriveTrainSubsystem m_driveTrain;
   public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
   public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
+  double cycles = 0;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
@@ -90,11 +91,41 @@ public class TurretPIDSubsystem extends SubsystemBase {
     m_turretMotor.set(ControlMode.PercentOutput, power);
   }
 
+  public double deltaA(){
+    double angle = getCurrentAngle();
+    double deltaA = 0;
+    double deltaATwo = 0;
+    double deltaAThree = 0;
+    double angleOne = 0;
+    double angleTwo = 0;
+    double angleThree = 0;
+    double angleFour = 0;
+
+    angleFour = angleThree;
+    angleThree = angleTwo;
+    angleTwo = angleOne;
+    angleOne = angle;
+
+    deltaA = angle - angleOne;
+    deltaATwo = angleTwo - angleThree;
+    deltaAThree = angleThree - angleFour;
+
+    return (deltaA + deltaATwo + deltaAThree) / 3;
+  }
+
+  public void angleUpdater(){
+    if (cycles % 10 == 0){
+      deltaA();
+    }
+
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
-
+    cycles++;
+    angleUpdater();
   }
 
   public double getP() {
