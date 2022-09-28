@@ -52,7 +52,7 @@ public class ShootWhileMove {
         // double angularVelocityFive = (deltaTxFive / 0.2) + (deltaAFive / 0.2);
         double vAverage = (angularVelocity + angularVelocityTwo) / 2;
         double vAverageTwo = (angularVelocityThree + angularVelocityFour) / 2;
-        double integrateV = (vAverage + vAverageTwo) / 0.2;  
+        double integrateV = (vAverage + vAverageTwo) / 0.2; 
         
     }
 
