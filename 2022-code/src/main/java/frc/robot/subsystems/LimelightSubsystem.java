@@ -8,6 +8,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.ShootWhileMove;
 
 public class LimelightSubsystem extends SubsystemBase {
   private static final String DistanceThree = null;
@@ -19,6 +20,7 @@ public class LimelightSubsystem extends SubsystemBase {
   double deltaTx;
   double limelightMountAngle = 30;
   double currentDistance;
+  ShootWhileMove shooterUpdatorHelper;
 
   public LimelightSubsystem() {
     limelight = NetworkTableInstance.getDefault().getTable("limelight");
@@ -31,6 +33,7 @@ public class LimelightSubsystem extends SubsystemBase {
     // currentDistance = getDistance();
     cycles++;
     distanceAngleUpdater();
+    shooterUpdatorHelper.integrateAngularV();
     // getTime();
   }
 

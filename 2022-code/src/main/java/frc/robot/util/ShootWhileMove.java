@@ -8,6 +8,7 @@ public class ShootWhileMove {
     TurretPIDSubsystem m_turret;
     LimelightSubsystem m_limelight;
     double LIMELIGHT_MULTIPLICATION = 10.0;
+    double TX_TO_TURRET_COUNTS_CONVERSION = 165/240;
 
     public ShootWhileMove(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight){
 
@@ -24,11 +25,35 @@ public class ShootWhileMove {
      * Look into it. 
      */
 
-    public double feedfowardTanV(){
-        double deltaTx = m_limelight.getDeltaTx() * LIMELIGHT_MULTIPLICATION;
+    public double integrateAngularV() {
+        double deltaTx = m_limelight.getDeltaTx() * TX_TO_TURRET_COUNTS_CONVERSION;
         double deltaA = m_turret.getDeltaA();
-        double distance = m_limelight.getDistance();
-        double tanV = (deltaTx / 0.2 + deltaA / 0.2) * distance;
+        double deltaTxTwo = 0.0;
+        double deltaATwo = 0.0;
+        double deltaTxThree = 0.0;
+        double deltaAThree = 0.0;
+        double deltaTxFour = 0.0;
+        double deltaAFour = 0.0;
+        //double deltaTxFive = 0.0;
+        //double deltaAFive = 0.0;
+        //deltaTxFive = deltaTxFour;
+        //deltaAFive = deltaAFour;
+        deltaTxFour = deltaTxThree;
+        deltaAFour = deltaAThree;
+        deltaTxThree = deltaTxTwo;
+        deltaAThree = deltaATwo;
+        deltaTxTwo = deltaTx;
+        deltaATwo = deltaA;
+        // double distance = m_limelight.getDistance();
+        double angularVelocity = (deltaTx / 0.2) + (deltaA / 0.2);
+        double angularVelocityTwo = (deltaTxTwo / 0.2) + (deltaATwo / 0.2);
+        double angularVelocityThree = (deltaTxThree / 0.2) + (deltaATwo / 0.2);
+        double angularVelocityFour = (deltaTxFour / 0.2) + (deltaAFour / 0.2);
+        // double angularVelocityFive = (deltaTxFive / 0.2) + (deltaAFive / 0.2);
+        double vAverage = (angularVelocity + angularVelocityTwo) / 2;
+        double vAverageTwo = (angularVelocityThree + angularVelocityFour) / 2;
+        double integrateV = (vAverage + vAverageTwo) / 0.4;  
+        
     }
 
 }
