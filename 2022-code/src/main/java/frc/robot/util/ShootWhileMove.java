@@ -45,14 +45,14 @@ public class ShootWhileMove {
         deltaTxTwo = deltaTx;
         deltaATwo = deltaA;
         // double distance = m_limelight.getDistance();
-        double angularVelocity = (deltaTx / 0.2) + (deltaA / 0.2);
-        double angularVelocityTwo = (deltaTxTwo / 0.2) + (deltaATwo / 0.2);
-        double angularVelocityThree = (deltaTxThree / 0.2) + (deltaATwo / 0.2);
-        double angularVelocityFour = (deltaTxFour / 0.2) + (deltaAFour / 0.2);
+        double angularVelocity = (deltaTx / 0.1) + (deltaA / 0.1);
+        double angularVelocityTwo = (deltaTxTwo / 0.1) + (deltaATwo / 0.1);
+        double angularVelocityThree = (deltaTxThree / 0.1) + (deltaATwo / 0.1);
+        double angularVelocityFour = (deltaTxFour / 0.1) + (deltaAFour / 0.1);
         // double angularVelocityFive = (deltaTxFive / 0.2) + (deltaAFive / 0.2);
         double vAverage = (angularVelocity + angularVelocityTwo) / 2;
         double vAverageTwo = (angularVelocityThree + angularVelocityFour) / 2;
-        double integrateV = (vAverage + vAverageTwo) / 0.4;  
+        double integrateV = (vAverage + vAverageTwo) / 0.2;  
         
     }
 
