@@ -41,10 +41,10 @@ public class ShooterInterpolateSpeed extends CommandBase {
 
     if (m_driverControl) {
       m_shooter.setCounter(10);
-      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
+      m_shooter.setTargetRPM(m_RPM);
     } else {
-      m_shooter.setTargetRPM(m_shooter.CalculateRPM());
-      m_shooter.iterateCounter(m_shooter.CalculateRPM());
+      m_shooter.setTargetRPM(m_RPM);
+      m_shooter.iterateCounter(m_RPM);
     }
   }
 
