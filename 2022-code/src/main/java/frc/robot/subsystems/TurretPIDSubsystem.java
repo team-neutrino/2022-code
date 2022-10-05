@@ -29,10 +29,13 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double turretZero = 420;
   private double turretKs = 0;
   private double turretKv = 0;
+  LimelightSubsystem m_limelight;
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(turretKs, turretKv);
 
   /** Creates a new TurretPIDSubsystem. */
-  public TurretPIDSubsystem() {
+  public TurretPIDSubsystem(LimelightSubsystem p_limelight) {
+    m_limelight = p_limelight;
+    shootWhileMove = new ShootWhileMove(this, m_limelight);
     m_turretMotorConfig.slot0.kP = 5.0;
     m_turretMotorConfig.slot0.kD = 0;
     m_turretMotorConfig.slot0.kI = 0;
