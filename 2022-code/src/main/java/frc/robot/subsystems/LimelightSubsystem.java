@@ -33,7 +33,7 @@ public class LimelightSubsystem extends SubsystemBase {
     // currentDistance = getDistance();
     cycles++;
     distanceAngleUpdater();
-    shooterUpdatorHelper.integrateAngularV();
+    // shooterUpdatorHelper.integrateAngularV();
     // getTime();
   }
 
@@ -78,7 +78,8 @@ public class LimelightSubsystem extends SubsystemBase {
     return h / Math.tan(Math.toRadians(getTy() + limelightMountAngle));
   }
 
-  public void deltaX() {
+ /* public void deltaX() {
+    System.out.println(cycles);
     double distance = getDistance();
     double deltaX = 0;
     double deltaXTwo = 0;
@@ -108,6 +109,7 @@ public class LimelightSubsystem extends SubsystemBase {
   public double getDeltaX(){
     return deltaX;
   }
+  */
 
   public void deltaTx() {
     double angle = getTx();
@@ -141,15 +143,15 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public void distanceAngleUpdater() {
     if (cycles % 10 == 0){
-      deltaX();
+      
       deltaTx();
     }
    
     
   }
-  public double getTanV(){
-    double tanV = getDeltaX() / 0.2;
-    return tanV;
-  }
+  // public double getTanV(){
+  //   double tanV = getDeltaX() / 0.2;
+  //   return tanV;
+  // }
 
 }

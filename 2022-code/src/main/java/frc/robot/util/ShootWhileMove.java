@@ -28,6 +28,8 @@ public class ShootWhileMove {
     public double integrateAngularV() {
         double deltaTx = m_limelight.getDeltaTx() * TX_TO_TURRET_COUNTS_CONVERSION;
         double deltaA = m_turret.getDeltaA();
+        System.out.println("Delta A: " + deltaA);
+        System.out.println("Delta Tx: " + deltaTx);
         double deltaTxTwo = 0.0;
         double deltaATwo = 0.0;
         double deltaTxThree = 0.0;
