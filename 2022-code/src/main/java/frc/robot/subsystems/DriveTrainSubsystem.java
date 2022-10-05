@@ -189,4 +189,20 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getDriveEncoderL1(), getDriveEncoderR1());
   }
+
+  public double getAmpsR1() {
+    return m_rightMotor1.getOutputCurrent();
+  }
+
+  public double getAmpsR2() {
+    return m_rightMotor2.getOutputCurrent();
+  }
+
+  public double getAmpsL1() {
+    return m_leftMotor1.getOutputCurrent();
+  }
+
+  public double getAmpsL2() {
+    return m_leftMotor2.getOutputCurrent();
+  }
 }
