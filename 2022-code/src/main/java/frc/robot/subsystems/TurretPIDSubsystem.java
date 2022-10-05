@@ -12,9 +12,11 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.util.ShootWhileMove;
 
 public class TurretPIDSubsystem extends SubsystemBase {
   DriveTrainSubsystem m_driveTrain;
+  ShootWhileMove shootWhileMove;
   public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
   public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   double cycles = 0;
@@ -90,6 +92,10 @@ public class TurretPIDSubsystem extends SubsystemBase {
 
   public void setPower(double power) {
     m_turretMotor.set(ControlMode.PercentOutput, power);
+  }
+
+  public double movePositionFeedfoward(){
+    return shootWhileMove.integrateAngularV();
   }
 
   public void deltaA(){
