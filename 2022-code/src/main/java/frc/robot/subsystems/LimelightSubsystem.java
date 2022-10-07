@@ -16,7 +16,7 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ledMode;
   double h = 1.25;
   int cycles = 0;
-  double deltaX;
+  // needed?? double deltaX;
   double deltaTx;
   double limelightMountAngle = 30;
   double currentDistance;
@@ -143,15 +143,10 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public void distanceAngleUpdater() {
     if (cycles % 10 == 0){
-      
       deltaTx();
     }
    
     
   }
-  // public double getTanV(){
-  //   double tanV = getDeltaX() / 0.2;
-  //   return tanV;
-  // }
 
 }

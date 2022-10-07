@@ -40,12 +40,13 @@ public class BetterTurretCommand extends CommandBase {
       m_turret.setTargetAngle(
           m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() + m_turret.movePositionFeedfoward());
       m_drive.resetNavX();
-    } else {
+    } /*else {
       if (m_notAuton) {
         m_turret.setTargetAngle(
             m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_drive.getNavYaw());
       }
     }
+    */
   }
 
   public void setNotAuton() {
