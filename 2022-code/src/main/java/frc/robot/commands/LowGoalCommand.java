@@ -34,7 +34,7 @@ public class LowGoalCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_turret.setTargetAngle(320);
+    m_turret.setTargetAngle(270);
     m_shooter.setTargetRPM(m_rpm);
   }
 

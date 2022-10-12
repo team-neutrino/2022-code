@@ -40,7 +40,7 @@ public class AAAutonShootCommand extends CommandBase {
     m_limelight = p_limelight;
     m_timer = new Timer();
     m_duration = p_duration;
-    m_spinUp = 2;
+    m_spinUp = 1;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_shooter, m_index);
   }

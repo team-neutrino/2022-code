@@ -14,7 +14,7 @@ import frc.robot.Constants;
 
 public class TurretPIDSubsystem extends SubsystemBase {
   public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
-  public static double REVERSE_SOFT_LIMIT_THRESHOLD = 90;
+  public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
