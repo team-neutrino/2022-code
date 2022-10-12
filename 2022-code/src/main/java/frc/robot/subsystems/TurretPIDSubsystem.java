@@ -104,6 +104,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public void deltaA(){
    // System.out.println(cycles);
    // System.out.println("Current angle is " + getCurrentAngle());
+    //System.out.println("deltaA is getting called");
     double angle = getCurrentAngle();
     double deltaA = 0;
     double deltaATwo = 0;
@@ -117,12 +118,18 @@ public class TurretPIDSubsystem extends SubsystemBase {
     angleThree = angleTwo;
     angleTwo = angleOne;
     angleOne = angle;
+    //below IMPORTANT!!!
+    //examine code below
+    //System.out.println("angle two is " + angleTwo);
+    //System.out.println("angle one is " + angleOne);
 
     deltaA = angle - angleOne;
     deltaATwo = angleTwo - angleThree;
     deltaAThree = angleThree - angleFour;
 
     this.deltaA = (deltaA + deltaATwo + deltaAThree) / 3;
+    //System.out.println("current angle is " + angle);
+    //System.out.println("deltaA is " + this.deltaA);
   }
 
   public double getDeltaA(){

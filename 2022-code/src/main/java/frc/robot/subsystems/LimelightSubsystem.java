@@ -129,6 +129,9 @@ public class LimelightSubsystem extends SubsystemBase {
     angleThree = angleTwo;
     angleTwo = angleOne;
     angleOne = angle;
+    System.out.println("current txtwo is " + angleTwo);
+    System.out.println("current txone is " + angleOne);
+    System.out.println("current tx is " + angle);
 
     deltaTx = angleOne - angleTwo;
     deltaTxTwo = angleThree - angleFour;
