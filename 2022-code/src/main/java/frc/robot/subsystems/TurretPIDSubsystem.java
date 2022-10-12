@@ -102,7 +102,8 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void deltaA(){
-    System.out.println(cycles);
+   // System.out.println(cycles);
+   // System.out.println("Current angle is " + getCurrentAngle());
     double angle = getCurrentAngle();
     double deltaA = 0;
     double deltaATwo = 0;
@@ -138,7 +139,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    // m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
+    m_currentAngle = m_turretMotor.getSelectedSensorPosition(0);
     cycles++;
     angleUpdater();
   }

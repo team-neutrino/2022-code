@@ -8,7 +8,7 @@ public class ShootWhileMove {
     TurretPIDSubsystem m_turret;
     LimelightSubsystem m_limelight;
     // needed?? double LIMELIGHT_MULTIPLICATION = 10.0;
-    double TX_TO_TURRET_COUNTS_CONVERSION = 165/240;
+    double TX_TO_TURRET_COUNTS_CONVERSION = 344/130;
 
     public ShootWhileMove(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight){
 
