@@ -146,7 +146,7 @@ public class RobotContainer {
     m_climber.setDefaultCommand(new ClimbDefaultCommand(m_climber));
 
     /** xbox button mapping */
-    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
+    m_A.whileHeld(new ShooterSetSpeed(m_shooter, 2500));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
     m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     m_Y.whileHeld(new MagicButtonCommand(m_shooter, m_index));
