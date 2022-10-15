@@ -47,7 +47,6 @@ import frc.robot.subsystems.IndexSubsystem;
 import frc.robot.subsystems.IntakeSubSystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
@@ -102,9 +101,9 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem(m_limelight);
   private final ClimberSubsystem m_climber = new ClimberSubsystem();
   private final ColorSubsystem m_color = new ColorSubsystem();
-  private final ShuffleboardSubsystem m_shuffleboard =
-      new ShuffleboardSubsystem(
-          m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_intake, m_color, m_limelight);
+  // private final ShuffleboardSubsystem m_shuffleboard =
+  // new ShuffleboardSubsystem(
+  // m_shooter, m_turret, m_climber, m_driveTrain, m_index, m_intake, m_color, m_limelight);
 
   /** Instantiate default command below */
   private final IntakeDefaultCommand m_intakeDefaultCommand = new IntakeDefaultCommand(m_intake);
@@ -162,7 +161,7 @@ public class RobotContainer {
     m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3580));
 
     m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
-    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter, m_limelight));
+    m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(

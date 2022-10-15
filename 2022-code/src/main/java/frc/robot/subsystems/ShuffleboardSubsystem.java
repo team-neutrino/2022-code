@@ -69,8 +69,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
     m_color = p_color;
     m_limelight = p_limelight;
 
-    driveStationTab();
-    debugTab();
+    //driveStationTab();
+    //debugTab();
     LiveWindow.disableAllTelemetry();
     LiveWindow.setEnabled(false);
   }
