@@ -9,6 +9,12 @@ public class ShootWhileMove {
     LimelightSubsystem m_limelight;
     // needed?? double LIMELIGHT_MULTIPLICATION = 10.0;
     double TX_TO_TURRET_COUNTS_CONVERSION = 344/130;
+    double deltaTxTwo = 0.0;
+    double deltaATwo = 0.0;
+    double deltaTxThree = 0.0;
+    double deltaAThree = 0.0;
+    double deltaTxFour = 0.0;
+    double deltaAFour = 0.0;
 
     public ShootWhileMove(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight){
 
@@ -22,12 +28,6 @@ public class ShootWhileMove {
         double deltaA = m_turret.getDeltaA();
         System.out.println("Delta A: " + deltaA);
         System.out.println("Delta Tx: " + deltaTx);
-        double deltaTxTwo = 0.0;
-        double deltaATwo = 0.0;
-        double deltaTxThree = 0.0;
-        double deltaAThree = 0.0;
-        double deltaTxFour = 0.0;
-        double deltaAFour = 0.0;
         //double deltaTxFive = 0.0;
         //double deltaAFive = 0.0;
         //deltaTxFive = deltaTxFour;

@@ -16,8 +16,17 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ledMode;
   double h = 1.25;
   int cycles = 0;
+  double finalDeltaTx = 0;
+  double deltaTx = 0;
+  double deltaTxTwo = 0;
+  double deltaTxThree = 0;
+  double angleOne = 0;
+  double angleTwo = 0;
+  double angleThree = 0;
+  double angleFour = 0;
+  double angleFive = 0;
+  double angleSix = 0;
   // needed?? double deltaX;
-  double deltaTx;
   double limelightMountAngle = 30;
   double currentDistance;
   ShootWhileMove shooterUpdatorHelper;
@@ -113,15 +122,6 @@ public class LimelightSubsystem extends SubsystemBase {
 
   public void deltaTx() {
     double angle = getTx();
-    double deltaTx = 0;
-    double deltaTxTwo = 0;
-    double deltaTxThree = 0;
-    double angleOne = 0;
-    double angleTwo = 0;
-    double angleThree = 0;
-    double angleFour = 0;
-    double angleFive = 0;
-    double angleSix = 0;
 
     angleSix = angleFive;
     angleFive = angleFour;
@@ -137,7 +137,7 @@ public class LimelightSubsystem extends SubsystemBase {
     deltaTxTwo = angleThree - angleFour;
     deltaTxThree = angleFive - angleSix;
 
-    this.deltaTx = (deltaTx + deltaTxTwo + deltaTxThree) / 3;
+    finalDeltaTx = (deltaTx + deltaTxTwo + deltaTxThree) / 3;
   }
 
   public double getDeltaTx(){

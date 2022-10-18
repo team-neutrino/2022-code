@@ -20,7 +20,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
   public static double FORWARD_SOFT_LIMIT_THRESHOLD = 750;
   public static double REVERSE_SOFT_LIMIT_THRESHOLD = 100;
   double cycles = 0;
-  double deltaA = 0;
   private TalonSRXConfiguration m_turretMotorConfig = new TalonSRXConfiguration();
   private TalonSRX m_turretMotor = new TalonSRX(Constants.CANIDConstants.TURRET_MOTOR_ID);
   private double m_currentAngle;
@@ -31,6 +30,14 @@ public class TurretPIDSubsystem extends SubsystemBase {
   private double turretKv = 0;
   LimelightSubsystem m_limelight;
   SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(turretKs, turretKv);
+  double finalDeltaA = 0;
+  double deltaA = 0;
+  double deltaATwo = 0;
+  double deltaAThree = 0;
+  double angleOne = 0;
+  double angleTwo = 0;
+  double angleThree = 0;
+  double angleFour = 0;
 
   /** Creates a new TurretPIDSubsystem. */
   public TurretPIDSubsystem(LimelightSubsystem p_limelight) {
@@ -106,13 +113,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
    // System.out.println("Current angle is " + getCurrentAngle());
     //System.out.println("deltaA is getting called");
     double angle = getCurrentAngle();
-    double deltaA = 0;
-    double deltaATwo = 0;
-    double deltaAThree = 0;
-    double angleOne = 0;
-    double angleTwo = 0;
-    double angleThree = 0;
-    double angleFour = 0;
 
     angleFour = angleThree;
     angleThree = angleTwo;
@@ -127,7 +127,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
     deltaATwo = angleTwo - angleThree;
     deltaAThree = angleThree - angleFour;
 
-    this.deltaA = (deltaA + deltaATwo + deltaAThree) / 3;
+    finalDeltaA = (deltaA + deltaATwo + deltaAThree) / 3;
     //System.out.println("current angle is " + angle);
     //System.out.println("deltaA is " + this.deltaA);
   }
