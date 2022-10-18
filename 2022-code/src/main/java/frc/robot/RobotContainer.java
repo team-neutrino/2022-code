@@ -167,17 +167,21 @@ public class RobotContainer {
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(
             new IntakeCommand(m_intake), new WaitCommand(0.1), new IntakeDownCommand(m_intake)));
+
+    // CLIMBER
     m_back.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbRetractCommand(m_climber, m_shooter, m_turret)));
+    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
     m_start.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
             new WaitCommand(0.5),
             new ClimbExtendCommand(m_climber, m_shooter, m_turret)));
-    m_back.whenReleased(new ClimbKeyExtendCommand(m_climber));
+    m_start.whenReleased(new ClimbKeyExtendCommand(m_climber));
+    
 
     // left 90 counterclockwise, up 0 forward, down 180 back, right 90 clockwise
     m_leftPovButton.whileHeld(new TurretToAngleCommand(m_turret, m_limelight, 100));
