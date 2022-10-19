@@ -50,5 +50,6 @@ public class ShootWhileMove {
         System.out.println(integrateV);
         return integrateV;
     }
+    //make methods to sample each thing: angular velocity and tx
 
 }
