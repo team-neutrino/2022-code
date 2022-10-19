@@ -26,7 +26,6 @@ public class LimelightSubsystem extends SubsystemBase {
   double angleFour = 0;
   double angleFive = 0;
   double angleSix = 0;
-  // needed?? double deltaX;
   double limelightMountAngle = 30;
   double currentDistance;
   ShootWhileMove shooterUpdatorHelper;

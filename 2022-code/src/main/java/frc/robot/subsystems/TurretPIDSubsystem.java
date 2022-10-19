@@ -118,8 +118,6 @@ public class TurretPIDSubsystem extends SubsystemBase {
     angleThree = angleTwo;
     angleTwo = angleOne;
     angleOne = angle;
-    //below IMPORTANT!!!
-    //examine code below
     //System.out.println("angle two is " + angleTwo);
     //System.out.println("angle one is " + angleOne);
 
