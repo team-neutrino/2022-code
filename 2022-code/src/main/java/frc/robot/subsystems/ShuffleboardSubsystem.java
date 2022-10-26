@@ -49,6 +49,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private NetworkTableEntry m_isShootable;
   private NetworkTableEntry m_shooterAdd;
   private NetworkTableEntry m_howMany;
+  private NetworkTableEntry m_coolCounter;
 
   /** Creates a new shuffleboard. */
   public ShuffleboardSubsystem(
@@ -71,8 +72,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     driveStationTab();
     debugTab();
-    LiveWindow.disableAllTelemetry();
-    LiveWindow.setEnabled(false);
+    // LiveWindow.disableAllTelemetry();
+    // LiveWindow.setEnabled(false);
   }
 
   private boolean isShootable() {
@@ -110,7 +111,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
       m_shooter.setFF(m_shooterPID[3].getDouble(0.0));
     }
     m_shooter.setShuffleboardRPM(m_shooterPID[4].getDouble(0.0));
-
+    
     m_turretAngle.setDouble(m_turret.getCurrentAngle());
     m_turretPositionGraph.setDouble(m_turret.getCurrentAngle());
     if (m_turretPID[0].getDouble(0.0) != m_turret.getP()) {
@@ -131,6 +132,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_climberVariables[0].setDouble(m_climber.getClimbEncoder());
     m_climberVariables[1].setBoolean(m_climber.getLimitSwitch());
+
+    m_coolCounter.setDouble(m_shooter.getCounter());
 
     m_indexVariables[0].setDouble(m_index.getIndexEncoder1());
     m_indexVariables[1].setBoolean(m_index.getBeamBreak());
@@ -162,6 +165,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_limelightVariables[5] =
         m_drivestationTab.add("Distance", 0).withPosition(4, 0).withSize(1, 1).getEntry();
+
+  
 
     m_pressureSensor =
         m_drivestationTab
@@ -248,6 +253,9 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withSize(3, 2)
             .withWidget(BuiltInWidgets.kGraph)
             .getEntry();
+
+     m_coolCounter =
+        m_debugTab.add("Cool Counter", 0).withPosition(5, 5).withSize(1, 1).getEntry();
 
     m_shooterAdd =
         m_debugTab.add("Shooter add speed", 0).withPosition(3, 0).withSize(1, 1).getEntry();

@@ -31,6 +31,7 @@ public class ShooterInterpolateSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("initialize() initialize()initialize()initialize()initialize()initialize()initialize()");
     m_shooter.resetCounter();
   }
 

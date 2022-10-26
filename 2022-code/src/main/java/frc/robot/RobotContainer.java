@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -157,12 +159,20 @@ public class RobotContainer {
     /** xbox button mapping */
     m_A.whileHeld(new ShooterSetSpeed(m_shooter, 3010));
     m_B.whileHeld(new ShooterInterpolateSpeed(m_shooter));
-    m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
+    //m_X.whileHeld(new TestShooterRPMCommand(m_shooter));
     // m_X.whileHeld(new ShooterInterpolateSpeed(m_shooter, true));
     m_Y.whileHeld(new ShooterSetSpeed(m_shooter, 3580));
 
     m_BumperRight.whileActiveContinuous(new LowGoalCommand(m_shooter, m_turret, 1400));
     m_TriggerRight.whileActiveContinuous(new IndexManualCommand(m_index, m_shooter, m_limelight));
+    // m_TriggerRight.whileActiveContinuous(
+    //     new ParallelCommandGroup(
+    //         new InstantCommand(m_index::MotorOneStart),
+    //         new InstantCommand(m_index::MotorTwoStart)
+    //     )
+    // );
+    m_TriggerRight.whenActive(new InstantCommand(() -> System.out.println("WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDWHEN PRESSED WHEN PRESSEDV")));
+    m_TriggerRight.whenInactive(new InstantCommand(() -> System.out.println("INACTIVE INACTIVE INACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVEINACTIVE INACTIVE")));
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(

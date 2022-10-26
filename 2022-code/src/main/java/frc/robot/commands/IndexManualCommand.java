@@ -14,15 +14,14 @@ public class IndexManualCommand extends CommandBase {
   private IndexSubsystem m_index;
 
   private ShooterSubsystem m_shooter;
-  private LimelightSubsystem m_limelight;
 
   public IndexManualCommand(
       IndexSubsystem p_index, ShooterSubsystem p_shooter, LimelightSubsystem p_limelight) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_index = p_index;
     m_shooter = p_shooter;
-    m_limelight = p_limelight;
-    addRequirements(m_index, m_shooter, m_limelight);
+    // addRequirements(m_index);
+    addRequirements(m_index, m_shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -32,7 +31,8 @@ public class IndexManualCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println(m_limelight.getTv());
+    // m_index.MotorOneStart();
+    // m_index.MotorTwoStart();
     if (m_shooter.okShoot()) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();
