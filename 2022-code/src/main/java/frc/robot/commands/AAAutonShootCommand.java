@@ -82,6 +82,7 @@ public class AAAutonShootCommand extends CommandBase {
 
     m_RPM = m_shooter.CalculateRPM();
     m_shooter.setTargetRPM(m_RPM);
+    
     if (m_timer.get() >= m_spinUp) {
       m_index.MotorOneStart();
       m_index.MotorTwoStart();

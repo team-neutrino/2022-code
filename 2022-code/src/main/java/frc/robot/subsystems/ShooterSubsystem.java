@@ -75,8 +75,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void iterateCounter(double p_targetRPM) {
-    // previous range was 20 for match 71
-    if (Math.abs(p_targetRPM - getRPM1()) < 30) coolCounter++;
+    // previous range was 30
+    if (Math.abs(p_targetRPM - getRPM1()) < 20) coolCounter++;
     else resetCounter();
   }
 

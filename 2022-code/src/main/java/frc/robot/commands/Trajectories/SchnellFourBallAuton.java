@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.TrajectoryConfigConstants;
+import frc.robot.commands.AAAutonShootCommand;
 import frc.robot.commands.AutoAAAutonShootCommand;
 import frc.robot.commands.AutonIntakeCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -110,10 +111,25 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
             p_drive);
 
     addCommands(
+        // new SequentialCommandGroup(
+        //     new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 2)),
+        //     new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
+        //     new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 2),
+        //     new InstantCommand(p_limelight::setLimelightOff),
+        //     new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
+        //     new SequentialCommandGroup(
+        //             fourBallHalfCommand,
+        //             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)))
+        //         .alongWith(new AutonIntakeCommand(p_intake, 1)),
+        //     fourBall2Command.alongWith(new AutonIntakeCommand(p_intake, 3)),
+        //     new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
+        //     new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)
+        //         .alongWith(new AutonIntakeCommand(p_intake, 1))));
+
         new SequentialCommandGroup(
             new ParallelCommandGroup(fourBall0Command, new AutonIntakeCommand(p_intake, 2)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 2),
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 2),
             new InstantCommand(p_limelight::setLimelightOff),
             new ParallelCommandGroup(fourBall1Command, new AutonIntakeCommand(p_intake, 3)),
             new SequentialCommandGroup(
@@ -122,7 +138,7 @@ public class SchnellFourBallAuton extends SequentialCommandGroup {
                 .alongWith(new AutonIntakeCommand(p_intake, 1)),
             fourBall2Command.alongWith(new AutonIntakeCommand(p_intake, 3)),
             new InstantCommand(() -> p_drive.setTankDriveVolts(0.0, 0.0)),
-            new AutoAAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)
+            new AAAutonShootCommand(p_shooter, p_index, p_turret, p_limelight, 4)
                 .alongWith(new AutonIntakeCommand(p_intake, 1))));
   }
 }
