@@ -131,7 +131,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public double getDeltaA(){
-    return deltaA;
+    return finalDeltaA;
   }
 
   public void angleUpdater(){
