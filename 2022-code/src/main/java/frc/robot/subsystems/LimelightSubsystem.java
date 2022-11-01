@@ -140,7 +140,7 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   public double getDeltaTx(){
-    return deltaTx;
+    return finalDeltaTx;
   }
 
   public void distanceAngleUpdater() {
