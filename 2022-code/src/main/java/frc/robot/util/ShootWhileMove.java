@@ -8,6 +8,9 @@ public class ShootWhileMove {
     TurretPIDSubsystem m_turret;
     LimelightSubsystem m_limelight;
     // needed?? double LIMELIGHT_MULTIPLICATION = 10.0;
+    double omega = 0;
+
+
     double TX_TO_TURRET_COUNTS_CONVERSION = 344/130;
     double deltaTxTwo = 0.0;
     double deltaATwo = 0.0;
@@ -26,8 +29,30 @@ public class ShootWhileMove {
     public double integrateAngularV() {
         double deltaTx = m_limelight.getDeltaTx() * TX_TO_TURRET_COUNTS_CONVERSION;
         double deltaA = m_turret.getDeltaA();
+        double tx = m_limelight.getTx();
         System.out.println("Delta A: " + deltaA);
         System.out.println("Delta Tx: " + deltaTx);
+
+        boolean sameSign = (deltaTx * tx) > 0; 
+       // boolean sameSignNegative = (deltaTx * tx) < 0; 
+        double txAddVelocity = tx / .1;
+
+        if (sameSign == true){
+            omega = deltaTx = txAddVelocity;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         //double deltaTxFive = 0.0;
         //double deltaAFive = 0.0;
         //deltaTxFive = deltaTxFour;
