@@ -9,15 +9,16 @@ public class ShootWhileMove {
     LimelightSubsystem m_limelight;
     // needed?? double LIMELIGHT_MULTIPLICATION = 10.0;
     double omega = 0;
-
+    double position = 0;
+    double deltaTxAverage = 0;
 
     double TX_TO_TURRET_COUNTS_CONVERSION = 344/130;
     double deltaTxTwo = 0.0;
-    double deltaATwo = 0.0;
+    //double deltaATwo = 0.0;
     double deltaTxThree = 0.0;
-    double deltaAThree = 0.0;
+    //double deltaAThree = 0.0;
     double deltaTxFour = 0.0;
-    double deltaAFour = 0.0;
+    //double deltaAFour = 0.0;
 
     public ShootWhileMove(TurretPIDSubsystem p_turret, LimelightSubsystem p_limelight){
 
@@ -36,11 +37,22 @@ public class ShootWhileMove {
         boolean sameSign = (deltaTx * tx) > 0; 
        // boolean sameSignNegative = (deltaTx * tx) < 0; 
         double txAddVelocity = tx / .1;
+        // deltaTxFour = deltaTxThree;
+        // deltaTxThree = deltaTxTwo;
+        // deltaTxTwo = tx;
+        // deltaTxAverage = (deltaTxFour + deltaTxThree + deltaTxTwo + tx) / 4;
+        
+        
 
         if (sameSign == true){
-            omega = deltaTx = txAddVelocity;
+            omega = (deltaTx / 0.1) + txAddVelocity;
+            position = omega * 0.1;
+        }
+        else {
+            position = tx + deltaTx;
         }
 
+        return position;
 
 
 
@@ -52,7 +64,7 @@ public class ShootWhileMove {
 
 
 
-
+        /* 
         //double deltaTxFive = 0.0;
         //double deltaAFive = 0.0;
         //deltaTxFive = deltaTxFour;
@@ -74,6 +86,7 @@ public class ShootWhileMove {
         double integrateV = (vAverage + vAverageTwo) * 0.2; 
         System.out.println(integrateV);
         return integrateV;
+        */
     }
     //make methods to sample each thing: angular velocity and tx
 

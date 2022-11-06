@@ -34,11 +34,13 @@ public class BetterTurretCommand extends CommandBase {
     m_limelight.setLimelightOn();
   }
 
+  // LIMELIGHT_MULTIPLICATION * m_limelight.getTx() + (I don't think this is needed. Try it with and without)
+
   @Override
   public void execute() {
     if (m_limelight.getTv() == true) {
       m_turret.setTargetAngle(
-          m_turret.getCurrentAngle() + LIMELIGHT_MULTIPLICATION * m_limelight.getTx() + m_turret.movePositionFeedfoward());
+          m_turret.getCurrentAngle() + m_turret.movePositionFeedfoward());
       m_drive.resetNavX();
     } /*else {
       if (m_notAuton) {
