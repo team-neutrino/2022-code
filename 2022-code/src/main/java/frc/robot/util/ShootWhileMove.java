@@ -29,9 +29,9 @@ public class ShootWhileMove {
 
     public double integrateAngularV() {
         double deltaTx = m_limelight.getDeltaTx() * TX_TO_TURRET_COUNTS_CONVERSION;
-        double deltaA = m_turret.getDeltaA();
-        double tx = m_limelight.getTx();
-        System.out.println("Delta A: " + deltaA);
+        //double deltaA = m_turret.getDeltaA();
+        double tx = m_limelight.getTx() * TX_TO_TURRET_COUNTS_CONVERSION;
+        //System.out.println("Delta A: " + deltaA);
         System.out.println("Delta Tx: " + deltaTx);
 
         boolean sameSign = (deltaTx * tx) > 0; 
@@ -51,6 +51,10 @@ public class ShootWhileMove {
         else {
             position = tx + deltaTx;
         }
+
+        System.out.println("Omega is: " + omega);
+        System.out.println("position is: " + position);
+        System.out.println("Is sameSign true: " + sameSign);
 
         return position;
 
