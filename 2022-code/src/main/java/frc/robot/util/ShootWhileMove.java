@@ -32,7 +32,6 @@ public class ShootWhileMove {
         //double deltaA = m_turret.getDeltaA();
         double tx = m_limelight.getTx() * TX_TO_TURRET_COUNTS_CONVERSION;
         //System.out.println("Delta A: " + deltaA);
-        System.out.println("Delta Tx: " + deltaTx);
 
         boolean sameSign = (deltaTx * tx) > 0; 
        // boolean sameSignNegative = (deltaTx * tx) < 0; 
@@ -41,7 +40,7 @@ public class ShootWhileMove {
         // deltaTxThree = deltaTxTwo;
         // deltaTxTwo = tx;
         // deltaTxAverage = (deltaTxFour + deltaTxThree + deltaTxTwo + tx) / 4;
-        
+        double currentAngle = m_turret.getCurrentAngle();
         
 
         if (sameSign == true){
@@ -52,6 +51,9 @@ public class ShootWhileMove {
             position = tx + deltaTx;
         }
 
+        System.out.println("Current angle is " + currentAngle);
+        System.out.println("Delta Tx: " + deltaTx);
+        System.out.println("TX is " + tx);
         System.out.println("Omega is: " + omega);
         System.out.println("position is: " + position);
         System.out.println("Is sameSign true: " + sameSign);

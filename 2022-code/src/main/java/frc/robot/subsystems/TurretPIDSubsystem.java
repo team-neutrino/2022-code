@@ -135,7 +135,7 @@ public class TurretPIDSubsystem extends SubsystemBase {
   }
 
   public void angleUpdater(){
-    if (cycles % 10 == 0){
+    if (cycles % 5 == 0){
       deltaA();
     }
 

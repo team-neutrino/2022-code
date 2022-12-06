@@ -130,7 +130,7 @@ public class LimelightSubsystem extends SubsystemBase {
     angleOne = angle;
     System.out.println("current txtwo is " + angleTwo);
     System.out.println("current txone is " + angleOne);
-    System.out.println("current tx is " + angle);
+    //System.out.println("current tx is " + angle);
 
     deltaTx = angleOne - angleTwo;
     deltaTxTwo = angleThree - angleFour;
@@ -144,7 +144,7 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   public void distanceAngleUpdater() {
-    if (cycles % 10 == 0){
+    if (cycles % 5 == 0){
       deltaTx();
     }
    
