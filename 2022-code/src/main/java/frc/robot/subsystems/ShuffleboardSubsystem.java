@@ -10,6 +10,8 @@ import edu.wpi.first.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cscore.VideoException;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.PowerDistribution;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -37,6 +39,8 @@ public class ShuffleboardSubsystem extends SubsystemBase {
   private IndexSubsystem m_index;
   private IntakeSubSystem m_intake;
   private LimelightSubsystem m_limelight;
+  private PowerDistribution m_pdp = new PowerDistribution(0, ModuleType.kCTRE);
+  private NetworkTableEntry m_pdpDisplay;
   private NetworkTableEntry m_driveVariables[] = new NetworkTableEntry[7];
   private NetworkTableEntry m_climberVariables[] = new NetworkTableEntry[3];
   private NetworkTableEntry m_indexVariables[] = new NetworkTableEntry[2];
@@ -141,6 +145,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
 
     m_calculatedRPM.setDouble(m_shooter.CalculateRPM());
     m_calculateRPMMatch.setBoolean(m_shooter.okShoot());
+    m_pdpDisplay.setDouble(m_pdp.getTotalCurrent());
   }
 
   private int getNumBalls() {
@@ -333,5 +338,7 @@ public class ShuffleboardSubsystem extends SubsystemBase {
             .withPosition(11, 3)
             .withSize(1, 1)
             .getEntry();
+    m_pdpDisplay =
+        m_debugTab.add("Current of PDP", 0).withPosition(10, 4).withSize(1, 1).getEntry();
   }
 }
