@@ -49,6 +49,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.ShuffleboardSubsystem;
 import frc.robot.subsystems.TurretPIDSubsystem;
+import frc.robot.subsystems.LightSubystem;
 import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
 
@@ -94,7 +95,7 @@ public class RobotContainer {
 
   /** Instantiate subsystems below */
   private final IndexSubsystem m_index = new IndexSubsystem();
-
+  private final LightSubystem m_light = new LightSubystem();
   private final TurretPIDSubsystem m_turret = new TurretPIDSubsystem();
   private final DriveTrainSubsystem m_driveTrain = new DriveTrainSubsystem();
   private final IntakeSubSystem m_intake = new IntakeSubSystem();
@@ -166,7 +167,7 @@ public class RobotContainer {
     m_BumperLeft.whileActiveContinuous(new ReverseIntakeCommand(m_intake));
     m_TriggerLeft.whileActiveContinuous(
         new SequentialCommandGroup(
-            new IntakeCommand(m_intake), new WaitCommand(0.1), new IntakeDownCommand(m_intake)));
+            new IntakeCommand(m_intake, m_light), new WaitCommand(0.1), new IntakeDownCommand(m_intake)));
     m_back.whileHeld(
         new SequentialCommandGroup(
             new ClimbKeyUnlockCommand(m_climber),
